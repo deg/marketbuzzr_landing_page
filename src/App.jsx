@@ -1,5 +1,48 @@
 import React from "react";
 
+// Data constants
+const FEATURES_DATA = [
+  {
+    heading: "Competitor Blog Posts",
+    description: "Analyze competitor content to detect themes, gaps, and opportunities. Our AI automates the monitoring and surfaces what matters.",
+    actionText: "Start tracking competitor blog posts",
+  },
+  {
+    heading: "Webinars",
+    description: "Follow industry leaders, topics, and key takeaways in real-time to inform GTM and positioning decisions.",
+    actionText: "Start tracking industry webinars",
+  },
+  {
+    heading: "Podcasts",
+    description: "Capture expert opinions, pain points, and evolving narratives from industry podcasts — summarized for quick review.",
+    actionText: "Start tracking industry podcasts",
+  },
+  {
+    heading: "Social Posts",
+    description: "Monitor LinkedIn and other channels to see what leaders are saying, trending concerns, and shifting industry priorities.",
+    actionText: "Start tracking social posts",
+  },
+];
+
+const PROBLEMS_DATA = [
+  {
+    heading: "Keeping track of competitors is a mess?",
+    actionText: "Track competitors, fully automated!",
+  },
+  {
+    heading: "Afraid to miss out on new market trends?",
+    actionText: "Stay on top of market trends — never miss out!",
+  },
+  {
+    heading: "Too busy to watch webinars and listen to podcasts?",
+    actionText: "Get tailored takeaways — from all your favorite events!",
+  },
+  {
+    heading: "Your CEO is asking you about the market?",
+    actionText: "Get tailored reports — all the time!",
+  },
+];
+
 const Nav = ({ onOpenModal }) => (
   <nav>
     <div className="container nav-inner">
@@ -16,6 +59,7 @@ const Nav = ({ onOpenModal }) => (
             e.preventDefault();
             onOpenModal();
           }}
+          aria-label="Book a demo"
         >
           Book a Demo
         </a>
@@ -39,6 +83,7 @@ const Hero = ({ onOpenModal }) => (
         e.preventDefault();
         onOpenModal();
       }}
+      aria-label="Get your MarketBuzzr"
     >
       Get your MarketBuzzr
     </a>
@@ -59,33 +104,12 @@ const Features = () => (
       lead="Never miss out on competitor activities and market trends"
     />
     <div className="grid">
-      {[
-        {
-          h: "Competitor Blog Posts",
-          p: "Analyze competitor content to detect themes, gaps, and opportunities. Our AI automates the monitoring and surfaces what matters.",
-          a: "Start tracking competitor blog posts",
-        },
-        {
-          h: "Webinars",
-          p: "Follow industry leaders, topics, and key takeaways in real-time to inform GTM and positioning decisions.",
-          a: "Start tracking industry webinars",
-        },
-        {
-          h: "Podcasts",
-          p: "Capture expert opinions, pain points, and evolving narratives from industry podcasts — summarized for quick review.",
-          a: "Start tracking industry podcasts",
-        },
-        {
-          h: "Social Posts",
-          p: "Monitor LinkedIn and other channels to see what leaders are saying, trending concerns, and shifting industry priorities.",
-          a: "Start tracking social posts",
-        },
-      ].map((item, i) => (
-        <div key={i} className="card">
+      {FEATURES_DATA.map((feature, index) => (
+        <div key={index} className="card">
           <div className="icon" />
-          <h3>{item.h}</h3>
-          <p>{item.p}</p>
-          <a href="#">{item.a}</a>
+          <h3>{feature.heading}</h3>
+          <p>{feature.description}</p>
+          <a href="#">{feature.actionText}</a>
         </div>
       ))}
     </div>
@@ -139,28 +163,11 @@ const ProblemCards = ({ onOpenModal }) => (
       lead="Surface tailored market trends and insights for Marketers in B2B SaaS"
     />
     <div className="grid">
-      {[
-        {
-          h: "Keeping track of competitors is a mess?",
-          a: "Track competitors, fully automated!",
-        },
-        {
-          h: "Afraid to miss out on new market trends?",
-          a: "Stay on top of market trends — never miss out!",
-        },
-        {
-          h: "Too busy to watch webinars and listen to podcasts?",
-          a: "Get tailored takeaways — from all your favorite events!",
-        },
-        {
-          h: "Your CEO is asking you about the market?",
-          a: "Get tailored reports — all the time!",
-        },
-      ].map((c, i) => (
-        <div key={i} className="card">
+      {PROBLEMS_DATA.map((problem, index) => (
+        <div key={index} className="card">
           <div className="icon" />
-          <h3>{c.h}</h3>
-          <a href="#">{c.a}</a>
+          <h3>{problem.heading}</h3>
+          <a href="#">{problem.actionText}</a>
         </div>
       ))}
     </div>
@@ -179,6 +186,7 @@ const ProblemCards = ({ onOpenModal }) => (
             e.preventDefault();
             onOpenModal();
           }}
+          aria-label="Book a demo"
         >
           Book a Demo
         </a>
@@ -210,22 +218,24 @@ const Footer = ({ onOpenModal }) => (
         <div>
           <a
             href="#"
-            style={{ color: "#86d5ff" }}
+            className="footer-link"
             onClick={(e) => {
               e.preventDefault();
               onOpenModal();
             }}
+            aria-label="Terms and Conditions"
           >
             Terms and Conditions
           </a>
           {" · "}
           <a
             href="#"
-            style={{ color: "#86d5ff" }}
+            className="footer-link"
             onClick={(e) => {
               e.preventDefault();
               onOpenModal();
             }}
+            aria-label="Privacy Policy"
           >
             Privacy Policy
           </a>
