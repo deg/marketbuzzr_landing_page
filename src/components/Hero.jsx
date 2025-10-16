@@ -5,7 +5,7 @@ const Hero = ({ onOpenModal }) => (
     <span className="kicker">Market Intelligence for B2B SaaS</span>
     <h1>Always know what's up</h1>
     <p className="sub">
-      Track competitor posts, industry webinars & podcasts. Neatly summarized,
+      Track competitor posts, industry webinars & podcasts.<br/> Neatly summarized,
       ready for decision-making.
     </p>
     <a

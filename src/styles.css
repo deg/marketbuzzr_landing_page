@@ -350,9 +350,37 @@ h2 {
   height: 28px;
   border-radius: var(--radius-sm);
   margin-bottom: var(--spacing-sm);
-  background: linear-gradient(145deg, #b06bff, #7d27ff);
+  background: #7d27ff;
   box-shadow: 0 6px 18px rgba(125, 39, 255, 0.35);
   transition: transform var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.card .icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.card .icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
 }
 
 .card:hover .icon {

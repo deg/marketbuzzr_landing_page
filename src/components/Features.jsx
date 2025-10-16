@@ -6,25 +6,46 @@ const FEATURES_DATA = [
   {
     heading: "Competitor Blog Posts",
     description:
-      "Analyze competitor content to detect themes, gaps, and opportunities. Our AI automates the monitoring and surfaces what matters.",
+      "Tracking competitor blog posts helps businesses stay ahead by identifying " +
+      "trending topics, content gaps, and emerging industry themes. By analyzing " +
+      "competitor content strategies, companies can refine their own messaging, " +
+      "create more impactful content, and enhance SEO performance. Our AI-powered " +
+      "platform automates this process, delivering real-time insights to ensure " +
+      "your content remains competitive and relevant.",
     actionText: "Start tracking competitor blog posts",
   },
   {
     heading: "Webinars",
     description:
-      "Follow industry leaders, topics, and key takeaways in real-time to inform GTM and positioning decisions.",
+      "Tracking webinars provides valuable insights into industry trends, thought " +
+      "leadership, and competitor positioning in real-time. By analyzing the topics, " +
+      "speakers, and key takeaways, businesses can uncover emerging opportunities, " +
+      "refine their go-to-market strategy, and align their messaging with industry " +
+      "conversations. Our AI-driven platform ensures you never miss critical " +
+      "discussions, helping you stay informed and ahead of the competition.",
     actionText: "Start tracking industry webinars",
   },
   {
     heading: "Podcasts",
     description:
-      "Capture expert opinions, pain points, and evolving narratives from industry podcasts — summarized for quick review.",
+      "Tracking podcasts offers a unique window into expert opinions, industry " +
+      "narratives, and competitor strategies that might not be captured in written " +
+      "content. By analyzing discussions from key industry voices, businesses can " +
+      "gain deeper insights into market shifts, customer pain points, and innovative " +
+      "ideas. Our AI-powered platform helps you stay connected to these " +
+      "conversations, ensuring you leverage the latest insights to refine your " +
+      "strategy.",
     actionText: "Start tracking industry podcasts",
   },
   {
     heading: "Social Posts",
     description:
-      "Monitor LinkedIn and other channels to see what leaders are saying, trending concerns, and shifting industry priorities.",
+      "Tracking LinkedIn posts from industry leaders provides real-time insights " +
+      "into market sentiment, emerging trends, and competitor engagement strategies. " +
+      "These posts often reveal thought leadership perspectives, customer pain " +
+      "points, and shifting industry priorities before they appear in formal " +
+      "reports. Our AI-powered platform continuously monitors these conversations, " +
+      "helping businesses stay agile and proactively adapt their strategies.",
     actionText: "Start tracking social posts",
   },
 ];

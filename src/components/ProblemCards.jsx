@@ -1,6 +1,6 @@
-import React from 'react';
-import SectionTitle from './SectionTitle';
-import ProblemCard from './ProblemCard';
+import React from "react";
+import SectionTitle from "./SectionTitle";
+import ProblemCard from "./ProblemCard";
 
 const PROBLEMS_DATA = [
   {
@@ -35,9 +35,12 @@ const ProblemCards = ({ onOpenModal }) => (
     <div className="cta-panel" id="book">
       <h3>Tailored Intelligence, built for your Business</h3>
       <p>
-        Harness the power of data and qualitative insights. MarketBuzzr delivers
-        actionable intelligence calibrated to your industry, audience, and
-        goals.
+        Harnessing the power of data and unique qualitative insights,
+        MarketBuzzr goes beyond surface-level trends to deliver actionable
+        intelligence that's deeply relevant to your business. By calibrating
+        insights to your industry, audience, and goals, it ensures you gain a
+        competitive edge by making smarter, faster, and more informed strategic
+        decisions.
       </p>
       <p>
         <a
