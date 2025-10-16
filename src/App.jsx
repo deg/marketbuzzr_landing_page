@@ -1,5 +1,4 @@
 import React from "react";
-import DashboardMock from "./DashboardMock.jsx";
 
 const Nav = () => (
   <nav>
