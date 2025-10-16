@@ -1577,3 +1577,137 @@ Your MarketBuzzr landing page is ready to go live! 🎉
 
 ---
 
+_**User**_
+
+I want my godaddy site, marketbuzzr.com, to use this gh-pages site.
+
+---
+
+_**Assistant**_
+
+Perfect! I'll help you connect your GoDaddy domain `marketbuzzr.com` to your GitHub Pages site. This requires setting up a custom domain configuration.
+
+
+---
+
+
+
+---
+
+Now I need to update the Vite configuration to use the root path instead of the repository path when using a custom domain:
+
+
+---
+
+<details><summary>Edit file: /Users/deg/Documents/marketbuzzr/marketbuzzr_landing_page/vite.config.js</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -5,5 +5,5 @@
+    plugins: [react()],
+    server: { port: 5173 },
+-   base: process.env.NODE_ENV === 'production' ? '/marketbuzzr_landing_page/' : '/'
++   base: '/'
+  })
+  
+```
+
+</details>
+
+---
+
+Let me create a comprehensive guide for setting up your custom domain:
+
+
+---
+
+
+
+---
+
+Now let me update the deployment script to reflect the custom domain:
+
+
+---
+
+<details><summary>Edit file: /Users/deg/Documents/marketbuzzr/marketbuzzr_landing_page/deploy.sh</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 7, lines removed: 5
+
+```diff
+@@ -24,9 +24,11 @@
+  
+  echo "✅ Deployment complete!"
+- echo "🌍 Your site should be available at: https://deg.github.io/marketbuzzr_landing_page/"
++ echo "🌍 Your site will be available at:"
++ echo "   - https://marketbuzzr.com (custom domain)"
++ echo "   - https://deg.github.io/marketbuzzr_landing_page/ (GitHub Pages)"
+  echo ""
+- echo "📝 Don't forget to:"
+- echo "   1. Enable GitHub Pages in your repository settings"
+- echo "   2. Set source to 'gh-pages' branch"
+- echo "   3. Your site URL: https://deg.github.io/marketbuzzr_landing_page/"
++ echo "📝 Next steps for custom domain:"
++ echo "   1. Configure DNS records in GoDaddy (see CUSTOM_DOMAIN_SETUP.md)"
++ echo "   2. Enable GitHub Pages in your repository settings"
++ echo "   3. Add custom domain 'marketbuzzr.com' in GitHub Pages settings"
+  
+```
+
+</details>
+
+---
+
+## 🎯 **Perfect! Here's exactly what you need to do to connect marketbuzzr.com:**
+
+### **Step 1: Deploy your site with the custom domain setup**
+```bash
+yarn deploy
+```
+
+### **Step 2: Configure GoDaddy DNS Records**
+
+**In your GoDaddy DNS management, add these A records:**
+
+```
+Type: A    Name: @    Value: 185.199.108.153    TTL: 600
+Type: A    Name: @    Value: 185.199.109.153    TTL: 600  
+Type: A    Name: @    Value: 185.199.110.153    TTL: 600
+Type: A    Name: @    Value: 185.199.111.153    TTL: 600
+```
+
+**Optional - Add WWW subdomain:**
+```
+Type: CNAME    Name: www    Value: deg.github.io    TTL: 600
+```
+
+### **Step 3: Configure GitHub Pages**
+
+1. Go to: https://github.com/deg/marketbuzzr_landing_page/settings/pages
+2. Under **Custom domain**, enter: `marketbuzzr.com`
+3. Check **"Enforce HTTPS"** (after DNS propagates)
+4. Click **Save**
+
+### **Step 4: Wait for DNS Propagation**
+- DNS changes take 1-48 hours to fully propagate
+- Check status at: https://dnschecker.org/
+
+### **Step 5: Your site will be live at:**
+**https://marketbuzzr.com** 🎉
+
+## ✅ **What I've configured:**
+- ✅ Created `public/CNAME` file with `marketbuzzr.com`
+- ✅ Updated Vite config for custom domain
+- ✅ Created detailed setup guide in `CUSTOM_DOMAIN_SETUP.md`
+
+The setup is ready! Just follow the steps above and your MarketBuzzr landing page will be live on your custom domain. 🚀
+
+---
+
