@@ -1,6 +1,6 @@
 import React from "react";
 
-const Nav = () => (
+const Nav = ({ onOpenModal }) => (
   <nav>
     <div className="container nav-inner">
       <div className="brand">
@@ -9,7 +9,14 @@ const Nav = () => (
       </div>
       <div className="nav-actions">
         <a href="#contact">Contact Us</a>
-        <a href="#book" className="primary">
+        <a
+          href="#"
+          className="primary"
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenModal();
+          }}
+        >
           Book a Demo
         </a>
       </div>
@@ -17,7 +24,7 @@ const Nav = () => (
   </nav>
 );
 
-const Hero = () => (
+const Hero = ({ onOpenModal }) => (
   <header className="hero container">
     <span className="kicker">Market Intelligence for B2B SaaS</span>
     <h1>Always know what's up</h1>
@@ -25,7 +32,14 @@ const Hero = () => (
       Track competitor posts, industry webinars & podcasts. Neatly summarized,
       ready for decision-making.
     </p>
-    <a href="#get" className="cta">
+    <a
+      href="#"
+      className="cta"
+      onClick={(e) => {
+        e.preventDefault();
+        onOpenModal();
+      }}
+    >
       Get your MarketBuzzr
     </a>
   </header>
@@ -78,7 +92,47 @@ const Features = () => (
   </section>
 );
 
-const ProblemCards = () => (
+const ComingSoonModal = ({ open, onClose }) => {
+  React.useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onClose();
+    if (open) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+  // lock page scroll while the modal is open
+  React.useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+  if (!open) return null;
+  return (
+    <div
+      className="modal-overlay"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h3>Coming soon</h3>
+        <p>Thanks for your interest! We will be open for business very soon.</p>
+        <p className="muted">
+          Want to talk now? Email{" "}
+          <a href="mailto:contact@marketbuzzr.com">contact@marketbuzzr.com</a>.
+        </p>
+        <div className="modal-actions">
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ProblemCards = ({ onOpenModal }) => (
   <section className="section container" id="problems">
     <SectionTitle
       title="Turn Market Buzz into Signals"
@@ -118,7 +172,14 @@ const ProblemCards = () => (
         goals.
       </p>
       <p>
-        <a className="cta" href="#contact">
+        <a
+          href="#"
+          className="primary"
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenModal();
+          }}
+        >
           Book a Demo
         </a>
       </p>
@@ -126,7 +187,7 @@ const ProblemCards = () => (
   </section>
 );
 
-const Footer = () => (
+const Footer = ({ onOpenModal }) => (
   <footer id="contact">
     <div className="container footer-grid">
       <div>
@@ -147,11 +208,25 @@ const Footer = () => (
         <h4>Careers</h4>
         <div>careers@marketbuzzr.com</div>
         <div>
-          <a href="#" style={{ color: "#86d5ff" }}>
+          <a
+            href="#"
+            style={{ color: "#86d5ff" }}
+            onClick={(e) => {
+              e.preventDefault();
+              onOpenModal();
+            }}
+          >
             Terms and Conditions
-          </a>{" "}
-          ·{" "}
-          <a href="#" style={{ color: "#86d5ff" }}>
+          </a>
+          {" · "}
+          <a
+            href="#"
+            style={{ color: "#86d5ff" }}
+            onClick={(e) => {
+              e.preventDefault();
+              onOpenModal();
+            }}
+          >
             Privacy Policy
           </a>
         </div>
@@ -160,14 +235,20 @@ const Footer = () => (
   </footer>
 );
 
-const App = () => (
-  <>
-    <Nav />
-    <Hero />
-    <Features />
-    <ProblemCards />
-    <Footer />
-  </>
-);
+const App = () => {
+  const [show, setShow] = React.useState(false);
+  const open = () => setShow(true);
+  const close = () => setShow(false);
+  return (
+    <>
+      <Nav onOpenModal={open} />
+      <Hero onOpenModal={open} />
+      <Features />
+      <ProblemCards onOpenModal={open} />
+      <Footer onOpenModal={open} />
+      <ComingSoonModal open={show} onClose={close} />
+    </>
+  );
+};
 
 export default App;
