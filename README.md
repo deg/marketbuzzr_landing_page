@@ -1,7 +1,6 @@
-# MarketBuzzr Landing — Pure CSS/SVG
+# MarketBuzzr Landing Page
 
-A static React + Vite homepage built from first principles (no big PNG hero).
-The dashboard at the top is a styled container with a tiny inline SVG chart.
+Initial landing page for the MarketBuzzr project.
 
 ## Run
 
