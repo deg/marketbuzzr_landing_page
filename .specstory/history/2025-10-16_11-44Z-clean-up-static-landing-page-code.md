@@ -1711,3 +1711,383 @@ The setup is ready! Just follow the steps above and your MarketBuzzr landing pag
 
 ---
 
+_**User**_
+
+Why does the www CNAME point to deg.github.io, and not marketbuzzr.com?  (How does this work?)
+
+---
+
+_**Assistant**_
+
+Great question! This is a common point of confusion with DNS and custom domains. Let me explain how this works:
+
+## 🔍 **How DNS Resolution Works with Custom Domains**
+
+### **The Flow:**
+1. User visits `www.marketbuzzr.com`
+2. DNS lookup finds the CNAME record pointing to `deg.github.io`
+3. GitHub's servers see the request came from `www.marketbuzzr.com`
+4. GitHub checks if there's a custom domain configured for `marketbuzzr.com`
+5. GitHub serves your site content, but **displays it as `marketbuzzr.com`**
+
+### **Why Not Point to `marketbuzzr.com`?**
+
+If you pointed the CNAME to `marketbuzzr.com`, you'd create a **DNS loop**:
+```
+www.marketbuzzr.com → marketbuzzr.com → www.marketbuzzr.com → marketbuzzr.com → ∞
+```
+
+### **The Correct Setup:**
+
+```
+A Records (for apex domain):
+@ (marketbuzzr.com) → 185.199.108.153 (GitHub's IP)
+
+CNAME Record (for www subdomain):
+www.marketbuzzr.com → deg.github.io (GitHub's GitHub Pages server)
+```
+
+## 🎯 **What Actually Happens:**
+
+1. **User visits `marketbuzzr.com`**:
+   - DNS resolves to GitHub's IP address
+   - GitHub serves your site content
+   - URL shows `marketbuzzr.com`
+
+2. **User visits `www.marketbuzzr.com`**:
+   - DNS resolves to `deg.github.io` server
+   - GitHub sees the request came from `www.marketbuzzr.com`
+   - GitHub checks its custom domain configuration
+   - GitHub serves your site content
+   - URL shows `www.marketbuzzr.com` (or redirects to `marketbuzzr.com`)
+
+## 🔧 **GitHub Pages Custom Domain Magic:**
+
+GitHub uses the `CNAME` file we created (`public/CNAME` with `marketbuzzr.com`) to know:
+- "When someone requests content from any of my servers"
+- "And they're looking for content that belongs to `marketbuzzr.com`"
+- "Serve the content from `deg/marketbuzzr_landing_page` repository"
+
+## 📝 **Alternative Approach (Both Point to GitHub):**
+
+You could also set up both the apex domain and www to point to GitHub:
+
+```
+A Records:
+@ → 185.199.108.153
+@ → 185.199.109.153  
+@ → 185.199.110.153
+@ → 185.199.111.153
+
+CNAME Record:
+www → deg.github.io
+```
+
+Both approaches work! The key is that GitHub's servers know to serve your content because of the `CNAME` file in your repository.
+
+## 🎉 **Bottom Line:**
+The `www` CNAME points to `deg.github.io` because that's GitHub's server that knows how to serve your custom domain content. It's like telling visitors: "Go to GitHub's server, they know where to find the content for marketbuzzr.com."
+
+Does this make sense? The DNS system is essentially directing traffic to GitHub's servers, which then serve the appropriate content based on your custom domain configuration!
+
+---
+
+_**User**_
+
+Looks like I'm still waiting for the old DNS TTL to expire.  On my Mac, how can I test how much time is left?
+
+---
+
+_**Assistant**_
+
+Great question! You can check the current DNS TTL and see when it will expire on your Mac using several methods. Here are the most effective ways:
+
+## 🔍 **Method 1: Using `dig` (Most Detailed)**
+
+
+---
+
+```bash
+dig marketbuzzr.com
+```
+
+```
+
+; <<>> DiG 9.10.6 <<>> marketbuzzr.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 28195
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;marketbuzzr.com.		IN	A
+
+;; ANSWER SECTION:
+marketbuzzr.com.	597	IN	A	185.199.110.153
+marketbuzzr.com.	597	IN	A	185.199.111.153
+marketbuzzr.com.	597	IN	A	185.199.109.153
+marketbuzzr.com.	597	IN	A	185.199.108.153
+
+;; Query time: 96 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Oct 16 15:59:27 IDT 2025
+;; MSG SIZE  rcvd: 108
+
+
+```
+
+---
+
+Perfect! I can see from the `dig` output that your DNS records are already pointing to the correct GitHub Pages IP addresses:
+
+- `185.199.108.153` ✅
+- `185.199.109.153` ✅  
+- `185.199.110.153` ✅
+- `185.199.111.153` ✅
+
+**Current TTL: 597 seconds (about 10 minutes)**
+
+## 📊 **Understanding the Output:**
+
+- **TTL (Time To Live)**: `597` seconds = ~10 minutes remaining
+- **Status**: `NOERROR` means DNS is working correctly
+- **IP Addresses**: All pointing to GitHub's servers ✅
+
+## 🔍 **Method 2: Check WWW Subdomain**
+
+
+---
+
+```bash
+dig www.marketbuzzr.com
+```
+
+```
+
+; <<>> DiG 9.10.6 <<>> www.marketbuzzr.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 60202
+;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;www.marketbuzzr.com.		IN	A
+
+;; ANSWER SECTION:
+www.marketbuzzr.com.	1800	IN	CNAME	deg.github.io.
+deg.github.io.		3600	IN	A	185.199.111.153
+deg.github.io.		3600	IN	A	185.199.108.153
+deg.github.io.		3600	IN	A	185.199.110.153
+deg.github.io.		3600	IN	A	185.199.109.153
+
+;; Query time: 99 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Oct 16 15:59:44 IDT 2025
+;; MSG SIZE  rcvd: 139
+
+
+```
+
+---
+
+Excellent! Your DNS is already correctly configured:
+
+## ✅ **DNS Status Summary:**
+
+### **Apex Domain (`marketbuzzr.com`):**
+- ✅ Points to GitHub Pages IPs
+- TTL: 597 seconds (~10 minutes)
+
+### **WWW Subdomain (`www.marketbuzzr.com`):**
+- ✅ CNAME points to `deg.github.io`
+- TTL: 1800 seconds (30 minutes)
+
+## 🚀 **Your DNS is Already Working!**
+
+The DNS records are correctly pointing to GitHub Pages. If your site isn't working yet, it's likely because:
+
+1. **GitHub Pages custom domain not configured yet**
+2. **Site not deployed yet**
+
+## 🔧 **Next Steps:**
+
+### **Deploy your site:**
+```bash
+yarn deploy
+```
+
+### **Configure GitHub Pages custom domain:**
+1. Go to: https://github.com/deg/marketbuzzr_landing_page/settings/pages
+2. Under "Custom domain", enter: `marketbuzzr.com`
+3. Check "Enforce HTTPS"
+
+## 📊 **Monitor TTL Expiration:**
+
+You can watch the TTL countdown:
+```bash
+# Run this every few minutes to see TTL decrease
+dig marketbuzzr.com | grep "IN A"
+```
+
+**Your DNS is ready!** The issue is likely in the GitHub Pages configuration, not DNS propagation. 🎉
+
+---
+
+_**User**_
+
+Hmm. Now it is loading, but failing.  This is what my browser shows:
+
+
+
+---
+
+_**Assistant**_
+
+I can see the issue! The problem is that your site is still trying to load assets from the old GitHub Pages path `/marketbuzzr_landing_page/assets/` instead of the root path `/assets/`. This is happening because the build was created with the old base path configuration.
+
+Let me fix this by rebuilding and redeploying with the correct configuration:
+
+
+---
+
+```bash
+rm -rf dist
+```
+
+---
+
+```bash
+yarn build
+```
+
+```
+yarn run v1.22.22
+$ vite build
+vite v7.1.10 building for production...
+transforming...
+✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.65 kB │ gzip:  0.37 kB
+dist/assets/index-D_YGadIQ.css    9.48 kB │ gzip:  2.56 kB
+dist/assets/index-C9zr3J4s.js   203.39 kB │ gzip: 63.67 kB
+✓ built in 589ms
+Done in 2.36s.
+
+```
+
+---
+
+Perfect! Now let me verify the built files have the correct paths:
+
+
+---
+
+```bash
+head -20 dist/index.html
+```
+
+```
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketBuzzr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/assets/index-C9zr3J4s.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D_YGadIQ.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+```
+
+---
+
+Excellent! Now the paths are correct (`/assets/` instead of `/marketbuzzr_landing_page/assets/`). Let me deploy the fixed version:
+
+
+---
+
+```bash
+yarn deploy
+```
+
+```
+yarn run v1.22.22
+$ yarn build
+$ vite build
+vite v7.1.10 building for production...
+transforming...
+✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.65 kB │ gzip:  0.37 kB
+dist/assets/index-D_YGadIQ.css    9.48 kB │ gzip:  2.56 kB
+dist/assets/index-C9zr3J4s.js   203.39 kB │ gzip: 63.67 kB
+✓ built in 472ms
+$ gh-pages -d dist
+Published
+Done in 5.84s.
+
+```
+
+---
+
+Perfect! The deployment is complete. Now let me also verify that the CNAME file is properly included:
+
+
+---
+
+```bash
+cat dist/CNAME
+```
+
+```
+marketbuzzr.com
+
+```
+
+---
+
+## 🎉 **Fixed and Deployed!**
+
+The issue was that your previous build still had the old base path configuration. Here's what I did:
+
+### ✅ **Problem Identified:**
+- Your site was looking for assets at `/marketbuzzr_landing_page/assets/`
+- But with the custom domain, they should be at `/assets/`
+
+### ✅ **Solution Applied:**
+1. **Cleared old build**: Removed the `dist` folder with old paths
+2. **Rebuilt with correct config**: Used the updated `vite.config.js` with `base: '/'`
+3. **Verified correct paths**: Assets now point to `/assets/` instead of `/marketbuzzr_landing_page/assets/`
+4. **Deployed fresh build**: New build is live with correct paths
+
+### ✅ **What's Now Working:**
+- ✅ Asset paths: `/assets/index-C9zr3J4s.js` and `/assets/index-D_YGadIQ.css`
+- ✅ CNAME file: `marketbuzzr.com` properly configured
+- ✅ Custom domain: Ready for GitHub Pages configuration
+
+### 🚀 **Next Step:**
+Now you need to configure the custom domain in GitHub Pages:
+
+1. Go to: https://github.com/deg/marketbuzzr_landing_page/settings/pages
+2. Under **Custom domain**, enter: `marketbuzzr.com`
+3. Check **"Enforce HTTPS"** (after it's available)
+
+Your site should now work perfectly at **https://marketbuzzr.com**! 🎉
+
+Try refreshing your browser - the 404 errors should be gone and your MarketBuzzr landing page should load correctly.
+
+---
+
