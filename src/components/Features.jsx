@@ -40,7 +40,7 @@ const FEATURES_DATA = [
   {
     heading: "Social Posts",
     description:
-      "Tracking LinkedIn posts from industry leaders provides real-time insights " +
+      "Tracking social posts from industry leaders provides real-time insights " +
       "into market sentiment, emerging trends, and competitor engagement strategies. " +
       "These posts often reveal thought leadership perspectives, customer pain " +
       "points, and shifting industry priorities before they appear in formal " +
