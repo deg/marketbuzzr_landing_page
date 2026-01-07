@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Hero = ({ onOpenModal }) => (
   <header className="hero container">
-    <span className="kicker">Market Intelligence for B2B SaaS</span>
+    <span className="kicker">Market Intelligence personalized for you</span>
     <h1>Always know what's up</h1>
     <p className="sub">
       Track competitor posts, industry webinars & podcasts. Neatly summarized,
