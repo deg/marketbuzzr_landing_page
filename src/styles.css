@@ -239,7 +239,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--spacing-lg);
-  align-items: start;
+  align-items: stretch;
 }
 
 /* Responsive Design */
@@ -338,6 +338,8 @@ h2 {
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .card::before {
@@ -413,6 +415,7 @@ h2 {
 }
 
 .card a {
+  margin-top: auto;
   color: var(--muted);
   text-underline-offset: 2px;
   font-weight: 600;
