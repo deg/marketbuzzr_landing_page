@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import ProblemCards from './components/ProblemCards';
 import Footer from './components/Footer';
-import ComingSoonModal from './components/ComingSoonModal';
+import EmailCaptureModal from './components/EmailCaptureModal';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ const App = () => {
       <Features />
       <ProblemCards onOpenModal={openModal} />
       <Footer onOpenModal={openModal} />
-      <ComingSoonModal open={isModalOpen} onClose={closeModal} />
+      <EmailCaptureModal open={isModalOpen} onClose={closeModal} />
     </ErrorBoundary>
   );
 };

@@ -664,6 +664,77 @@ footer a:hover {
   margin-top: 14px;
 }
 
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* Visually hidden but reachable by screen readers — the placeholder text on the
+   input duplicates the label so sighted users still see it. */
+.modal-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #ffffff33;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  font-size: 16px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast);
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.modal-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-error {
+  color: #ff9a9a;
+  margin: 0;
+  font-size: 14px;
+}
+
+.modal-error a {
+  color: #ffc7c7;
+  text-decoration: underline;
+}
+
+/* Honeypot: positioned offscreen rather than display:none so bots that prune
+   non-rendered fields still see and fill it. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.btn:disabled,
+.modal a.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Buttons */
 .btn,
 .modal a.btn {
