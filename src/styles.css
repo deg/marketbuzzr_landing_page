@@ -569,10 +569,6 @@ footer a:hover {
   opacity: 0.8;
 }
 
-.footer-link {
-  text-decoration: underline;
-}
-
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: 2px solid var(--brand);

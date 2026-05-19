@@ -24,7 +24,7 @@ const App = () => {
       <Hero onOpenModal={openModal} />
       <Features />
       <ProblemCards onOpenModal={openModal} />
-      <Footer onOpenModal={openModal} />
+      <Footer />
       <EmailCaptureModal open={isModalOpen} onClose={closeModal} />
     </ErrorBoundary>
   );

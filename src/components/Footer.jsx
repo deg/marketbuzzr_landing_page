@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = ({ onOpenModal }) => (
+const Footer = () => (
   <footer id="contact">
     <div className="container footer-grid">
       <div>
@@ -30,31 +30,6 @@ const Footer = ({ onOpenModal }) => (
         <div>
           <a href="mailto:careers@marketbuzzr.com" aria-label="Email careers">
             careers@marketbuzzr.com
-          </a>
-        </div>
-        <div>
-          <a
-            href="#"
-            className="footer-link"
-            onClick={(e) => {
-              e.preventDefault();
-              onOpenModal();
-            }}
-            aria-label="Terms and Conditions"
-          >
-            Terms and Conditions
-          </a>
-          {" · "}
-          <a
-            href="#"
-            className="footer-link"
-            onClick={(e) => {
-              e.preventDefault();
-              onOpenModal();
-            }}
-            aria-label="Privacy Policy"
-          >
-            Privacy Policy
           </a>
         </div>
       </div>
