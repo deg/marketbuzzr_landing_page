@@ -6,11 +6,15 @@ const CONVERSION_ENDPOINT = `${API_BASE_URL}/api/landing/conversion`;
 
 const EmailCaptureModal = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
 
   const resetForm = useCallback(() => {
     setEmail("");
+    setName("");
+    setComment("");
     setWebsite("");
     setStatus("idle");
   }, []);
@@ -70,7 +74,7 @@ const EmailCaptureModal = ({ open, onClose }) => {
         const response = await fetch(CONVERSION_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, website }),
+          body: JSON.stringify({ email, name, comment, website }),
         });
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
@@ -80,7 +84,7 @@ const EmailCaptureModal = ({ open, onClose }) => {
         setStatus("error");
       }
     },
-    [email, website, status]
+    [email, name, comment, website, status]
   );
 
   if (!open) return null;
@@ -136,6 +140,33 @@ const EmailCaptureModal = ({ open, onClose }) => {
                 disabled={isSubmitting}
                 required
                 autoComplete="email"
+              />
+              <label className="modal-label" htmlFor="modal-name">
+                Your name (optional)
+              </label>
+              <input
+                id="modal-name"
+                type="text"
+                className="modal-input"
+                placeholder="Your name (optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={isSubmitting}
+                autoComplete="name"
+                maxLength={200}
+              />
+              <label className="modal-label" htmlFor="modal-comment">
+                Comment or question (optional)
+              </label>
+              <textarea
+                id="modal-comment"
+                className="modal-input modal-textarea"
+                placeholder="Comment or question (optional)"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                disabled={isSubmitting}
+                rows={3}
+                maxLength={2000}
               />
               {/* Honeypot: hidden from humans via CSS, visible to bots. */}
               <div className="honeypot" aria-hidden="true">

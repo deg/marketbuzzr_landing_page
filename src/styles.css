@@ -702,6 +702,13 @@ footer a:hover {
   border-color: var(--brand);
 }
 
+.modal-textarea {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
 .modal-input:disabled {
   opacity: 0.6;
   cursor: not-allowed;
