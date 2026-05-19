@@ -563,10 +563,16 @@ footer a:hover {
   gap: 10px;
   font-weight: 700;
   color: var(--text);
+  margin-bottom: 12px;
 }
 
 .footer-note {
   opacity: 0.8;
+  margin: 0;
+}
+
+footer h4 {
+  margin: 0 0 12px 0;
 }
 
 /* Focus styles for accessibility */
