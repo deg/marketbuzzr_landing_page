@@ -1,7 +1,8 @@
 // Home page copy, lifted from Manu's homepage content doc ("HOMEPAGE" section).
 export const home = {
+  title: "MarketBuzzr — Market Intelligence, Clarified",
   hero: {
-    title: "Turn Market Noise Into Clear Intelligence",
+    title: "MarketBuzzr Turns Market Noise Into Clear Intelligence",
     sub: [
       "Every day, competitors publish, creators comment, customers react, and communities shape narratives across dozens of channels — leaving teams with too much information and not enough clarity on what actually matters.",
       "MarketBuzzr filters and structures this into decision-ready intelligence so teams understand what is happening in their market, category, and ecosystem — without having to manually piece it together.",

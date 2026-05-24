@@ -2,9 +2,10 @@
 // Biotech Companies" section).
 export const biotech = {
   slug: "biotech",
+  title: "Market Intelligence for Biotech — MarketBuzzr",
   hero: {
     kicker: "Always know what's happening around your pipeline",
-    title: "Market Intelligence for Biotech Companies",
+    title: "MarketBuzzr — Market Intelligence for Biotech Companies",
     sub: [
       "Understand what patients, caregivers, KOLs, competitors, and the broader market are saying about your therapy — outside of clinical data.",
     ],

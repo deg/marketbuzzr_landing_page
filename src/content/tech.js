@@ -2,9 +2,10 @@
 // Companies" section).
 export const tech = {
   slug: "tech",
+  title: "Market Intelligence for Tech Teams — MarketBuzzr",
   hero: {
     kicker: "Always know what's happening across your market",
-    title: "Role-Based Market Intelligence for Modern Tech Teams",
+    title: "MarketBuzzr — Role-Based Market Intelligence for Modern Tech Teams",
     sub: [
       "From competitor updates and industry blogs to webinars, YouTube discussions, Reddit threads, and product reviews — we turn fragmented market activity into structured, decision-ready intelligence.",
     ],

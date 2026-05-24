@@ -1,5 +1,6 @@
 // How It Works page copy, lifted from Manu's doc ("How it works" section).
 export const howItWorks = {
+  title: "How It Works — MarketBuzzr",
   hero: {
     title: "How MarketBuzzr Works",
     sub: [
