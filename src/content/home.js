@@ -6,7 +6,7 @@ export const home = {
       "Every day, competitors publish, creators comment, customers react, and communities shape narratives across dozens of channels — leaving teams with too much information and not enough clarity on what actually matters.",
       "MarketBuzzr filters and structures this into decision-ready intelligence so teams understand what is happening in their market, category, and ecosystem — without having to manually piece it together.",
     ],
-    ctaLabel: "Get Your MarketBuzzr",
+    ctaLabel: "Get your MarketBuzzr",
   },
   offerings: {
     title: "See What's Actually Shaping Your Market",
