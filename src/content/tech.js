@@ -15,14 +15,14 @@ export const tech = {
       heading: "Turn Market Noise into Role-Based Intelligence",
       paragraphs: [
         "The internet produces more competitor and category content than any team can realistically process — across blogs, webinars, YouTube, reviews, newsletters, and community discussions.",
-        "Marketbuzzr structures this into role-based intelligence so each team sees what matters for their decisions. Whether you're a founder, product leader, marketer, or operator — you get the signals that matter, not the noise.",
+        "MarketBuzzr structures this into role-based intelligence so each team sees what matters for their decisions. Whether you're a founder, product leader, marketer, or operator — you get the signals that matter, not the noise.",
       ],
     },
     {
       heading: "Built for Teams in Tech Who Already Try to Do This Themselves",
       paragraphs: [
         "Many teams use trackers, AI workflows, or custom prompts to stay on top of the market. The problem isn't access to information — it's signal quality, consistency, and context at scale.",
-        "Marketbuzzr runs on autopilot, continuously aggregating and filtering market activity across sources without prompting, manual upkeep, or constant adjustments, and delivers role-specific, actionable insights for product, marketing, and leadership teams.",
+        "MarketBuzzr runs on autopilot, continuously aggregating and filtering market activity across sources without prompting, manual upkeep, or constant adjustments, and delivers role-specific, actionable insights for product, marketing, and leadership teams.",
       ],
     },
   ],
@@ -57,7 +57,7 @@ export const tech = {
   problems: {
     title: "Turn Market Buzz into Signals",
     intro:
-      "Marketbuzzr structures fragmented market activity into clear, actionable signals so teams can move from information overload to decisions faster.",
+      "MarketBuzzr structures fragmented market activity into clear, actionable signals so teams can move from information overload to decisions faster.",
     items: [
       { question: "Still drowning in webinars, blogs, and product launches — but unsure what actually matters?" },
       { question: "Missing how competitors are really shifting their positioning?" },
@@ -71,8 +71,8 @@ export const tech = {
   closing: {
     heading: "Real-Time Market Intelligence — Without the DIY Overhead",
     paragraphs: [
-      "Marketbuzzr gives founders, marketers, and product leaders a continuously updated view of how their market and competitors are being discussed.",
-      "Instead of maintaining internal trackers, feeds, or AI workflows, Marketbuzzr aggregates signals from blogs, webinars, YouTube, reviews, and community discussions into structured, role-based intelligence.",
+      "MarketBuzzr gives founders, marketers, and product leaders a continuously updated view of how their market and competitors are being discussed.",
+      "Instead of maintaining internal trackers, feeds, or AI workflows, MarketBuzzr aggregates signals from blogs, webinars, YouTube, reviews, and community discussions into structured, role-based intelligence.",
       "The result is faster product and messaging decisions, shared context across teams, and a clear understanding of what is actually shaping your market.",
     ],
     ctaLabel: "Book a Demo",

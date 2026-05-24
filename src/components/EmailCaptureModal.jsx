@@ -106,7 +106,7 @@ const EmailCaptureModal = ({ open, onClose }) => {
           <>
             <h3 id="modal-title">Thank you!</h3>
             <p>
-              Thank you for your interest in Marketbuzzr! Our team will reach
+              Thank you for your interest in MarketBuzzr! Our team will reach
               out to you shortly!
             </p>
             <div className="modal-actions">

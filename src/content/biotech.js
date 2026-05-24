@@ -8,14 +8,14 @@ export const biotech = {
     sub: [
       "Understand what patients, caregivers, KOLs, competitors, and the broader market are saying about your therapy — outside of clinical data.",
     ],
-    ctaLabel: "Get your Marketbuzzr",
+    ctaLabel: "Get your MarketBuzzr",
   },
   intro: [
     {
       heading: "Built for Lean Biotech Teams",
       paragraphs: [
         "Clinical data tells only part of the story. The real-world narrative around your molecule is already forming across patient and caregiver communities, KOL discussions, conference commentary, biotech blogs, YouTube uploads, Reddit threads, advocacy groups, and competitor communications.",
-        "Marketbuzzr structures these fragmented signals into indication- and molecule-specific intelligence so teams stay aligned with how their therapy is being perceived, discussed, and positioned across the ecosystem.",
+        "MarketBuzzr structures these fragmented signals into indication- and molecule-specific intelligence so teams stay aligned with how their therapy is being perceived, discussed, and positioned across the ecosystem.",
       ],
     },
   ],
@@ -46,7 +46,7 @@ export const biotech = {
   problems: {
     title: "Turn Market Buzz into Signals",
     intro:
-      "Marketbuzzr continuously turns fragmented external conversations into structured, indication- and molecule-specific intelligence — helping biotech teams separate noise from emerging signals across the ecosystem.",
+      "MarketBuzzr continuously turns fragmented external conversations into structured, indication- and molecule-specific intelligence — helping biotech teams separate noise from emerging signals across the ecosystem.",
     items: [
       {
         question: "Missing what patients and families are saying?",
@@ -89,9 +89,9 @@ export const biotech = {
   closing: {
     heading: "Real-World Intelligence Around Your Molecule",
     paragraphs: [
-      "Marketbuzzr gives biotech teams a continuously updated view of how their molecule is being discussed outside clinical and regulatory channels. We structure signals from biotech media, patient and caregiver communities, KOL discussions, conferences, YouTube uploads, Reddit threads, and competitor communications into clear, indication-specific intelligence aligned with your strategic priorities.",
+      "MarketBuzzr gives biotech teams a continuously updated view of how their molecule is being discussed outside clinical and regulatory channels. We structure signals from biotech media, patient and caregiver communities, KOL discussions, conferences, YouTube uploads, Reddit threads, and competitor communications into clear, indication-specific intelligence aligned with your strategic priorities.",
       "This helps teams identify blind spots earlier, understand real-world perception shifts, and stay aligned with how the landscape is evolving — without adding operational overhead or replacing existing clinical, regulatory, or commercial workflows.",
-      "See how Marketbuzzr can help your team stay closer to the conversations shaping your therapy and indication.",
+      "See how MarketBuzzr can help your team stay closer to the conversations shaping your therapy and indication.",
     ],
     ctaLabel: "Book a Demo",
   },
