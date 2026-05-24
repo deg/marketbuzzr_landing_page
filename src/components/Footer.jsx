@@ -9,7 +9,7 @@ const Footer = () => (
           MarketBuzzr
         </div>
         <p className="footer-note">
-          © 2025 MarketBuzzr — All rights reserved.
+          © 2025–{new Date().getFullYear()} MarketBuzzr — All rights reserved.
         </p>
       </div>
       <div>
