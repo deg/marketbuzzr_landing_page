@@ -50,9 +50,13 @@ const Nav = () => {
   return (
     <nav>
       <div className="container nav-inner">
-        <Link to="/" className="brand" onClick={closeAll}>
+        <Link
+          to="/"
+          className="brand"
+          onClick={closeAll}
+          aria-label="MarketBuzzr home"
+        >
           <div className="brand-badge">M</div>
-          MarketBuzzr
         </Link>
 
         <button

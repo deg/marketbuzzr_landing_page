@@ -792,8 +792,14 @@ footer h4 {
 
 .nav-menu {
   display: flex;
+  flex: 1;
   align-items: center;
   gap: var(--spacing-lg);
+}
+
+/* Push the Book a Demo group to the far right; tabs stay left by the brand. */
+.nav-actions {
+  margin-left: auto;
 }
 
 .nav-links {
