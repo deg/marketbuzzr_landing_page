@@ -440,42 +440,18 @@ h2 {
   flex-direction: column;
 }
 
-.card .icon {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-sm);
+.signal-mark {
+  display: block;
+  width: 40px;
+  height: 24px;
   margin-bottom: var(--spacing-sm);
-  background: #7d27ff;
-  box-shadow: 0 6px 18px rgba(125, 39, 255, 0.35);
-  transition: transform var(--transition-normal);
-  position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.card .icon::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 16px;
-  height: 16px;
-  border: 2px solid white;
-  border-radius: 50%;
-  border-top-color: transparent;
-  border-right-color: transparent;
-}
-
-.card .icon::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
+.signal-mark polyline {
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 2;
 }
 
 .card h3 {

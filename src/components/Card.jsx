@@ -1,8 +1,9 @@
 import React from "react";
+import SignalMark from "./SignalMark";
 
 const Card = ({ heading, description, note }) => (
   <div className="card">
-    <div className="icon" />
+    <SignalMark />
     <h3>{heading}</h3>
     <p>{description}</p>
     {note && <p className="card-note">{note}</p>}
