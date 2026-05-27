@@ -38,7 +38,6 @@ export const home = {
     title: "Turn Market Buzz into Signals",
     items: [
       { question: "Still tracking competitors, content, and industry discussions manually?" },
-      { question: "Missing shifts in positioning or perception until they're already obvious?" },
       { question: "Struggling to turn fragmented market inputs into clear decisions?" },
       { question: "Different teams seeing different versions of the market with no shared source of truth?" },
       { question: "Not seeing the full picture of how your market is evolving?" },
