@@ -55,6 +55,7 @@ html, body, #root {
 body {
   margin: 0;
   font-family: var(--font-body);
+  font-size: 18px;
   color: var(--text);
   background:
     radial-gradient(1200px 600px at 50% -10%, #1b4c8f55, transparent 60%),
@@ -160,7 +161,7 @@ nav {
 /* Hero Section */
 .hero {
   padding: var(--spacing-3xl) 0 var(--spacing-xl);
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
@@ -198,16 +199,7 @@ h1 {
 
 .sub {
   color: var(--muted);
-  max-width: 700px;
-  margin: 0 auto 22px;
-  padding: 0 var(--spacing-sm);
-  text-wrap: balance;
-}
-
-/* How It Works hero: a touch wider so the (comma-joined) sub sits on two
-   balanced lines rather than three. */
-.hero-wide .sub {
-  max-width: 820px;
+  margin: 0 0 22px;
 }
 
 .hero .cta {
@@ -246,7 +238,7 @@ h1 {
   width: 100%;
   max-width: 760px;
   height: 60px;
-  margin: var(--spacing-xl) auto 0;
+  margin: var(--spacing-xl) 0 0;
   overflow: visible;
 }
 
@@ -322,14 +314,13 @@ h1 {
 h2 {
   font-size: clamp(24px, 3.4vw, 44px);
   margin: 0 0 12px 0;
-  text-align: center;
+  text-align: left;
 }
 
 .section p.lead {
-  text-align: center;
+  text-align: left;
   color: var(--muted);
   margin-top: 8px;
-  text-wrap: balance;
 }
 
 .grid {
@@ -468,7 +459,7 @@ h2 {
   border: 1px solid #ffffff18;
   border-radius: var(--radius-xl);
   padding: var(--spacing-2xl);
-  text-align: center;
+  text-align: left;
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
@@ -500,14 +491,6 @@ h2 {
 
 .cta-panel p {
   color: var(--muted);
-  text-wrap: balance;
-}
-
-/* Home closing panel: keep the paragraph measure narrow enough that even the
-   short first paragraph wraps to at least two (balanced) lines on any width. */
-.home-closing .cta-panel p {
-  max-width: 700px;
-  margin-inline: auto;
 }
 
 .cta-panel a:not(.primary) {
@@ -1003,10 +986,8 @@ footer h4 {
   justify-content: flex-start;
 }
 
-/* Use Case intro block ("Built for ...") — a centered, narrow lead block. */
-.info-block {
-  max-width: 820px;
-}
+/* Use Case intro block ("Built for ..."): full-width section so its left edge
+   matches the cards; the lead's reading width is capped by .section p.lead. */
 
 /* Tighten the gap between intro paragraphs: an explicit top margin (and no
    default <p> bottom margin to collapse in). `p.lead` ties .section p.lead on
@@ -1018,9 +999,8 @@ footer h4 {
 /* How It Works — numbered steps */
 .steps {
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
-  max-width: 820px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
@@ -1067,9 +1047,8 @@ footer h4 {
 
 /* How It Works — closing summary with value bullets */
 .summary-block {
-  max-width: 820px;
-  margin: 0 auto;
-  text-align: center;
+  margin: 0;
+  text-align: left;
 }
 
 .summary-block p {
