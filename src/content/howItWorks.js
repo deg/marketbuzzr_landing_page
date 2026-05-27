@@ -4,7 +4,7 @@ export const howItWorks = {
   hero: {
     title: "How MarketBuzzr Works",
     sub: [
-      "MarketBuzzr continuously transforms fragmented market activity into structured intelligence teams can actually use — without manual tracking, prompting, or information overload.",
+      "MarketBuzzr continuously transforms fragmented market activity into structured intelligence teams can actually use, without manual tracking, prompting, or information overload.",
     ],
   },
   steps: [
@@ -39,13 +39,14 @@ export const howItWorks = {
       "Instead of maintaining systems, teams get a continuously structured view of what matters:",
     ],
     bullets: [
-      "always-updated intelligence without manual tracking or maintenance",
-      "consistent logic across sources, teams, and time",
-      "unified coverage of written and video-based market content",
-      "filtered signals that remove noise and surface relevance",
-      "continuity across competitors, categories, and market shifts",
-      "a shared market view across product, marketing, and leadership teams",
-      "decision-ready insights instead of fragmented tools and workflows",
+      "Always-updated intelligence without manual tracking or maintenance",
+      "Consistent logic across sources, teams, and time",
+      "Unified coverage of written and video-based market content",
+      "Filtered signals that remove noise and surface relevance",
+      "Continuity across competitors, categories, and market shifts",
+      "A shared market view across product, marketing, and leadership teams",
+      "Decision-ready insights instead of fragmented tools and workflows",
+      "Tuned to match your interests, unlike generic AI texts",
     ],
     footnote: "No prompts. No pipelines to manage. No constant adjustments.",
     ctaLabel: "Book a Demo",

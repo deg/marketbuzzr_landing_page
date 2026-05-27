@@ -8,7 +8,7 @@ const HowItWorks = () => {
   useDocumentTitle(howItWorks.title);
   return (
     <>
-      <PageHero {...howItWorks.hero} />
+      <PageHero {...howItWorks.hero} className="hero-wide" />
 
       <section className="section container">
         <ol className="steps">
