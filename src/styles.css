@@ -972,6 +972,8 @@ footer h4 {
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-normal),
+    box-shadow var(--transition-normal), background var(--transition-normal);
 }
 
 .step-number {
@@ -1029,6 +1031,23 @@ footer h4 {
   padding: var(--spacing-md) var(--spacing-lg);
   box-shadow: var(--shadow-md);
   color: var(--muted);
+  transition: border-color var(--transition-normal),
+    box-shadow var(--transition-normal), background var(--transition-normal);
+}
+
+/* Ambient hover: content boxes warm up under the cursor — a faint brand-cyan
+   border, a soft glow, and a touch more light — with no lift, no pointer
+   cursor, and no text change, so nothing reads as a clickable affordance.
+   (We removed the old hover lift in mbz-nn3j for exactly that reason.)
+   Gated to real-hover devices so touch screens don't get stuck-hover. */
+@media (hover: hover) {
+  .card:hover,
+  .step:hover,
+  .value-box:hover {
+    border-color: rgba(110, 224, 255, 0.3);
+    box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
+    background: linear-gradient(180deg, #16245fcc, #111d49cc);
+  }
 }
 
 @media (max-width: 768px) {
