@@ -58,13 +58,12 @@ export const tech = {
   problems: {
     title: "Turn Market Buzz into Signals",
     intro:
-      "MarketBuzzr structures fragmented market activity into clear, actionable signals so teams can move from information overload to decisions faster.",
+      "MarketBuzzr structures fragmented market activity into clear, actionable signals\nso teams can move from information overload to decisions faster.",
     items: [
       { question: "Still drowning in webinars, blogs, and product launches — but unsure what actually matters?" },
       { question: "Missing how competitors are really shifting their positioning?" },
       { question: "Missing what customers, creators, and industry voices are saying about your product?" },
       { question: "Struggling to keep up with market changes using internal trackers or AI prompts?" },
-      { question: "Different teams reading the market in different ways — with no shared source of truth?" },
       { question: "Ever caught off guard in leadership conversations because the market moved first?" },
       { question: "Not sure what actually matters for your next move anymore?" },
     ],
