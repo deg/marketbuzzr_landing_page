@@ -2,7 +2,7 @@
 // Biotech Companies" section).
 export const biotech = {
   slug: "biotech",
-  title: "Market Intelligence for Biotech — MarketBuzzr",
+  title: "Market Intelligence for Biotech Teams — MarketBuzzr",
   hero: {
     kicker: "Always know what's happening around your pipeline",
     title: "MarketBuzzr — Market Intelligence for Biotech Companies",
