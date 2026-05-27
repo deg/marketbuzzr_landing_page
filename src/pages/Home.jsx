@@ -24,7 +24,7 @@ const Home = () => {
 
       <ProblemList {...home.problems} />
 
-      <section className="section container">
+      <section className="section container home-closing">
         <CtaPanel {...home.closing} />
       </section>
     </>
