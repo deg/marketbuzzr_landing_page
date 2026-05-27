@@ -69,11 +69,11 @@ export const tech = {
     ],
   },
   closing: {
-    heading: "Real-Time Market Intelligence — Without the DIY Overhead",
+    heading: "Real-Time Market Intelligence —\nWithout the DIY Overhead",
     paragraphs: [
-      "MarketBuzzr gives founders, marketers, and product leaders a continuously updated view of how their market and competitors are being discussed.",
-      "Instead of maintaining internal trackers, feeds, or AI workflows, MarketBuzzr aggregates signals from blogs, webinars, YouTube, reviews, and community discussions into structured, role-based intelligence.",
-      "The result is faster product and messaging decisions, shared context across teams, and a clear understanding of what is actually shaping your market.",
+      "MarketBuzzr gives founders, marketers, and product leaders a continuously updated view\nof how their market and competitors are being discussed.",
+      "Instead of maintaining internal trackers, feeds, or AI workflows, MarketBuzzr aggregates signals from\nblogs, webinars, YouTube, reviews, and community discussions into structured, role-based intelligence.",
+      "The result is faster product and messaging decisions, shared context across teams,\nand a clear understanding of what is actually shaping your market.",
     ],
     ctaLabel: "Book a Demo",
   },

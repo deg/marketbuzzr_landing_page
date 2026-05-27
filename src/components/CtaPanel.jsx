@@ -4,7 +4,7 @@ import { withBreaks } from "./withBreaks";
 
 const CtaPanel = ({ heading, paragraphs = [], ctaLabel = "Book a Demo" }) => (
   <div className="cta-panel">
-    <h3>{heading}</h3>
+    <h3>{withBreaks(heading)}</h3>
     {paragraphs.map((p, i) => (
       <p key={i}>{withBreaks(p)}</p>
     ))}
