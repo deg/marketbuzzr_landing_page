@@ -199,10 +199,8 @@ h1 {
 
 .sub {
   color: var(--muted);
-  max-width: 760px;
   margin: 0 auto 22px;
   padding: 0 var(--spacing-sm);
-  text-wrap: balance;
 }
 
 /* How It Works hero: a touch wider so the (comma-joined) sub sits on two
@@ -330,8 +328,6 @@ h2 {
   text-align: center;
   color: var(--muted);
   margin: 8px auto 0;
-  max-width: 760px;
-  text-wrap: balance;
 }
 
 .grid {
