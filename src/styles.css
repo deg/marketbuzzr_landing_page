@@ -44,7 +44,7 @@
 }
 
 html, body, #root {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -189,6 +189,13 @@ h1 {
   max-width: 700px;
   margin: 0 auto 22px;
   padding: 0 var(--spacing-sm);
+  text-wrap: balance;
+}
+
+/* How It Works hero: a touch wider so the (comma-joined) sub sits on two
+   balanced lines rather than three. */
+.hero-wide .sub {
+  max-width: 820px;
 }
 
 .hero .cta {
@@ -235,6 +242,7 @@ h2 {
   text-align: center;
   color: var(--muted);
   margin-top: 8px;
+  text-wrap: balance;
 }
 
 .grid {
@@ -424,10 +432,12 @@ h2 {
 .cta-panel h3 {
   font-size: clamp(22px, 3vw, 36px);
   margin: 0 0 10px 0;
+  text-wrap: balance;
 }
 
 .cta-panel p {
   color: var(--muted);
+  text-wrap: balance;
 }
 
 .cta-panel a:not(.primary) {
