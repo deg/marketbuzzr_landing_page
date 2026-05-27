@@ -26,21 +26,25 @@ export const biotech = {
         heading: "Treatment Perception",
         description:
           "How patients, caregivers, and the broader ecosystem understand your molecule shapes expectations long before approval. We track how it is being discussed in terms of outcomes, burden, and real-world experience.",
+        note: "Understand how your therapy is perceived beyond clinical endpoints",
       },
       {
         heading: "Early Safety & Blind Spot Detection",
         description:
           "Not all important signals appear in clinical or internal reporting. We surface emerging discussions around safety, tolerability, and treatment approach that may indicate early perception shifts or concerns worth addressing proactively.",
+        note: "Spot emerging safety and perception signals to avoid blind spots",
       },
       {
         heading: "Caregiver & Community Insights",
         description:
           "Families and caregivers are often the most active voices in patient communities. Their discussions reveal unmet needs, practical challenges, and recurring questions that help teams better understand real-world context around their molecule.",
+        note: "Surface caregiver and patient perspectives",
       },
       {
         heading: "Competitor & Conference Intelligence",
         description:
           "We analyze how competing therapies, mechanisms, and companies are being discussed across biotech blogs, conference coverage, YouTube uploads, KOL commentary, and patient communities, helping teams stay aligned with how the landscape is actually evolving.",
+        note: "Understand how competitors are positioning their therapies",
       },
     ],
   },
