@@ -55,7 +55,7 @@ html, body, #root {
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--text);
   background:
     radial-gradient(1200px 600px at 50% -10%, #1b4c8f55, transparent 60%),
@@ -132,7 +132,7 @@ nav {
   background: transparent;
   cursor: pointer;
   transition: all var(--transition-fast);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -171,7 +171,7 @@ nav {
   border: 1px solid var(--ring);
   border-radius: var(--radius-full);
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, 0.05);
@@ -218,7 +218,7 @@ h1 {
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
   font-family: inherit;
   border: none;
   cursor: pointer;
@@ -377,7 +377,7 @@ h2 {
   .nav-actions a,
   .nav-actions button {
     padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 13px;
+    font-size: 16px;
     white-space: nowrap;
   }
 
@@ -401,7 +401,7 @@ h2 {
 
   .hero .cta {
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .nav-inner {
@@ -415,11 +415,11 @@ h2 {
   .nav-actions a,
   .nav-actions button {
     padding: 5px var(--spacing-xs);
-    font-size: 11px;
+    font-size: 16px;
   }
 
   .brand {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .brand-badge {
@@ -557,7 +557,7 @@ footer {
   padding: 30px 0 60px;
   border-top: 1px solid #ffffff14;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 footer a {
@@ -722,7 +722,7 @@ footer h4 {
   border: 1px solid #ffffff33;
   background: rgba(0, 0, 0, 0.25);
   color: var(--text);
-  font-size: 16px;
+  font-size: 18px;
   font-family: inherit;
   box-sizing: border-box;
   transition: border-color var(--transition-fast);
@@ -748,7 +748,7 @@ footer h4 {
 .modal-error {
   color: #ff9a9a;
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .modal-error a {
@@ -842,7 +842,7 @@ footer h4 {
   border-radius: var(--radius-full);
   color: var(--text);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   font-family: inherit;
   background: transparent;
@@ -861,7 +861,7 @@ footer h4 {
 }
 
 .nav-caret {
-  font-size: 10px;
+  font-size: 12px;
   opacity: 0.8;
 }
 
@@ -893,7 +893,7 @@ footer h4 {
   border-radius: var(--radius-sm);
   color: var(--text);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   white-space: nowrap;
   transition: background var(--transition-fast);
 }
@@ -1136,7 +1136,7 @@ footer h4 {
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 18px;
   font-family: inherit;
   border: none;
   box-shadow: var(--shadow-sm);
