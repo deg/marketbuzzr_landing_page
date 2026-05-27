@@ -1198,3 +1198,41 @@ footer h4 {
 [data-version="left"] .summary-block {
   text-align: left;
 }
+
+/* ============================================================
+   Mixed layout variant (the default) — opt in via ?version=mixed. Headings
+   stay centered (the centered base), but body paragraphs are left-justified.
+   Headings, CTAs, and the signal line keep the centered base.
+   ============================================================ */
+[data-version="mixed"] .sub {
+  text-align: left;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+[data-version="mixed"] .section p.lead {
+  text-align: left;
+  margin: 8px 0 0;
+}
+
+[data-version="mixed"] .info-block p.lead {
+  text-align: left;
+  margin: var(--spacing-sm) 0 0;
+}
+
+/* Left-justify panel body text but not the button (it lives in its own <p>),
+   so CTAs stay centered like the headings. */
+[data-version="mixed"] .cta-panel p:not(:has(.primary)) {
+  text-align: left;
+  text-wrap: wrap;
+}
+
+[data-version="mixed"] .home-closing .cta-panel p {
+  max-width: none;
+  margin-inline: 0;
+}
+
+[data-version="mixed"] .summary-block p,
+[data-version="mixed"] .summary-footnote {
+  text-align: left;
+}
