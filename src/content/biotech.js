@@ -4,8 +4,8 @@ export const biotech = {
   slug: "biotech",
   title: "Market Intelligence for Biotech Teams — MarketBuzzr",
   hero: {
-    kicker: "Always know what's happening around your pipeline",
-    title: "MarketBuzzr — Market Intelligence for Biotech Companies",
+    kicker: "Market Intelligence for Biotech Companies",
+    title: "Always know what's happening around your pipeline",
     sub: [
       "Understand what patients, caregivers, KOLs, competitors, and the broader market are saying about your therapy — outside of clinical data.",
     ],
