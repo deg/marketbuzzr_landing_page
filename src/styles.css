@@ -1143,3 +1143,55 @@ footer h4 {
 .summary-block button.primary {
   margin-top: var(--spacing-md);
 }
+
+/* ============================================================
+   Left-aligned layout variant — opt in via ?version=left (default is the
+   centered layout above). These rules flip alignment back to left and undo the
+   centered measure tweaks. Toggled by data-version on <html> (set in main.jsx).
+   ============================================================ */
+[data-version="left"] .hero {
+  text-align: left;
+}
+
+[data-version="left"] .sub {
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+[data-version="left"] .signal-line {
+  margin: var(--spacing-xl) 0 0;
+}
+
+[data-version="left"] h2 {
+  text-align: left;
+}
+
+[data-version="left"] .section p.lead {
+  text-align: left;
+  margin: 8px 0 0;
+}
+
+[data-version="left"] .cta-panel {
+  text-align: left;
+}
+
+[data-version="left"] .cta-panel p {
+  text-wrap: wrap;
+}
+
+[data-version="left"] .home-closing .cta-panel p {
+  max-width: none;
+  margin-inline: 0;
+}
+
+[data-version="left"] .info-block {
+  max-width: none;
+}
+
+[data-version="left"] .info-block p.lead {
+  margin: var(--spacing-sm) 0 0;
+}
+
+[data-version="left"] .summary-block {
+  text-align: left;
+}
