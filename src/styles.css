@@ -1014,7 +1014,7 @@ footer h4 {
    default <p> bottom margin to collapse in). `p.lead` ties .section p.lead on
    specificity and wins by source order. */
 .info-block p.lead {
-  margin: var(--spacing-sm) 0 0;
+  margin: var(--spacing-sm) auto 0;
 }
 
 /* How It Works — numbered steps */
