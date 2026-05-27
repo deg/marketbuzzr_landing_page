@@ -3,8 +3,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import DemoButton from "./DemoButton";
 
 const USE_CASES = [
-  { to: "/use-cases/biotech", label: "Biotech" },
-  { to: "/use-cases/tech", label: "Tech" },
+  { to: "/use-cases/biotech", label: "Market Intelligence for Biotech Teams" },
+  { to: "/use-cases/tech", label: "Market Intelligence for Tech Teams" },
 ];
 
 const linkClass = ({ isActive }) =>
@@ -74,7 +74,7 @@ const Nav = () => {
         <div className={`nav-menu ${menuOpen ? "open" : ""}`}>
           <div className="nav-links">
             <NavLink to="/" end className={linkClass} onClick={closeAll}>
-              Home
+              MarketBuzzr
             </NavLink>
 
             <div className="nav-dropdown" ref={dropdownRef}>

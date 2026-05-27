@@ -812,6 +812,7 @@ footer h4 {
   color: var(--text);
   text-decoration: none;
   font-size: 14px;
+  white-space: nowrap;
   transition: background var(--transition-fast);
 }
 
@@ -892,6 +893,11 @@ footer h4 {
     background: transparent;
     border: none;
     box-shadow: none;
+  }
+
+  /* Let the longer use-case labels wrap inside the narrow mobile menu. */
+  .nav-dropdown-item {
+    white-space: normal;
   }
 
   .nav-actions {
