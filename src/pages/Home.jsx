@@ -6,6 +6,7 @@ import SectionTitle from "../components/SectionTitle";
 import Card from "../components/Card";
 import ProblemList from "../components/ProblemList";
 import CtaPanel from "../components/CtaPanel";
+import SignalDivider from "../components/SignalDivider";
 
 const Home = () => {
   useDocumentTitle(home.title);
@@ -22,7 +23,11 @@ const Home = () => {
         </div>
       </section>
 
+      <SignalDivider />
+
       <ProblemList {...home.problems} />
+
+      <SignalDivider />
 
       <section className="section container home-closing">
         <CtaPanel {...home.closing} />

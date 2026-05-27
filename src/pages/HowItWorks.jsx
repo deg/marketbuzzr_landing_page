@@ -3,6 +3,7 @@ import { howItWorks } from "../content/howItWorks";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import DemoButton from "../components/DemoButton";
+import SignalDivider from "../components/SignalDivider";
 
 const HowItWorks = () => {
   useDocumentTitle(howItWorks.title);
@@ -27,6 +28,8 @@ const HowItWorks = () => {
           ))}
         </ol>
       </section>
+
+      <SignalDivider />
 
       <section className="section container">
         <div className="summary-block">

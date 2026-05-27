@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero";
 import Card from "../components/Card";
 import ProblemList from "../components/ProblemList";
 import CtaPanel from "../components/CtaPanel";
+import SignalDivider from "../components/SignalDivider";
 
 // Renders a Use Case (Biotech or Tech) from its content module — same shape,
 // different copy. Routed at /use-cases/:slug via App.
@@ -32,7 +33,11 @@ const UseCasePage = ({ data }) => {
         </div>
       </section>
 
+      <SignalDivider />
+
       <ProblemList {...data.problems} />
+
+      <SignalDivider />
 
       <section className="section container">
         <CtaPanel {...data.closing} />

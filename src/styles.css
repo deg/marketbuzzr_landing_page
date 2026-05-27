@@ -282,6 +282,37 @@ h1 {
   }
 }
 
+/* Faint signal hairline echoed between sections — the motif as a recurring
+   thread down the page. */
+.signal-divider {
+  display: block;
+  width: 120px;
+  height: 22px;
+  margin: var(--spacing-md) auto;
+  overflow: visible;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 30%,
+    #000 70%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 30%,
+    #000 70%,
+    transparent
+  );
+}
+
+.signal-divider polyline {
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.75;
+}
+
 /* Sections */
 
 .section {
