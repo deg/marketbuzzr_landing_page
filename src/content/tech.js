@@ -4,8 +4,8 @@ export const tech = {
   slug: "tech",
   title: "Market Intelligence for Tech Teams — MarketBuzzr",
   hero: {
-    kicker: "Always know what's happening across your market",
-    title: "MarketBuzzr — Role-Based Market Intelligence for Modern Tech Teams",
+    kicker: "Role-Based Market Intelligence for Modern Tech Teams",
+    title: "Always know what's happening across your market",
     sub: [
       "From competitor updates and industry blogs to webinars, YouTube discussions, Reddit threads, and product reviews — we turn fragmented market activity into structured, decision-ready intelligence.",
     ],
@@ -69,7 +69,7 @@ export const tech = {
     ],
   },
   closing: {
-    heading: "Real-Time Market Intelligence — Without the DIY Overhead",
+    heading: "Real-Time Market Intelligence — Without the DIY Overhead",
     paragraphs: [
       "MarketBuzzr gives founders, marketers, and product leaders a continuously updated view of how their market and competitors are being discussed.",
       "Instead of maintaining internal trackers, feeds, or AI workflows, MarketBuzzr aggregates signals from blogs, webinars, YouTube, reviews, and community discussions into structured, role-based intelligence.",
