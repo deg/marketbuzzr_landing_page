@@ -238,6 +238,50 @@ h1 {
   transform: translateY(0);
 }
 
+/* Signature motif: a noise->signal waveform under the hero content. The stroke
+   gradient fades in from faint cool (noise) to bright brand (signal), and the
+   line draws itself left-to-right on mount. */
+.signal-line {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: 60px;
+  margin: var(--spacing-xl) auto 0;
+  overflow: visible;
+}
+
+.signal-line .signal-stop-0 {
+  stop-color: var(--brand-2);
+  stop-opacity: 0.12;
+}
+
+.signal-line .signal-stop-1 {
+  stop-color: var(--brand-2);
+}
+
+.signal-line .signal-stop-2 {
+  stop-color: var(--brand);
+}
+
+.signal-line-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: signal-draw 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+@keyframes signal-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-line-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
 /* Sections */
 
 .section {

@@ -1,5 +1,6 @@
 import React from "react";
 import DemoButton from "./DemoButton";
+import SignalLine from "./SignalLine";
 
 const PageHero = ({ kicker, title, sub = [], ctaLabel, className = "" }) => (
   <header className={["hero container", className].filter(Boolean).join(" ")}>
@@ -11,6 +12,7 @@ const PageHero = ({ kicker, title, sub = [], ctaLabel, className = "" }) => (
       </p>
     ))}
     {ctaLabel && <DemoButton label={ctaLabel} className="cta" />}
+    <SignalLine />
   </header>
 );
 
