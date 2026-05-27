@@ -10,7 +10,7 @@ export const home = {
   },
   offerings: {
     title: "See What's Actually Shaping Your Market",
-    lead: "From competitor updates, industry blogs, webinars, YouTube discussions, Reddit threads, reviews, and community conversations — MarketBuzzr turns fragmented market activity into structured intelligence tailored to how different teams make decisions.",
+    lead: "From competitor updates, industry blogs, webinars, YouTube discussions, Reddit threads, reviews, and community conversations,\nMarketBuzzr turns fragmented market activity into structured intelligence tailored to how different teams make decisions.",
     items: [
       {
         heading: "Competitor Narrative & Positioning",
