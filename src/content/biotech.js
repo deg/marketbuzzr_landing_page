@@ -16,7 +16,7 @@ export const biotech = {
       heading: "Built for Lean Biotech Teams",
       paragraphs: [
         "Clinical data tells only part of the story. The real-world narrative around your molecule is already forming across patient and caregiver communities, KOL discussions, conference commentary, biotech blogs, YouTube uploads, Reddit threads, advocacy groups, and competitor communications.",
-        "MarketBuzzr structures these fragmented signals into indication- and molecule-specific intelligence so teams stay aligned with how their therapy is being perceived, discussed, and positioned across the ecosystem.",
+        "MarketBuzzr structures these fragmented external signals into indication- and molecule-specific intelligence, helping you understand how your therapy is being perceived, discussed, and positioned across the ecosystem.",
       ],
     },
   ],
