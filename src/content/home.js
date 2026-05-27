@@ -46,9 +46,9 @@ export const home = {
   closing: {
     heading: "Stay Ahead of How Your Market Is Moving",
     paragraphs: [
-      "MarketBuzzr replaces manual tracking, scattered tools, and disconnected workflows with a continuously updated intelligence layer.",
-      "Instead of stitching together signals from dozens of sources, teams get a shared, structured view of what is shaping their market in real time.",
-      "The result: faster decisions, aligned teams, and a clearer understanding of how your market and product are being perceived externally.",
+      "MarketBuzzr replaces manual tracking, scattered tools, and disconnected workflows\nwith a continuously updated intelligence layer.",
+      "Instead of stitching together signals from dozens of sources,\nteams get a shared, structured view of what is shaping their market in real time.",
+      "The result: faster decisions, aligned teams,\nand a clearer understanding of how your market and product are being perceived externally.",
     ],
     ctaLabel: "Book a Demo",
   },
