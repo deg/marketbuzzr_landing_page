@@ -1160,6 +1160,7 @@ footer h4 {
 
 [data-version="left"] .signal-line {
   margin: var(--spacing-xl) 0 0;
+  max-width: none;
 }
 
 [data-version="left"] h2 {
@@ -1184,8 +1185,10 @@ footer h4 {
   margin-inline: 0;
 }
 
+/* .info-block IS the .container, so cap at the container width (not none, which
+   would let it span the whole window) — just undo the centered 820 narrowing. */
 [data-version="left"] .info-block {
-  max-width: none;
+  max-width: 1100px;
 }
 
 [data-version="left"] .info-block p.lead {
