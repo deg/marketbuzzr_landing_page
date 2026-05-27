@@ -34,9 +34,11 @@ const HowItWorks = () => {
           {howItWorks.closing.paragraphs.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
-          <ul className="value-bullets">
+          <ul className="value-grid">
             {howItWorks.closing.bullets.map((b, i) => (
-              <li key={i}>{b}</li>
+              <li className="value-box" key={i}>
+                {b}
+              </li>
             ))}
           </ul>
           <p className="summary-footnote">{howItWorks.closing.footnote}</p>
