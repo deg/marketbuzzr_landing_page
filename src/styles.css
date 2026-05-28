@@ -1272,3 +1272,37 @@ footer h4 {
 [data-version="simple"] .summary-footnote {
   text-align: left;
 }
+
+/* Drop the noise→signal motif entirely in the simple variant: hero signal
+   line and the short between-section sine ticks. display: none removes the
+   element from layout so the surrounding margins collapse on their own. */
+[data-version="simple"] .signal-line,
+[data-version="simple"] .signal-divider {
+  display: none;
+}
+
+/* Card squiggle → original purple spinner-style icon (the look at 96d5624,
+   pre-redesign): a purple rounded square with a 270° white ring and a center
+   dot. Painted via an inline-SVG data URI background because Chrome doesn't
+   paint ::before/::after on <svg> elements, and we're reusing the existing
+   .signal-mark <svg> as the container to avoid touching Card.jsx. */
+[data-version="simple"] .signal-mark {
+  width: 28px;
+  height: 28px;
+  margin: 0 0 var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  background-color: #7d27ff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M 18.24 18.24 A 6 6 0 0 1 9.76 9.76' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='14' cy='14' r='3' fill='white'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: 0 6px 18px rgba(125, 39, 255, 0.35);
+  transition: transform var(--transition-normal);
+}
+
+[data-version="simple"] .signal-mark polyline {
+  display: none;
+}
+
+[data-version="simple"] .card:hover .signal-mark {
+  transform: scale(1.1) rotate(5deg);
+}
