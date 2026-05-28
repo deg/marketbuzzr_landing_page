@@ -423,13 +423,27 @@ h2 {
   }
 }
 
-/* Cards */
-.card {
+/* Card / step / value-box share the same surface (gradient, border, radius,
+   shadow); each adds its own padding, layout, and transition. */
+:is(.card, .step, .value-box) {
   background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
   border: 1px solid #ffffff14;
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
   box-shadow: var(--shadow-md);
+}
+
+/* .step and .value-box use the same explicit-property transition list
+   (omitting layout/padding so resizes don't animate). .card differs by using
+   `all` and stays inline below. */
+:is(.step, .value-box) {
+  transition: border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    background var(--transition-normal);
+}
+
+/* Cards */
+.card {
+  padding: var(--spacing-lg);
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
@@ -1031,13 +1045,7 @@ footer h4 {
   display: flex;
   gap: var(--spacing-lg);
   align-items: flex-start;
-  background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
-  border: 1px solid #ffffff14;
-  border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
-  transition: border-color var(--transition-normal),
-    box-shadow var(--transition-normal), background var(--transition-normal);
 }
 
 .step-number {
@@ -1088,14 +1096,8 @@ footer h4 {
 }
 
 .value-box {
-  background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
-  border: 1px solid #ffffff14;
-  border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
-  box-shadow: var(--shadow-md);
   color: var(--muted);
-  transition: border-color var(--transition-normal),
-    box-shadow var(--transition-normal), background var(--transition-normal);
 }
 
 /* Ambient hover: content boxes warm up under the cursor — a faint brand-cyan
@@ -1104,21 +1106,18 @@ footer h4 {
    (We removed the old hover lift in mbz-nn3j for exactly that reason.)
    Gated to real-hover devices so touch screens don't get stuck-hover. */
 @media (hover: hover) {
-  .card:hover,
-  .step:hover,
-  .value-box:hover {
+  /* Shared ambient-hover paint: cyan border + lighter gradient. Only the
+     shadow base differs between cards/steps/value-boxes (md) and the larger
+     CTA panel (lg), so those two box-shadow declarations live below. */
+  :is(.card, .step, .value-box, .cta-panel):hover {
     border-color: rgba(110, 224, 255, 0.3);
-    box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
     background: linear-gradient(180deg, #16245fcc, #111d49cc);
   }
-
-  /* Same ambient treatment for the full-width CTA panels — same border tint
-     and glow, but keep the panel's larger base shadow rather than dropping
-     down to the card-sized one. */
+  :is(.card, .step, .value-box):hover {
+    box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
+  }
   .cta-panel:hover {
-    border-color: rgba(110, 224, 255, 0.3);
     box-shadow: var(--shadow-lg), 0 0 24px rgba(110, 224, 255, 0.1);
-    background: linear-gradient(180deg, #16245fcc, #111d49cc);
   }
 }
 
@@ -1175,27 +1174,39 @@ footer h4 {
    nesting to avoid repeating the prefix on every line.
    ============================================================ */
 
-[data-version="left"] {
-  :is(.hero, h2, .section p.lead, .cta-panel, .summary-block) {
-    text-align: left;
-  }
+/* Left + mixed both undo the centered-narrow tweaks the base applies. These
+   margin/padding/max-width adjustments are identical between the two; the
+   variants only differ in WHICH text gets flipped to left-align (see the
+   per-variant blocks below). */
+:is([data-version="left"], [data-version="mixed"]) {
   .sub {
     margin: 0 0 22px;
     padding: 0;
+  }
+  .section p.lead {
+    margin: 8px 0 0;
+  }
+  .info-block p.lead {
+    margin: var(--spacing-sm) 0 0;
+  }
+  .home-closing .cta-panel p {
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* Left: flush-left headings + body + signal-line edge-to-edge + wider
+   info-block. */
+[data-version="left"] {
+  :is(.hero, h2, .section p.lead, .cta-panel, .summary-block) {
+    text-align: left;
   }
   .signal-line {
     margin: var(--spacing-xl) 0 0;
     max-width: none;
   }
-  .section p.lead {
-    margin: 8px 0 0;
-  }
   .cta-panel p {
     text-wrap: wrap;
-  }
-  .home-closing .cta-panel p {
-    max-width: none;
-    margin-inline: 0;
   }
   /* .info-block IS the .container, so cap at the container width (not none,
      which would let it span the whole window) — just undo the centered 820
@@ -1203,36 +1214,19 @@ footer h4 {
   .info-block {
     max-width: 1100px;
   }
-  .info-block p.lead {
-    margin: var(--spacing-sm) 0 0;
-  }
 }
 
-/* Mixed: headings/CTAs/signal-line stay centered (the base), body
-   paragraphs flip to left-justified. */
+/* Mixed: headings/CTAs/signal-line stay centered (base), body paragraphs
+   flip to left-justified. */
 [data-version="mixed"] {
   :is(.sub, .section p.lead, .info-block p.lead,
       .cta-panel p:not(:has(.primary)),
       .summary-block p, .summary-footnote) {
     text-align: left;
   }
-  .sub {
-    margin: 0 0 22px;
-    padding: 0;
-  }
-  .section p.lead {
-    margin: 8px 0 0;
-  }
-  .info-block p.lead {
-    margin: var(--spacing-sm) 0 0;
-  }
   /* Panel body text is left, but the button-bearing <p> stays centered. */
   .cta-panel p:not(:has(.primary)) {
     text-wrap: wrap;
-  }
-  .home-closing .cta-panel p {
-    max-width: none;
-    margin-inline: 0;
   }
 }
 
