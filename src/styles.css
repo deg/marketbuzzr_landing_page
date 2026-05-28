@@ -21,6 +21,11 @@
   --spacing-2xl: 48px;
   --spacing-3xl: 72px;
 
+  /* Lead-paragraph reading measure — capped centered text uses this width.
+     Applied to the home-closing CTA base and to every centered lead/CTA
+     paragraph in the simple variant. */
+  --lead-measure: 700px;
+
   /* Border radius */
   --radius-sm: 8px;
   --radius-lg: 18px;
@@ -499,7 +504,7 @@ h2 {
 /* Home closing panel: keep the paragraph measure narrow enough that even the
    short first paragraph wraps to at least two (balanced) lines on any width. */
 .home-closing .cta-panel p {
-  max-width: 700px;
+  max-width: var(--lead-measure);
   margin-inline: auto;
 }
 
@@ -1159,152 +1164,113 @@ footer h4 {
 }
 
 /* ============================================================
-   Left-aligned layout variant — opt in via ?version=left (default is the
-   centered layout above). These rules flip alignment back to left and undo the
-   centered measure tweaks. Toggled by data-version on <html> (set in main.jsx).
-   ============================================================ */
-[data-version="left"] .hero {
-  text-align: left;
-}
-
-[data-version="left"] .sub {
-  margin: 0 0 22px;
-  padding: 0;
-}
-
-[data-version="left"] .signal-line {
-  margin: var(--spacing-xl) 0 0;
-  max-width: none;
-}
-
-[data-version="left"] h2 {
-  text-align: left;
-}
-
-[data-version="left"] .section p.lead {
-  text-align: left;
-  margin: 8px 0 0;
-}
-
-[data-version="left"] .cta-panel {
-  text-align: left;
-}
-
-[data-version="left"] .cta-panel p {
-  text-wrap: wrap;
-}
-
-[data-version="left"] .home-closing .cta-panel p {
-  max-width: none;
-  margin-inline: 0;
-}
-
-/* .info-block IS the .container, so cap at the container width (not none, which
-   would let it span the whole window) — just undo the centered 820 narrowing. */
-[data-version="left"] .info-block {
-  max-width: 1100px;
-}
-
-[data-version="left"] .info-block p.lead {
-  margin: var(--spacing-sm) 0 0;
-}
-
-[data-version="left"] .summary-block {
-  text-align: left;
-}
-
-/* ============================================================
-   Mixed layout variant (the default) — opt in via ?version=mixed. Headings
-   stay centered (the centered base), but body paragraphs are left-justified.
-   Headings, CTAs, and the signal line keep the centered base.
-   ============================================================ */
-[data-version="mixed"] .sub {
-  text-align: left;
-  margin: 0 0 22px;
-  padding: 0;
-}
-
-[data-version="mixed"] .section p.lead {
-  text-align: left;
-  margin: 8px 0 0;
-}
-
-[data-version="mixed"] .info-block p.lead {
-  text-align: left;
-  margin: var(--spacing-sm) 0 0;
-}
-
-/* Left-justify panel body text but not the button (it lives in its own <p>),
-   so CTAs stay centered like the headings. */
-[data-version="mixed"] .cta-panel p:not(:has(.primary)) {
-  text-align: left;
-  text-wrap: wrap;
-}
-
-[data-version="mixed"] .home-closing .cta-panel p {
-  max-width: none;
-  margin-inline: 0;
-}
-
-[data-version="mixed"] .summary-block p,
-[data-version="mixed"] .summary-footnote {
-  text-align: left;
-}
-
-/* ============================================================
-   Simple layout variant — the new default. Forked from "mixed"; we evolve
-   only this variant from here, leaving mixed/center/left frozen as reference
-   points. Divergence from mixed so far: hero/section/use-case-intro lead
-   paragraphs, the full-width CTA-panel body text, and the How-It-Works
-   closing-summary paragraphs all stay centered (inherit the unscoped base)
-   instead of being left-aligned, on Manu's request.
+   Layout variants — opt in via ?version=. Four variants today:
+     center  unscoped base, no overrides (every selector below is absent)
+     left    fully left-aligned, signal line edge-to-edge, info-block widened
+     mixed   left-justified body, centered headings/CTAs/signal-line
+     simple  forked from mixed: stripped of the signal motif, with hero +
+             section + use-case-intro leads + CTA body + summary text staying
+             centered at a constrained reading measure
+   Each block wraps a single [data-version="X"] selector with native CSS
+   nesting to avoid repeating the prefix on every line.
    ============================================================ */
 
-/* Narrower reading measure for the centered lead paragraphs and the CTA
-   panel body text — Manu prefers a constrained measure over container-width
-   centered text. 700px matches the existing base cap on the home-closing
-   CTA paragraph (so home keeps its current width and everything else falls
-   in line with it). */
-[data-version="simple"] .sub,
-[data-version="simple"] .section p.lead,
-[data-version="simple"] .info-block p.lead,
-[data-version="simple"] .cta-panel p,
-[data-version="simple"] .summary-block p,
-[data-version="simple"] .summary-footnote {
-  max-width: 700px;
-  margin-inline: auto;
+[data-version="left"] {
+  :is(.hero, h2, .section p.lead, .cta-panel, .summary-block) {
+    text-align: left;
+  }
+  .sub {
+    margin: 0 0 22px;
+    padding: 0;
+  }
+  .signal-line {
+    margin: var(--spacing-xl) 0 0;
+    max-width: none;
+  }
+  .section p.lead {
+    margin: 8px 0 0;
+  }
+  .cta-panel p {
+    text-wrap: wrap;
+  }
+  .home-closing .cta-panel p {
+    max-width: none;
+    margin-inline: 0;
+  }
+  /* .info-block IS the .container, so cap at the container width (not none,
+     which would let it span the whole window) — just undo the centered 820
+     narrowing. */
+  .info-block {
+    max-width: 1100px;
+  }
+  .info-block p.lead {
+    margin: var(--spacing-sm) 0 0;
+  }
 }
 
-/* Drop the noise→signal motif entirely in the simple variant: hero signal
-   line and the short between-section sine ticks. display: none removes the
-   element from layout so the surrounding margins collapse on their own. */
-[data-version="simple"] .signal-line,
-[data-version="simple"] .signal-divider {
-  display: none;
+/* Mixed: headings/CTAs/signal-line stay centered (the base), body
+   paragraphs flip to left-justified. */
+[data-version="mixed"] {
+  :is(.sub, .section p.lead, .info-block p.lead,
+      .cta-panel p:not(:has(.primary)),
+      .summary-block p, .summary-footnote) {
+    text-align: left;
+  }
+  .sub {
+    margin: 0 0 22px;
+    padding: 0;
+  }
+  .section p.lead {
+    margin: 8px 0 0;
+  }
+  .info-block p.lead {
+    margin: var(--spacing-sm) 0 0;
+  }
+  /* Panel body text is left, but the button-bearing <p> stays centered. */
+  .cta-panel p:not(:has(.primary)) {
+    text-wrap: wrap;
+  }
+  .home-closing .cta-panel p {
+    max-width: none;
+    margin-inline: 0;
+  }
 }
 
-/* Card squiggle → original purple spinner-style icon (the look at 96d5624,
-   pre-redesign): a purple rounded square with a 270° white ring and a center
-   dot. Painted via an inline-SVG data URI background because Chrome doesn't
-   paint ::before/::after on <svg> elements, and we're reusing the existing
-   .signal-mark <svg> as the container to avoid touching Card.jsx. */
-[data-version="simple"] .signal-mark {
-  width: 28px;
-  height: 28px;
-  margin: 0 0 var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  background-color: #7d27ff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M 18.24 18.24 A 6 6 0 0 1 9.76 9.76' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='14' cy='14' r='3' fill='white'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  box-shadow: 0 6px 18px rgba(125, 39, 255, 0.35);
-  transition: transform var(--transition-normal);
-}
+[data-version="simple"] {
+  /* Constrained reading measure on every centered lead/CTA/summary paragraph
+     — Manu prefers a narrow centered column over container-width text. */
+  :is(.sub, .section p.lead, .info-block p.lead, .cta-panel p,
+      .summary-block p, .summary-footnote) {
+    max-width: var(--lead-measure);
+    margin-inline: auto;
+  }
 
-[data-version="simple"] .signal-mark polyline {
-  display: none;
-}
+  /* Drop the noise→signal motif entirely: hero signal line and between-
+     section sine ticks. display: none collapses surrounding margins. */
+  :is(.signal-line, .signal-divider) {
+    display: none;
+  }
 
-[data-version="simple"] .card:hover .signal-mark {
-  transform: scale(1.1) rotate(5deg);
+  /* Card squiggle → original purple spinner-style icon (the look at 96d5624,
+     pre-redesign): purple rounded square with a 270° white ring and center
+     dot. Painted via inline-SVG data URI on the existing .signal-mark <svg>
+     (Chrome doesn't paint ::before/::after on <svg>). */
+  .signal-mark {
+    width: 28px;
+    height: 28px;
+    margin: 0 0 var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    background-color: #7d27ff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M 18.24 18.24 A 6 6 0 0 1 9.76 9.76' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='14' cy='14' r='3' fill='white'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow: 0 6px 18px rgba(125, 39, 255, 0.35);
+    transition: transform var(--transition-normal);
+  }
+  .signal-mark polyline {
+    display: none;
+  }
+  .card:hover .signal-mark {
+    transform: scale(1.1) rotate(5deg);
+  }
 }
