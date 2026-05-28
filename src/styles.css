@@ -1255,13 +1255,10 @@ footer h4 {
    Simple layout variant — the new default. Forked from "mixed"; we evolve
    only this variant from here, leaving mixed/center/left frozen as reference
    points. Divergence from mixed so far: hero/section/use-case-intro lead
-   paragraphs and the full-width CTA-panel body text stay centered (inherit
-   the unscoped base) instead of being left-aligned, on Manu's request.
+   paragraphs, the full-width CTA-panel body text, and the How-It-Works
+   closing-summary paragraphs all stay centered (inherit the unscoped base)
+   instead of being left-aligned, on Manu's request.
    ============================================================ */
-[data-version="simple"] .summary-block p,
-[data-version="simple"] .summary-footnote {
-  text-align: left;
-}
 
 /* Narrower reading measure for the centered lead paragraphs and the CTA
    panel body text — Manu prefers a constrained measure over container-width
@@ -1271,7 +1268,9 @@ footer h4 {
 [data-version="simple"] .sub,
 [data-version="simple"] .section p.lead,
 [data-version="simple"] .info-block p.lead,
-[data-version="simple"] .cta-panel p {
+[data-version="simple"] .cta-panel p,
+[data-version="simple"] .summary-block p,
+[data-version="simple"] .summary-footnote {
   max-width: 700px;
   margin-inline: auto;
 }
