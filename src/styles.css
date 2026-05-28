@@ -6,7 +6,7 @@
   --bg-2: #0e173a;
   --card: #0f1a45cc;
   --text: #d7e2ff;
-  --muted: #9bb3e8;
+  --muted: #c2d1f5;
   --brand: #6ee0ff;
   --brand-2: #5ea4ff;
   --ring: rgba(110, 224, 255, 0.35);
@@ -61,6 +61,7 @@ body {
   margin: 0;
   font-family: var(--font-body);
   font-size: 20px;
+  font-weight: 500;
   color: var(--text);
   background:
     radial-gradient(1200px 600px at 50% -10%, #1b4c8f55, transparent 60%),
