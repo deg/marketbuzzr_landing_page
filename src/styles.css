@@ -1236,3 +1236,39 @@ footer h4 {
 [data-version="mixed"] .summary-footnote {
   text-align: left;
 }
+
+/* ============================================================
+   Simple layout variant — the new default. Starts as a copy of "mixed"; we
+   evolve only this variant from here, leaving mixed/center/left frozen as
+   reference points.
+   ============================================================ */
+[data-version="simple"] .sub {
+  text-align: left;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+[data-version="simple"] .section p.lead {
+  text-align: left;
+  margin: 8px 0 0;
+}
+
+[data-version="simple"] .info-block p.lead {
+  text-align: left;
+  margin: var(--spacing-sm) 0 0;
+}
+
+[data-version="simple"] .cta-panel p:not(:has(.primary)) {
+  text-align: left;
+  text-wrap: wrap;
+}
+
+[data-version="simple"] .home-closing .cta-panel p {
+  max-width: none;
+  margin-inline: 0;
+}
+
+[data-version="simple"] .summary-block p,
+[data-version="simple"] .summary-footnote {
+  text-align: left;
+}
