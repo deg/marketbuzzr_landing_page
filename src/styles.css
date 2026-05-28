@@ -1238,26 +1238,12 @@ footer h4 {
 }
 
 /* ============================================================
-   Simple layout variant — the new default. Starts as a copy of "mixed"; we
-   evolve only this variant from here, leaving mixed/center/left frozen as
-   reference points.
+   Simple layout variant — the new default. Forked from "mixed"; we evolve
+   only this variant from here, leaving mixed/center/left frozen as reference
+   points. Divergence from mixed so far: hero/section/use-case-intro lead
+   paragraphs stay centered (inherit the unscoped base) instead of being
+   left-aligned, on Manu's request.
    ============================================================ */
-[data-version="simple"] .sub {
-  text-align: left;
-  margin: 0 0 22px;
-  padding: 0;
-}
-
-[data-version="simple"] .section p.lead {
-  text-align: left;
-  margin: 8px 0 0;
-}
-
-[data-version="simple"] .info-block p.lead {
-  text-align: left;
-  margin: var(--spacing-sm) 0 0;
-}
-
 [data-version="simple"] .cta-panel p:not(:has(.primary)) {
   text-align: left;
   text-wrap: wrap;
