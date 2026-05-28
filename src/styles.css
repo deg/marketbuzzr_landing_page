@@ -982,13 +982,17 @@ footer h4 {
    Page content (offering/problem cards, use-case intros, steps)
    ============================================================ */
 
-/* Benefit line on tech use-case cards. More specific than `.card p`. */
+/* Benefit line on use-case cards. More specific than `.card p`. Reserves
+   a two-line minimum vertical box so a 1-line note (e.g. "Surface caregiver
+   and patient perspectives") aligns to the top of the 2-line note next to
+   it in the same grid row, rather than sitting one line below it. */
 .card .card-note {
   margin-top: auto;
   padding-top: var(--spacing-sm);
   color: var(--brand);
   font-weight: 600;
   font-style: italic;
+  min-height: 2lh;
 }
 
 /* Problem cards have no icon/link, so let the question/answer sit naturally. */
