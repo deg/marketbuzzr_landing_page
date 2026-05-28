@@ -1084,13 +1084,15 @@ footer h4 {
   color: var(--muted);
 }
 
-/* Value points as a 2-column grid of boxes (not a bullet list). */
+/* Value points as a single-column stack of full-width boxes (not a bullet
+   list, not a 2-up grid — the items are short, structurally flat statements
+   that read better as a vertical list of emphasized lines). */
 .value-grid {
   list-style: none;
   margin: var(--spacing-lg) 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--spacing-md);
   text-align: left;
 }
@@ -1098,6 +1100,7 @@ footer h4 {
 .value-box {
   padding: var(--spacing-md) var(--spacing-lg);
   color: var(--muted);
+  font-weight: 700;
 }
 
 /* Ambient hover: content boxes warm up under the cursor — a faint brand-cyan
@@ -1118,12 +1121,6 @@ footer h4 {
   }
   .cta-panel:hover {
     box-shadow: var(--shadow-lg), 0 0 24px rgba(110, 224, 255, 0.1);
-  }
-}
-
-@media (max-width: 768px) {
-  .value-grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -1238,6 +1235,7 @@ footer h4 {
     max-width: var(--lead-measure);
     margin-inline: auto;
   }
+
 
   /* Drop the noise→signal motif entirely: hero signal line and between-
      section sine ticks. display: none collapses surrounding margins. */
