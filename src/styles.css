@@ -1259,18 +1259,17 @@ footer h4 {
   text-align: left;
 }
 
-/* Let CTA-panel paragraphs fill the panel (matching how out-of-box leads
-   fill the container) instead of being capped at 700px and balanced narrow.
-   text-wrap: balance is the base default but interacts badly with centered
-   text — the browser picks a narrower equal-width wrap. Switching to plain
-   wrap lets lines fill greedily, with only the last (short) line visibly
-   centered. */
+/* Narrower reading measure for the centered lead paragraphs and the CTA
+   panel body text — Manu prefers a constrained measure over container-width
+   centered text. 700px matches the existing base cap on the home-closing
+   CTA paragraph (so home keeps its current width and everything else falls
+   in line with it). */
+[data-version="simple"] .sub,
+[data-version="simple"] .section p.lead,
+[data-version="simple"] .info-block p.lead,
 [data-version="simple"] .cta-panel p {
-  text-wrap: wrap;
-}
-
-[data-version="simple"] .home-closing .cta-panel p {
-  max-width: none;
+  max-width: 700px;
+  margin-inline: auto;
 }
 
 /* Drop the noise→signal motif entirely in the simple variant: hero signal
