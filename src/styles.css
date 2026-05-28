@@ -464,6 +464,7 @@ h2 {
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
+  transition: all var(--transition-normal);
 }
 
 .cta-panel::before {
@@ -1099,6 +1100,15 @@ footer h4 {
   .value-box:hover {
     border-color: rgba(110, 224, 255, 0.3);
     box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
+    background: linear-gradient(180deg, #16245fcc, #111d49cc);
+  }
+
+  /* Same ambient treatment for the full-width CTA panels — same border tint
+     and glow, but keep the panel's larger base shadow rather than dropping
+     down to the card-sized one. */
+  .cta-panel:hover {
+    border-color: rgba(110, 224, 255, 0.3);
+    box-shadow: var(--shadow-lg), 0 0 24px rgba(110, 224, 255, 0.1);
     background: linear-gradient(180deg, #16245fcc, #111d49cc);
   }
 }
