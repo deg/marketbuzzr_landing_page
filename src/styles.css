@@ -1241,22 +1241,26 @@ footer h4 {
    Simple layout variant — the new default. Forked from "mixed"; we evolve
    only this variant from here, leaving mixed/center/left frozen as reference
    points. Divergence from mixed so far: hero/section/use-case-intro lead
-   paragraphs stay centered (inherit the unscoped base) instead of being
-   left-aligned, on Manu's request.
+   paragraphs and the full-width CTA-panel body text stay centered (inherit
+   the unscoped base) instead of being left-aligned, on Manu's request.
    ============================================================ */
-[data-version="simple"] .cta-panel p:not(:has(.primary)) {
+[data-version="simple"] .summary-block p,
+[data-version="simple"] .summary-footnote {
   text-align: left;
+}
+
+/* Let CTA-panel paragraphs fill the panel (matching how out-of-box leads
+   fill the container) instead of being capped at 700px and balanced narrow.
+   text-wrap: balance is the base default but interacts badly with centered
+   text — the browser picks a narrower equal-width wrap. Switching to plain
+   wrap lets lines fill greedily, with only the last (short) line visibly
+   centered. */
+[data-version="simple"] .cta-panel p {
   text-wrap: wrap;
 }
 
 [data-version="simple"] .home-closing .cta-panel p {
   max-width: none;
-  margin-inline: 0;
-}
-
-[data-version="simple"] .summary-block p,
-[data-version="simple"] .summary-footnote {
-  text-align: left;
 }
 
 /* Drop the noise→signal motif entirely in the simple variant: hero signal
