@@ -45,7 +45,14 @@ email-capture modal is open:
 | `/use-cases/tech` | `pages/UseCasePage.jsx` with `content/tech.js` |
 | `/use-cases` | redirect → `/use-cases/biotech` |
 | `/how-it-works` | `pages/HowItWorks.jsx` |
-| anything else | redirect → `/` |
+| anything else | `pages/NotImplemented.jsx` |
+
+The catch-all used to `Navigate to="/"`, which silently returned anyone with a
+typo or a stale link to the homepage with no explanation. It now renders a
+visible placeholder that derives its title from the path, so linking to a page
+that does not exist yet is safe. **A real not-found page should survive to
+production even after the dev-cycle wording goes** — do not delete
+`NotImplemented.jsx` wholesale or you reintroduce the original defect.
 
 ```
 ErrorBoundary > ModalContext.Provider > Nav, <Routes>, Footer, EmailCaptureModal
@@ -58,10 +65,19 @@ not by wiring up a new handler.
 
 ### Copy lives in `src/content/`, not in components
 
-`content/{home,biotech,tech,howItWorks}.js` each export one plain object holding all of
-that page's marketing copy (headings, leads, card arrays, CTA text). The page components
-are presentational and map over those arrays via shared components — `Card`,
-`ProblemList`, `CtaPanel`, `PageHero`, `SectionTitle`, `SignalDivider`.
+`content/{home,biotech,tech,howItWorks,nav}.js` each export one plain object holding all
+of that page's marketing copy (headings, leads, card arrays, CTA text). The page
+components are presentational and map over those arrays.
+
+Two content files carry structure that looks like styling but is not:
+
+- `home.problem.signals` — **array order places the chips** around the 3×3 signal
+  cloud, and the three marked `relevant` are the ones touching the centre card.
+  Reordering the array moves the composition. The cell map is commented there.
+- `content/nav.js` — the nav's shape, including the two judgement calls it
+  records: How It Works lives under Product, and Industries replaced the old
+  Use Cases dropdown. It imports the industry list from `home.js` so the nav and
+  section 7 cannot drift apart.
 
 **To change marketing copy, edit the content module — never the components.** The two
 Use Case pages are literally the same component with different content objects, so copy
@@ -69,6 +85,51 @@ edits must not introduce structural differences.
 
 `withBreaks.jsx` turns `\n` inside a content string into `<br/>`, used where the source
 deck asks for a break at a specific point.
+
+### The homepage (2026-08 redesign)
+
+`pages/Home.jsx` renders eight sections in the order set by Manu's implementation
+brief (`~/Documents/marketbuzzr/marketbuzzr_homepage_handoff_md/`). Each has its
+own component; none of them is generic, so read the component before changing a
+section:
+
+| § | Section | Built from |
+|---|---|---|
+| 1 | Hero | `PageHero` + `ProductImage` |
+| 2 | Problem | `SignalCloud` (3×3 grid) then `BrandDivider` |
+| 3 | How It Works | `ProductImage`; `FlowSteps` is the unused alternative |
+| 4 | Insight | `ProductImage` + `.card` callouts |
+| 5 | Categories | `CategoryCard` + `CategoryIcon` (six line icons) |
+| 6 | Personalization | `ProductImage`; `PersonalizationDiagram` is the alternative |
+| 7 | Industries | `IndustryTile` |
+| 8 | Final CTA | `CtaPanel` with a secondary label |
+
+`FlowSteps` and `PersonalizationDiagram` are **built and working but not shown**.
+The sections use the handoff artwork instead, which carries more content; those
+two stay readable at phone widths, so they are kept as candidates for a mobile
+rendering. They are reachable behind the dev triggers.
+
+Images live in `src/assets/` as AVIF with a WebP fallback, encoded from the
+handoff PNGs (4.2 MB of PNG → 275 KB of AVIF). The source PNGs are not in this
+repo. `ProductImage` handles `<picture>`, sizing and loading priority — the hero
+is eager with `fetchPriority="high"` because it is the LCP element, everything
+else is lazy.
+
+### Dev scaffolding — must not ship
+
+The design cycle deliberately links unbuilt pages to placeholders and annotates
+known problems in the artwork. Every such spot is tagged:
+
+```bash
+grep -rn "FIX-BEFORE-RELEASE" src
+```
+
+**`yarn deploy` refuses the live target while any tag remains** (`scripts/deploy.mjs`).
+`yarn deploy:new` is exempt — the sandbox is where this is meant to be visible.
+Each tag says what to do, and they do not all mean delete: some unwrap, one
+(`NotImplemented.jsx`) must be reframed rather than removed, and one is a design
+decision for Manu. `src/components/DevOnly.jsx` holds all the dev-only React so
+removing it is a deletion rather than a hunt. Beads issue `mbz-et8e.18` tracks it.
 
 ### The one backend dependency: the email-capture form
 
@@ -92,7 +153,21 @@ reuse them (`var(--brand)`, `var(--spacing-lg)`, …) rather than introducing ne
 Dark theme throughout. Class names are plain (`.modal`, `.cta-panel`, `.grid`); no CSS
 modules or utility framework.
 
-The "Final overrides" block at the **end** of the file must stay there. Several of its
+Three traps in this stylesheet, all of which have bitten:
+
+**`padding: X 0` on an element that also carries `.container` silently destroys
+the horizontal gutter.** `.hero` and `.section` both did this, so content ran
+flush to the screen edge on narrow viewports. Both are fixed; treat the pattern
+as suspect if you add another.
+
+**Visuals break out of the 1100px text container** to a 1400px cap
+(`.product-frame`), because the artwork is 1536px wide and would otherwise render
+at ~67% and be hard to read. The breakout centres a wider child inside a narrower
+parent with `left: 50%` + `translateX(-50%)`, which **only works when the parent
+spans the page** — inside a split column the 50% resolves against the column and
+the image overflows the window. §6 is excluded for exactly this reason.
+
+**The "Final overrides" block at the end of the file must stay there.** Several of its
 rules tie on specificity with the base rules they override (`.section p.lead`,
 `.info-block p.lead`, `.signal-mark`, `.signal-mark polyline`) and win only by source
 order — relocating them silently reverts the overrides with no error anywhere.
