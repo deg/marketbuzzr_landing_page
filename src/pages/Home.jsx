@@ -5,13 +5,22 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import SectionTitle from "../components/SectionTitle";
 import CtaPanel from "../components/CtaPanel";
-import SectionPlaceholder from "../components/SectionPlaceholder";
 import SignalCloud from "../components/SignalCloud";
 import BrandDivider from "../components/BrandDivider";
 import FlowSteps from "../components/FlowSteps";
 import CategoryCard from "../components/CategoryCard";
 import PersonalizationDiagram from "../components/PersonalizationDiagram";
 import IndustryTile from "../components/IndustryTile";
+import ProductImage from "../components/ProductImage";
+import { DevNote, DevPeek } from "../components/DevOnly";
+import heroAvif from "../assets/hero-dashboard.avif";
+import heroWebp from "../assets/hero-dashboard.webp";
+import insightAvif from "../assets/insight-card.avif";
+import insightWebp from "../assets/insight-card.webp";
+import flowAvif from "../assets/signal-flow.avif";
+import flowWebp from "../assets/signal-flow.webp";
+import personalizationAvif from "../assets/personalization.avif";
+import personalizationWebp from "../assets/personalization.webp";
 
 // Section order follows the brief's Final Page Flow. Each section is a shell:
 // the copy and heading levels are final, but the visual or interactive part is
@@ -45,11 +54,21 @@ const Home = () => {
         secondaryCtaLabel={hero.ctaSecondary}
         footnote={hero.footnote}
       >
-        <SectionPlaceholder
-          note={hero.visualNote}
-          ratio="16 / 9"
+        <ProductImage
           className="hero-visual"
+          avif={heroAvif}
+          webp={heroWebp}
+          width={1536}
+          height={735}
+          priority
+          alt={hero.visualAlt}
         />
+        <DevNote>
+          This artwork has “7,842 / Scanned across 350+ sources” baked in. The
+          brief’s own Copy/UX principle 6 forbids invented platform metrics, and
+          it cannot be edited out of a flattened image. Accepted for the design
+          cycle; needs a re-render or a crop before launch.
+        </DevNote>
       </PageHero>
 
       {/* §2 Problem. Copy left, signal cloud right; stacks copy-first on
@@ -73,7 +92,14 @@ const Home = () => {
           /how-it-works rather than being duplicated here. */}
       <section className="section container">
         <SectionTitle title={howItWorks.title} lead={howItWorks.lead} />
-        <FlowSteps steps={howItWorks.steps} />
+        <DevPeek
+          label="Signal flow diagram"
+          avif={flowAvif}
+          webp={flowWebp}
+          alt={howItWorks.visualAlt}
+        >
+          <FlowSteps steps={howItWorks.steps} />
+        </DevPeek>
         <p className="lead lead-strong">{howItWorks.emphasis}</p>
         <p className="lead">
           <Link className="text-link" to={howItWorks.linkTo}>
@@ -89,7 +115,20 @@ const Home = () => {
           their meaning on their own. */}
       <section className="section container">
         <SectionTitle title={insight.title} lead={insight.lead} />
-        <SectionPlaceholder note={insight.visualNote} ratio="3 / 2" />
+        <ProductImage
+          avif={insightAvif}
+          webp={insightWebp}
+          width={1536}
+          height={1024}
+          alt={insight.visualAlt}
+        />
+        <DevNote>
+          This artwork shows third-party marks — FDA, Reuters, McKinsey &amp;
+          Company, Fierce Medtech, Nature Medicine, Intuitive Surgical — plus a
+          photograph of an FDA building. Shown as sources rather than customers,
+          but neither the marks nor the photograph have been cleared for
+          marketing use. Accepted for the design cycle; confirm before launch.
+        </DevNote>
         <div className="grid">
           {insight.callouts.map((c) => (
             <div className="card" key={c.heading}>
@@ -129,11 +168,18 @@ const Home = () => {
             <p className="problem-closer">{personalization.emphasis}</p>
             <p className="personalization-closer">{personalization.closer}</p>
           </div>
-          <PersonalizationDiagram
-            inputs={personalization.inputs}
-            engine={personalization.engine}
-            output={personalization.output}
-          />
+          <DevPeek
+            label="Personalization diagram"
+            avif={personalizationAvif}
+            webp={personalizationWebp}
+            alt={personalization.visualAlt}
+          >
+            <PersonalizationDiagram
+              inputs={personalization.inputs}
+              engine={personalization.engine}
+              output={personalization.output}
+            />
+          </DevPeek>
         </div>
       </section>
 

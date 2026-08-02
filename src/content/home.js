@@ -9,9 +9,11 @@
 // its own key (`emphasis`, `footnote`, `closer`) and the component decides how
 // to render it. Do not put ** or HTML into these strings.
 //
-// The four PNGs shipped with the brief were set aside as aspirational mockups
-// (mbz-et8e.1), so everything is built natively. `visualNote` describes what
-// belongs in a visual slot and is shown as placeholder text until it exists.
+// Sections 1 and 4 show the handoff artwork; `visualAlt` carries the brief's
+// suggested alt text, with the brand casing corrected. Sections 3 and 6 are
+// built natively instead and keep their artwork only as a dev-only reference
+// (mbz-et8e.19), because at mobile widths the supplied diagrams render at about
+// 23% scale and their embedded labels stop being legible.
 export const home = {
   title: "MarketBuzzr — Market Intelligence, Clarified",
 
@@ -28,8 +30,8 @@ export const home = {
     ctaSecondary: "Try It Free",
     footnote:
       "No endless searching. No information overload. Just what matters.",
-    visualNote:
-      "Product screenshot: the MarketBuzzr overview — a weekly market intelligence report showing top strategic insights, impact labels and the reader profile it was written for. Dominates the section at 85–95% of the container width.",
+    visualAlt:
+      "MarketBuzzr strategic intelligence dashboard with market signals, tailored insights and AI draft actions",
   },
 
   // §2 Problem
@@ -81,8 +83,8 @@ export const home = {
     emphasis: "We monitor everything. You focus on what matters.",
     linkLabel: "See how it works in detail",
     linkTo: "/how-it-works",
-    visualNote:
-      "Flow diagram: the five steps above connected left-to-right on desktop, stacking vertically on mobile.",
+    visualAlt:
+      "MarketBuzzr workflow from market monitoring to strategic insights, recommendations and ready-to-use drafts",
   },
 
   // §4 Product Output / Insight
@@ -113,8 +115,8 @@ export const home = {
     paragraphs: [
       "When an insight requires action, turn it into an action plan, executive summary, campaign, blog post or other ready-to-use draft.",
     ],
-    visualNote:
-      "Product screenshot: a single insight showing the market signal, its strategic implication, the recommended actions and the sources it was drawn from.",
+    visualAlt:
+      "MarketBuzzr insight showing a market signal, strategic implication, recommended actions and transparent sources",
   },
 
   // §5 What MarketBuzzr Helps You Track
@@ -209,8 +211,8 @@ export const home = {
       "Your Markets",
     ],
     output: "Only what matters reaches you",
-    visualNote:
-      "Personalization diagram: the six inputs above converging through MarketBuzzr into a single filtered output.",
+    visualAlt:
+      "MarketBuzzr personalization model using company, competitors, goals, role and markets to filter intelligence",
   },
 
   // §7 Industries

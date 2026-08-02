@@ -1275,6 +1275,133 @@ footer h4 {
   color: var(--muted);
 }
 
+/* Handoff artwork is light-themed while the site is dark, so it sits on a
+   deliberate plate: a light surround, border and shadow read as "a picture of
+   the product" rather than as a background that failed to load. */
+.product-frame {
+  margin: var(--spacing-xl) 0 0;
+  padding: var(--spacing-sm);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, #ffffff1f, #ffffff0a);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(110, 224, 255, 0.08);
+}
+
+.product-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================================
+   DEV-ONLY. Everything below pairs with src/components/DevOnly.jsx and must
+   not ship — see mbz-et8e.18. Amber and hazard-striped so scaffolding is one
+   recognisable thing, matching the not-implemented page.
+   ============================================================ */
+.dev-note {
+  max-width: var(--lead-measure);
+  margin: var(--spacing-lg) auto 0;
+  padding: var(--spacing-md);
+  border: 2px dashed #f0a53a;
+  border-radius: var(--radius-sm);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(240, 165, 58, 0.06) 0 12px,
+    transparent 12px 24px
+  );
+  text-align: left;
+}
+
+.dev-note p {
+  margin: var(--spacing-sm) 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.dev-note-tag {
+  display: inline-block;
+  padding: 2px var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  background: #f0a53a;
+  color: #241500;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dev-peek-trigger {
+  display: block;
+  margin: var(--spacing-md) auto 0;
+  padding: 4px var(--spacing-sm);
+  border: 1px dashed #f0a53a;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: #f0a53a;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dev-peek-trigger:hover {
+  background: rgba(240, 165, 58, 0.12);
+}
+
+.dev-peek-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-lg);
+  background: rgba(4, 8, 24, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.dev-peek-panel {
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow: auto;
+  padding: var(--spacing-md);
+  border: 2px dashed #f0a53a;
+  border-radius: var(--radius-sm);
+  background: #0b1230;
+}
+
+.dev-peek-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.dev-peek-close {
+  padding: 4px var(--spacing-sm);
+  border: 1px solid #f0a53a;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: #f0a53a;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dev-peek-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.dev-peek-foot {
+  margin: var(--spacing-md) 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 /* Not-yet-implemented page. Deliberately unlike the rest of the site — amber,
    hazard-striped and monospaced — because it must be impossible to mistake for
    finished work, and obvious in a screenshot if it ever escapes to production.
