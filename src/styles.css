@@ -1441,6 +1441,60 @@ footer h4 {
   }
 }
 
+/* §5 Intelligence categories. Its own grid rather than .grid, which is two
+   columns — six cards want three across, then two, then one. */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+  align-items: stretch;
+}
+
+.category-card {
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--spacing-sm);
+}
+
+.category-card h3 {
+  margin: 0;
+}
+
+.category-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--brand);
+}
+
+/* Lines, not paragraphs — the brief is explicit. Markers are removed because
+   the four items are attributes of the category rather than a checklist, but
+   the list element stays so the structure survives for screen readers. */
+.category-lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-lines li {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 2px 0;
+}
+
+@media (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Brand divider band between sections. */
 .brand-divider {
   display: flex;

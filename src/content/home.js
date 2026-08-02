@@ -126,6 +126,7 @@ export const home = {
     items: [
       {
         heading: "Competitive Intelligence",
+        icon: "target",
         lines: [
           "Product launches",
           "Repositioning",
@@ -135,6 +136,7 @@ export const home = {
       },
       {
         heading: "Market & Industry",
+        icon: "trend",
         lines: [
           "Industry trends",
           "Consumer behavior",
@@ -144,6 +146,7 @@ export const home = {
       },
       {
         heading: "Regulation & Risk",
+        icon: "shield",
         lines: [
           "Regulatory changes",
           "Policy direction",
@@ -153,6 +156,7 @@ export const home = {
       },
       {
         heading: "Growth & Opportunities",
+        icon: "growth",
         lines: [
           "White-space opportunities",
           "New markets",
@@ -162,6 +166,7 @@ export const home = {
       },
       {
         heading: "Content & Communication",
+        icon: "message",
         lines: [
           "Thought leadership",
           "Content ideas",
@@ -171,6 +176,7 @@ export const home = {
       },
       {
         heading: "Executive Intelligence",
+        icon: "compass",
         lines: [
           "Strategic Pulse",
           "Opportunities & threats",

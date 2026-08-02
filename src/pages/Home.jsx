@@ -10,6 +10,7 @@ import SectionPlaceholder from "../components/SectionPlaceholder";
 import SignalCloud from "../components/SignalCloud";
 import BrandDivider from "../components/BrandDivider";
 import FlowSteps from "../components/FlowSteps";
+import CategoryCard from "../components/CategoryCard";
 
 // Section order follows the brief's Final Page Flow. Each section is a shell:
 // the copy and heading levels are final, but the visual or interactive part is
@@ -104,14 +105,14 @@ const Home = () => {
         ))}
       </section>
 
-      {/* §5 Intelligence categories — mbz-et8e.8 builds the icon card grid */}
+      {/* §5 Intelligence categories */}
       <section className="section container">
         <SectionTitle title={categories.title} lead={categories.lead} />
-        <SectionPlaceholder
-          note={`Six-card grid, one icon per category: ${categories.items
-            .map((c) => c.heading)
-            .join(", ")}.`}
-        />
+        <div className="category-grid">
+          {categories.items.map((item) => (
+            <CategoryCard key={item.heading} {...item} />
+          ))}
+        </div>
       </section>
 
       {/* §6 Personalization — mbz-et8e.9 builds the diagram and split layout */}
