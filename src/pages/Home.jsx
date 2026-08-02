@@ -28,18 +28,24 @@ const Home = () => {
 
   return (
     <>
-      {/* §1 Hero — mbz-et8e.4 adds the secondary CTA and the product visual */}
+      {/* §1 Hero. The visual stays a placeholder until real product
+          screenshots exist (mbz-et8e.12) — a hand-built dashboard would be
+          invented product imagery, which the brief rules out. */}
       <PageHero
         kicker={hero.eyebrow}
         title={hero.title}
         sub={hero.sub}
+        emphasis={hero.emphasis}
         ctaLabel={hero.ctaPrimary}
-      />
-      <section className="section container">
-        <p className="lead">{hero.emphasis}</p>
-        <p className="lead">{hero.footnote}</p>
-        <SectionPlaceholder note={hero.visualNote} ratio="16 / 9" />
-      </section>
+        secondaryCtaLabel={hero.ctaSecondary}
+        footnote={hero.footnote}
+      >
+        <SectionPlaceholder
+          note={hero.visualNote}
+          ratio="16 / 9"
+          className="hero-visual"
+        />
+      </PageHero>
 
       {/* §2 Problem + signal cloud + brand divider — mbz-et8e.5 */}
       <section className="section container">
