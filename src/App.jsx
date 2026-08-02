@@ -7,6 +7,7 @@ import EmailCaptureModal from "./components/EmailCaptureModal";
 import Home from "./pages/Home";
 import UseCasePage from "./pages/UseCasePage";
 import HowItWorks from "./pages/HowItWorks";
+import NotImplemented from "./pages/NotImplemented";
 import { ModalContext } from "./ModalContext";
 import { biotech } from "./content/biotech";
 import { tech } from "./content/tech";
@@ -47,7 +48,11 @@ const App = () => {
               element={<Navigate to="/use-cases/biotech" replace />}
             />
             <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* Anything else lands on a visible placeholder. This used to
+                redirect silently to "/", which meant a typo or a stale link
+                left the visitor back at the start with no explanation — and it
+                is why linking to unbuilt pages was previously unsafe. */}
+            <Route path="*" element={<NotImplemented />} />
           </Routes>
         </main>
         <Footer />

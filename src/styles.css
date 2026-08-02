@@ -1275,6 +1275,55 @@ footer h4 {
   color: var(--muted);
 }
 
+/* Not-yet-implemented page. Deliberately unlike the rest of the site — amber,
+   hazard-striped and monospaced — because it must be impossible to mistake for
+   finished work, and obvious in a screenshot if it ever escapes to production.
+   See mbz-et8e.18: this must not ship. */
+.nyi {
+  max-width: var(--lead-measure);
+  margin: var(--spacing-3xl) auto;
+  padding: var(--spacing-2xl);
+  border: 2px dashed #f0a53a;
+  border-radius: var(--radius-sm);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(240, 165, 58, 0.06) 0 12px,
+    transparent 12px 24px
+  );
+  text-align: left;
+}
+
+.nyi-tag {
+  display: inline-block;
+  padding: 2px var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  background: #f0a53a;
+  color: #241500;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nyi-title {
+  font-size: clamp(28px, 4vw, 40px);
+  margin: var(--spacing-md) 0 var(--spacing-sm);
+  text-align: left;
+}
+
+.nyi-body {
+  color: var(--muted);
+  margin: 0 0 var(--spacing-md);
+}
+
+.nyi-path {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 14px;
+  color: #f0a53a;
+  margin: 0 0 var(--spacing-lg);
+}
+
 /* ============================================================
    Homepage sections (2026-08 redesign). Kept together and placed after the
    shared card/placeholder rules these need to win against on source order.
