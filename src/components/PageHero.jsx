@@ -27,7 +27,7 @@ const PageHero = ({
     ))}
     {emphasis && <p className="hero-emphasis">{emphasis}</p>}
     {(ctaLabel || secondaryCtaLabel) && (
-      <div className="hero-actions">
+      <div className="cta-actions">
         {ctaLabel && <DemoButton label={ctaLabel} className="cta" />}
         {secondaryCtaLabel && (
           <DemoButton label={secondaryCtaLabel} className="cta-secondary" />

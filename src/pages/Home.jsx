@@ -5,7 +5,6 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import SectionTitle from "../components/SectionTitle";
 import CtaPanel from "../components/CtaPanel";
-import DemoButton from "../components/DemoButton";
 import SectionPlaceholder from "../components/SectionPlaceholder";
 import SignalCloud from "../components/SignalCloud";
 import BrandDivider from "../components/BrandDivider";
@@ -147,19 +146,15 @@ const Home = () => {
         />
       </section>
 
-      {/* §8 Final CTA — mbz-et8e.11 */}
+      {/* §8 Final CTA */}
       <section className="section container home-closing">
         <CtaPanel
           as="h2"
           heading={finalCta.title}
           paragraphs={finalCta.paragraphs}
           ctaLabel={finalCta.ctaPrimary}
+          secondaryCtaLabel={finalCta.ctaSecondary}
         />
-        {/* Secondary CTA reuses the existing .btn outline style (.btn.primary
-            is the filled variant) rather than introducing a new class. */}
-        <p className="lead">
-          <DemoButton label={finalCta.ctaSecondary} className="btn" />
-        </p>
       </section>
     </>
   );

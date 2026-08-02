@@ -8,6 +8,7 @@ const CtaPanel = ({
   heading,
   paragraphs = [],
   ctaLabel = "Book a Demo",
+  secondaryCtaLabel,
   as: Heading = "h3",
 }) => (
   <div className="cta-panel">
@@ -15,9 +16,19 @@ const CtaPanel = ({
     {paragraphs.map((p, i) => (
       <p key={i}>{p}</p>
     ))}
-    <p>
-      <DemoButton label={ctaLabel} className="primary" />
-    </p>
+    {secondaryCtaLabel ? (
+      // A pair uses the same matched buttons as the hero. The single-button
+      // path below is left as it was, so the closing panels on the use-case and
+      // how-it-works pages are unaffected.
+      <div className="cta-actions">
+        <DemoButton label={ctaLabel} className="cta" />
+        <DemoButton label={secondaryCtaLabel} className="cta-secondary" />
+      </div>
+    ) : (
+      <p>
+        <DemoButton label={ctaLabel} className="primary" />
+      </p>
+    )}
   </div>
 );
 

@@ -214,8 +214,12 @@ h1 {
 
 /* Hero CTAs come in a filled and an outline variant. Geometry is shared so the
    pair matches exactly; only the fill differs. */
-.hero :is(.cta, .cta-secondary) {
+.cta-actions :is(.cta, .cta-secondary) {
   display: inline-block;
+  /* Both carry a 1px border so the pair is exactly the same height — the
+     filled one just makes its border transparent. Without this the outlined
+     button sits 2px taller and the pair no longer lines up. */
+  border: 1px solid transparent;
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius-full);
   font-weight: 700;
@@ -228,14 +232,13 @@ h1 {
   overflow: hidden;
 }
 
-.hero .cta {
+.cta-actions .cta {
   background: linear-gradient(145deg, var(--brand-2), var(--brand));
   color: #04162a;
-  border: none;
   box-shadow: 0 8px 30px rgba(110, 224, 255, 0.25);
 }
 
-.hero .cta:hover {
+.cta-actions .cta:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(110, 224, 255, 0.4);
   background: linear-gradient(145deg, var(--brand), var(--brand-2));
@@ -243,24 +246,24 @@ h1 {
 
 /* Secondary reads as available, not equal — the brief makes Book a Demo the
    primary action and Try It Free the alternative. */
-.hero .cta-secondary {
+.cta-actions .cta-secondary {
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
   border: 1px solid var(--ring);
   backdrop-filter: blur(8px);
 }
 
-.hero .cta-secondary:hover {
+.cta-actions .cta-secondary:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--brand);
 }
 
-.hero :is(.cta, .cta-secondary):active {
+.cta-actions :is(.cta, .cta-secondary):active {
   transform: translateY(0);
 }
 
-.hero-actions {
+.cta-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -434,7 +437,7 @@ h2 {
   }
 
   /* Stack the CTAs so neither wraps mid-label on a narrow screen. */
-  .hero-actions {
+  .cta-actions {
     flex-direction: column;
   }
 
@@ -476,7 +479,7 @@ h2 {
     padding: 0 var(--spacing-lg);
   }
 
-  .hero .cta {
+  .cta-actions .cta {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 16px;
   }
