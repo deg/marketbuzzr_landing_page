@@ -14,13 +14,13 @@ const FlowSteps = ({ steps }) => (
   <ol className="flow-steps">
     {steps.map((step, i) => (
       <React.Fragment key={step.verb}>
-        {i > 0 && (
-          <li className="flow-arrow" aria-hidden="true">
-            →
-          </li>
-        )}
+        {/* Drawn in CSS rather than as a glyph: the brief asks for a thin
+            connector, and it has to turn vertical on narrow screens. */}
+        {i > 0 && <li className="flow-connector" aria-hidden="true" />}
         <li className="flow-step">
-          <span className="flow-step-number">{i + 1}</span>
+          <span className="flow-step-number">
+            {String(i + 1).padStart(2, "0")}
+          </span>
           <span className="flow-step-verb">{step.verb}</span>
           <span className="flow-step-label">{step.label}</span>
         </li>
