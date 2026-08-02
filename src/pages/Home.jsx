@@ -63,6 +63,7 @@ const Home = () => {
           priority
           alt={hero.visualAlt}
         />
+        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): remove, or re-render the artwork without the metric. */}
         <DevNote>
           This artwork has “7,842 / Scanned across 350+ sources” baked in. The
           brief’s own Copy/UX principle 6 forbids invented platform metrics, and
@@ -92,6 +93,7 @@ const Home = () => {
           /how-it-works rather than being duplicated here. */}
       <section className="section container">
         <SectionTitle title={howItWorks.title} lead={howItWorks.lead} />
+        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): unwrap — keep <FlowSteps>, drop the DevPeek wrapper. */}
         <DevPeek
           label="Signal flow diagram"
           avif={flowAvif}
@@ -122,6 +124,7 @@ const Home = () => {
           height={1024}
           alt={insight.visualAlt}
         />
+        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): remove once the marks are cleared, or swap the artwork. */}
         <DevNote>
           This artwork shows third-party marks — FDA, Reuters, McKinsey &amp;
           Company, Fierce Medtech, Nature Medicine, Intuitive Surgical — plus a
@@ -168,6 +171,7 @@ const Home = () => {
             <p className="problem-closer">{personalization.emphasis}</p>
             <p className="personalization-closer">{personalization.closer}</p>
           </div>
+          {/* FIX-BEFORE-RELEASE (mbz-et8e.18): unwrap — keep the diagram, drop the DevPeek wrapper. */}
           <DevPeek
             label="Personalization diagram"
             avif={personalizationAvif}

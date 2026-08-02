@@ -10,6 +10,10 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 // meant a typo or a stale link left the visitor where they started with no
 // explanation and nothing to act on.
 //
+// FIX-BEFORE-RELEASE (mbz-et8e.18): reframe, do not simply delete. A real not-found page is strictly
+// better than the silent redirect this replaced, so the ROUTE should ship — it
+// is the "not yet implemented" wording and styling that must not.
+//
 // DELIBERATELY UGLY. This is a dev/design-cycle affordance and must not reach
 // marketbuzzr.com — see mbz-et8e.18. If you are reading this because it did
 // ship, that gate was missed.

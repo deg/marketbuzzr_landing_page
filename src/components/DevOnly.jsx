@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 // ============================================================================
+// FIX-BEFORE-RELEASE (mbz-et8e.18): delete this entire file.
 // EVERYTHING IN THIS FILE IS A DEV/DESIGN-CYCLE AFFORDANCE AND MUST NOT SHIP.
 //
 // It is deliberately all in one module so removing it is a deletion rather than

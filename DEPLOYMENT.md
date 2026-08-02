@@ -77,6 +77,30 @@ yarn vite preview --outDir dist-new --base /new/ # serve the sandbox build
 - **Changes not visible** — GitHub Pages can take a minute, and the browser caches
   `index.html`. Hard-reload before debugging anything else.
 
+## Before publishing the redesign to the live site
+
+The redesign links unbuilt pages to visible placeholders and annotates known
+problems in the artwork. That is correct while reviewing on `/new/` and wrong on
+marketbuzzr.com. Every such spot is tagged:
+
+```bash
+grep -rn "FIX-BEFORE-RELEASE" src
+```
+
+**`yarn deploy` enforces this.** The live target refuses while any tag remains in
+`src`, listing the files. `yarn deploy:new` is deliberately exempt — the sandbox
+is where this scaffolding is supposed to be visible. Override with
+`ALLOW_UNRESOLVED_TAGS=1 yarn deploy` if you ever genuinely need to.
+
+Each hit says what to do, and not all of them mean "delete" — the catch-all
+route, for instance, should ship, because a real not-found page beats the silent
+redirect to the homepage it replaced. It is the *not-yet-implemented* wording
+and styling that must go. Beads issue `mbz-et8e.18` tracks this.
+
+Note that `yarn deploy` already refuses to run from any branch but `main`, so
+the live site cannot be reached from `redesign` by accident. The risk is the
+merge, not the deploy.
+
 ## Retiring the sandbox
 
 Nothing removes `/new/` automatically — that is the whole point of the `remove` guard, so

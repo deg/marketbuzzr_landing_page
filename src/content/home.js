@@ -219,6 +219,8 @@ export const home = {
   industries: {
     title: "Built for Teams in Dynamic Markets",
     lead: "MarketBuzzr supports strategic teams operating in markets where competitive moves, regulation, technology and customer behavior can quickly change the direction of the business.",
+    // FIX-BEFORE-RELEASE (mbz-et8e.18): four of these point at placeholder pages. Build the pages, or
+    // drop the `to` and render those tiles non-interactive.
     // Every tile links. Biotechnology and Enterprise Technology reach real
     // use-case pages; the other four reach the not-yet-implemented placeholder
     // (mbz-et8e.16), which is deliberate during the design cycle and must not

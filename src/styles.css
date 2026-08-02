@@ -1295,6 +1295,7 @@ footer h4 {
 }
 
 /* ============================================================
+   FIX-BEFORE-RELEASE (mbz-et8e.18): delete this block.
    DEV-ONLY. Everything below pairs with src/components/DevOnly.jsx and must
    not ship — see mbz-et8e.18. Amber and hazard-striped so scaffolding is one
    recognisable thing, matching the not-implemented page.
@@ -1402,7 +1403,8 @@ footer h4 {
   font-size: 14px;
 }
 
-/* Not-yet-implemented page. Deliberately unlike the rest of the site — amber,
+/* FIX-BEFORE-RELEASE (mbz-et8e.18): restyle for a real not-found page; the route itself stays.
+   Not-yet-implemented page. Deliberately unlike the rest of the site — amber,
    hazard-striped and monospaced — because it must be impossible to mistake for
    finished work, and obvious in a screenshot if it ever escapes to production.
    See mbz-et8e.18: this must not ship. */

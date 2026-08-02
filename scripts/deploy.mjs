@@ -12,7 +12,7 @@
 // Usage: node scripts/deploy.mjs <live|new>
 
 import { execFileSync } from "node:child_process";
-import { rmSync } from "node:fs";
+import { readFileSync, readdirSync, rmSync } from "node:fs";
 import ghpages from "gh-pages";
 
 const SANDBOX_DIR = "new";
@@ -29,6 +29,7 @@ const TARGETS = {
     // every stale file in place.
     remove: ["**/*", `!${SANDBOX_DIR}/**`],
     requireBranch: "main",
+    requireNoReleaseTags: true,
     url: "https://marketbuzzr.com",
   },
   [SANDBOX_DIR]: {
@@ -38,6 +39,8 @@ const TARGETS = {
     // Rooted at dest, so this can only ever clear the sandbox subtree.
     remove: ["**/*"],
     requireBranch: null,
+    // The sandbox is exactly where dev scaffolding is meant to be visible.
+    requireNoReleaseTags: false,
     url: `https://marketbuzzr.com/${SANDBOX_DIR}/`,
   },
 };
@@ -49,6 +52,41 @@ if (!target) {
     `Usage: node scripts/deploy.mjs <${Object.keys(TARGETS).join("|")}>`,
   );
   process.exit(1);
+}
+
+// Source marked FIX-BEFORE-RELEASE is dev/design-cycle scaffolding: visible
+// placeholders for unbuilt pages, notes about known problems in the artwork.
+// Correct on the sandbox, wrong on the live site. Checked before the branch
+// guard so it is reachable from any branch -- it is a property of the tree, not
+// of where you are standing.
+const RELEASE_TAG = "FIX-BEFORE-RELEASE";
+
+const taggedFiles = (dir, found = []) => {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = `${dir}/${entry.name}`;
+    if (entry.isDirectory()) taggedFiles(path, found);
+    else if (
+      /\.(jsx?|css|html)$/.test(entry.name) &&
+      readFileSync(path, "utf8").includes(RELEASE_TAG)
+    ) {
+      found.push(path);
+    }
+  }
+  return found;
+};
+
+if (target.requireNoReleaseTags) {
+  const tagged = taggedFiles("src");
+  if (tagged.length > 0 && !process.env.ALLOW_UNRESOLVED_TAGS) {
+    console.error(
+      `Refusing to deploy '${name}' (${target.url}): ${tagged.length} file(s) still carry ${RELEASE_TAG}.\n` +
+        tagged.map((f) => `  ${f}`).join("\n") +
+        `\n\nEach tag says what to do -- and not all of them mean delete.\n` +
+        `  grep -rn "${RELEASE_TAG}" src\n` +
+        `To override: ALLOW_UNRESOLVED_TAGS=1 yarn deploy`,
+    );
+    process.exit(1);
+  }
 }
 
 const branch = execFileSync("git", ["rev-parse", "--abbrev-ref", "HEAD"], {

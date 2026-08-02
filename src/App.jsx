@@ -48,7 +48,8 @@ const App = () => {
               element={<Navigate to="/use-cases/biotech" replace />}
             />
             <Route path="/how-it-works" element={<HowItWorks />} />
-            {/* Anything else lands on a visible placeholder. This used to
+            {/* FIX-BEFORE-RELEASE (mbz-et8e.18): keep this route, revisit what it renders.
+                Anything else lands on a visible placeholder. This used to
                 redirect silently to "/", which meant a typo or a stale link
                 left the visitor back at the start with no explanation — and it
                 is why linking to unbuilt pages was previously unsafe. */}
