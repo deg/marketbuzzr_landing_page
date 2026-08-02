@@ -31,8 +31,13 @@ const App = () => {
     <ErrorBoundary>
       <ModalContext.Provider value={openModal}>
         <ScrollToTop />
+        {/* First thing in the tab order, so keyboard users can jump the eight
+            nav items instead of traversing them on every page. */}
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
         <Nav />
-        <main>
+        <main id="main" tabIndex={-1}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route

@@ -73,6 +73,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Keyboard users otherwise tab through eight nav items before reaching content,
+   on every page. Off-screen until focused. */
+.skip-link {
+  position: absolute;
+  left: var(--spacing-md);
+  top: -100px;
+  z-index: 200;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  background: var(--brand);
+  color: #04162a;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--spacing-md);
+}
+
 /* Layout */
 .container {
   max-width: 1100px;
@@ -349,7 +369,20 @@ h1 {
   }
 }
 
+/* A blanket switch rather than a per-rule opt-out: 49 elements still animated
+   their transitions under `reduce` when only the signal line was covered.
+   Durations are near-zero rather than zero so transitionend still fires and any
+   JS waiting on it does not hang. */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
   .signal-line-path {
     animation: none;
     stroke-dashoffset: 0;
@@ -520,9 +553,10 @@ h2 {
     font-size: 16px;
   }
 
+  /* 24px is the minimum target size; this had been 22. */
   .brand-badge {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -673,7 +707,11 @@ footer {
   font-size: 16px;
 }
 
+/* Padded to clear the 24px minimum target size — the bare line box was 21px.
+   inline-block so the padding actually contributes height. */
 footer a {
+  display: inline-block;
+  padding: var(--spacing-xs) 0;
   color: var(--muted);
   text-decoration: none;
   transition: color var(--transition-fast);
@@ -1540,8 +1578,12 @@ footer h4 {
   color: var(--muted);
   font-size: 14px;
   text-align: center;
-  /* Most of the market is noise: dimmed, shrunk and pushed back. */
-  opacity: 0.45;
+  /* Most of the market is noise: dimmed, shrunk and pushed back. Held at 0.62
+     rather than lower because these are real words a sighted reader may try to
+     read — below about 0.6 the text drops under 4.5:1 against the page. The
+     noise/signal distinction is carried by the border, fill and scale as much
+     as by this. */
+  opacity: 0.62;
   scale: 0.92;
 }
 
