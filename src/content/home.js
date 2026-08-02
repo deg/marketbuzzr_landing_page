@@ -42,16 +42,22 @@ export const home = {
       "Some of it could change your strategy.",
     ],
     closer: "MarketBuzzr helps you know the difference.",
-    // Eight competing signals; two or three resolve toward `relevant`.
+    // ORDER IS LOAD-BEARING. These eight fill the cells around a 3x3 grid whose
+    // centre is the `relevant` card, in array order:
+    //   0 1 2
+    //   3 . 4      <- index 3 sits left of the card, index 4 right of it
+    //   5 6 7
+    // The three marked `relevant` are the ones touching the card, so the
+    // composition reads as converging. Reordering this array moves them.
     signals: [
-      "Competitor Launch",
-      "Regulatory Update",
-      "Market Shift",
-      "Industry Webinar",
-      "Clinical Study",
-      "Customer Discussion",
-      "Funding & M&A",
-      "New Technology",
+      { label: "Industry Webinar" },
+      { label: "Competitor Launch", relevant: true },
+      { label: "Customer Discussion" },
+      { label: "Regulatory Update", relevant: true },
+      { label: "Clinical Study", relevant: true },
+      { label: "Market Shift" },
+      { label: "Funding & M&A" },
+      { label: "New Technology" },
     ],
     relevant: "Relevant to You",
     visualNote:

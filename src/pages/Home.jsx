@@ -7,6 +7,8 @@ import SectionTitle from "../components/SectionTitle";
 import CtaPanel from "../components/CtaPanel";
 import DemoButton from "../components/DemoButton";
 import SectionPlaceholder from "../components/SectionPlaceholder";
+import SignalCloud from "../components/SignalCloud";
+import BrandDivider from "../components/BrandDivider";
 
 // Section order follows the brief's Final Page Flow. Each section is a shell:
 // the copy and heading levels are final, but the visual or interactive part is
@@ -47,18 +49,22 @@ const Home = () => {
         />
       </PageHero>
 
-      {/* §2 Problem + signal cloud + brand divider — mbz-et8e.5 */}
+      {/* §2 Problem. Copy left, signal cloud right; stacks copy-first on
+          narrow screens. */}
       <section className="section container">
-        <SectionTitle title={problem.title} />
-        {problem.paragraphs.map((p, i) => (
-          <p className="lead" key={i}>
-            {p}
-          </p>
-        ))}
-        <p className="lead">{problem.closer}</p>
-        <SectionPlaceholder note={problem.visualNote} />
-        <SectionPlaceholder note={divider.join("  ")} />
+        <div className="problem-grid">
+          <div className="problem-copy">
+            <h2>{problem.title}</h2>
+            {problem.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+            <p className="problem-closer">{problem.closer}</p>
+          </div>
+          <SignalCloud signals={problem.signals} relevant={problem.relevant} />
+        </div>
       </section>
+
+      <BrandDivider steps={divider} />
 
       {/* §3 How It Works — mbz-et8e.6 builds the flow diagram */}
       <section className="section container">

@@ -368,12 +368,19 @@ h1 {
 
 /* Sections */
 
+/* Horizontal padding is restated, not inherited: this shorthand would otherwise
+   zero out the value .container sets, leaving every section's content flush
+   against the screen edge on narrow viewports. Same trap as .hero. */
 .section {
-  padding: 56px 0;
+  padding: 56px var(--spacing-lg);
 }
 
+/* Display leading, matching h1's 1.05. Without this h2 inherited the body's
+   1.6, which only showed once headings started wrapping to three lines in a
+   narrow column. */
 h2 {
   font-size: clamp(24px, 3.4vw, 44px);
+  line-height: 1.15;
   margin: 0 0 12px 0;
   text-align: center;
 }
@@ -449,8 +456,10 @@ h2 {
     white-space: nowrap;
   }
 
+  /* Keep the horizontal gutter here too — this breakpoint is exactly where
+     content running to the screen edge is most obvious. */
   .section {
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-2xl) var(--spacing-md);
   }
 
   .card {
@@ -1261,6 +1270,139 @@ footer h4 {
   max-width: var(--lead-measure);
   margin: 0;
   color: var(--muted);
+}
+
+/* ============================================================
+   Homepage sections (2026-08 redesign). Kept together and placed after the
+   shared card/placeholder rules these need to win against on source order.
+   ============================================================ */
+
+/* §2 Problem — copy beside the signal cloud, 45/55 per the brief. */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+/* Left-aligned against the site's centred default: this is a column of prose
+   next to a visual, not a centred lead paragraph. */
+.problem-copy {
+  text-align: left;
+}
+
+.problem-copy h2 {
+  text-align: left;
+}
+
+.problem-copy p {
+  color: var(--muted);
+  margin: 0 0 var(--spacing-md);
+}
+
+.problem-closer {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Eight signals around a centre card. The card is placed explicitly so
+   auto-placement flows the chips around it — see SignalCloud.jsx. */
+/* Sized to hold its own beside a tall column of copy — this is the 55% half of
+   the section, not a small inset graphic. */
+.signal-cloud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg) var(--spacing-sm);
+  padding: var(--spacing-xl) 0;
+  align-items: center;
+  justify-items: center;
+}
+
+.signal-chip {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  /* Most of the market is noise: dimmed, shrunk and pushed back. */
+  opacity: 0.45;
+  scale: 0.92;
+}
+
+.signal-chip.is-relevant {
+  border-color: var(--ring);
+  background: rgba(110, 224, 255, 0.08);
+  color: var(--text);
+  opacity: 1;
+  scale: 1;
+}
+
+.signal-focus {
+  grid-area: 2 / 2;
+  padding: var(--spacing-lg) var(--spacing-lg);
+  font-size: 18px;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #16245fcc, #111d49cc);
+  box-shadow: var(--shadow-md), 0 0 28px rgba(110, 224, 255, 0.18);
+  color: var(--text);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Brand divider band between sections. */
+.brand-divider {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+}
+
+.brand-divider-step {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(110, 224, 255, 0.35);
+}
+
+.brand-divider-arrow {
+  color: var(--brand);
+  font-size: 18px;
+}
+
+@media (max-width: 820px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+}
+
+/* Three columns of two-word labels stop fitting once the content box drops
+   below ~340px, so the chips shrink rather than the grid breaking. Keeping the
+   3x3 arrangement matters more than the type size — the composition IS the
+   point of this section. */
+@media (max-width: 480px) {
+  .signal-cloud {
+    gap: var(--spacing-md) var(--spacing-xs);
+  }
+
+  .signal-chip {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 12px;
+  }
+
+  .signal-focus {
+    padding: var(--spacing-md) var(--spacing-sm);
+    font-size: 16px;
+  }
 }
 
 /* ============================================================
