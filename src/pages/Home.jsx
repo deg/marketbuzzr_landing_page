@@ -11,6 +11,7 @@ import BrandDivider from "../components/BrandDivider";
 import FlowSteps from "../components/FlowSteps";
 import CategoryCard from "../components/CategoryCard";
 import PersonalizationDiagram from "../components/PersonalizationDiagram";
+import IndustryTile from "../components/IndustryTile";
 
 // Section order follows the brief's Final Page Flow. Each section is a shell:
 // the copy and heading levels are final, but the visual or interactive part is
@@ -136,14 +137,20 @@ const Home = () => {
         </div>
       </section>
 
-      {/* §7 Industries — mbz-et8e.10 builds the tiles; linking waits on .2 */}
+      {/* §7 Industries. Four of the six lead to placeholders during the design
+          cycle — gated from production by mbz-et8e.18. */}
       <section className="section container">
         <SectionTitle title={industries.title} lead={industries.lead} />
-        <SectionPlaceholder
-          note={`Six industry tiles, Medical Technology featured: ${industries.items
-            .map((i) => i.name)
-            .join(", ")}.`}
-        />
+        <div className="industry-grid">
+          {industries.items.map((item) => (
+            <IndustryTile key={item.name} {...item} />
+          ))}
+        </div>
+        <p className="lead">
+          <Link className="text-link" to={industries.exploreTo}>
+            {industries.exploreLabel} →
+          </Link>
+        </p>
       </section>
 
       {/* §8 Final CTA */}

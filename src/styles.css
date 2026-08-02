@@ -1624,6 +1624,104 @@ footer h4 {
   }
 }
 
+/* §7 Industries. Three across, then two, then one. */
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-2xl) 0 var(--spacing-xl);
+}
+
+.industry-tile {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  border: 1px solid #ffffff14;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
+  box-shadow: var(--shadow-md);
+  color: var(--text);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+/* The abstract accent the brief offers instead of per-industry iconography. */
+.industry-accent {
+  width: 4px;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(180deg, var(--brand), var(--brand-2));
+  opacity: 0.5;
+}
+
+.industry-name {
+  flex: 1;
+  font-weight: 700;
+  text-align: left;
+}
+
+.industry-arrow {
+  color: var(--brand);
+  opacity: 0;
+  transition: all var(--transition-normal);
+}
+
+/* Medical Technology leads without dominating — a brighter accent and border,
+   not a bigger tile. The brief wants it prominent without making the product
+   look MedTech-only. */
+.industry-tile.is-featured {
+  border-color: var(--ring);
+}
+
+.industry-tile.is-featured .industry-accent {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .industry-tile:hover {
+    border-color: rgba(110, 224, 255, 0.3);
+    background: linear-gradient(180deg, #16245fcc, #111d49cc);
+    box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
+  }
+
+  .industry-tile:hover .industry-arrow {
+    opacity: 1;
+  }
+}
+
+/* The arrow slides in on hover, but only for readers who want motion. Its
+   appearing at all is opacity, so the reveal still happens either way. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .industry-arrow {
+    translate: -6px 0;
+  }
+
+  .industry-tile:hover .industry-arrow {
+    translate: 0 0;
+  }
+}
+
+/* Keyboard users get the same reveal as a hover, which is otherwise
+   mouse-only. */
+.industry-tile:focus-visible .industry-arrow {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (max-width: 1024px) {
+  .industry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .industry-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Brand divider band between sections. */
 .brand-divider {
   display: flex;

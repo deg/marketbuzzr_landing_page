@@ -217,17 +217,23 @@ export const home = {
   industries: {
     title: "Built for Teams in Dynamic Markets",
     lead: "MarketBuzzr supports strategic teams operating in markets where competitive moves, regulation, technology and customer behavior can quickly change the direction of the business.",
-    // `to` is set only where a page actually exists. App.jsx redirects unknown
-    // paths to "/" silently, so linking a missing page reads as a broken site
-    // rather than a 404 — the remaining open question in mbz-et8e.2.
+    // Every tile links. Biotechnology and Enterprise Technology reach real
+    // use-case pages; the other four reach the not-yet-implemented placeholder
+    // (mbz-et8e.16), which is deliberate during the design cycle and must not
+    // ship — see the gate in mbz-et8e.18.
     items: [
-      { name: "Medical Technology", featured: true },
+      { name: "Medical Technology", to: "/industries/medical-technology", featured: true },
       { name: "Biotechnology", to: "/use-cases/biotech" },
-      { name: "Life Sciences" },
-      { name: "Financial Technology" },
-      { name: "Public Safety & Defense Technology" },
+      { name: "Life Sciences", to: "/industries/life-sciences" },
+      { name: "Financial Technology", to: "/industries/financial-technology" },
+      {
+        name: "Public Safety & Defense Technology",
+        to: "/industries/public-safety-defense-technology",
+      },
       { name: "Enterprise Technology", to: "/use-cases/tech" },
     ],
+    exploreLabel: "Explore all industries",
+    exploreTo: "/industries",
   },
 
   // §8 Final CTA
