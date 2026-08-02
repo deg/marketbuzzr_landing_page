@@ -37,6 +37,8 @@ const noindexSandbox = () => {
 // Declared as image/avif on purpose: a browser without AVIF support ignores the
 // hint and takes the WebP from <picture> as usual, rather than downloading a
 // format it cannot use.
+const HERO_BASENAME = 'hero-filter'
+
 const preloadHeroImage = () => {
   let base = '/'
   return {
@@ -48,9 +50,18 @@ const preloadHeroImage = () => {
     transformIndexHtml: (html, ctx) => {
       if (!ctx.bundle) return html // dev server: nothing is hashed yet
       const hero = Object.keys(ctx.bundle).find(
-        (file) => file.includes('hero-dashboard') && file.endsWith('.avif')
+        (file) => file.includes(HERO_BASENAME) && file.endsWith('.avif')
       )
-      if (!hero) return html
+      // Renaming the hero asset without updating HERO_BASENAME would otherwise
+      // drop the preload silently and hand back the ~300ms this exists to save,
+      // with a green build. Say so instead.
+      if (!hero) {
+        console.warn(
+          `[preload-hero-image] no bundled asset matches "${HERO_BASENAME}" — ` +
+            'the LCP preload hint was NOT emitted.'
+        )
+        return html
+      }
       return html.replace(
         '</head>',
         `  <link rel="preload" as="image" type="image/avif" href="${base}${hero}" fetchpriority="high" />\n  </head>`

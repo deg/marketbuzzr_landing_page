@@ -303,18 +303,16 @@ h1 {
   margin: var(--spacing-md) auto 0;
 }
 
-/* FIX-BEFORE-RELEASE (mbz-et8e.18): §6's artwork renders at ~34% of its source
-   here, so its embedded labels land near 4.7px and are not readable. Left that
-   way ON PURPOSE so the problem is visible rather than buried in a note.
-   THIS IS A DESIGN DECISION, NOT AN IMPLEMENTATION ONE — the brief demands a
-   split layout for §6 and also assigns it a wide full-bleed diagram, and those
-   cannot both hold. Manu chooses: give the section full width, or supply a
-   simpler diagram that works in a half column.
+/* LOAD-BEARING for §2, which now puts artwork in the right-hand column.
+   .product-frame breaks out of the text container by shifting its left edge to
+   50% and pulling back half its own width. That only works when the parent
+   spans the page: inside a split column the 50% resolves against the column
+   instead of the viewport, so the image lands off-centre and overflows the
+   window — measured at a 1280 viewport it ran x=363 to x=1595, 315px past the
+   right edge. This rule puts the frame back in normal flow at column width.
 
-   Why the breakout cannot simply be extended here: inside a split column the
-   50% resolves against the column rather than the viewport, so the image lands
-   off-centre — measured at a 1280 viewport it ran x=363 to x=1595, overflowing
-   the window by 315px. */
+   The section that first needed this (the old personalization split) is gone,
+   so it is easy to read this rule as leftover and delete it. It is not. */
 .problem-grid .product-frame {
   position: static;
   left: auto;
@@ -330,6 +328,17 @@ h1 {
    better. Only the whitespace above it is set here. */
 .hero .hero-visual {
   margin-top: var(--spacing-3xl);
+}
+
+/* The six context dimensions the hero artwork draws, restated in HTML. The
+   revision removed the standalone personalization section because its concept
+   is "promoted into the hero" — but the hero is a flat image, so without this
+   line the differentiator would not exist for crawlers or screen readers. */
+.hero-context {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: var(--lead-measure);
+  margin: var(--spacing-lg) auto 0;
 }
 
 /* Signature motif: a noise->signal waveform under the hero content. The stroke

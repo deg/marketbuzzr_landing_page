@@ -7,10 +7,13 @@ import React from "react";
 //
 // The arrows are decorative punctuation between list items, so they are hidden
 // from assistive technology; an ordered list already conveys the sequence.
+// Each step is `{ verb, label }` — the revised brief gives every stage a verb
+// (MONITOR, FILTER, …) as well as the line describing it, so a step cannot be a
+// bare string and cannot key on one either.
 const FlowSteps = ({ steps }) => (
   <ol className="flow-steps">
     {steps.map((step, i) => (
-      <React.Fragment key={step}>
+      <React.Fragment key={step.verb}>
         {i > 0 && (
           <li className="flow-arrow" aria-hidden="true">
             →
@@ -18,7 +21,8 @@ const FlowSteps = ({ steps }) => (
         )}
         <li className="flow-step">
           <span className="flow-step-number">{i + 1}</span>
-          <span className="flow-step-label">{step}</span>
+          <span className="flow-step-verb">{step.verb}</span>
+          <span className="flow-step-label">{step.label}</span>
         </li>
       </React.Fragment>
     ))}

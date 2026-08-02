@@ -1,12 +1,13 @@
 import React from "react";
 
-// A handoff image, framed. The artwork is light-themed while the site is dark,
-// so it sits on a deliberate plate with a border and shadow: presented as a
-// picture of the product rather than looking like it failed to load a
-// background.
+// A handoff image, framed. It sits on a deliberate plate with a border and
+// shadow so it reads as a picture of the product rather than as artwork that
+// failed to load its background. §2 and §5 are drawn on the site's own navy, so
+// the plate is only a frame there; §1 is drawn on white and needs the plate to
+// carry that ground deliberately — see .hero-visual in styles.css.
 //
 // AVIF first with a WebP fallback — between them every browser we care about is
-// covered, and the source PNGs (4.2 MB for the set) are not shipped at all.
+// covered, and the source PNGs (4.4 MB for the set) are not shipped at all.
 //
 // Deliberately not clickable. A tap-to-pan viewer was tried and dropped: phone
 // browsers already zoom the whole page, panning is barely reachable with a

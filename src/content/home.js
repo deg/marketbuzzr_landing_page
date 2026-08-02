@@ -1,125 +1,119 @@
-// Homepage copy, from Manu's "Marketbuzzr Homepage — Final Implementation
-// Brief" (~/Documents/marketbuzzr/marketbuzzr_homepage_handoff_md/). Keys are
-// grouped by that brief's section numbers so copy edits trace back to it.
+// Homepage copy, from Manu's "Marketbuzzr Homepage — Revised CTO / Claude
+// Implementation Handoff"
+// (~/Documents/marketbuzzr/Marketbuzzr_Homepage_Revised_CTO_Handoff/). That
+// revision supersedes the original brief: it reorders the page, drops two whole
+// sections and replaces the artwork. Keys appear in the revised brief's section
+// order so copy edits trace back to it.
 //
 // Brand is "MarketBuzzr" throughout — the brief's "Marketbuzzr" is deliberately
 // not adopted (mbz-et8e.2).
 //
 // Emphasis is structural, not markup: where the brief bolds a line it lives in
-// its own key (`emphasis`, `footnote`, `closer`) and the component decides how
-// to render it. Do not put ** or HTML into these strings.
+// its own key (`emphasis`, `closer`) and the component decides how to render it.
+// Do not put ** or HTML into these strings.
 //
-// Sections 1 and 4 show the handoff artwork; `visualAlt` carries the brief's
-// suggested alt text, with the brand casing corrected. Sections 3 and 6 are
-// built natively instead and keep their artwork only as a dev-only reference
-// (mbz-et8e.19), because at mobile widths the supplied diagrams render at about
-// 23% scale and their embedded labels stop being legible.
+// Sections 1, 2 and 5 show the revised handoff artwork; `visualAlt` carries the
+// brief's suggested alt text, with the brand casing corrected. Section 4 is
+// built natively (FlowSteps), which is what the revision asks for.
 export const home = {
   title: "MarketBuzzr — Market Intelligence, Clarified",
 
   // §1 Hero
   hero: {
-    eyebrow: "ALWAYS-ON STRATEGIC INTELLIGENCE",
+    eyebrow: "ALWAYS-ON STRATEGIC INTELLIGENCE FOR TEAMS IN DYNAMIC MARKETS",
     title: "Never Miss the Signals That Shape Your Market",
     sub: [
-      "MarketBuzzr continuously monitors your competitors, industry, regulation and market conversations—filtering out the noise and interpreting what matters through the context of your company, role and goals.",
+      "MarketBuzzr continuously monitors your competitors, industry, regulation and market conversations—surfacing what matters, what it means for your business, and what to do next.",
     ],
     emphasis:
       "Clear insights. Actionable recommendations. Ready-to-use drafts.",
     ctaPrimary: "Book a Demo",
     ctaSecondary: "Try It Free",
-    footnote:
-      "No endless searching. No information overload. Just what matters.",
+    // Sits below the hero visual. The revision deletes the standalone
+    // personalization section on the grounds that its concept is "promoted into
+    // the hero" — but the hero is artwork, so the six context dimensions would
+    // otherwise exist only inside a PNG and be invisible to crawlers and screen
+    // readers. This line keeps the differentiator in HTML (mbz-et8e.21).
+    context:
+      "Every signal is evaluated through your company, products, competitors, goals, role and markets.",
     visualAlt:
-      "MarketBuzzr strategic intelligence dashboard with market signals, tailored insights and AI draft actions",
+      "MarketBuzzr filters signals from competitors, industry news, regulation and market sources through a company's strategic context to deliver relevant insights, recommendations, alerts and drafts.",
   },
 
   // §2 Problem
   problem: {
     title: "Your Market Moves Faster Than Anyone Can Follow",
     paragraphs: [
-      "Competitors launch products. Regulations change. Customer priorities shift. New technologies emerge. Important conversations happen across webinars, podcasts, research, industry news and online communities.",
-      "The information is everywhere. But it's fragmented across sources and written without your business context in mind.",
+      "Competitors move. Regulations change. Customer priorities shift. New technologies and market trends emerge.",
+      "The signals are everywhere—but fragmented across sources and rarely interpreted with your business in mind.",
       "Most of it doesn't matter to you.",
       "Some of it could change your strategy.",
     ],
     closer: "MarketBuzzr helps you know the difference.",
-    // ORDER IS LOAD-BEARING. These eight fill the cells around a 3x3 grid whose
-    // centre is the `relevant` card, in array order:
-    //   0 1 2
-    //   3 . 4      <- index 3 sits left of the card, index 4 right of it
-    //   5 6 7
-    // The three marked `relevant` are the ones touching the card, so the
-    // composition reads as converging. Reordering this array moves them.
-    signals: [
-      { label: "Industry Webinar" },
-      { label: "Competitor Launch", relevant: true },
-      { label: "Customer Discussion" },
-      { label: "Regulatory Update", relevant: true },
-      { label: "Clinical Study", relevant: true },
-      { label: "Market Shift" },
-      { label: "Funding & M&A" },
-      { label: "New Technology" },
-    ],
-    relevant: "Relevant to You",
-    visualNote:
-      "Signal cloud: the eight signals above scattered and dimmed, with two or three converging on a brighter “Relevant to You” card.",
-  },
-
-  // Brand divider, immediately after §2
-  divider: ["LESS NOISE.", "MORE SIGNAL.", "BETTER DECISIONS."],
-
-  // §3 How It Works — a summary here; the full story lives at /how-it-works
-  howItWorks: {
-    title: "From Market Signals to Strategic Action",
-    lead: "MarketBuzzr continuously scans the market, evaluates every signal against your business context and turns the most relevant developments into intelligence your team can act on.",
-    steps: [
-      "Signals from everywhere",
-      "Analysis",
-      "Strategic Insights",
-      "Recommendations",
-      "Ready-to-use Drafts",
-    ],
-    emphasis: "We monitor everything. You focus on what matters.",
-    linkLabel: "See how it works in detail",
-    linkTo: "/how-it-works",
     visualAlt:
-      "MarketBuzzr workflow from market monitoring to strategic insights, recommendations and ready-to-use drafts",
+      "Many market signals compete for attention, while a smaller set of important developments is highlighted as worth attention.",
   },
 
-  // §4 Product Output / Insight
+  // §3 Industries — moved up from the end of the page by the revision, so the
+  // reader learns who this is for before the process and the product output.
+  industries: {
+    title: "Built for Teams in Dynamic Markets",
+    lead: "For teams operating in markets where regulation, competition, technology and customer behavior can quickly change the direction of the business.",
+    // FIX-BEFORE-RELEASE (mbz-et8e.18): four of these point at placeholder pages. Build the pages, or
+    // drop the `to` and render those tiles non-interactive. Moving this section
+    // to §3 makes the dead tiles more prominent, not less.
+    // Every tile links. Biotechnology and Enterprise Technology reach real
+    // use-case pages; the other four reach the not-yet-implemented placeholder
+    // (mbz-et8e.16), which is deliberate during the design cycle and must not
+    // ship — see the gate in mbz-et8e.18.
+    items: [
+      {
+        name: "Medical Technology",
+        to: "/industries/medical-technology",
+        featured: true,
+      },
+      { name: "Biotechnology", to: "/use-cases/biotech" },
+      { name: "Life Sciences", to: "/industries/life-sciences" },
+      { name: "Financial Technology", to: "/industries/financial-technology" },
+      {
+        name: "Public Safety & Defense Technology",
+        to: "/industries/public-safety-defense-technology",
+      },
+      { name: "Enterprise Technology", to: "/use-cases/tech" },
+    ],
+    exploreLabel: "Explore all industries",
+    exploreTo: "/industries",
+  },
+
+  // §4 The five-step flow. Named `flow` rather than `howItWorks` because
+  // content/howItWorks.js is the separate /how-it-works page this section links
+  // to, and one name for both was ambiguous. The revision replaced the large
+  // diagram that used to sit here with these five native steps, and is explicit
+  // that no paragraph belongs under the heading.
+  flow: {
+    title: "From Market Signals to Strategic Action",
+    steps: [
+      { verb: "MONITOR", label: "Signals from everywhere" },
+      { verb: "FILTER", label: "Through your context" },
+      { verb: "INTERPRET", label: "What it means for you" },
+      { verb: "RECOMMEND", label: "What to do next" },
+      { verb: "CREATE", label: "Ready-to-use drafts" },
+    ],
+    linkLabel: "Explore How It Works",
+    linkTo: "/how-it-works",
+  },
+
+  // §5 Product Output / Insight
   insight: {
     title: "Every Insight. Clear. Actionable. Ready to Use.",
-    lead: "MarketBuzzr doesn't just summarize what happened. Each relevant signal is translated into what it means for your business and what your team can do next.",
-    callouts: [
-      {
-        heading: "Market Signal",
-        description: "Quick summary of what happened.",
-      },
-      {
-        heading: "Strategic Implication",
-        description: "The potential impact on your business.",
-      },
-      {
-        heading: "Recommended Actions",
-        description: "Clear next steps your team can take.",
-      },
-      {
-        heading: "Transparent Sources",
-        description:
-          "See exactly where every insight came from—no black box, no guessing.",
-      },
-    ],
+    lead: "MarketBuzzr doesn't just tell you what happened. It shows what it could mean for your business—and what you can do next.",
     emphasis:
-      "Discover what you didn't know—and pressure-test what you think you already know.",
-    paragraphs: [
-      "When an insight requires action, turn it into an action plan, executive summary, campaign, blog post or other ready-to-use draft.",
-    ],
+      "Discover what you didn't know. Pressure-test what you think you already know.",
     visualAlt:
-      "MarketBuzzr insight showing a market signal, strategic implication, recommended actions and transparent sources",
+      "MarketBuzzr competitor-launch insight showing the market signal, strategic implication, recommended actions, transparent sources and draft actions.",
   },
 
-  // §5 What MarketBuzzr Helps You Track
+  // §6 What MarketBuzzr Helps You Track
   categories: {
     title: "Stay Ahead of What Matters to Your Business",
     lead: "One intelligence layer across the market developments strategic teams need to understand.",
@@ -177,7 +171,7 @@ export const home = {
         ],
       },
       {
-        heading: "Executive Intelligence",
+        heading: "Strategy & Executive",
         icon: "compass",
         lines: [
           "Strategic Pulse",
@@ -189,58 +183,7 @@ export const home = {
     ],
   },
 
-  // §6 Personalization
-  personalization: {
-    eyebrow: "BUILT AROUND YOU",
-    title: "See the Market Through Your Strategic Lens",
-    paragraphs: [
-      "MarketBuzzr learns your company, products, positioning, competitors, markets, role and strategic priorities.",
-      "Every signal is then evaluated through that context—helping determine what's relevant, what it could mean for your business and whether it deserves your attention.",
-    ],
-    emphasis:
-      "The result: intelligence interpreted for you, not another generic market feed.",
-    closer:
-      "Because a MedTech CEO and a FinTech marketing leader should not receive the same intelligence.",
-    engine: "MarketBuzzr",
-    inputs: [
-      "Your Company",
-      "Your Products",
-      "Your Competitors",
-      "Your Goals",
-      "Your Role",
-      "Your Markets",
-    ],
-    output: "Only what matters reaches you",
-    visualAlt:
-      "MarketBuzzr personalization model using company, competitors, goals, role and markets to filter intelligence",
-  },
-
-  // §7 Industries
-  industries: {
-    title: "Built for Teams in Dynamic Markets",
-    lead: "MarketBuzzr supports strategic teams operating in markets where competitive moves, regulation, technology and customer behavior can quickly change the direction of the business.",
-    // FIX-BEFORE-RELEASE (mbz-et8e.18): four of these point at placeholder pages. Build the pages, or
-    // drop the `to` and render those tiles non-interactive.
-    // Every tile links. Biotechnology and Enterprise Technology reach real
-    // use-case pages; the other four reach the not-yet-implemented placeholder
-    // (mbz-et8e.16), which is deliberate during the design cycle and must not
-    // ship — see the gate in mbz-et8e.18.
-    items: [
-      { name: "Medical Technology", to: "/industries/medical-technology", featured: true },
-      { name: "Biotechnology", to: "/use-cases/biotech" },
-      { name: "Life Sciences", to: "/industries/life-sciences" },
-      { name: "Financial Technology", to: "/industries/financial-technology" },
-      {
-        name: "Public Safety & Defense Technology",
-        to: "/industries/public-safety-defense-technology",
-      },
-      { name: "Enterprise Technology", to: "/use-cases/tech" },
-    ],
-    exploreLabel: "Explore all industries",
-    exploreTo: "/industries",
-  },
-
-  // §8 Final CTA
+  // §7 Final CTA
   finalCta: {
     title: "Know What Changed. Understand What It Means. Know What to Do Next.",
     paragraphs: [
