@@ -4,8 +4,8 @@ import SignalLine from "./SignalLine";
 
 // Shared page hero. Everything after `sub` is optional and currently used only
 // by the homepage, whose hero the brief specifies in more detail than the
-// use-case and how-it-works ones: a second CTA, an emphasis line, a small
-// footnote, and one large product visual below the copy (passed as children).
+// use-case and how-it-works ones: a second CTA, an emphasis line, and one large
+// product visual below the copy (passed as children).
 const PageHero = ({
   kicker,
   title,
@@ -13,7 +13,6 @@ const PageHero = ({
   emphasis,
   ctaLabel,
   secondaryCtaLabel,
-  footnote,
   className = "",
   children,
 }) => (
@@ -34,7 +33,6 @@ const PageHero = ({
         )}
       </div>
     )}
-    {footnote && <p className="hero-footnote">{footnote}</p>}
     <SignalLine />
     {children}
   </header>
