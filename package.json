@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "node scripts/deploy.mjs live",
-    "deploy:new": "node scripts/deploy.mjs new"
+    "deploy:new": "node scripts/deploy.mjs new",
+    "deploy:snapshot": "node scripts/deploy.mjs snapshot"
   },
   "dependencies": {
     "react": "19.2.0",

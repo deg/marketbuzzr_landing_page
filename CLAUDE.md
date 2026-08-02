@@ -231,28 +231,46 @@ Dev deliberately routes through nginx (`:9004`), not the backend (`:5004`), so t
 request path mirrors prod: nginx strips `/api/*` to bare paths before proxying. Hitting
 the backend directly bypasses that and masks 404s (this was the bug fixed in `mbz-r53x`).
 
-Note that the `/new/` sandbox is a production build and therefore posts to the **real**
-backend, same as the live site.
+Note that `/new/` and the snapshots are production builds and therefore post to the
+**real** backend, same as the live site — a demo request from any of them is
+indistinguishable from one on marketbuzzr.com (`mbz-et8e.15`).
 
 ## Deployment
 
-Two sites are published from the single `gh-pages` branch:
+Everything is published from the single `gh-pages` branch:
 
 | Command | Publishes to | URL | Allowed from |
 |---|---|---|---|
 | `yarn deploy` | branch root | https://marketbuzzr.com | `main` only |
 | `yarn deploy:new` | branch `new/` | https://marketbuzzr.com/new/ | any branch |
+| `yarn deploy:snapshot <tag>` | branch `<tag>/` | https://marketbuzzr.com/&lt;tag&gt;/ | any branch |
 
-Both are driven by `scripts/deploy.mjs`. Two invariants in it are load-bearing and easy
-to break:
+`/new/` rolls forward with whatever is checked out. A **snapshot is frozen** — built
+from a git tag, so a review point stays reachable after the branch moves on. Live at
+time of writing: `/3aug_v1/` (before the revised-brief round) and `/3aug_v2/` (after).
 
-- The live deploy passes `remove: ["**/*", "!new/**"]`. `gh-pages` roots its `remove`
-  glob at `dest`, so the default `"."` would delete the sandbox along with everything
-  else. This **must stay an array** — the string form `"!(new)"` is read as a bare
-  negation with no positive pattern, matches nothing, and silently leaves stale files.
+Snapshots build from a **detached git worktree**, so your working tree is never touched
+and a failed build can't strand you on a detached HEAD. `node_modules` is symlinked in
+rather than reinstalled, which is only valid while the tag's `package.json` and
+`yarn.lock` match the current install — the script checks and refuses otherwise.
+
+All are driven by `scripts/deploy.mjs`. Four invariants in it are load-bearing:
+
+- The live deploy's `remove` glob clears the whole branch root except what
+  `PRESERVED_DIRS` holds back. `gh-pages` roots `remove` at `dest`, so the default `"."`
+  would delete the sandbox and every snapshot. This **must stay an array** — the string
+  form `"!(new)"` is read as a bare negation with no positive pattern, matches nothing,
+  and silently leaves stale files.
+- **Publishing a snapshot whose name isn't in `PRESERVED_DIRS` is refused**, and before
+  any live deploy the script reads `gh-pages` and refuses if a directory there is
+  neither preserved nor live-owned (override: `ALLOW_UNTRACKED_DIRS=1`). Without these,
+  forgetting to extend that list means the next live deploy silently deletes a published
+  snapshot, discovered only when someone follows a dead URL.
 - The live deploy is refused from any branch but `main` (override:
   `ALLOW_ANY_BRANCH=1`), because the redesign branch stays checked out for weeks and
   `yarn deploy` is muscle memory.
+- `noindex` needs no per-target work: the vite plugin keys on `base !== '/'`, so any
+  subdirectory build gets it. Don't narrow that condition to `/new/`.
 
 The sandbox build gets a `noindex` meta tag from the `noindexSandbox` plugin in
 `vite.config.js`. `public/CNAME` holds `marketbuzzr.com` and belongs only at the branch

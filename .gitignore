@@ -6,5 +6,5 @@
 .idea/
 .vscode/
 dist/
-dist-new/
+dist-*/
 node_modules/
