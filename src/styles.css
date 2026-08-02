@@ -328,6 +328,16 @@ h1 {
    better. Only the whitespace above it is set here. */
 .hero .hero-visual {
   margin-top: var(--spacing-3xl);
+
+  /* §1's artwork is drawn on a near-white ground while the page is navy, so the
+     frame stops being a translucent plate here and becomes an opaque light
+     panel in the artwork's own background colour (sampled: #FBFCFD). The
+     padding then reads as part of the picture and the rounded corners close
+     around it, instead of a white rectangle sitting in a navy gap.
+     This is a holding treatment: a dark re-render would revert it to one line. */
+  background: #fbfcfd;
+  padding: var(--spacing-md);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 /* The six context dimensions the hero artwork draws, restated in HTML. The
@@ -1374,6 +1384,49 @@ footer h4 {
   border-radius: var(--radius-lg);
 }
 
+/* Below this the artwork stops being legible if it is simply scaled to fit, so
+   it is held at a usable size inside a horizontal scroller instead — the option
+   the brief lists first, and which it prefers to shrinking embedded text until
+   it cannot be read.
+
+   The numbers are measured, not guessed. Ink height of a representative label
+   in each source: hero 13px, problem 16px, insight 10px, all at 1536px wide. A
+   390px viewport gives the frame ~326px of inner width, which scales those to
+   2.8px, 3.4px and 2.1px. Holding the image at 1000px instead brings them to
+   8.5px and 10.4px; the insight artwork sets its own larger width below because
+   its type is the smallest to begin with and the brief specifically requires
+   that card be readable.
+
+   None of this is a substitute for mobile-specific renders — see mbz-et8e.24. */
+@media (max-width: 820px) {
+  /* The scroller is the <picture>, not the figure, so the frame's padding and
+     border stay put instead of scrolling away with the image. */
+  .product-frame picture {
+    display: block;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border-radius: var(--radius-lg);
+  }
+
+  .product-frame img {
+    width: var(--mobile-artwork-width, 1000px);
+    max-width: none;
+  }
+
+  .insight-visual {
+    --mobile-artwork-width: 1400px;
+  }
+
+  /* §2's artwork is composed right-heavy: measured by column density, its left
+     25% is empty background and the signal cluster only begins at x=384 of
+     1536. Left alone the scroller opens on that void and the section looks
+     broken. Pulling the image left by the same 25% starts it on the cluster;
+     what is clipped away is nothing. */
+  .signals-visual img {
+    margin-left: calc(var(--mobile-artwork-width, 1000px) * -0.25);
+  }
+}
+
 /* ============================================================
    FIX-BEFORE-RELEASE (mbz-et8e.18): delete this block.
    DEV-ONLY. Everything below pairs with src/components/DevOnly.jsx and must
@@ -1995,8 +2048,14 @@ footer h4 {
 }
 
 @media (max-width: 820px) {
+  /* minmax(0, …) rather than a bare 1fr: a grid track's automatic minimum is
+     its content's min-content size, so once §2's artwork is held at 1000px
+     inside its scroller the track grows to fit it, .product-frame's width:100%
+     resolves against that inflated track, and the page gains ~630px of
+     horizontal overflow. Measured before this line: track 1018px at a 390px
+     viewport. */
   .problem-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--spacing-2xl);
   }
 }

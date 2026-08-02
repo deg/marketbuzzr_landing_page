@@ -66,6 +66,7 @@ const Home = () => {
             <p className="problem-closer">{problem.closer}</p>
           </div>
           <ProductImage
+            className="signals-visual"
             avif={signalsAvif}
             webp={signalsWebp}
             width={1536}
@@ -112,6 +113,7 @@ const Home = () => {
       <section className="section container">
         <SectionTitle title={insight.title} lead={insight.lead} />
         <ProductImage
+          className="insight-visual"
           avif={insightAvif}
           webp={insightWebp}
           width={1536}
