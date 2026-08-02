@@ -70,20 +70,6 @@ edits must not introduce structural differences.
 `withBreaks.jsx` turns `\n` inside a content string into `<br/>`, used where the source
 deck asks for a break at a specific point.
 
-### Layout variants (`?version=`)
-
-`src/main.jsx` reads a `version` query parameter and sets `data-version` on `<html>`;
-`styles.css` keys overrides off `[data-version="..."]`. Valid values are **`simple`
-(default), `mixed`, `center`, `left`**. `center` is the unscoped base; `mixed`, `center`,
-and `left` are **frozen reference variants** and `simple` is the one that gets evolved.
-
-This matters more than it looks: a CSS change made without checking the
-`[data-version]` blocks near the end of `styles.css` can silently break the three frozen
-variants. Read those blocks before restyling anything shared.
-
-The parameter is read from the query string *before* the hash (`?version=left#/how-it-works`),
-with the hash query accepted as a fallback, so it survives hash navigation.
-
 ### The one backend dependency: the email-capture form
 
 `src/components/EmailCaptureModal.jsx` is the only component that talks to a server. On
@@ -100,11 +86,20 @@ stack must be running.
 
 ### Styling
 
-All CSS is in `src/styles.css` (~1270 lines). Design tokens (colors, spacing, radii,
+All CSS is in `src/styles.css` (~1200 lines). Design tokens (colors, spacing, radii,
 shadows, transitions, fonts, `--lead-measure`) are CSS custom properties in `:root` —
 reuse them (`var(--brand)`, `var(--spacing-lg)`, …) rather than introducing new literals.
 Dark theme throughout. Class names are plain (`.modal`, `.cta-panel`, `.grid`); no CSS
 modules or utility framework.
+
+The "Final overrides" block at the **end** of the file must stay there. Several of its
+rules tie on specificity with the base rules they override (`.section p.lead`,
+`.info-block p.lead`, `.signal-mark`, `.signal-mark polyline`) and win only by source
+order — relocating them silently reverts the overrides with no error anywhere.
+
+`SignalLine` and `SignalDivider` still render on every page but are hidden by
+`display: none` in that block. That is deliberate: the noise→signal motif was stripped
+from the current design, and deleting the one rule brings it back.
 
 ## Environment / API URL
 
