@@ -36,8 +36,13 @@ export const nav = {
     { label: "Resources", to: "/resources" },
     { label: "Pricing", to: "/pricing" },
   ],
+  // The app root, NOT /login — there is no login page. The product's root route
+  // is wrapped in ProtectedRoute, which raises the login modal for anyone not
+  // signed in, so this is where "Login" should land.
+  //   /login      -> 200 but only the SPA shell; no such route exists
+  //   /api/login  -> 405, it is a POST-only backend endpoint (nginx.conf)
   // The one nav destination that genuinely exists today, and currently the only
   // route from the marketing site into the product.
-  login: { label: "Login", href: "https://mvp.marketbuzzr.com/login" },
+  login: { label: "Login", href: "https://mvp.marketbuzzr.com/" },
   cta: "Book a Demo",
 };

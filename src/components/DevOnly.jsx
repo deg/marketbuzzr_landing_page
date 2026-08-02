@@ -49,29 +49,30 @@ export const DevAlternative = ({ label, children }) => {
         className="dev-peek-trigger"
         onClick={() => setOpen(true)}
       >
-        Dev: view native {label}
+        Dev: simpler {label} for small screens
       </button>
       {open && (
         <div
           className="dev-peek-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label={`Native version: ${label}`}
+          aria-label={`Simpler alternative: ${label}`}
           onClick={close}
         >
           <div className="dev-peek-panel" onClick={(e) => e.stopPropagation()}>
             <div className="dev-peek-bar">
-              <span className="dev-note-tag">Native version — {label}</span>
+              <span className="dev-note-tag">Simpler alternative — {label}</span>
               <button type="button" className="dev-peek-close" onClick={close}>
                 Close
               </button>
             </div>
             {children}
             <p className="dev-peek-foot">
-              Kept in the codebase but not shown on the page. The section uses
-              the handoff artwork instead, which carries more content. This
-              version stays readable at phone widths, so it may return as the
-              mobile rendering.
+              A plainer version of this section, built in HTML rather than as
+              an image. It is not shown on the page — the section uses the
+              handoff artwork, which carries more detail. This one stays
+              readable on a phone, where the artwork does not, so it is kept as
+              a candidate for the mobile layout.
             </p>
           </div>
         </div>
