@@ -72,7 +72,7 @@ const Home = () => {
       <section className="section container">
         <SectionTitle title={howItWorks.title} lead={howItWorks.lead} />
         <FlowSteps steps={howItWorks.steps} />
-        <p className="lead flow-emphasis">{howItWorks.emphasis}</p>
+        <p className="lead lead-strong">{howItWorks.emphasis}</p>
         <p className="lead">
           <Link className="text-link" to={howItWorks.linkTo}>
             {howItWorks.linkLabel} →
@@ -80,19 +80,23 @@ const Home = () => {
         </p>
       </section>
 
-      {/* §4 Product Output / Insight — mbz-et8e.7 adds the product visual */}
+      {/* §4 Product Output / Insight. The visual stays a placeholder until real
+          screenshots exist (mbz-et8e.12) — this depicts an actual product
+          surface, so it must not be invented. The four callouts are real HTML
+          beside it rather than annotations baked into an image, so they carry
+          their meaning on their own. */}
       <section className="section container">
         <SectionTitle title={insight.title} lead={insight.lead} />
         <SectionPlaceholder note={insight.visualNote} ratio="3 / 2" />
         <div className="grid">
-          {insight.callouts.map((c, i) => (
-            <div className="card" key={i}>
+          {insight.callouts.map((c) => (
+            <div className="card" key={c.heading}>
               <h3>{c.heading}</h3>
               <p>{c.description}</p>
             </div>
           ))}
         </div>
-        <p className="lead">{insight.emphasis}</p>
+        <p className="lead lead-strong">{insight.emphasis}</p>
         {insight.paragraphs.map((p, i) => (
           <p className="lead" key={i}>
             {p}

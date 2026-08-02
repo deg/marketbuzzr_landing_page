@@ -1403,7 +1403,9 @@ footer h4 {
   font-size: 20px;
 }
 
-.flow-emphasis {
+/* A lead paragraph the brief sets in bold — the one-line claim that closes a
+   section. Shared across sections rather than restated per section. */
+.lead-strong {
   color: var(--text);
   font-weight: 700;
 }
