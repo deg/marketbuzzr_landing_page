@@ -1160,6 +1160,37 @@ footer h4 {
   margin-top: var(--spacing-md);
 }
 
+/* Placeholder standing in for a visual that does not exist yet. Dashed and
+   desaturated on purpose — it should read as unfinished at a glance on the
+   /new/ sandbox, never as a design choice. Removed as each section lands. */
+.section-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  border: 1px dashed rgba(110, 224, 255, 0.35);
+  border-radius: var(--radius-lg);
+  background: rgba(15, 26, 69, 0.35);
+  text-align: center;
+}
+
+.section-placeholder-tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.section-placeholder p {
+  max-width: var(--lead-measure);
+  margin: 0;
+  color: var(--muted);
+}
+
 /* ============================================================
    Final overrides. These rules must stay LAST in the file: several of them tie
    on specificity with the base rules they override (.section p.lead,
