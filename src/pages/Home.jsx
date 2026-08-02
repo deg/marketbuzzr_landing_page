@@ -9,6 +9,7 @@ import DemoButton from "../components/DemoButton";
 import SectionPlaceholder from "../components/SectionPlaceholder";
 import SignalCloud from "../components/SignalCloud";
 import BrandDivider from "../components/BrandDivider";
+import FlowSteps from "../components/FlowSteps";
 
 // Section order follows the brief's Final Page Flow. Each section is a shell:
 // the copy and heading levels are final, but the visual or interactive part is
@@ -66,13 +67,16 @@ const Home = () => {
 
       <BrandDivider steps={divider} />
 
-      {/* §3 How It Works — mbz-et8e.6 builds the flow diagram */}
+      {/* §3 How It Works — a summary. The detailed version stays at
+          /how-it-works rather than being duplicated here. */}
       <section className="section container">
         <SectionTitle title={howItWorks.title} lead={howItWorks.lead} />
-        <SectionPlaceholder note={howItWorks.visualNote} />
-        <p className="lead">{howItWorks.emphasis}</p>
+        <FlowSteps steps={howItWorks.steps} />
+        <p className="lead flow-emphasis">{howItWorks.emphasis}</p>
         <p className="lead">
-          <Link to={howItWorks.linkTo}>{howItWorks.linkLabel}</Link>
+          <Link className="text-link" to={howItWorks.linkTo}>
+            {howItWorks.linkLabel} →
+          </Link>
         </p>
       </section>
 
