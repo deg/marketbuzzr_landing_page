@@ -5,8 +5,10 @@ import React, { useCallback, useEffect, useState } from "react";
 // EVERYTHING IN THIS FILE IS A DEV/DESIGN-CYCLE AFFORDANCE AND MUST NOT SHIP.
 //
 // It is deliberately all in one module so removing it is a deletion rather than
-// a hunt: delete this file, then the handful of <DevNote> and <DevPeek> usages
-// the compiler will point at. See mbz-et8e.18, which gates the merge to main.
+// a hunt: delete this file, then the handful of <DevNote> and <DevAlternative>
+// usages the compiler will point at. See mbz-et8e.18, which gates the merge.
+//
+// Note that ProductImage is NOT dev-only and must survive this deletion.
 //
 // Everything here reuses the same amber hazard styling as the not-implemented
 // page, so dev scaffolding looks like one recognisable thing on the page.
@@ -21,10 +23,13 @@ export const DevNote = ({ children }) => (
   </aside>
 );
 
-// Wraps a natively-built diagram so clicking it opens the handoff artwork it
-// was based on. Lets the reference art be compared against what we built
-// without either replacing the other.
-export const DevPeek = ({ label, avif, webp, alt, children }) => {
+// Parks an alternative rendering of a section behind a trigger, so it can be
+// compared against what is actually shown without either replacing the other.
+//
+// Sections 3 and 6 show the handoff artwork; their natively-built versions live
+// in here. Those were kept rather than deleted because they may come back as the
+// mobile rendering, where the artwork is too small to read.
+export const DevAlternative = ({ label, children }) => {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
 
@@ -39,43 +44,34 @@ export const DevPeek = ({ label, avif, webp, alt, children }) => {
 
   return (
     <>
-      <div className="dev-peek">
-        {children}
-        <button
-          type="button"
-          className="dev-peek-trigger"
-          onClick={() => setOpen(true)}
-        >
-          Dev: compare with handoff artwork
-        </button>
-      </div>
+      <button
+        type="button"
+        className="dev-peek-trigger"
+        onClick={() => setOpen(true)}
+      >
+        Dev: view native {label}
+      </button>
       {open && (
         <div
           className="dev-peek-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label={`Handoff artwork: ${label}`}
+          aria-label={`Native version: ${label}`}
           onClick={close}
         >
-          <div
-            className="dev-peek-panel"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="dev-peek-panel" onClick={(e) => e.stopPropagation()}>
             <div className="dev-peek-bar">
-              <span className="dev-note-tag">Handoff artwork — {label}</span>
+              <span className="dev-note-tag">Native version — {label}</span>
               <button type="button" className="dev-peek-close" onClick={close}>
                 Close
               </button>
             </div>
-            <picture>
-              <source srcSet={avif} type="image/avif" />
-              <source srcSet={webp} type="image/webp" />
-              <img src={webp} alt={alt} />
-            </picture>
+            {children}
             <p className="dev-peek-foot">
-              Reference only. The live section is built natively so it stays
-              readable on mobile, keeps its text searchable, and matches the
-              dark palette.
+              Kept in the codebase but not shown on the page. The section uses
+              the handoff artwork instead, which carries more content. This
+              version stays readable at phone widths, so it may return as the
+              mobile rendering.
             </p>
           </div>
         </div>

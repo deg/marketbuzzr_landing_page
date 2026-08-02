@@ -12,7 +12,7 @@ import CategoryCard from "../components/CategoryCard";
 import PersonalizationDiagram from "../components/PersonalizationDiagram";
 import IndustryTile from "../components/IndustryTile";
 import ProductImage from "../components/ProductImage";
-import { DevNote, DevPeek } from "../components/DevOnly";
+import { DevNote, DevAlternative } from "../components/DevOnly";
 import heroAvif from "../assets/hero-dashboard.avif";
 import heroWebp from "../assets/hero-dashboard.webp";
 import insightAvif from "../assets/insight-card.avif";
@@ -93,15 +93,18 @@ const Home = () => {
           /how-it-works rather than being duplicated here. */}
       <section className="section container">
         <SectionTitle title={howItWorks.title} lead={howItWorks.lead} />
-        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): unwrap — keep <FlowSteps>, drop the DevPeek wrapper. */}
-        <DevPeek
-          label="Signal flow diagram"
+        <ProductImage
           avif={flowAvif}
           webp={flowWebp}
+          width={1536}
+          height={839}
           alt={howItWorks.visualAlt}
-        >
+        />
+        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): remove this trigger. Keep
+            FlowSteps itself — it may return as the mobile rendering. */}
+        <DevAlternative label="flow diagram">
           <FlowSteps steps={howItWorks.steps} />
-        </DevPeek>
+        </DevAlternative>
         <p className="lead lead-strong">{howItWorks.emphasis}</p>
         <p className="lead">
           <Link className="text-link" to={howItWorks.linkTo}>
@@ -171,19 +174,29 @@ const Home = () => {
             <p className="problem-closer">{personalization.emphasis}</p>
             <p className="personalization-closer">{personalization.closer}</p>
           </div>
-          {/* FIX-BEFORE-RELEASE (mbz-et8e.18): unwrap — keep the diagram, drop the DevPeek wrapper. */}
-          <DevPeek
-            label="Personalization diagram"
-            avif={personalizationAvif}
-            webp={personalizationWebp}
-            alt={personalization.visualAlt}
-          >
-            <PersonalizationDiagram
-              inputs={personalization.inputs}
-              engine={personalization.engine}
-              output={personalization.output}
+          <div>
+            {/* FIX-BEFORE-RELEASE (mbz-et8e.18): this artwork is unreadable at
+                the width a split column gives it (~34% of source). Deliberately
+                left visibly wrong rather than patched, because the fix is a
+                DESIGN decision for Manu: widen the section, or supply a simpler
+                diagram that survives a half column. See styles.css. */}
+            <ProductImage
+              avif={personalizationAvif}
+              webp={personalizationWebp}
+              width={1536}
+              height={889}
+              alt={personalization.visualAlt}
             />
-          </DevPeek>
+            {/* FIX-BEFORE-RELEASE (mbz-et8e.18): remove this trigger. Keep the
+                diagram itself — it may return as the mobile rendering. */}
+            <DevAlternative label="personalization diagram">
+              <PersonalizationDiagram
+                inputs={personalization.inputs}
+                engine={personalization.engine}
+                output={personalization.output}
+              />
+            </DevAlternative>
+          </div>
         </div>
       </section>
 

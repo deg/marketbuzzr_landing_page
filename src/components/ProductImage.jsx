@@ -8,6 +8,11 @@ import React from "react";
 // AVIF first with a WebP fallback — between them every browser we care about is
 // covered, and the source PNGs (4.2 MB for the set) are not shipped at all.
 //
+// Deliberately not clickable. A tap-to-pan viewer was tried and dropped: phone
+// browsers already zoom the whole page, panning is barely reachable with a
+// mouse, and if an image is unreadable at the size it is shown then that is a
+// layout problem rather than something a viewer should paper over.
+//
 // width/height are the intrinsic pixel dimensions and are always passed, so the
 // browser reserves the right box before the image arrives and the page does not
 // shift as it loads.

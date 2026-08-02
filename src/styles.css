@@ -283,15 +283,33 @@ h1 {
   margin: var(--spacing-md) auto 0;
 }
 
-/* One large product visual beneath the hero copy. The brief asks for 85–95% of
-   the content container and generous whitespace, and explicitly rules out a
-   small screenshot beside the copy.
-   Scoped to `.hero` deliberately: .section-placeholder sets its own margin-top
-   and is defined later in this file, so an unscoped .hero-visual would lose to
-   it on source order and the whitespace would quietly shrink. */
+/* FIX-BEFORE-RELEASE (mbz-et8e.18): §6's artwork renders at ~34% of its source
+   here, so its embedded labels land near 4.7px and are not readable. Left that
+   way ON PURPOSE so the problem is visible rather than buried in a note.
+   THIS IS A DESIGN DECISION, NOT AN IMPLEMENTATION ONE — the brief demands a
+   split layout for §6 and also assigns it a wide full-bleed diagram, and those
+   cannot both hold. Manu chooses: give the section full width, or supply a
+   simpler diagram that works in a half column.
+
+   Why the breakout cannot simply be extended here: inside a split column the
+   50% resolves against the column rather than the viewport, so the image lands
+   off-centre — measured at a 1280 viewport it ran x=363 to x=1595, overflowing
+   the window by 315px. */
+.problem-grid .product-frame {
+  position: static;
+  left: auto;
+  transform: none;
+  width: 100%;
+}
+
+/* The hero visual takes the same breakout width as the other artwork, so the
+   four do not render at two different scales down the page. This is a
+   deliberate departure from the brief's "85–95% of the main content container",
+   which assumed the container was the only measure available; the intent there
+   was that the product visual dominates its section, and a wider one does that
+   better. Only the whitespace above it is set here. */
 .hero .hero-visual {
-  width: 92%;
-  margin: var(--spacing-3xl) auto 0;
+  margin-top: var(--spacing-3xl);
 }
 
 /* Signature motif: a noise->signal waveform under the hero content. The stroke
@@ -1278,7 +1296,22 @@ footer h4 {
 /* Handoff artwork is light-themed while the site is dark, so it sits on a
    deliberate plate: a light surround, border and shadow read as "a picture of
    the product" rather than as a background that failed to load. */
+/* The artwork is 1536px wide but the text container caps at 1100px, so inside
+   it nothing exceeds ~1030px and the embedded labels land around 9px. Visuals
+   therefore break out of the prose column up to a 1400px cap — a wider measure
+   for pictures than for text. The brief allows this: it asks for wide diagrams
+   to be capped so they do not oversize on ultrawide displays, and a cap is what
+   this is.
+
+   Centring a wider child inside a narrower parent: shift its left edge to the
+   parent's midpoint, then pull it back by half its own width. The vw term is
+   reduced by two full gutters, which is comfortably more than any scrollbar, so
+   this cannot produce horizontal overflow. */
 .product-frame {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1400px, calc(100vw - 2 * var(--spacing-lg)));
   margin: var(--spacing-xl) 0 0;
   padding: var(--spacing-sm);
   border: 1px solid rgba(255, 255, 255, 0.14);
