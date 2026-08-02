@@ -69,15 +69,14 @@ not by wiring up a new handler.
 of that page's marketing copy (headings, leads, card arrays, CTA text). The page
 components are presentational and map over those arrays.
 
-Two content files carry structure that looks like styling but is not:
+`content/nav.js` carries structure that looks like styling but is not: the nav's
+shape, including the two judgement calls it records — How It Works lives under
+Product, and Industries replaced the old Use Cases dropdown. It imports the
+industry list from `home.js` so the nav and §3 cannot drift apart.
 
-- `home.problem.signals` — **array order places the chips** around the 3×3 signal
-  cloud, and the three marked `relevant` are the ones touching the centre card.
-  Reordering the array moves the composition. The cell map is commented there.
-- `content/nav.js` — the nav's shape, including the two judgement calls it
-  records: How It Works lives under Product, and Industries replaced the old
-  Use Cases dropdown. It imports the industry list from `home.js` so the nav and
-  section 7 cannot drift apart.
+Emphasis in `home.js` is structural rather than markup. Where the brief bolds a
+line it gets its own key (`emphasis`, `closer`, `context`) and the component
+decides how to render it — **do not put `**` or HTML into those strings**.
 
 **To change marketing copy, edit the content module — never the components.** The two
 Use Case pages are literally the same component with different content objects, so copy
@@ -88,32 +87,49 @@ deck asks for a break at a specific point.
 
 ### The homepage (2026-08 redesign)
 
-`pages/Home.jsx` renders eight sections in the order set by Manu's implementation
-brief (`~/Documents/marketbuzzr/marketbuzzr_homepage_handoff_md/`). Each has its
-own component; none of them is generic, so read the component before changing a
-section:
+`pages/Home.jsx` renders seven sections in the order set by Manu's **revised**
+handoff brief
+(`~/Documents/marketbuzzr/Marketbuzzr_Homepage_Revised_CTO_Handoff/`). That
+revision supersedes the original brief in the older `marketbuzzr_homepage_handoff_md/`
+folder — read the revised one. Each section has its own component; none of them
+is generic, so read the component before changing a section:
 
 | § | Section | Built from |
 |---|---|---|
-| 1 | Hero | `PageHero` + `ProductImage` |
-| 2 | Problem | `SignalCloud` (3×3 grid) then `BrandDivider` |
-| 3 | How It Works | `ProductImage`; `FlowSteps` is the unused alternative |
-| 4 | Insight | `ProductImage` + `.card` callouts |
-| 5 | Categories | `CategoryCard` + `CategoryIcon` (six line icons) |
-| 6 | Personalization | `ProductImage`; `PersonalizationDiagram` is the alternative |
-| 7 | Industries | `IndustryTile` |
-| 8 | Final CTA | `CtaPanel` with a secondary label |
+| 1 | Hero | `PageHero` + `ProductImage` + the HTML context line |
+| 2 | Problem | copy beside `ProductImage`, in `.problem-grid` |
+| 3 | Industries | `IndustryTile` |
+| 4 | Five-step flow | `FlowSteps` (native HTML, no artwork) |
+| 5 | Insight | `ProductImage` alone |
+| 6 | Categories | `CategoryCard` + `CategoryIcon` (six line icons) |
+| 7 | Final CTA | `CtaPanel` with a secondary label |
 
-`FlowSteps` and `PersonalizationDiagram` are **built and working but not shown**.
-The sections use the handoff artwork instead, which carries more content; those
-two stay readable at phone widths, so they are kept as candidates for a mobile
-rendering. They are reachable behind the dev triggers.
+Two things the revision removed that earlier versions of this file described:
+the LESS NOISE / MORE SIGNAL divider, and the standalone personalization
+section. `SignalCloud`, `BrandDivider` and `PersonalizationDiagram` were deleted
+with them.
+
+**The hero's context line is not decoration.** The revision deletes the
+personalization section on the grounds that its concept moves into the hero —
+but the hero is a flat PNG, so `home.hero.context` is the only place the six
+context dimensions exist as text. Removing it silently strips the page's stated
+differentiator from crawlers and screen readers.
 
 Images live in `src/assets/` as AVIF with a WebP fallback, encoded from the
-handoff PNGs (4.2 MB of PNG → 275 KB of AVIF). The source PNGs are not in this
-repo. `ProductImage` handles `<picture>`, sizing and loading priority — the hero
-is eager with `fetchPriority="high"` because it is the LCP element, everything
-else is lazy.
+revised handoff PNGs at `avifenc -q 63` (4.4 MB of PNG → 197 KB of AVIF; q63 is
+indistinguishable from source at 2× zoom, checked on the insight card, which has
+the smallest type). The source PNGs are not in this repo. `ProductImage` handles
+`<picture>`, sizing and loading priority — the hero is eager with
+`fetchPriority="high"` because it is the LCP element, everything else is lazy.
+
+`vite.config.js` also emits a `<link rel="preload">` for the hero, and finds it
+by matching the filename against `HERO_BASENAME`. **Rename the hero asset and
+you must update that constant**; a miss now warns at build time rather than
+silently dropping the hint.
+
+Full page weight is 289 KB (91 KB gzipped text + 198 KB of AVIF), plus ~44 KB of
+Google Fonts. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no
+imagery at all.
 
 ### Dev scaffolding — must not ship
 
@@ -126,10 +142,27 @@ grep -rn "FIX-BEFORE-RELEASE" src
 
 **`yarn deploy` refuses the live target while any tag remains** (`scripts/deploy.mjs`).
 `yarn deploy:new` is exempt — the sandbox is where this is meant to be visible.
-Each tag says what to do, and they do not all mean delete: some unwrap, one
-(`NotImplemented.jsx`) must be reframed rather than removed, and one is a design
-decision for Manu. `src/components/DevOnly.jsx` holds all the dev-only React so
-removing it is a deletion rather than a hunt. Beads issue `mbz-et8e.18` tracks it.
+Each tag says what to do, and they do not all mean delete. `src/components/DevOnly.jsx`
+holds all the dev-only React so removing it is a deletion rather than a hunt.
+Beads issue `mbz-et8e.18` gates the merge.
+
+There are **8 tags across 7 files**. The revision retired five of the original
+thirteen — scaffolding it made moot — but none of the four that actually block:
+
+| Where | What it needs |
+|---|---|
+| `pages/NotImplemented.jsx` + its CSS + `App.jsx` | **Reframe, do not delete.** The route should ship: a real not-found page is strictly better than the silent redirect to `/` it replaced. Only the "not yet implemented" wording and amber styling must go. Deleting it wholesale reintroduces the original defect. |
+| `content/home.js` | Four industry tiles point at pages that do not exist. Build them, or drop the `to` and render those tiles non-interactive. §3 makes them more prominent than before. |
+| `content/nav.js` | Solutions, Resources and Pricing point at the same placeholder. |
+| `pages/Home.jsx` | A decision, not a code change — see `mbz-et8e.12`. |
+
+The `DevOnly.jsx` and `styles.css` dev-block tags are plain deletions once the
+Home.jsx note goes.
+
+**The risk is the merge, not the deploy.** `yarn deploy` is already refused from
+any branch but `main`, so the live site cannot be reached from `redesign` by
+accident. An agent that merges and then strips tags to get past the gate would
+undo real fixes.
 
 ### The one backend dependency: the email-capture form
 
@@ -147,13 +180,13 @@ stack must be running.
 
 ### Styling
 
-All CSS is in `src/styles.css` (~1200 lines). Design tokens (colors, spacing, radii,
+All CSS is in `src/styles.css` (~1900 lines). Design tokens (colors, spacing, radii,
 shadows, transitions, fonts, `--lead-measure`) are CSS custom properties in `:root` —
 reuse them (`var(--brand)`, `var(--spacing-lg)`, …) rather than introducing new literals.
 Dark theme throughout. Class names are plain (`.modal`, `.cta-panel`, `.grid`); no CSS
 modules or utility framework.
 
-Three traps in this stylesheet, all of which have bitten:
+Four traps in this stylesheet, all of which have bitten:
 
 **`padding: X 0` on an element that also carries `.container` silently destroys
 the horizontal gutter.** `.hero` and `.section` both did this, so content ran
@@ -165,7 +198,15 @@ as suspect if you add another.
 at ~67% and be hard to read. The breakout centres a wider child inside a narrower
 parent with `left: 50%` + `translateX(-50%)`, which **only works when the parent
 spans the page** — inside a split column the 50% resolves against the column and
-the image overflows the window. §6 is excluded for exactly this reason.
+the image overflows the window. `.problem-grid .product-frame` suppresses it, and
+**§2 now depends on that rule**. It reads like leftover from the deleted
+personalization split; it is not.
+
+**A bare `1fr` grid track takes its automatic minimum from its content.** Below
+820px the artwork is held at 1000–1400px inside a horizontal scroller so its
+embedded text stays legible, which inflated §2's `1fr` track to 1018px and gave
+the page ~630px of horizontal overflow. `minmax(0, 1fr)` is what stops it. Any
+new grid that will hold one of these scrollers needs the same.
 
 **The "Final overrides" block at the end of the file must stay there.** Several of its
 rules tie on specificity with the base rules they override (`.section p.lead`,
