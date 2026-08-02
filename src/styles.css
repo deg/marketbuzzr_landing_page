@@ -1441,6 +1441,83 @@ footer h4 {
   }
 }
 
+/* §6 Personalization — a vertical funnel: six inputs, narrowing through
+   MarketBuzzr, to one output. Deliberately directional where §2's cloud is
+   radial, so the page's two split sections do not read as the same layout. */
+.pd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.pd-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.pd-input {
+  padding: var(--spacing-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* The narrowing itself: a trapezoid, wide at the inputs and narrow at the
+   engine. Doing this with clip-path keeps it one element and lets it scale with
+   the column instead of needing fixed coordinates. */
+.pd-funnel {
+  width: 100%;
+  height: 44px;
+  clip-path: polygon(0 0, 100% 0, 62% 100%, 38% 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(110, 224, 255, 0.22),
+    rgba(110, 224, 255, 0.06)
+  );
+}
+
+.pd-engine {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-full);
+  background: linear-gradient(145deg, var(--brand-2), var(--brand));
+  color: #04162a;
+  font-weight: 700;
+  box-shadow: 0 8px 30px rgba(110, 224, 255, 0.25);
+}
+
+.pd-arrow {
+  color: var(--brand);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pd-output {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--brand);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #16245fcc, #111d49cc);
+  box-shadow: var(--shadow-md), 0 0 28px rgba(110, 224, 255, 0.18);
+  color: var(--text);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* The closing one-liner is an aside to the argument above it, not part of it. */
+.personalization-closer {
+  color: var(--muted);
+  font-style: italic;
+}
+
 /* §5 Intelligence categories. Its own grid rather than .grid, which is two
    columns — six cards want three across, then two, then one. */
 .category-grid {

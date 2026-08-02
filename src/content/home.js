@@ -199,6 +199,7 @@ export const home = {
       "The result: intelligence interpreted for you, not another generic market feed.",
     closer:
       "Because a MedTech CEO and a FinTech marketing leader should not receive the same intelligence.",
+    engine: "MarketBuzzr",
     inputs: [
       "Your Company",
       "Your Products",

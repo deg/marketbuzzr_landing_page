@@ -11,6 +11,7 @@ import SignalCloud from "../components/SignalCloud";
 import BrandDivider from "../components/BrandDivider";
 import FlowSteps from "../components/FlowSteps";
 import CategoryCard from "../components/CategoryCard";
+import PersonalizationDiagram from "../components/PersonalizationDiagram";
 
 // Section order follows the brief's Final Page Flow. Each section is a shell:
 // the copy and heading levels are final, but the visual or interactive part is
@@ -115,18 +116,25 @@ const Home = () => {
         </div>
       </section>
 
-      {/* §6 Personalization — mbz-et8e.9 builds the diagram and split layout */}
+      {/* §6 Personalization. Second split of the page, so the visual is a
+          vertical funnel rather than another cluster — see the component. */}
       <section className="section container">
-        <span className="kicker">{personalization.eyebrow}</span>
-        <SectionTitle title={personalization.title} />
-        {personalization.paragraphs.map((p, i) => (
-          <p className="lead" key={i}>
-            {p}
-          </p>
-        ))}
-        <p className="lead">{personalization.emphasis}</p>
-        <p className="lead">{personalization.closer}</p>
-        <SectionPlaceholder note={personalization.visualNote} />
+        <div className="problem-grid">
+          <div className="problem-copy">
+            <span className="kicker">{personalization.eyebrow}</span>
+            <h2>{personalization.title}</h2>
+            {personalization.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+            <p className="problem-closer">{personalization.emphasis}</p>
+            <p className="personalization-closer">{personalization.closer}</p>
+          </div>
+          <PersonalizationDiagram
+            inputs={personalization.inputs}
+            engine={personalization.engine}
+            output={personalization.output}
+          />
+        </div>
       </section>
 
       {/* §7 Industries — mbz-et8e.10 builds the tiles; linking waits on .2 */}
