@@ -59,7 +59,7 @@ const Home = () => {
       {/* §3 Problem. Copy left, signal artwork right; stacks copy-first on
           narrow screens. The artwork must NOT take the .product-frame breakout
           here — see the rule in styles.css that suppresses it inside a column. */}
-      <section className="section container">
+      <section className="section container container-wide">
         <div className="problem-grid">
           <div className="problem-copy">
             <h2>{problem.title}</h2>

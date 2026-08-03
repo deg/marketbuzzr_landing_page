@@ -100,6 +100,15 @@ body {
   padding: 0 var(--spacing-lg);
 }
 
+/* §3 opts into the same wider measure the full-bleed visuals use, because its
+   artwork sits in a column and the brief wants it materially larger — at the
+   1100px measure the 55% column is only ~605px. Ties with .container on
+   specificity and wins by source order, so it must stay below it. The 1024px
+   media query below only changes padding, so it is unaffected. */
+.container-wide {
+  max-width: 1400px;
+}
+
 
 /* Navigation */
 nav {
@@ -1337,24 +1346,45 @@ footer h4 {
    parent's midpoint, then pull it back by half its own width. The vw term is
    reduced by two full gutters, which is comfortably more than any scrollbar, so
    this cannot produce horizontal overflow. */
+/* No plate. The brief wants these to "blend into the navy background with no
+   visible outer frame/card", and all three artworks are now drawn on their own
+   dark ground, so the border, translucent fill, shadow and padding that used to
+   present them as framed pictures are gone. Rounded corners went too — a
+   radius reads as a card even without a border.
+
+   What remains is only sizing, which is a separate concern and still wanted. */
 .product-frame {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   width: min(1400px, calc(100vw - 2 * var(--spacing-lg)));
   margin: var(--spacing-xl) 0 0;
-  padding: var(--spacing-sm);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-xl);
-  background: linear-gradient(180deg, #ffffff1f, #ffffff0a);
-  box-shadow: var(--shadow-lg), 0 0 40px rgba(110, 224, 255, 0.08);
+  /* Each artwork is drawn on a darker ground than the page (measured: page
+     #0B1230 against #00041C, #020925, #000B2D), so removing the frame left a
+     visible dark rectangle — a borderless card rather than the blend the brief
+     asks for. This bleeds the artwork's OWN ground outward so the edge fades
+     into the page. A mask would have been the obvious alternative and was
+     rejected: content sits 1.3% from the hero's left edge and the insight card
+     starts 2.7% from its top, so any fade deep enough to work would clip. */
+  box-shadow: 0 0 80px 30px var(--artwork-ground, transparent);
+}
+
+.hero-visual {
+  --artwork-ground: #00041c;
+}
+
+.signals-visual {
+  --artwork-ground: #020925;
+}
+
+.insight-visual {
+  --artwork-ground: #000b2d;
 }
 
 .product-frame img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--radius-lg);
 }
 
 /* Below this the artwork stops being legible if it is simply scaled to fit, so
