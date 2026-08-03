@@ -11,12 +11,12 @@ import CategoryCard from "../components/CategoryCard";
 import IndustryTile from "../components/IndustryTile";
 import ProductImage from "../components/ProductImage";
 import { DevNote } from "../components/DevOnly";
-import heroAvif from "../assets/hero-filter.avif";
-import heroWebp from "../assets/hero-filter.webp";
+import heroAvif from "../assets/hero-market-universe.avif";
+import heroWebp from "../assets/hero-market-universe.webp";
 import signalsAvif from "../assets/market-signals.avif";
 import signalsWebp from "../assets/market-signals.webp";
-import insightAvif from "../assets/insight-competitor-launch.avif";
-import insightWebp from "../assets/insight-competitor-launch.webp";
+import insightAvif from "../assets/insight-medicalcomp.avif";
+import insightWebp from "../assets/insight-medicalcomp.webp";
 
 // Section order follows the FINAL handoff brief
 // (~/Documents/marketbuzzr/Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/),
@@ -72,8 +72,8 @@ const Home = () => {
             className="signals-visual"
             avif={signalsAvif}
             webp={signalsWebp}
-            width={1536}
-            height={1024}
+            width={1163}
+            height={1011}
             alt={problem.visualAlt}
           />
         </div>
@@ -94,12 +94,12 @@ const Home = () => {
         />
         {/* FIX-BEFORE-RELEASE (mbz-et8e.18): decision open, see mbz-et8e.12. */}
         <DevNote>
-          This artwork depicts a product announcement attributed to Medtronic
-          that did not happen: the MiniMed 780G is a real product, but the
-          “enhanced AI algorithm and 15% longer battery life”, the date and the
-          cited coverage are invented, as are Tandem Diabetes Care and MedTech
-          Dive as sources. Accepted for the design cycle; a real company&apos;s
-          name on a fabricated announcement needs a decision before launch.
+          The company is now the fictional MedicalComp, but the artwork still
+          announces the “MiniMed 780G” — Medtronic’s real, trademarked product,
+          which a fictional company cannot launch — and still cites Tandem
+          Diabetes Care and MedTech Dive as real sources. The date reads May 2,
+          2025, more than a year stale. Three string edits in this same artwork
+          would close it; see mbz-et8e.12.
         </DevNote>
         <p className="lead lead-strong">{insight.emphasis}</p>
       </section>

@@ -37,7 +37,7 @@ const noindexSandbox = () => {
 // Declared as image/avif on purpose: a browser without AVIF support ignores the
 // hint and takes the WebP from <picture> as usual, rather than downloading a
 // format it cannot use.
-const HERO_BASENAME = 'hero-filter'
+const HERO_BASENAME = 'hero-market-universe'
 
 const preloadHeroImage = () => {
   let base = '/'
