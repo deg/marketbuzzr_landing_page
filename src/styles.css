@@ -1416,13 +1416,28 @@ footer h4 {
     overscroll-behavior-x: contain;
   }
 
+  /* max(..., 100%) rather than the bare value: where the container is WIDER
+     than the held width, a fixed width pins the artwork SMALLER than the space
+     available instead of filling it. Measured at an 820px viewport before this
+     changed: the problem image rendered 600px inside a 788px column. */
   .product-frame img {
-    width: var(--mobile-artwork-width, 1000px);
+    width: max(var(--mobile-artwork-width, 1000px), 100%);
     max-width: none;
   }
 
-  .signals-visual {
-    --mobile-artwork-width: 600px;
+  /* §3 sets no held width on purpose, so it renders full-width with no
+     scroller. The brief asks for "copy then full-width visual" here and — unlike
+     the hero and the insight — attaches no readability caveat to it. That suits
+     the artwork: its point is "lots of noise, one thing worth attention", which
+     the composition carries rather than the labels, most of which are
+     deliberately blurred shapes. Its labels do fall below the ~8px floor the
+     other two hold to; that is the trade the brief asks for.
+
+     Stated as an explicit width rather than by dropping the variable, because
+     dropping it just falls back to the 1000px default and re-creates the
+     scroller. */
+  .signals-visual img {
+    width: 100%;
   }
 
   .insight-visual {
