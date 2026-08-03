@@ -20,6 +20,7 @@ yarn build       # Production bundle to dist/
 yarn preview     # Serve the built dist/ locally
 yarn deploy      # Build + publish the LIVE site to marketbuzzr.com (main branch only)
 yarn deploy:new  # Build + publish the SANDBOX to marketbuzzr.com/new/ (any branch)
+yarn deploy:snapshot <tag>   # Publish a frozen build of a git tag to marketbuzzr.com/<tag>/
 ```
 
 There is **no test suite and no linter** configured. `make`, `vitest`, `eslint`, etc. do
@@ -72,10 +73,10 @@ components are presentational and map over those arrays.
 `content/nav.js` carries structure that looks like styling but is not: the nav's
 shape, including the two judgement calls it records — How It Works lives under
 Product, and Industries replaced the old Use Cases dropdown. It imports the
-industry list from `home.js` so the nav and §3 cannot drift apart.
+industry list from `home.js` so the nav and §6 cannot drift apart.
 
 Emphasis in `home.js` is structural rather than markup. Where the brief bolds a
-line it gets its own key (`emphasis`, `closer`, `context`) and the component
+line it gets its own key (`emphasis`, `closer`) and the component
 decides how to render it — **do not put `**` or HTML into those strings**.
 
 **To change marketing copy, edit the content module — never the components.** The two
@@ -87,49 +88,67 @@ deck asks for a break at a specific point.
 
 ### The homepage (2026-08 redesign)
 
-`pages/Home.jsx` renders seven sections in the order set by Manu's **revised**
+`pages/Home.jsx` renders eight sections in the order set by Manu's **final**
 handoff brief
-(`~/Documents/marketbuzzr/Marketbuzzr_Homepage_Revised_CTO_Handoff/`). That
-revision supersedes the original brief in the older `marketbuzzr_homepage_handoff_md/`
-folder — read the revised one. Each section has its own component; none of them
-is generic, so read the component before changing a section:
+(`~/Documents/marketbuzzr/Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/`).
+That is the **third** brief and supersedes both earlier folders — read it, not
+them. It reads Promise → Problem → Product Proof → How It Works → Who It's For →
+What You Track → CTA. Each section has its own component; none of them is
+generic, so read the component before changing a section:
 
 | § | Section | Built from |
 |---|---|---|
-| 1 | Hero | `PageHero` + `ProductImage` + the HTML context line |
-| 2 | Problem | copy beside `ProductImage`, in `.problem-grid` |
-| 3 | Industries | `IndustryTile` |
-| 4 | Five-step flow | `FlowSteps` (native HTML, no artwork) |
-| 5 | Insight | `ProductImage` alone |
-| 6 | Categories | `CategoryCard` + `CategoryIcon` (six line icons) |
-| 7 | Final CTA | `CtaPanel` with a secondary label |
+| 1 | Hero | `PageHero` + `ProductImage` |
+| 2 | Transition | `BrandDivider` — one line, deliberately not a section |
+| 3 | Problem | copy beside `ProductImage`, in `.problem-grid`, at the wide measure |
+| 4 | Insight | `ProductImage` alone |
+| 5 | Five-step flow | `FlowSteps` (native HTML, no artwork) |
+| 6 | Industries | `IndustryTile` |
+| 7 | Intelligence areas | `CategoryCard` + `CategoryIcon` (six line icons) |
+| 8 | Final CTA | `CtaPanel` with a secondary label |
 
-Two things the revision removed that earlier versions of this file described:
-the LESS NOISE / MORE SIGNAL divider, and the standalone personalization
-section. `SignalCloud`, `BrandDivider` and `PersonalizationDiagram` were deleted
-with them.
+**The order has now changed three times, and so has the divider.** `BrandDivider`
+was deleted in `mbz-et8e.25` on the second brief's instruction and restored in
+`.29` on the third's. `SignalCloud` and `PersonalizationDiagram` were deleted
+alongside it and have not come back. While the brief is still iterating, prefer
+parking a component over deleting it.
 
-**The hero's context line is not decoration.** The revision deletes the
-personalization section on the grounds that its concept moves into the hero —
-but the hero is a flat PNG, so `home.hero.context` is the only place the six
-context dimensions exist as text. Removing it silently strips the page's stated
-differentiator from crawlers and screen readers.
+**The hero has no context line, deliberately.** An earlier round added one
+naming the personalization dimensions, because the hero is a flat image. The
+final brief deletes it and says not to replace it; the meaning now lives in the
+hero image's `visualAlt` instead, so it survives for assistive technology
+without visible copy. Note the current artwork draws **five** dimensions, not
+the six that sentence named — "products" is no longer depicted, and the alt text
+follows the artwork.
 
-Images live in `src/assets/` as AVIF with a WebP fallback, encoded from the
-revised handoff PNGs at `avifenc -q 63` (4.4 MB of PNG → 197 KB of AVIF; q63 is
-indistinguishable from source at 2× zoom, checked on the insight card, which has
-the smallest type). The source PNGs are not in this repo. `ProductImage` handles
-`<picture>`, sizing and loading priority — the hero is eager with
-`fetchPriority="high"` because it is the LCP element, everything else is lazy.
+Images live in `src/assets/` as AVIF with a WebP fallback, encoded from the final
+handoff artwork at `avifenc -q 58` (3.5 MB of source → 189 KB of AVIF). The
+setting is re-derived each round rather than carried over, by comparing against
+source at 2× zoom on the smallest type and on the hero's gradients, where
+banding shows first. The source files are not in this repo.
+
+**The artwork is unframed and bleeds into the page.** `.product-frame` carries
+sizing only — the plate is gone, because the brief wants the visuals to blend
+with no visible card. Each instance sets `--artwork-ground` to its own
+background colour, which `.product-frame` bleeds outward as a large soft shadow;
+without that the darker artwork reads as a borderless dark rectangle. Do not
+replace this with a `mask-image` fade: content sits 1.3% from the hero's left
+edge and the insight card starts 2.7% from its top, so a fade deep enough to
+work clips real content.
+
+`ProductImage` handles `<picture>`, sizing and loading priority — the hero is
+eager with `fetchPriority="high"` because it is the LCP element, everything else
+is lazy.
 
 `vite.config.js` also emits a `<link rel="preload">` for the hero, and finds it
 by matching the filename against `HERO_BASENAME`. **Rename the hero asset and
 you must update that constant**; a miss now warns at build time rather than
 silently dropping the hint.
 
-Full page weight is 289 KB (91 KB gzipped text + 198 KB of AVIF), plus ~44 KB of
+Full page weight is 281 KB (91 KB gzipped text + 189 KB of AVIF), plus ~44 KB of
 Google Fonts. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no
-imagery at all.
+imagery at all. Re-measure after any asset change rather than trusting this
+line.
 
 ### Dev scaffolding — must not ship
 
