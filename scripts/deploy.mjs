@@ -30,9 +30,10 @@ const SANDBOX_DIR = "new";
 // this list on purpose — that one the live build owns and should replace.
 //
 // Adding a snapshot without adding it here would let the next live deploy wipe
-// it silently, so `assertLivePreservesEverything` below checks the branch
-// against this list rather than trusting anyone to remember.
-const PRESERVED_DIRS = [SANDBOX_DIR, "3aug_v1", "3aug_v2"];
+// it silently, so the live deploy reads gh-pages and checks it against this
+// list rather than trusting anyone to remember. Publishing a snapshot whose
+// name is missing here is refused outright.
+const PRESERVED_DIRS = [SANDBOX_DIR, "3aug_v1", "3aug_v2", "3aug_v3"];
 
 // Directories the live build produces and is entitled to overwrite.
 const LIVE_OWNED_DIRS = ["assets"];
