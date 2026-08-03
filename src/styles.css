@@ -334,17 +334,6 @@ h1 {
   border-color: rgba(255, 255, 255, 0.28);
 }
 
-/* The six context dimensions the hero artwork draws, restated in HTML. The
-   revision removed the standalone personalization section because its concept
-   is "promoted into the hero" — but the hero is a flat image, so without this
-   line the differentiator would not exist for crawlers or screen readers. */
-.hero-context {
-  color: var(--muted);
-  font-size: 17px;
-  max-width: var(--lead-measure);
-  margin: var(--spacing-lg) auto 0;
-}
-
 /* Signature motif: a noise->signal waveform under the hero content. The stroke
    gradient fades in from faint cool (noise) to bright brand (signal), and the
    line draws itself left-to-right on mount. */
@@ -1514,6 +1503,36 @@ footer h4 {
    Homepage sections (2026-08 redesign). Kept together and placed after the
    shared card/placeholder rules these need to win against on source order.
    ============================================================ */
+
+/* §2 Hero transition: LESS NOISE -> MORE SIGNAL -> BETTER DECISIONS. Sits
+   directly under the hero image as a compact bridge, which is why it is a
+   single centred line rather than three cards — the brief is explicit that it
+   is not a content section. Deleted in mbz-et8e.25 and reinstated here.
+   Kept in normal flow (no .section) so it reads as part of the hero block. */
+.brand-divider {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+}
+
+.brand-divider-step {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(110, 224, 255, 0.35);
+}
+
+.brand-divider-arrow {
+  color: var(--brand);
+  font-size: 18px;
+}
 
 /* §2 Problem — copy beside the signal cloud, 45/55 per the brief. */
 .problem-grid {
