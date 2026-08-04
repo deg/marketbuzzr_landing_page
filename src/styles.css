@@ -2647,10 +2647,10 @@ footer h4 {
 
     position: relative;
     display: block;
-    /* 440, not 620. The perimeter walk needed the extra height to separate
-       chips that shared a y; alternating sides does not, and the taller box
-       left the hero looking stretched. */
-    min-height: 440px;
+        /* Tall enough that the even vertical steps alone keep consecutive chips
+       apart — about 70px between chips that are 38px tall — which is what frees
+       their horizontal position entirely and lets the scatter be a scatter. */
+    min-height: 460px;
   }
 
   .source-cluster-chips {

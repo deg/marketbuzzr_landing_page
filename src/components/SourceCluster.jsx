@@ -22,31 +22,39 @@ import HeroMark from "./HeroMark";
 //   A PERIMETER WALK used the corners and reached 43px, but had to be 620px tall
 //   to do it, which left the hero looking stretched.
 //
-// ALTERNATING SIDES is what this does now. Because no two chips share a y, and
-// a left chip and a right chip cannot overlap horizontally at this column width,
-// the vertical steps can be small: 51px of clearance in 440px, against 43px in
-// 620px. Better separation in two-thirds the height.
+// A GOLDEN-ANGLE SWEEP is what this does now, and the reason is a constraint
+// that turns out not to bind. The chips step evenly down a 460px box, so
+// consecutive ones are ~70px apart while being 38px tall — no two chips can
+// overlap VERTICALLY at all, which means their horizontal position is free.
+// Three earlier generators were all solving a collision problem that the
+// vertical spacing had already solved:
 //
-// The sway pulls a few chips off the edge so the arrangement reads as scattered
-// rather than as a ladder. Keep it small — at 0.12 the gaps halve, because a
-// chip pulled inward starts to sit under its neighbour on the far side.
+//   ellipse         16px between the closest pair at best, and only a ring at
+//                   all above a ~720px column
+//   perimeter walk  43px, but needed a 620px box and left the hero stretched
+//   alternating     good clearance, but pinned five of seven chips to the left
+//                   or right edge and read as two columns
+//
+// Stepping x by the golden angle gives seven distinct positions across the full
+// width with only two landing near an edge, which is what makes it read as
+// scattered. Clearance drops to ~31px, and that is the trade: it is whitespace
+// between chips rather than the risk of a collision, because a collision is not
+// geometrically possible here.
 //
 // Positions are emitted as 0..1 fractions of an inset rectangle and resolved in
 // CSS, so the component never needs a chip's rendered width. The inset is the
 // widest chip horizontally and its height vertically, which is what keeps every
 // chip inside the box.
-const SWAY = 0.05;
+//
+// 2.39996 radians is the golden angle. Any irrational step would do; this one
+// spreads a small number of points about as evenly as a sequence can.
+const GOLDEN_ANGLE = 2.39996;
 
-// Alternating left and right, stepping down. Slightly compressed towards the
-// ends so the rhythm is not a metronome.
 const scatterPoints = (n) =>
-  Array.from({ length: n }, (_, i) => {
-    const t = n > 1 ? i / (n - 1) : 0.5;
-    const sway = i % 3 === 1 ? SWAY : 0;
-    const x = i % 2 === 0 ? sway : 1 - sway;
-    const y = t + 0.03 * Math.sin(2 * Math.PI * t);
-    return [x, Math.min(1, Math.max(0, y))];
-  });
+  Array.from({ length: n }, (_, i) => [
+    0.5 + 0.5 * Math.sin(GOLDEN_ANGLE * i),
+    n > 1 ? i / (n - 1) : 0.5,
+  ]);
 
 const SourceCluster = ({ items, mark }) => {
   const points = scatterPoints(items.length);
