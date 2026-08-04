@@ -1912,6 +1912,67 @@ footer h4 {
   line-height: 1.5;
 }
 
+/* --- Split hero -----------------------------------------------------------
+
+   Copy left, visual right, per Manu's industry-page design. Measured against
+   the centred version of the same page: 960px tall with the visual starting
+   669px down, so on a 900px laptop the artwork carrying the whole idea was
+   below the fold. Split, both fit together.
+
+   Everything below is an override of .hero's centring, which the other three
+   pages still use. The .sub rule wins over the Final overrides block on
+   specificity (two classes to its one) rather than on source order, so it does
+   not care that the block sits later in the file. */
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--spacing-3xl);
+  align-items: center;
+  text-align: left;
+}
+
+/* Smaller than the centred hero's clamp(36px, 6vw, 72px): that size assumes the
+   full container width, and in a column of roughly 45% it drove this heading to
+   four lines with one word stranded on the last. */
+.hero-split h1 {
+  margin-inline: 0;
+  font-size: clamp(34px, 4vw, 58px);
+}
+
+.hero-split .sub {
+  max-width: none;
+  margin-inline: 0;
+  padding-left: 0;
+}
+
+.hero-split .cta-actions {
+  justify-content: flex-start;
+}
+
+/* Below the split the two columns stack, and the hero goes back to centred --
+   a lone left-aligned column on a phone reads as a mistake next to every other
+   page on the site. */
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .hero-split h1 {
+    margin-inline: auto;
+  }
+
+  .hero-split .sub {
+    max-width: var(--lead-measure);
+    margin-inline: auto;
+  }
+
+  .hero-split .cta-actions {
+    justify-content: center;
+  }
+}
+
 /* --- Hero source cluster --------------------------------------------------
 
    Chips are GRID ITEMS, never absolutely positioned. The sketch placed seven
@@ -1919,14 +1980,16 @@ footer h4 {
    rendering (two collided at 1440px, two more truncated by 1000px). Grid cells
    cannot overlap at any width, which is the whole reason for this shape.
 
-   THIS ONE BLOCK IS MOBILE-FIRST, against the rest of the file. Stacked is the
-   default and the ring is the enhancement, because the stacked treatment is
-   needed in two independent situations -- a narrow screen, and a source list
-   that is not 6-8 long (see SourceCluster.jsx). Written desktop-first, those
-   same eight declarations had to appear twice and be kept in step by hand. */
+   Two columns with the mark centred in the GUTTER between them. The gutter is
+   wide enough to hold it, so the mark overlaps nothing and needs no reserved
+   cell -- which is what let the earlier ring's spacer, its pinned index and its
+   6-to-8 source bound all go away.
+
+   MOBILE-FIRST, alone in this file: stacked is the default and the two-column
+   split is the enhancement, because stacked is what every narrow screen gets
+   and duplicating it desktop-first meant keeping two copies in step by hand. */
 .source-cluster {
-  margin: var(--spacing-3xl) auto 0;
-  max-width: 880px;
+  margin: 0;
 }
 
 .source-cluster-ring {
@@ -1936,21 +1999,15 @@ footer h4 {
 
 .source-cluster-chips {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--spacing-md);
   margin: 0;
   padding: 0;
   list-style: none;
-  /* Not stretch: in the ring the middle row is deliberately taller than a chip
-     (see .source-cluster-hole), and stretching made the two chips flanking the
-     core twice the height of the six around them. */
-  align-items: center;
 }
 
-/* Stacked: the core leads. It follows the <ul> in the DOM -- which is what lets
-   the seven sources stay one uninterrupted list -- so order pulls it up.
-   Unlabelled by design (see SourceCluster.jsx), so this is a mark in a pool of
-   light rather than a captioned tile. */
+/* Stacked: the mark leads. It follows the <ul> in the DOM -- which is what lets
+   the sources stay one uninterrupted list -- so order pulls it up. */
 .source-cluster-core {
   order: -1;
   display: flex;
@@ -1959,8 +2016,8 @@ footer h4 {
   margin: 0 auto var(--spacing-lg);
   padding: var(--spacing-lg);
   color: var(--brand);
-  /* A soft pool of brand light, so the centre reads as the subject the chips
-     are arranged around rather than as an eighth chip. */
+  /* A soft pool of brand light, so the mark reads as the subject the chips are
+     arranged around rather than as another chip. */
   background: radial-gradient(
     circle,
     rgba(110, 224, 255, 0.18),
@@ -1968,9 +2025,7 @@ footer h4 {
   );
 }
 
-/* Much larger than a chip's icon: with no label, the mark alone has to hold the
-   centre of the ring, and it carries detail a 24px chip icon cannot. Its own
-   aspect ratio, so height is not restated. */
+/* Its own aspect ratio, so height is not restated. */
 .dna-mark {
   width: 50px;
   height: auto;
@@ -1997,47 +2052,37 @@ footer h4 {
   flex: 0 0 auto;
 }
 
-/* Holds the centre cell open for the core. The min-height is what makes the
-   middle row taller than a chip row, so the centre reads as the thing the ring
-   is arranged around rather than as a gap where a chip is missing. Rendered
-   only in the ring -- stacked, it would just be an empty cell. */
-.source-cluster-hole {
-  visibility: hidden;
-  /* Sized to clear the DNA mark plus the padding its glow needs. At 104px --
-     right for the small line icon this replaced -- the taller mark overlapped
-     the chips above and below it at every width above 900px. Re-measure if the
-     mark's width changes; its height is 132/64 of that plus 2x --spacing-lg. */
-  min-height: 168px;
-}
-
 .source-cluster-caption {
-  margin: var(--spacing-lg) auto 0;
-  max-width: var(--lead-measure);
+  margin: var(--spacing-lg) 0 0;
   color: var(--muted);
   font-size: 15px;
-  text-align: center;
 }
 
-/* The ring proper: three columns with the core laid over the centre cell. The
-   core is the one positioned element here, and that is safe precisely because
-   the cell beneath it is a guaranteed-empty spacer. */
+/* Two columns with the mark between them. The column-gap has to clear the mark
+   plus the pool of light around it: the mark is 50px and its padding 2x24, so
+   anything under ~100px would put chips under the glow. */
 @media (min-width: 901px) {
-  .source-cluster-ring.is-ring {
+  .source-cluster-ring {
     display: block;
     position: relative;
   }
 
-  .source-cluster-ring.is-ring .source-cluster-chips {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .source-cluster-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 116px;
   }
 
-  .source-cluster-ring.is-ring .source-cluster-core {
+  .source-cluster-core {
     order: 0;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+  }
+
+  .source-cluster-caption {
+    text-align: center;
   }
 }
 

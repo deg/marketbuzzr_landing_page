@@ -27,15 +27,17 @@ const IndustryPage = ({ data }) => {
 
   return (
     <>
+      {/* Split rather than centred, following Manu's design: copy left, sources
+          beside it. The centred version put the visual 669px down a 960px hero,
+          which on a laptop is below the fold. */}
       <PageHero
         kicker={hero.kicker}
         title={hero.title}
         sub={hero.sub}
         ctaLabel={hero.ctaPrimary}
         secondaryCtaLabel={hero.ctaSecondary}
-      >
-        <SourceCluster {...sources} />
-      </PageHero>
+        aside={<SourceCluster {...sources} />}
+      />
 
       <section className="section container info-block">
         <h2>{intro.heading}</h2>

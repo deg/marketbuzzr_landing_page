@@ -3,74 +3,49 @@ import CategoryIcon from "./CategoryIcon";
 import DnaMark from "./DnaMark";
 
 // The external sources forming a conversation around one thing, with that thing
-// at the centre. Built to be reusable: How It Works step 01 makes this same
-// point about the same source types with a PNG, and is the next candidate.
+// between them. Built to be reusable: How It Works step 01 makes the same point
+// about the same source types with a PNG, and is the next candidate.
 //
 // NOT a port of the sketch's version, which absolutely-positioned seven boxes at
 // hardcoded percentage offsets and already overlapped in its own rendering — two
 // cards collided at 1440px with one clipped mid-word, and two more truncated by
-// 1000px.
+// 1000px. The chips here are grid items and cannot collide at any width.
 //
-// The chips are grid items, so they cannot collide at any width. The centre cell
-// is held open by an empty spacer item and the core is laid over it; that is the
-// one thing here that is positioned rather than placed, and it is safe because
-// the cell beneath it is guaranteed empty. Keeping the core outside the <ul> is
-// what lets the seven sources stay one uninterrupted list for a screen reader —
-// the spacer is aria-hidden so the list still counts seven.
-// The spacer must be the FIFTH grid child, because a 3-column grid puts child 5
-// in row 2, column 2 — the cell the core is laid over. That is a property of the
-// grid, not of how many sources there are, so it is pinned rather than derived;
-// deriving it from the list length only lands on the centre for 7 or 8 items.
-const HOLE_AT = 4;
-
-// ...and the overlay only works while the ring is exactly three rows, because
-// the core is centred on the ring rather than on the cell. Measured: 6, 7 and 8
-// sources put the core cleanly on the hole; 9 makes a fourth row, the geometric
-// centre falls between rows 2 and 3, and the core lands on a real chip.
+// TWO COLUMNS WITH THE MARK IN THE GUTTER, not a ring around a reserved cell.
+// The ring came first and was replaced when the hero became a split: three
+// columns need 836px for the widest label to stay on one line, and the hero's
+// right-hand column is about 784px. Two columns give each chip ~390px, so
+// nothing wraps — and it is closer to the sketch, where the helix sits between
+// the cards rather than inside the grid.
 //
-// Outside that range the core is rendered above the chips instead — the same
-// treatment narrow screens get. A component whose whole point is reuse by the
-// next industry should not depend on that industry sending exactly 6-8 sources.
-const RING_MIN = 6;
-const RING_MAX = 8;
-
-const SourceCluster = ({ caption, items }) => {
-  const isRing = items.length >= RING_MIN && items.length <= RING_MAX;
-
-  return (
-    <figure className="source-cluster">
-      <div className={`source-cluster-ring${isRing ? " is-ring" : ""}`}>
-        <ul className="source-cluster-chips">
-          {items.slice(0, HOLE_AT).map((item) => (
-            <li className="source-chip" key={item.label}>
-              <CategoryIcon name={item.icon} />
-              <span>{item.label}</span>
-            </li>
-          ))}
-          {/* No hole when the core is not overlaid — it would just be a gap. */}
-          {isRing && <li className="source-cluster-hole" aria-hidden="true" />}
-          {items.slice(HOLE_AT).map((item) => (
-            <li className="source-chip" key={item.label}>
-              <CategoryIcon name={item.icon} />
-              <span>{item.label}</span>
-            </li>
-          ))}
-        </ul>
-        {/* No label, matching the sketch. An earlier version captioned this
-            "Your molecule", which was invented here and read as jargon floating
-            in the middle of a diagram — the sub-headline above and the caption
-            below both already say "your therapy", so the mark needs no words of
-            its own. Decorative, hence aria-hidden: the caption carries the
-            meaning for assistive technology. */}
-        <div className="source-cluster-core" aria-hidden="true">
-          <DnaMark />
-        </div>
+// It is also markedly simpler. The ring needed an empty spacer holding its
+// centre cell open, a pinned index for that spacer, and a 6-to-8 bound on the
+// source count outside which the geometry silently broke. The gutter needs none
+// of that and works for any number of sources.
+const SourceCluster = ({ caption, items }) => (
+  <figure className="source-cluster">
+    <div className="source-cluster-ring">
+      <ul className="source-cluster-chips">
+        {items.map((item) => (
+          <li className="source-chip" key={item.label}>
+            <CategoryIcon name={item.icon} />
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+      {/* No label, matching the sketch. An earlier version captioned this "Your
+          molecule", which was invented here and read as jargon floating in the
+          middle of a diagram — the sub-headline and the caption below both
+          already say "your therapy". Decorative, hence aria-hidden: the caption
+          carries the meaning for assistive technology. */}
+      <div className="source-cluster-core" aria-hidden="true">
+        <DnaMark />
       </div>
-      {caption && (
-        <figcaption className="source-cluster-caption">{caption}</figcaption>
-      )}
-    </figure>
-  );
-};
+    </div>
+    {caption && (
+      <figcaption className="source-cluster-caption">{caption}</figcaption>
+    )}
+  </figure>
+);
 
 export default SourceCluster;
