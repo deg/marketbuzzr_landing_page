@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../components/Link";
 
 // One industry. Every tile links: two reach real use-case pages, the rest reach
 // the not-yet-implemented placeholder. Because they all behave the same way,

@@ -4,9 +4,9 @@ import {
   Route,
   Navigate,
   useLocation,
-  useSearchParams,
 } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { useThemeParam } from "./hooks/useThemeParam";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import EmailCaptureModal from "./components/EmailCaptureModal";
@@ -21,34 +21,24 @@ import { tech } from "./content/tech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
 
-// Theme switch for review: ?theme=light or ?theme=dark, dark by default. The
-// query works inside the hash, so marketbuzzr.com/new/#/use-cases/biotech?theme=light
-// is a valid address.
+// Theme switch for review: ?theme=light or ?theme=dark, dark by default.
 //
-// It is REMEMBERED FOR THE SESSION rather than read fresh on each render, and
-// that is not a nicety: <Link> drops the query string, so without this the theme
-// would snap back to dark on the first click and "?theme=light" would only ever
-// describe one page. An explicit ?theme= in the URL always wins over the
-// remembered value, so either can be linked directly.
+// The address is the only thing that decides. Which query forms are read, and
+// why both are, is in hooks/useThemeParam.js; carrying it from page to page is
+// components/Link.jsx. Nothing is stored anywhere, so a page is never light
+// while its own URL says nothing about it, and a link sent to someone else
+// arrives the same way round it left.
 //
 // Only the industry page is designed for light so far. The homepage's artwork is
 // drawn on near-black grounds (#00041C, #020925, #000B2D) and becomes three dark
 // rectangles on a pale background — no CSS fixes that, it needs re-renders. That
 // is known and accepted; pages are being moved to native markup one at a time.
-const THEMES = ["dark", "light"];
-const THEME_KEY = "mb-theme";
-
 const useTheme = () => {
-  const [params] = useSearchParams();
-  const requested = params.get("theme");
+  const theme = useThemeParam();
 
   useEffect(() => {
-    const valid = THEMES.includes(requested) ? requested : null;
-    if (valid) window.sessionStorage.setItem(THEME_KEY, valid);
-    const theme =
-      valid || window.sessionStorage.getItem(THEME_KEY) || THEMES[0];
     document.documentElement.dataset.theme = theme;
-  }, [requested]);
+  }, [theme]);
 };
 
 // Each tab is a "page", so reset scroll to top on navigation.

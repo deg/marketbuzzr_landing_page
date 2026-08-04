@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Link } from "../components/Link";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 // Stands in for any route that does not exist yet. Reached via the catch-all,
