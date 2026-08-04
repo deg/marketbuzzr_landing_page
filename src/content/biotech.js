@@ -24,7 +24,7 @@ export const biotech = {
     kicker: "MARKETBUZZR FOR BIOTECHNOLOGY",
     title: "Always know what's happening around your pipeline",
     sub: [
-      "Understand what patients, caregivers, KOLs, competitors and the broader market are saying about your therapy — outside of clinical data.",
+      "Understand what patients, caregivers, KOLs, competitors and the broader market are saying about your therapy—outside of clinical data.",
       "MarketBuzzr brings fragmented external signals together and turns them into indication- and molecule-specific intelligence your team can act on.",
     ],
     ctaPrimary: "Try for Free",
@@ -93,7 +93,7 @@ export const biotech = {
     },
     implication: {
       heading: "Strategic Implication",
-      text: "Treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication — even where clinical efficacy remains the primary point of differentiation.",
+      text: "The conversation suggests that treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication—even where clinical efficacy remains the primary point of differentiation.",
     },
     sources: {
       heading: "Sources",
@@ -132,7 +132,7 @@ export const biotech = {
         icon: "people",
         heading: "Treatment perception",
         description:
-          "Understand how patients, caregivers and the broader ecosystem perceive your therapy beyond clinical endpoints — including outcomes, treatment burden and real-world experience.",
+          "Understand how patients, caregivers and the broader ecosystem perceive your therapy beyond clinical endpoints—including outcomes, treatment burden and real-world experience.",
       },
       {
         icon: "shield",
@@ -154,7 +154,7 @@ export const biotech = {
       },
     ],
     closer:
-      "MarketBuzzr gives lean biotech teams a continuously updated view of the conversations shaping their therapy and indication — without adding operational overhead or replacing existing clinical, regulatory or commercial workflows.",
+      "MarketBuzzr gives lean biotech teams a continuously updated view of the conversations shaping their therapy and indication—without adding operational overhead or replacing existing clinical, regulatory or commercial workflows.",
   },
 
   closing: {

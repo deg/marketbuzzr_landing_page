@@ -26,7 +26,7 @@ const IndustryPage = ({ data }) => {
   const { hero, sources, intro, insight, roles, features, closing } = data;
 
   return (
-    <>
+    <div className="industry-page">
       {/* Split rather than centred, following Manu's design: copy left, sources
           beside it. The centred version put the visual 669px down a 960px hero,
           which on a laptop is below the fold. */}
@@ -97,7 +97,7 @@ const IndustryPage = ({ data }) => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

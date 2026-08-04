@@ -2046,6 +2046,229 @@ footer h4 {
   line-height: 1.5;
 }
 
+/* ==========================================================================
+   Industry page: matched to Manu's stylesheet.
+
+   Values below are read out of drop_05 rather than approximated. The page had
+   been built on the site's own scale and weights, which put all 32 compared
+   element pairs slightly off his: our body runs 20px/500/1.6 against his
+   16px/400/1.5, and every "too light" impression traced back to that one
+   inherited difference rather than to any single rule.
+
+   His palette is also SIX purples and two greys, not one of each. They are
+   within a few points of one another and of ours, and collapsing them into a
+   token is exactly the kind of tidying that adds up to a page that reads
+   differently without any one thing looking wrong.
+
+   NOT matched, by decision: Title Case headings with full stops, and his longer
+   chip labels. Both are on his list to confirm.
+   ========================================================================== */
+.industry-page {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+:root[data-theme="light"] .industry-page {
+  --brand: #5d22d6;
+  --muted: #2e3c61;
+  --text: #0f1b3d;
+  --edge: #e7e9f2;
+  /* His .small: the timestamp, the source kinds and the implication body. Body
+     copy is --muted; this is a step quieter and is a separate colour, not a
+     lighter version of the same one. */
+  --small: #526080;
+}
+
+/* Type scale */
+.industry-page .hero-split h1 {
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  margin: 14px 0 22px;
+}
+
+.industry-page h2 {
+  font-size: clamp(30px, 3.4vw, 46px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+/* Two classes and a type, to beat .industry-page .section p.lead — the element
+   carries both and the base rule would otherwise flatten it to 400. */
+.industry-page .section p.lead.lead-strong {
+  font-weight: 700;
+}
+
+.industry-page .sub,
+.industry-page .section p.lead,
+.industry-page .insight-summary,
+.industry-page .industry-cta p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* His eyebrow: 14px/800, its own purple, and no pill radius left over. */
+.industry-page .hero-split .kicker {
+  border-radius: 0;
+  color: #4d21d3;
+  line-height: 1.5;
+}
+
+/* Buttons are flat, not gradient, and a size smaller than ours were. */
+.industry-page .cta-actions .cta,
+.industry-page .cta-actions .cta-secondary {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+:root[data-theme="light"] .industry-page .cta-actions .cta {
+  background: #5f22d8;
+  border-color: #6336db;
+}
+
+:root[data-theme="light"] .industry-page .cta-actions .cta-secondary {
+  color: #4b22c3;
+  border-color: #6336db;
+}
+
+.industry-page .source-chip {
+  line-height: 1.5;
+}
+
+/* Insight card */
+.industry-page .insight-headline {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 24px 0 8px;
+}
+
+.industry-page .insight-tag {
+  font-weight: 850;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+.industry-page .insight-impact {
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+:root[data-theme="light"] .industry-page .insight-tag {
+  color: #5b2bd0;
+}
+
+.industry-page .insight-detected {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--small, var(--muted));
+}
+
+/* The two block headings are coloured and the two strip headings are ink. His
+   three are green, purple and ink respectively -- ours had made all of them the
+   accent, which lost the distinction between "do this", "this means" and a
+   plain label. */
+.industry-page .insight-block h4,
+.industry-page .insight-strip h4 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+.industry-page .insight-strip h4 {
+  color: var(--text);
+}
+
+:root[data-theme="light"] .industry-page .insight-block h4 {
+  color: #4d23ce;
+}
+
+:root[data-theme="light"] .industry-page .insight-block-actions h4 {
+  color: #0a976a;
+}
+
+.industry-page .insight-actions li {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.industry-page .insight-block p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--small, var(--muted));
+}
+
+.industry-page .insight-sources strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.industry-page .insight-sources span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--small, var(--muted));
+}
+
+.industry-page .insight-drafts li {
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+:root[data-theme="light"] .industry-page .insight-drafts li {
+  color: #5229ca;
+  border-color: #ded9ef;
+}
+
+/* Role bar */
+.industry-page .role-bar-items strong {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.industry-page .role-bar-items span {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Capability row */
+.industry-page .feature h3 {
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.industry-page .feature p {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+:root[data-theme="light"] .industry-page .feature h3 {
+  color: #5227cf;
+}
+
+:root[data-theme="light"] .industry-page .feature p {
+  color: #405071;
+}
+
+/* 27px, matching the size his emoji render at inside the same 58px disc. */
+.industry-page .feature-badge .category-icon {
+  width: 27px;
+  height: 27px;
+}
+
+.industry-page .industry-cta h2 {
+  font-weight: 700;
+}
+
 /* --- Split hero -----------------------------------------------------------
 
    Copy left, visual right, per Manu's industry-page design. Measured against
@@ -2146,7 +2369,7 @@ footer h4 {
 
 .hero-split .sub {
   font-size: 18px;
-  line-height: 1.55;
+  line-height: 1.5;
   margin-bottom: 18px;
 }
 
@@ -2163,8 +2386,9 @@ footer h4 {
 :is(.hero-split, .industry-cta) .cta-actions .cta-secondary {
   border-radius: 10px;
   padding: 14px 22px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
+  line-height: 1.5;
   box-shadow: none;
 }
 
@@ -2290,8 +2514,8 @@ footer h4 {
    control beside the filled one. */
 :root[data-theme="light"] .hero-split .cta-actions .cta-secondary {
   background: #ffffff;
-  border: 1px solid var(--brand);
-  color: var(--brand);
+  border: 1px solid #6336db;
+  color: #4b22c3;
 }
 
 :root[data-theme="light"] .hero-split .cta-actions .cta-secondary:hover {
@@ -2374,7 +2598,7 @@ footer h4 {
 
 :root[data-theme="light"] .info-block h2,
 :root[data-theme="light"] .industry-cta h2 {
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 
