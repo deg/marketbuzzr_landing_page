@@ -145,7 +145,7 @@ by matching the filename against `HERO_BASENAME`. **Rename the hero asset and
 you must update that constant**; a miss now warns at build time rather than
 silently dropping the hint. Note the hint goes into the one shared `index.html`,
 so it fires on **every** route, including ones that never render the hero — 81 KB
-of waste off the homepage, tracked as `mbz-2d01`.
+of waste off the homepage, tracked as `mbz-et8e.34`.
 
 ### The How It Works page (2026-08)
 
@@ -188,7 +188,7 @@ rules (`.steps`, `.step`, `.step-number`, `.step-body`, `.summary-block`,
 halves of the selectors they shared with `.card` and `.cta-panel`.
 
 Page weight with everything scrolled in is 92 KB gzipped text + 171 KB of AVIF,
-plus the 79 KB hero the shared preload drags in for nothing (`mbz-2d01`). No
+plus the 79 KB hero the shared preload drags in for nothing (`mbz-et8e.34`). No
 visual is the LCP element on this page — it is the H1 on desktop (344ms) and the
 `.sub` paragraph on phone (260ms) — so all three stay `loading="lazy"`, which is
 what the brief conditions on. Re-measure rather than trusting this line.
