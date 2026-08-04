@@ -2639,16 +2639,18 @@ footer h4 {
    broken at every width from 901 to 1280. */
 @media (min-width: 1250px) {
   .source-cluster-ring {
-    /* Half the widest chip, and half its height: the inset the perimeter walk
-       in SourceCluster.jsx is expressed against, and what keeps every chip
-       inside the box. These two and min-height are what WALK_ASPECT is derived
-       from — change one and re-derive the other. */
+    /* The widest chip and its height: the inset the scatter in
+       SourceCluster.jsx is expressed against, and what keeps every chip inside
+       the box. */
     --ring-inset-x: 240px;
     --ring-inset-y: 38px;
 
     position: relative;
     display: block;
-    min-height: 620px;
+    /* 440, not 620. The perimeter walk needed the extra height to separate
+       chips that shared a y; alternating sides does not, and the taller box
+       left the hero looking stretched. */
+    min-height: 440px;
   }
 
   .source-cluster-chips {
