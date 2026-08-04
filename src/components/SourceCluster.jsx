@@ -50,11 +50,25 @@ import HeroMark from "./HeroMark";
 // spreads a small number of points about as evenly as a sequence can.
 const GOLDEN_ANGLE = 2.39996;
 
-const scatterPoints = (n) =>
-  Array.from({ length: n }, (_, i) => [
-    0.5 + 0.5 * Math.sin(GOLDEN_ANGLE * i),
-    n > 1 ? i / (n - 1) : 0.5,
-  ]);
+const scatterPoints = (n) => {
+  const xs = Array.from(
+    { length: n },
+    (_, i) => 0.5 + 0.5 * Math.sin(GOLDEN_ANGLE * i)
+  );
+
+  // One hand-made adjustment on top of the sequence: the third- and
+  // second-to-last swap places. The golden angle spreads points evenly over the
+  // whole run, but it knows nothing about how a run of seven reads as a
+  // composition, and it left the lower half leaning left. Swapping these two
+  // balances the bottom without disturbing anything above them.
+  if (n >= 3) {
+    const a = n - 3;
+    const b = n - 2;
+    [xs[a], xs[b]] = [xs[b], xs[a]];
+  }
+
+  return xs.map((x, i) => [x, n > 1 ? i / (n - 1) : 0.5]);
+};
 
 const SourceCluster = ({ items, mark }) => {
   const points = scatterPoints(items.length);
