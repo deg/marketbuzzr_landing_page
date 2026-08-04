@@ -7,7 +7,12 @@ import React from "react";
 //
 // Decorative: every icon sits directly above its own heading, so naming it
 // again for a screen reader would just be repetition.
-const PATHS = {
+//
+// The geometry is exported as well as the component. HeroAnimation draws the
+// same icons inside a much larger SVG, where it needs the paths on their own so
+// it can place and scale them itself; wrapping each one in this component's own
+// <svg> would nest a second root just to move a picture 30 units to the left.
+export const ICON_PATHS = {
   // Competitive Intelligence — a target being sighted.
   target: (
     <>
@@ -179,6 +184,18 @@ const PATHS = {
       <path d="M8.5 8h7M8.5 11.5h7M8.5 15h4" />
     </>
   ),
+
+  // --- Added for the hero animation. ---
+
+  // The reader's own role — one figure, where `people` is the several-figure
+  // icon this set already had. The hero draws both, side by side on the same
+  // orbit, so they have to be distinguishable at a glance.
+  person: (
+    <>
+      <circle cx="12" cy="7.5" r="4" />
+      <path d="M4.5 20.5c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5" />
+    </>
+  ),
 };
 
 const CategoryIcon = ({ name }) => (
@@ -192,7 +209,7 @@ const CategoryIcon = ({ name }) => (
     strokeLinejoin="round"
     aria-hidden="true"
   >
-    {PATHS[name]}
+    {ICON_PATHS[name]}
   </svg>
 );
 

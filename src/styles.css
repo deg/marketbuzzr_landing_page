@@ -463,7 +463,7 @@ h1 {
    which assumed the container was the only measure available; the intent there
    was that the product visual dominates its section, and a wider one does that
    better. Only the whitespace above it is set here. */
-.hero .hero-visual {
+.hero .hero-anim {
   margin-top: var(--spacing-3xl);
 }
 
@@ -618,7 +618,7 @@ h2 {
   /* Width stays 92%: .hero zeroes out .container's horizontal padding, so that
      percentage is the only thing keeping the visual off the screen edges. Only
      the whitespace above it needs to come down at this size. */
-  .hero .hero-visual {
+  .hero .hero-anim {
     margin-top: var(--spacing-2xl);
   }
 
@@ -1442,10 +1442,6 @@ footer h4 {
   box-shadow: 0 0 80px 30px var(--artwork-ground, transparent);
 }
 
-.hero-visual {
-  --artwork-ground: #00041c;
-}
-
 .signals-visual {
   --artwork-ground: #020925;
 }
@@ -1497,6 +1493,235 @@ footer h4 {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   The homepage hero animation
+
+   Manu's, from drop_05_marketbuzzr-hero-animation-synced.html — see the header
+   of components/HeroAnimation.jsx for what was changed and why. His durations,
+   delays and keyframe values are kept exactly; only the names are prefixed,
+   because `dash`, `core` and `noiseA` in a shared stylesheet are an accident
+   waiting to happen. The url() inside heroAnimNodeHit has to carry the same
+   prefix as the filter it names in the markup.
+
+   It takes .product-frame's sizing so it renders at the same scale as the other
+   artwork down the page, and needs none of that rule's ground bleed: the SVG's
+   own radial gradient already ends on the page background.
+   --------------------------------------------------------------------------- */
+.hero-anim svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The last stop of the illustration's own radial ground. Following --bg rather
+   than a literal is what lets it dissolve into the page in either theme; see
+   the note beside the gradient in HeroAnimation.jsx. */
+.hero-anim-fade {
+  stop-color: var(--bg);
+}
+
+.hero-anim-flow {
+  stroke-dasharray: 7 15;
+  animation: heroAnimDash 1.7s linear infinite;
+}
+
+.hero-anim-flow-slow {
+  animation-duration: 2.5s;
+}
+
+/* The four insight cards surface one after another, 1.5s apart on an 8s loop —
+   the same 8s the highlight takes to travel the orbit, which is what "synced"
+   in his filename refers to. */
+.hero-anim-output {
+  opacity: 0.24;
+  animation: heroAnimOutReveal 8s ease-in-out infinite;
+}
+
+.hero-anim-output-2 {
+  animation-delay: 1.5s;
+}
+
+.hero-anim-output-3 {
+  animation-delay: 3s;
+}
+
+.hero-anim-output-4 {
+  animation-delay: 4.5s;
+}
+
+/* Each context node lights as the highlight reaches it: five nodes, 1.6s apart,
+   round the same 8s orbit. */
+.hero-anim-node {
+  opacity: 0.58;
+  animation: heroAnimNodeHit 8s ease-in-out infinite;
+}
+
+.hero-anim-node-2 {
+  animation-delay: 1.6s;
+}
+
+.hero-anim-node-3 {
+  animation-delay: 3.2s;
+}
+
+.hero-anim-node-4 {
+  animation-delay: 4.8s;
+}
+
+.hero-anim-node-5 {
+  animation-delay: 6.4s;
+}
+
+.hero-anim-core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: heroAnimCore 2.8s ease-in-out infinite;
+}
+
+/* The highlight sweeping the orbit, one lap every 8s — the beat the nodes and
+   the insight cards are both timed against. It is drawn parked at the top of
+   the circle and spun about the circle's centre, so transform-box has to stay
+   view-box (the default) rather than fill-box: the origin below is a point on
+   the 1500x900 canvas, not a corner of this group's own two dots. */
+.hero-anim-scan {
+  transform-origin: 760px 440px;
+  animation: heroAnimScan 8s linear infinite;
+}
+
+@keyframes heroAnimScan {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Three drift speeds over the source chips and the dot field, so the market's
+   noise never settles into a single rhythm. */
+.hero-anim-drift-a {
+  animation: heroAnimDriftA 4.4s ease-in-out infinite;
+}
+
+.hero-anim-drift-b {
+  animation: heroAnimDriftB 5.2s ease-in-out infinite;
+}
+
+.hero-anim-drift-c {
+  animation: heroAnimDriftC 6s ease-in-out infinite;
+}
+
+@keyframes heroAnimDash {
+  to {
+    stroke-dashoffset: -44;
+  }
+}
+
+@keyframes heroAnimOutReveal {
+  0%,
+  14%,
+  100% {
+    opacity: 0.2;
+    transform: translateX(12px);
+  }
+  22%,
+  74% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroAnimNodeHit {
+  0% {
+    opacity: 1;
+    filter: url(#hero-anim-node-glow);
+  }
+  7% {
+    opacity: 1;
+    filter: url(#hero-anim-node-glow);
+  }
+  14% {
+    opacity: 0.72;
+    filter: url(#hero-anim-node-glow);
+  }
+  20%,
+  100% {
+    opacity: 0.55;
+    filter: none;
+  }
+}
+
+@keyframes heroAnimCore {
+  0%,
+  100% {
+    transform: scale(0.985);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes heroAnimDriftA {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(8px);
+  }
+}
+
+@keyframes heroAnimDriftB {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateX(12px);
+  }
+}
+
+@keyframes heroAnimDriftC {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.45;
+    transform: translateX(5px);
+  }
+}
+
+/* The blanket reduced-motion rule near the top of this file pins every
+   animation to its LAST keyframe, and three of the ones above are least visible
+   there: the insight cards end at 20% opacity and the drift groups at 12-25%,
+   which would leave the right-hand third of the hero almost blank and the
+   source chips too faint to read. Motion is what the visitor asked to lose, not
+   the picture, so each of these is pinned to the frame that reads best instead
+   — full strength for the cards, the 50% peak for the drift groups. The nodes
+   are left alone: their last keyframe is the resting state they spend most of
+   the loop in anyway. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim-output {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-anim-drift-a {
+    opacity: 0.7;
+  }
+
+  .hero-anim-drift-b {
+    opacity: 0.55;
+  }
+
+  .hero-anim-drift-c {
+    opacity: 0.45;
+  }
 }
 
 /* Below this the artwork stops being legible if it is simply scaled to fit, so

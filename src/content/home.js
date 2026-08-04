@@ -29,13 +29,23 @@ export const home = {
       "Clear insights. Actionable recommendations. Ready-to-use drafts.",
     ctaPrimary: "Book a Demo",
     ctaSecondary: "Try It Free",
+    // The hero artwork is now drawn rather than photographed — Manu's drop_05
+    // animation — so these two strings become its <title> and <desc> rather
+    // than an <img alt>. Same job: they are the only textual form of what the
+    // picture says, since the labels inside it are a diagram rather than prose
+    // and a screen reader is told to skip them.
+    visualTitle: "How MarketBuzzr turns market noise into decisions",
     // The brief deletes the visible line that used to name the context
     // dimensions, and says not to replace it. Agreed — but the artwork is the
-    // only place that concept now exists, so the alt text carries it instead.
-    // Note the new artwork draws five dimensions, not the six the deleted
-    // sentence named: "products" is no longer depicted.
+    // only place that concept now exists, so this carries it instead. Note it
+    // draws five dimensions, not the six the deleted sentence named: "products"
+    // is no longer depicted.
+    //
+    // Kept in step with what is actually on screen: the twelve source types are
+    // the twelve chips, and the impact ratings the previous artwork showed are
+    // gone from this one, so the claim went with them.
     visualAlt:
-      "MarketBuzzr draws market signals from press releases, industry reports, webinars, podcasts, research, news, social posts and reviews into a central engine, evaluates them against your company, competitors, role, markets and goals, and surfaces only the developments that matter — competitor launches, regulatory changes, growth opportunities and consumer trends, each rated for impact.",
+      "MarketBuzzr draws market signals from press releases, industry news and reports, webinars, earnings calls, blog posts, newsletters, YouTube and Reddit discussions, research papers, podcasts and regulatory updates into a central engine, evaluates each one against your company, competitors, role, markets and goals, and surfaces only the developments that matter — a competitor launch, a regulatory change, a growth opportunity, a consumer trend — each with ready-to-use drafts to act on it.",
   },
 
   // §2 Hero transition. A compact bridge under the hero image — explicitly not

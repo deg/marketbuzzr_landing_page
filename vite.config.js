@@ -24,54 +24,15 @@ const noindexSandbox = () => {
   }
 }
 
-// The hero image is the LCP element, but this is a client-rendered app: the
-// <img> does not exist in the served HTML, so the browser's preload scanner
-// cannot see it and the request only starts once the JS bundle has downloaded,
-// parsed and rendered. Measured on the sandbox, the bundle ran 420-696ms and the
-// image did not start until 734ms -- roughly 300ms of pure waiting.
-//
-// A preload hint in the HTML lets the scanner start it immediately, in parallel
-// with the JS. The filename is content-hashed, so it has to be read out of the
-// bundle at build time rather than hard-coded.
-//
-// Declared as image/avif on purpose: a browser without AVIF support ignores the
-// hint and takes the WebP from <picture> as usual, rather than downloading a
-// format it cannot use.
-const HERO_BASENAME = 'hero-market-universe'
-
-const preloadHeroImage = () => {
-  let base = '/'
-  return {
-    name: 'preload-hero-image',
-    enforce: 'post',
-    configResolved: (config) => {
-      base = config.base
-    },
-    transformIndexHtml: (html, ctx) => {
-      if (!ctx.bundle) return html // dev server: nothing is hashed yet
-      const hero = Object.keys(ctx.bundle).find(
-        (file) => file.includes(HERO_BASENAME) && file.endsWith('.avif')
-      )
-      // Renaming the hero asset without updating HERO_BASENAME would otherwise
-      // drop the preload silently and hand back the ~300ms this exists to save,
-      // with a green build. Say so instead.
-      if (!hero) {
-        console.warn(
-          `[preload-hero-image] no bundled asset matches "${HERO_BASENAME}" — ` +
-            'the LCP preload hint was NOT emitted.'
-        )
-        return html
-      }
-      return html.replace(
-        '</head>',
-        `  <link rel="preload" as="image" type="image/avif" href="${base}${hero}" fetchpriority="high" />\n  </head>`
-      )
-    }
-  }
-}
+// There was a preload-hero-image plugin here, and it is gone with the image it
+// preloaded. The homepage hero is now an inline SVG (components/HeroAnimation),
+// so there is no separate request to start early: it arrives inside the JS
+// bundle and paints as soon as React mounts. That also settles mbz-et8e.34 --
+// the hint lived in the shared index.html and so fired on every route, spending
+// 81 KB on pages that never showed the image.
 
 export default defineConfig({
-  plugins: [react(), noindexSandbox(), preloadHeroImage()],
+  plugins: [react(), noindexSandbox()],
   server: { port: 5173 },
   base: '/'
 })

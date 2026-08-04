@@ -10,9 +10,8 @@ import FlowSteps from "../components/FlowSteps";
 import CategoryCard from "../components/CategoryCard";
 import IndustryTile from "../components/IndustryTile";
 import ProductImage from "../components/ProductImage";
+import HeroAnimation from "../components/HeroAnimation";
 import { DevNote } from "../components/DevOnly";
-import heroAvif from "../assets/hero-market-universe.avif";
-import heroWebp from "../assets/hero-market-universe.webp";
 import signalsAvif from "../assets/market-signals.avif";
 import signalsWebp from "../assets/market-signals.webp";
 import insightAvif from "../assets/insight-medicalcomp.avif";
@@ -32,8 +31,12 @@ const Home = () => {
   return (
     <>
       {/* §1 Hero. The brief deletes the context line that used to sit under the
-          visual and says not to replace it; its meaning moved into the image's
-          alt text instead — see content/home.js. */}
+          visual and says not to replace it; its meaning moved into the visual's
+          description instead — see content/home.js.
+
+          The artwork here is drawn rather than photographed: Manu's drop_05
+          animation, which replaced the AVIF of the same composition. Its forty
+          labels are now real text. */}
       <PageHero
         kicker={hero.eyebrow}
         title={hero.title}
@@ -42,15 +45,7 @@ const Home = () => {
         ctaLabel={hero.ctaPrimary}
         secondaryCtaLabel={hero.ctaSecondary}
       >
-        <ProductImage
-          className="hero-visual"
-          avif={heroAvif}
-          webp={heroWebp}
-          width={1536}
-          height={1024}
-          priority
-          alt={hero.visualAlt}
-        />
+        <HeroAnimation title={hero.visualTitle} description={hero.visualAlt} />
       </PageHero>
 
       {/* §2 Hero transition — a compact bridge, deliberately not a section. */}
