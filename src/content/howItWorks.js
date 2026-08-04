@@ -1,54 +1,94 @@
-// How It Works page copy, lifted from Manu's doc ("How it works" section).
+// How It Works copy, from Manu's "MarketBuzzr — How It Works Page, Final CTO /
+// Claude Implementation Handoff"
+// (~/Documents/marketbuzzr/Marketbuzzr_How_It_Works_revised/).
+//
+// The page is deliberately Hero -> 01 -> 02 -> 03 -> CTA and nothing else. The
+// brief is explicit that the simplicity is the point: no fourth step, no
+// sources grid, no separate weekly-report section, no feature grid, no FAQ. If
+// a later round wants to add a section here, check that document first.
+//
+// Brand is "MarketBuzzr" throughout — the brief's "Marketbuzzr" is deliberately
+// not adopted (mbz-et8e.2), same call as the homepage.
+//
+// Emphasis is structural, not markup: the brief bolds each step's closing line,
+// and that line lives in its own `closer` key rather than carrying ** or HTML.
+//
+// CTA labels follow THIS brief — primary "Try for Free", secondary "Book a
+// Demo". That is the reverse of the homepage's order and wording ("Try It
+// Free"), because the two pages were specified by different briefs. The
+// divergence is a question for Manu (mbz-et8e.28 item 10), not something to
+// settle by quietly editing one page to match the other.
 export const howItWorks = {
   title: "How It Works — MarketBuzzr",
+
   hero: {
-    title: "How MarketBuzzr Works",
+    eyebrow: "HOW IT WORKS",
+    title: "From Market Signals to Strategic Action",
     sub: [
-      "MarketBuzzr continuously transforms fragmented market activity into structured intelligence teams can actually use, without manual tracking, prompting, or information overload.",
+      "MarketBuzzr monitors your market, identifies what matters to your business, and turns relevant developments into personalized intelligence you can act on.",
     ],
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
   },
+
+  // One entry per step. `id` is the anchor the brief names in its suggested
+  // markup; `number` is copy rather than derived from the index, because it is
+  // the label the brief specifies and not an incidental position.
+  //
+  // `visualAlt` is shorter here than the homepage's. There the artwork carried
+  // meaning that existed nowhere else, so its alt text had to reconstruct it.
+  // This brief puts every important message in HTML and asks specifically not
+  // to restate the text visible inside the image.
   steps: [
     {
-      heading: "Monitor External Market Activity",
+      id: "monitor-filter",
+      number: "01",
+      title: "Monitor Your Market. Filter the Noise.",
+      lead: "Stay on top of what's changing—without tracking it all yourself.",
       paragraphs: [
-        "MarketBuzzr continuously tracks external market activity across competitor content, industry blogs, webinars, YouTube discussions, reviews, and community conversations.",
-        "It captures both written and video-based content across fragmented channels where market narratives and perception shifts form — so important signals don't get missed.",
+        "MarketBuzzr continuously monitors the sources that shape your market—from competitors, industry news and regulation to research, podcasts, webinars and online discussions.",
+        "Every signal is evaluated against your business context—your company, products, competitors, goals, role and markets—so you see what deserves your attention, not everything that happened.",
       ],
+      visualAlt:
+        "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets to surface only relevant developments.",
+      closer: "Less noise. More signal. More time for what matters.",
     },
     {
-      heading: "Filter Noise. Keep What Matters.",
+      id: "role-based-intelligence",
+      number: "02",
+      title: "Intelligence Shaped Around Your Role",
+      lead: "Different roles need different intelligence—and different ways to act on it.",
       paragraphs: [
-        "Most external content is irrelevant. MarketBuzzr uses a proprietary filtering and structuring layer to continuously process high-volume market activity into relevant signals based on your role, goals, industry, category, competitors, and strategic context.",
-        "Instead of consuming endless streams of content, teams receive structured insights focused on what actually impacts decisions.",
+        "MarketBuzzr turns relevant developments into personalized insights, opportunities and recommendations based on each reader's priorities.",
+        "Executives can focus on strategic priorities, growth opportunities and board-level implications. Marketing, Sales, Customer Success and other teams receive intelligence relevant to the decisions they make and the work they do.",
       ],
+      visualAlt:
+        "Example role-based MarketBuzzr weekly intelligence showing tailored outputs for executives, marketing, sales and customer success, including strategic priorities, growth opportunities, board discussion points, content ideas, battlecards, talk tracks and client updates.",
+      closer:
+        "One market. Different priorities. Intelligence built around each reader.",
     },
     {
-      heading: "Role-Based Delivery",
+      id: "turn-intelligence-into-action",
+      number: "03",
+      title: "Turn Intelligence Into Action",
+      lead: "Don't just know what happened. Know what to do next.",
       paragraphs: [
-        "Insights are delivered as structured, role-specific views — aligned to how different teams make decisions. Product and marketing teams may track competitor positioning, category shifts, and messaging trends. CEOs look for strategic shifts, regulation change and M&A.",
-        "Clinical, scientific, and leadership teams in biotech may focus on treatment perception, market evolution, external narratives, or emerging concerns across the ecosystem. MarketBuzzr structures insights based on what each team actually needs to understand, monitor, and act on.",
+        "MarketBuzzr goes beyond summarizing the market. It identifies what developments mean for your business, recommends next steps, and helps you turn intelligence into work your team can use.",
+        "Create action plans, executive communications, board talking points, battlecards, outreach, campaigns, thought-leadership content and more—directly from the opportunities and insights MarketBuzzr identifies.",
       ],
+      visualAlt:
+        "MarketBuzzr workflow showing a growth opportunity being turned into an action plan by selecting a draft format and generating a context-aware ready-to-use draft.",
+      closer:
+        "No blank page. No generic prompt. Your draft starts with the market intelligence and business context already behind the insight.",
     },
   ],
-  closing: {
-    heading: "Built to Replace Manual Tracking and DIY Workflows",
+
+  finalCta: {
+    title: "Stop Following the Market Manually.",
     paragraphs: [
-      "Many teams already try to stitch this together using spreadsheets, dashboards, prompts, trackers, alerts, and internal AI workflows.",
-      "The challenge is keeping everything relevant and continuously up to date as information moves across blogs, webinars, YouTube, reviews, and community discussions.",
-      "As volume and sources grow, maintaining clarity becomes harder. MarketBuzzr runs in the background, automatically filtering and structuring market activity into clear, role-specific insights without constant prompting, upkeep, or manual monitoring.",
-      "Instead of maintaining systems, teams get a continuously structured view of what matters:",
+      "Let MarketBuzzr monitor what's changing, surface what deserves your attention, and help you turn intelligence into action.",
     ],
-    bullets: [
-      "Always-updated intelligence without manual tracking or maintenance",
-      "Consistent logic across sources, teams, and time",
-      "Unified coverage of written and video-based market content",
-      "Filtered signals that remove noise and surface relevance",
-      "Continuity across competitors, categories, and market shifts",
-      "A shared market view across product, marketing, and leadership teams",
-      "Decision-ready insights instead of fragmented tools and workflows",
-      "Tuned to match your interests, unlike generic AI texts",
-    ],
-    footnote: "No prompts. No pipelines to manage. No constant adjustments.",
-    ctaLabel: "Book a Demo",
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
   },
 };

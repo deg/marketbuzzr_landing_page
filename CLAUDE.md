@@ -143,7 +143,55 @@ is lazy.
 `vite.config.js` also emits a `<link rel="preload">` for the hero, and finds it
 by matching the filename against `HERO_BASENAME`. **Rename the hero asset and
 you must update that constant**; a miss now warns at build time rather than
-silently dropping the hint.
+silently dropping the hint. Note the hint goes into the one shared `index.html`,
+so it fires on **every** route, including ones that never render the hero — 81 KB
+of waste off the homepage, tracked as `mbz-2d01`.
+
+### The How It Works page (2026-08)
+
+`pages/HowItWorks.jsx` is Hero → 01 → 02 → 03 → Final CTA and deliberately
+nothing else, from Manu's separate How It Works brief
+(`~/Documents/marketbuzzr/Marketbuzzr_How_It_Works_revised/`). That brief forbids
+additions by name: no fourth step, no sources grid, no separate weekly-report
+section, no feature grid, no FAQ. **Read it before adding a section here.**
+
+The three steps are stacked full-width sections, not a three-column layout and
+not alternating 50/50 splits — both were ruled out because they shrink the
+artwork below the size its embedded text needs. That also means `.product-frame`'s
+breakout works normally here; the `.problem-grid .product-frame` suppression is a
+homepage-only rule and must not be copied over.
+
+**This page's artwork is light, and that inverts the bleed.** All three PNGs are
+drawn on white (`#FEFEFE`) against the navy page, so `.how-visual` sets a
+`box-shadow` directly instead of taking `--artwork-ground`. Its blur is 24px with
+no spread, against the homepage's 80px/30px, and **the difference is load-bearing
+rather than taste**: a dark bleed that overshoots on a dark page is invisible, a
+light one is not. Measured contrast of `--muted` body copy against the ground
+immediately above a figure was 1.70:1 at 80/30 and 9.57:1 at 24/0. Do not
+harmonise the two. Dark-ground re-renders are on the ask list (`mbz-et8e.28`
+item 9) and would delete this whole special case.
+
+Mobile held widths for the 820px scroller are re-derived per artwork, same method
+as the homepage: 1200 / 1100 / 1000px. The middle one is held to its report-card
+copy rather than its smallest text — clearing the 9px tab row and the 8px bottom
+strip would mean showing it at native 1604px, four screens of panning.
+
+**CTA labels differ from the homepage on purpose.** This brief specifies primary
+"Try for Free" and secondary "Book a Demo"; the homepage ships the reverse order
+and "Try It Free". Two briefs, two answers — the conflict is a question for Manu
+(`mbz-et8e.28` item 10), not something to settle by editing one page to match the
+other.
+
+The page this replaced was a numbered `<ol>` plus a value-bullet summary. Its
+rules (`.steps`, `.step`, `.step-number`, `.step-body`, `.summary-block`,
+`.value-grid`, `.value-box`, `.summary-footnote`) are gone, and so are their
+halves of the selectors they shared with `.card` and `.cta-panel`.
+
+Page weight with everything scrolled in is 92 KB gzipped text + 171 KB of AVIF,
+plus the 79 KB hero the shared preload drags in for nothing (`mbz-2d01`). No
+visual is the LCP element on this page — it is the H1 on desktop (344ms) and the
+`.sub` paragraph on phone (260ms) — so all three stay `loading="lazy"`, which is
+what the brief conditions on. Re-measure rather than trusting this line.
 
 Full page weight is 281 KB (91 KB gzipped text + 189 KB of AVIF), plus ~44 KB of
 Google Fonts. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no

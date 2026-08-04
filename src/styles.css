@@ -561,26 +561,15 @@ h2 {
   }
 }
 
-/* Card / step / value-box share the same surface (gradient, border, radius,
-   shadow); each adds its own padding, layout, and transition. */
-:is(.card, .step, .value-box) {
+/* Cards. The surface (gradient, border, radius, shadow) used to be shared with
+   the old How It Works page's .step and .value-box; both are gone and .card is
+   the only user left, so the two blocks are now one. The explicit transition
+   list those two shared went with them — .card has always used `all`. */
+.card {
   background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
   border: 1px solid #ffffff14;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-}
-
-/* .step and .value-box use the same explicit-property transition list
-   (omitting layout/padding so resizes don't animate). .card differs by using
-   `all` and stays inline below. */
-:is(.step, .value-box) {
-  transition: border-color var(--transition-normal),
-    box-shadow var(--transition-normal),
-    background var(--transition-normal);
-}
-
-/* Cards */
-.card {
   padding: var(--spacing-lg);
   transition: all var(--transition-normal);
   position: relative;
@@ -1173,76 +1162,38 @@ footer h4 {
   margin: var(--spacing-sm) auto 0;
 }
 
-/* How It Works — numbered steps */
-.steps {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
+/* How It Works — the three numbered step sections.
 
-.step {
-  display: flex;
-  gap: var(--spacing-lg);
-  align-items: flex-start;
-  padding: var(--spacing-lg);
-}
+   Sequential full-width sections, not a three-column layout and not alternating
+   50/50 splits: the brief rules both out, because either one shrinks the
+   supplied artwork below the size its embedded text needs. Everything is
+   centered, following the site's existing full-width section convention.
 
-.step-number {
-  flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: var(--radius-full);
-  background: linear-gradient(145deg, var(--brand-2), var(--brand));
-  color: #05203a;
-  font-weight: 800;
-  font-size: 20px;
-}
-
-.step-body h3 {
-  margin: 0 0 8px 0;
-}
-
-.step-body p {
-  color: var(--muted);
-  margin: 8px 0 0;
-}
-
-.step-body p:first-of-type {
-  margin-top: 0;
-}
-
-/* How It Works — closing summary with value bullets */
-.summary-block {
-  margin: 0 auto;
+   This replaced the old numbered-list-plus-summary page wholesale. Its rules
+   (.steps, .step, .step-number, .step-body, .summary-block, .value-grid,
+   .value-box, .summary-footnote) are gone, along with their halves of the
+   shared hover, button and reading-measure selectors. */
+.how-step-number {
+  font-size: clamp(40px, 6vw, 64px);
+  margin: 0 0 var(--spacing-xs);
   text-align: center;
 }
 
-.summary-block p {
-  color: var(--muted);
+/* Body prose sits at the same reading measure as the centered leads around it,
+   so the step reads as one column rather than three different widths. */
+.how-step-body {
+  max-width: var(--lead-measure);
+  margin: var(--spacing-md) auto 0;
+  text-align: center;
 }
 
-/* Value points as a single-column stack of full-width boxes (not a bullet
-   list, not a 2-up grid — the items are short, structurally flat statements
-   that read better as a vertical list of emphasized lines). */
-.value-grid {
-  list-style: none;
-  margin: var(--spacing-lg) 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-  text-align: left;
+.how-step-body p {
+  color: var(--muted);
+  margin: var(--spacing-md) 0 0;
 }
 
-.value-box {
-  padding: var(--spacing-md) var(--spacing-lg);
-  color: var(--muted);
-  font-weight: 700;
+.how-step-body p:first-child {
+  margin-top: 0;
 }
 
 /* Ambient hover: content boxes warm up under the cursor — a faint brand-cyan
@@ -1252,13 +1203,13 @@ footer h4 {
    Gated to real-hover devices so touch screens don't get stuck-hover. */
 @media (hover: hover) {
   /* Shared ambient-hover paint: cyan border + lighter gradient. Only the
-     shadow base differs between cards/steps/value-boxes (md) and the larger
-     CTA panel (lg), so those two box-shadow declarations live below. */
-  :is(.card, .step, .value-box, .cta-panel):hover {
+     shadow base differs between the cards (md) and the larger CTA panel (lg),
+     so those two box-shadow declarations live below. */
+  :is(.card, .cta-panel):hover {
     border-color: rgba(110, 224, 255, 0.3);
     background: linear-gradient(180deg, #16245fcc, #111d49cc);
   }
-  :is(.card, .step, .value-box):hover {
+  .card:hover {
     box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
   }
   .cta-panel:hover {
@@ -1266,15 +1217,8 @@ footer h4 {
   }
 }
 
-.summary-footnote {
-  font-weight: 700;
-  color: var(--text);
-  margin-top: var(--spacing-md);
-}
-
 /* CTA buttons that replaced anchors (DemoButton renders a <button>). */
-.cta-panel button.primary,
-.summary-block button.primary {
+.cta-panel button.primary {
   display: inline-block;
   background: linear-gradient(145deg, var(--brand-2), var(--brand));
   color: #05203a;
@@ -1291,14 +1235,9 @@ footer h4 {
   z-index: 1;
 }
 
-.cta-panel button.primary:hover,
-.summary-block button.primary:hover {
+.cta-panel button.primary:hover {
   background: linear-gradient(145deg, var(--brand), var(--brand-2));
   box-shadow: var(--shadow-md);
-}
-
-.summary-block button.primary {
-  margin-top: var(--spacing-md);
 }
 
 /* Placeholder standing in for a visual that does not exist yet. Dashed and
@@ -1381,6 +1320,45 @@ footer h4 {
   --artwork-ground: #000b2d;
 }
 
+/* The How It Works artwork runs the other way: all three are drawn on white
+   (#FEFEFE sampled at every corner) against the navy page, so the same bleed
+   that stops the homepage's dark artwork reading as a black rectangle here
+   stops these reading as white ones.
+
+   The BLUR AND SPREAD ARE MUCH SMALLER THAN THE DARK CASE, and that asymmetry
+   is not a stylistic preference. A dark bleed on a dark page is invisible where
+   it overshoots; a light one is not. Contrast of the --muted body copy against
+   the ground in the 40px band right above a figure, where the copy sits closest:
+
+                                        1440px    390px
+     80px/30px, the homepage's values   1.70:1    2.08:1   (AA wants 4.5:1)
+     24px/0                             9.57:1    9.79:1
+
+   The haze reaches far enough at 80/30 to put the end of the paragraph on a
+   near-grey ground; at 24px with no spread the edge still dissolves and nothing
+   leaks into the copy. Do not "harmonise" this back to the homepage's numbers.
+
+   Dark-ground re-renders have been asked for (mbz-et8e.28 item 9); when they
+   arrive this whole block goes and the artwork joins the rule above.
+
+   No radius, deliberately: the homepage dropped rounded corners because they
+   read as a card even with no border, and the brief here forbids cards too.
+
+   Written as .product-frame.how-visual, not bare .how-visual: it overrides
+   .product-frame's own box-shadow, and a single class would tie with it and win
+   only by source order — the trap this file's header block is about. Same reason
+   the margin below is scoped to .how-step.
+
+   Extra space below, because the emphasized closing line follows the figure
+   directly and .section p.lead only puts 8px between them. */
+.product-frame.how-visual {
+  box-shadow: 0 0 24px 0 #fefefe;
+}
+
+.how-step .how-visual {
+  margin-bottom: var(--spacing-2xl);
+}
+
 .product-frame img {
   display: block;
   width: 100%;
@@ -1442,6 +1420,35 @@ footer h4 {
 
   .insight-visual {
     --mobile-artwork-width: 1024px;
+  }
+
+  /* The How It Works artwork, measured the same way rather than inheriting the
+     homepage's numbers. Ink height of the smallest line that carries the
+     story, and the width that puts it at the ~8px floor:
+
+       monitor-filter   12px @ 1774 wide  ->  1183px for the source labels
+       role-based       12px @ 1604 wide  ->  1069px for the report card copy
+       turn-into-action 12px @ 1503 wide  ->  1002px for the workflow steps
+
+     role-based is held to its card copy, not to its smallest text. The tab row
+     (9px) and the Sales / Customer Success strip along the bottom (8px) still
+     fall below the floor at 1100px, and clearing those would mean showing it at
+     its native 1604px — four screens of panning on a phone. The brief asks this
+     visual to answer "what do I actually receive?", and the role titles, report
+     header and card headlines answer it; the strip is corroboration. Same trade
+     the hero makes on the homepage.
+
+     Mobile-specific renders remain the real fix — see mbz-et8e.28 item 11. */
+  .how-visual-monitor-filter {
+    --mobile-artwork-width: 1200px;
+  }
+
+  .how-visual-role-based-intelligence {
+    --mobile-artwork-width: 1100px;
+  }
+
+  .how-visual-turn-intelligence-into-action {
+    --mobile-artwork-width: 1000px;
   }
 }
 /* ============================================================
@@ -1627,8 +1634,10 @@ footer h4 {
   text-align: center;
 }
 
-.flow-step-number {
-  font-size: var(--flow-numeral);
+/* The step numeral, shared with How It Works' .how-step-number. Both are a
+   large figure painted with the brand gradient and nothing else — only the size
+   differs, so the technique is stated once. */
+:is(.flow-step-number, .how-step-number) {
   line-height: 1;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -1636,6 +1645,10 @@ footer h4 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.flow-step-number {
+  font-size: var(--flow-numeral);
 }
 
 .flow-step-verb {
@@ -1892,8 +1905,7 @@ footer h4 {
 
 /* Constrained reading measure on every centered lead/CTA/summary paragraph
    — Manu prefers a narrow centered column over container-width text. */
-:is(.sub, .section p.lead, .info-block p.lead, .cta-panel p,
-    .summary-block p, .summary-footnote) {
+:is(.sub, .section p.lead, .info-block p.lead, .cta-panel p) {
   max-width: var(--lead-measure);
   margin-inline: auto;
 }
