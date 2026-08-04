@@ -14,17 +14,27 @@ all styling is hand-written in a single `src/styles.css`.
 
 ## Commands
 
-```bash
-yarn dev         # Vite dev server on http://localhost:5173
-yarn build       # Production bundle to dist/
-yarn preview     # Serve the built dist/ locally
-yarn deploy      # Build + publish the LIVE site to marketbuzzr.com (main branch only)
-yarn deploy:new  # Build + publish the SANDBOX to marketbuzzr.com/new/ (any branch)
-yarn deploy:snapshot <tag>   # Publish a frozen build of a git tag to marketbuzzr.com/<tag>/
-```
+`make help` is the front door and lists everything. The targets are thin wrappers over
+the yarn scripts, which remain the underlying interface:
 
-There is **no test suite and no linter** configured. `make`, `vitest`, `eslint`, etc. do
-not apply here.
+| make | yarn |
+|---|---|
+| `make dev` | `yarn dev` — Vite dev server on http://localhost:5173 |
+| `make build` | `yarn build` — production bundle to `dist/` |
+| `make preview` | build, then `yarn preview` |
+| `make deploy-sandbox` | `yarn deploy:new` — SANDBOX to marketbuzzr.com/new/ (any branch) |
+| `make deploy-snapshot TAG=<tag>` | `yarn deploy:snapshot <tag>` — frozen build of a git tag |
+| `make deploy-live` | `yarn deploy` — the LIVE site (main branch only) |
+| `make snapshots` | — reads `PRESERVED_DIRS` and prints what a live deploy will not delete |
+| `make scaffolding` | — lists the `FIX-BEFORE-RELEASE` markers that block a live deploy |
+
+**The Makefile deliberately does not re-check what the deploy script already
+enforces** (branch, preserved directories, release tags). Two copies of a safety check
+are two places to forget one. The only thing it validates is that `TAG` was passed,
+which is a make-level concern.
+
+There is **no test suite and no linter** configured — `vitest`, `eslint`, etc. do not
+apply here, and there is no `make lint` or `make test`.
 
 Package manager is **yarn** (Yarn 1, pinned via `packageManager`). Never use npm.
 
