@@ -1975,19 +1975,21 @@ footer h4 {
 
 /* --- Hero source cluster --------------------------------------------------
 
-   Chips are GRID ITEMS, never absolutely positioned. The sketch placed seven
-   boxes at hardcoded percentage offsets and they already overlapped in its own
-   rendering (two collided at 1440px, two more truncated by 1000px). Grid cells
-   cannot overlap at any width, which is the whole reason for this shape.
+   A ring: three columns, the mark in the middle cell, the sources around it.
+   Chips are GRID ITEMS and can never overlap -- the sketch's version placed
+   seven boxes at hardcoded percentage offsets and they already collided in its
+   own rendering, two at 1440px with one clipped mid-word and two more truncated
+   by 1000px.
 
-   Two columns with the mark centred in the GUTTER between them. The gutter is
-   wide enough to hold it, so the mark overlaps nothing and needs no reserved
-   cell -- which is what let the earlier ring's spacer, its pinned index and its
-   6-to-8 source bound all go away.
+   The mark is placed EXPLICITLY at 2/2 and the chips auto-place around it.
+   Explicitly-placed items are positioned before auto-placed ones, so the chips
+   skip the occupied cell on their own. An earlier ring reserved that cell with
+   an empty spacer at a pinned index, which only landed correctly for 6 to 8
+   sources; this needs no spacer and has no such bound.
 
-   MOBILE-FIRST, alone in this file: stacked is the default and the two-column
-   split is the enhancement, because stacked is what every narrow screen gets
-   and duplicating it desktop-first meant keeping two copies in step by hand. */
+   MOBILE-FIRST, alone in this file: stacked is the default and the ring is the
+   enhancement, because stacked is what every narrow screen gets and writing it
+   desktop-first meant keeping two copies of it in step by hand. */
 .source-cluster {
   margin: 0;
 }
@@ -1997,6 +1999,9 @@ footer h4 {
   flex-direction: column;
 }
 
+/* Stacked: a plain list. Under the ring below it becomes display: contents so
+   its items join the ring's grid, which is the only way to have one grid and
+   still have one list for a screen reader. */
 .source-cluster-chips {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -2058,29 +2063,28 @@ footer h4 {
   font-size: 15px;
 }
 
-/* Two columns with the mark between them. The column-gap has to clear the mark
-   plus the pool of light around it: the mark is 50px and its padding 2x24, so
-   anything under ~100px would put chips under the glow. */
 @media (min-width: 901px) {
   .source-cluster-ring {
-    display: block;
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-sm);
+    /* Not stretch: the middle row is taller than a chip because the mark is in
+       it, and stretching grew the two chips flanking the mark to match. */
+    align-items: center;
   }
 
   .source-cluster-chips {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 116px;
+    display: contents;
   }
 
   .source-cluster-core {
     order: 0;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    grid-area: 2 / 2;
     margin: 0;
+    padding: var(--spacing-sm);
   }
 
+  /* Sibling of the ring inside the <figure>, not a grid item of it. */
   .source-cluster-caption {
     text-align: center;
   }

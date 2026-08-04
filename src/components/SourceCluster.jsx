@@ -11,17 +11,21 @@ import DnaMark from "./DnaMark";
 // cards collided at 1440px with one clipped mid-word, and two more truncated by
 // 1000px. The chips here are grid items and cannot collide at any width.
 //
-// TWO COLUMNS WITH THE MARK IN THE GUTTER, not a ring around a reserved cell.
-// The ring came first and was replaced when the hero became a split: three
-// columns need 836px for the widest label to stay on one line, and the hero's
-// right-hand column is about 784px. Two columns give each chip ~390px, so
-// nothing wraps — and it is closer to the sketch, where the helix sits between
-// the cards rather than inside the grid.
+// A RING: three columns with the mark in the middle cell, so the sources read as
+// surrounding the subject. A two-column version with the mark in the gutter was
+// tried and rejected — it reads as two lists either side of a divider, which
+// loses the entire point of the arrangement.
 //
-// It is also markedly simpler. The ring needed an empty spacer holding its
-// centre cell open, a pinned index for that spacer, and a 6-to-8 bound on the
-// source count outside which the geometry silently broke. The gutter needs none
-// of that and works for any number of sources.
+// The mark is a real grid item placed at row 2 / column 2, and the chips
+// auto-place around it. That is what makes this version robust where the first
+// ring was not: explicitly-placed items are positioned before auto-placed ones,
+// so the chips simply skip the occupied cell. No empty spacer holding the middle
+// open, no pinned index for it, and no bound on how many sources there can be.
+//
+// The <ul> takes `display: contents` so its items become grid items of the ring
+// while the list itself survives for assistive technology. That is the only way
+// to have both one grid and one list; browsers dropped list semantics under
+// display:contents years ago and no longer do.
 const SourceCluster = ({ caption, items }) => (
   <figure className="source-cluster">
     <div className="source-cluster-ring">

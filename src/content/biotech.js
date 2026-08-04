@@ -34,17 +34,25 @@ export const biotech = {
   // The hero visual: the outside conversations that form around a therapy.
   // `items` are where they happen; the centre of the ring is an unlabelled mark,
   // because the caption below it already names what they are all about.
+  //
+  // LABELS ARE SHORTER THAN THE SKETCH'S, deliberately. Its wording — "Patient &
+  // caregiver communities", "Conferences & event coverage" — wraps to two lines
+  // in a ring chip, and four of the seven did, leaving the rows uneven. Nothing
+  // is lost: the full phrasing is in the section below, which names patient and
+  // caregiver communities, KOL discussions, conference commentary, biotech
+  // media, YouTube, Reddit, advocacy groups and competitor communications. A
+  // chip is a label, not a sentence.
   sources: {
     caption:
       "The conversations forming around your therapy, across the places they actually happen.",
     items: [
-      { icon: "people", label: "Patient & caregiver communities" },
-      { icon: "message", label: "KOLs & expert discussions" },
-      { icon: "calendar", label: "Conferences & event coverage" },
+      { icon: "people", label: "Patients & caregivers" },
+      { icon: "message", label: "KOLs & experts" },
+      { icon: "calendar", label: "Conferences & events" },
       { icon: "article", label: "Biotech media & blogs" },
-      { icon: "video", label: "YouTube & video content" },
-      { icon: "threads", label: "Reddit & online communities" },
-      { icon: "building", label: "Competitor communications" },
+      { icon: "video", label: "YouTube & video" },
+      { icon: "threads", label: "Reddit & forums" },
+      { icon: "building", label: "Competitor updates" },
     ],
   },
 
