@@ -2091,7 +2091,24 @@ footer h4 {
 .industry-page .container {
   width: min(1180px, calc(100% - 40px));
   max-width: none;
-  padding: 0;
+  /* HORIZONTAL ONLY. A bare `padding: 0` here also killed .section's vertical
+     padding -- it beats .section on specificity -- which collapsed the gap
+     between every section on these pages to nothing. The gutter comes from the
+     width calc above, exactly as it does in his stylesheet. */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* His rhythm is 72px, ours was 56px. */
+.industry-page .section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+/* The capability row sits closer to the example above it than a full section
+   break, as it does in his file. */
+.industry-page .industry-capabilities {
+  padding-top: 36px;
 }
 
 .industry-page .info-block {
@@ -2622,21 +2639,16 @@ footer h4 {
    broken at every width from 901 to 1280. */
 @media (min-width: 1250px) {
   .source-cluster-ring {
-    /* Capped in px as well as proportional: past about 1440 the column stops
-       growing but the percentages kept pushing the chips outward, so the overlap
-       drifted away at wide viewports. */
-    /* Retuned after the container came down from 1352px to his 1180px: the
-       aside column is now 517px, not 704px, and the radii that worked in the
-       wider box put two chips into a 9px corner overlap. Taller and narrower is
-       what clears it -- the collisions in this arrangement are always between
-       angularly-adjacent chips at a similar y, so vertical spread is the lever,
-       not horizontal. */
-    --ring-rx: min(28%, 140px);
-    --ring-ry: min(48%, 260px);
+    /* Half the widest chip, and half its height: the inset the perimeter walk
+       in SourceCluster.jsx is expressed against, and what keeps every chip
+       inside the box. These two and min-height are what WALK_ASPECT is derived
+       from — change one and re-derive the other. */
+    --ring-inset-x: 240px;
+    --ring-inset-y: 38px;
 
     position: relative;
     display: block;
-    min-height: 580px;
+    min-height: 620px;
   }
 
   .source-cluster-chips {
@@ -2645,8 +2657,12 @@ footer h4 {
 
   .source-cluster-ring .source-chip {
     position: absolute;
-    left: calc(50% + var(--cos) * var(--ring-rx));
-    top: calc(50% + var(--sin) * var(--ring-ry));
+    left: calc(
+      var(--ring-inset-x) / 2 + var(--px) * (100% - var(--ring-inset-x))
+    );
+    top: calc(
+      var(--ring-inset-y) / 2 + var(--py) * (100% - var(--ring-inset-y))
+    );
     transform: translate(-50%, -50%);
     white-space: nowrap;
   }

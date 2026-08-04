@@ -101,7 +101,7 @@ const IndustryPage = ({ data }) => {
           because the dividers have to know where a row begins: biotech has four
           capabilities and the later industries have six, and three columns suit
           six far better than four does. */}
-      <section className="section container">
+      <section className="section container industry-capabilities">
         <SectionTitle title={features.heading} />
         <div
           className={`feature-row feature-row-${featureCols}`}
