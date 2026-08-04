@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import EmailCaptureModal from "./components/EmailCaptureModal";
 import Home from "./pages/Home";
 import UseCasePage from "./pages/UseCasePage";
+import IndustryPage from "./pages/IndustryPage";
 import HowItWorks from "./pages/HowItWorks";
 import NotImplemented from "./pages/NotImplemented";
 import { ModalContext } from "./ModalContext";
@@ -40,9 +41,12 @@ const App = () => {
         <main id="main" tabIndex={-1}>
           <Routes>
             <Route path="/" element={<Home />} />
+            {/* Biotech is the pilot for the new industry-page structure and has
+                moved to IndustryPage; tech stays on UseCasePage until the pilot
+                is judged (mbz-et8e.38). Two templates on purpose, temporarily. */}
             <Route
               path="/use-cases/biotech"
-              element={<UseCasePage data={biotech} />}
+              element={<IndustryPage data={biotech} />}
             />
             <Route
               path="/use-cases/tech"

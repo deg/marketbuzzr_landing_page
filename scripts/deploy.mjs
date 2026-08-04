@@ -33,7 +33,14 @@ const SANDBOX_DIR = "new";
 // it silently, so the live deploy reads gh-pages and checks it against this
 // list rather than trusting anyone to remember. Publishing a snapshot whose
 // name is missing here is refused outright.
-const PRESERVED_DIRS = [SANDBOX_DIR, "3aug_v1", "3aug_v2", "3aug_v3", "4aug_v4"];
+const PRESERVED_DIRS = [
+  SANDBOX_DIR,
+  "3aug_v1",
+  "3aug_v2",
+  "3aug_v3",
+  "4aug_v4",
+  "4aug_v5",
+];
 
 // Directories the live build produces and is entitled to overwrite.
 const LIVE_OWNED_DIRS = ["assets"];

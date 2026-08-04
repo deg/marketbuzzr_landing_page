@@ -53,6 +53,74 @@ const PATHS = {
       <path d="M15.5 8.5l-2 5-5 2 2-5z" />
     </>
   ),
+
+  // --- Added for the industry pages, same 24x24 box and stroke weight. ---
+
+  // Patient and caregiver communities — two figures, one behind the other.
+  people: (
+    <>
+      <circle cx="9.5" cy="8" r="3.5" />
+      <path d="M3.5 19.5c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+      <path d="M16 5.2a3.5 3.5 0 0 1 0 6.6" />
+      <path d="M17.5 14.2c1.9.8 3 2.6 3 5.3" />
+    </>
+  ),
+  // Conferences and events — a calendar.
+  calendar: (
+    <>
+      <path d="M4 6h16v14H4z" />
+      <path d="M4 10h16" />
+      <path d="M8.5 3.5v4M15.5 3.5v4" />
+    </>
+  ),
+  // Media and blogs — a page of text with a folded corner.
+  article: (
+    <>
+      <path d="M5.5 3.5h9l5 5v12h-14z" />
+      <path d="M14.5 3.5v5h5" />
+      <path d="M8.5 12.5h7M8.5 16h5" />
+    </>
+  ),
+  // Video — a play mark in a frame.
+  video: (
+    <>
+      <path d="M3 6.5h18v11H3z" />
+      <path d="M10.5 9.5l5 2.5-5 2.5z" />
+    </>
+  ),
+  // Online communities — two overlapping threads of conversation.
+  threads: (
+    <>
+      <path d="M3.5 5.5h11v7h-6l-3 2.5v-2.5h-2z" />
+      <path d="M9.5 15.5h9v-6" />
+      <path d="M20.5 9.5v9l-3-2.5" />
+    </>
+  ),
+  // Competitor communications — a building.
+  building: (
+    <>
+      <path d="M5 20.5V4.5h9v16" />
+      <path d="M14 9.5h5v11" />
+      <path d="M8 8h3M8 11.5h3M8 15h3" />
+      <path d="M3 20.5h18" />
+    </>
+  ),
+  // Caregiver and patient experience — a heart.
+  heart: (
+    <path d="M12 20.5C6.5 17 3.5 13.6 3.5 9.9A4.4 4.4 0 0 1 12 8a4.4 4.4 0 0 1 8.5 1.9c0 3.7-3 7.1-8.5 10.6z" />
+  ),
+  // The molecule at the centre of the source cluster — a simple chain, drawn
+  // rather than borrowed from an emoji so it takes the page's stroke and colour.
+  molecule: (
+    <>
+      <circle cx="12" cy="4.5" r="2" />
+      <circle cx="5.5" cy="9.5" r="2" />
+      <circle cx="18.5" cy="9.5" r="2" />
+      <circle cx="8" cy="18" r="2" />
+      <circle cx="16" cy="18" r="2" />
+      <path d="M10.6 6.1L7 8M13.4 6.1L17 8M6.6 11.2L7.4 16M17.4 11.2L16.6 16M10 18h4" />
+    </>
+  ),
 };
 
 const CategoryIcon = ({ name }) => (

@@ -52,6 +52,12 @@ back to him live beside them.
 | `drop_02_Marketbuzzr_Homepage_Revised_CTO_Handoff.zip` | homepage, 2nd | `Marketbuzzr_Homepage_Revised_CTO_Handoff/` |
 | `drop_03_Marketbuzzr_Homepage_CTO_Handoff_file_aug3.zip` | homepage, 3rd — **current** | `Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/` |
 | `drop_04_Marketbuzzr_How_It_Works_CTO_Handoff_Updated.zip` | How It Works — **current** | *(flat, no wrapper)* |
+| `drop_05_marketbuzzr-biotech-landing.html` | Biotechnology — **current** | *(a single HTML file)* |
+
+`drop_05` is the first handoff delivered as **HTML rather than artwork** — a sketch by
+an artist agent, not a page to drop in. Its copy and structure are the deliverable; its
+palette, iconography and hero layout are not. That format is a large improvement and the
+direction we want: text stays text.
 
 **Code comments and beads cite drops by number**, not by path. They used to point
 at loose unversioned folders under `~/Documents/marketbuzzr/`, which have since
@@ -77,7 +83,7 @@ email-capture modal is open:
 | Route | Page |
 |---|---|
 | `/` | `pages/Home.jsx` |
-| `/use-cases/biotech` | `pages/UseCasePage.jsx` with `content/biotech.js` |
+| `/use-cases/biotech` | `pages/IndustryPage.jsx` with `content/biotech.js` |
 | `/use-cases/tech` | `pages/UseCasePage.jsx` with `content/tech.js` |
 | `/use-cases` | redirect → `/use-cases/biotech` |
 | `/how-it-works` | `pages/HowItWorks.jsx` |
@@ -114,9 +120,12 @@ Emphasis in `home.js` is structural rather than markup. Where the brief bolds a
 line it gets its own key (`emphasis`, `closer`) and the component
 decides how to render it — **do not put `**` or HTML into those strings**.
 
-**To change marketing copy, edit the content module — never the components.** The two
-Use Case pages are literally the same component with different content objects, so copy
-edits must not introduce structural differences.
+**To change marketing copy, edit the content module — never the components.**
+
+The two Use Case pages used to be the same component with different content objects.
+**They are not any more**: biotech moved to `IndustryPage.jsx` as the pilot for a new
+structure, tech is still on `UseCasePage.jsx`. That split is deliberate and meant to be
+temporary — see The industry pages below before adding a third.
 
 `withBreaks.jsx` turns `\n` inside a content string into `<br/>`, used where the source
 deck asks for a break at a specific point.
@@ -226,6 +235,57 @@ plus the 79 KB hero the shared preload drags in for nothing (`mbz-et8e.34`). No
 visual is the LCP element on this page — it is the H1 on desktop (344ms) and the
 `.sub` paragraph on phone (260ms) — so all three stay `loading="lazy"`, which is
 what the brief conditions on. Re-measure rather than trusting this line.
+
+### The industry pages (2026-08) — and why there are two page templates
+
+`pages/IndustryPage.jsx` renders **Biotechnology only**, from `drop_05`, the first
+handoff Manu sent as HTML rather than artwork. `pages/UseCasePage.jsx` still renders
+tech and is untouched. **This is a pilot, not a permanent fork** (`mbz-et8e.38`): if it
+holds up, tech and the four unbuilt industry pages converge on `IndustryPage`. Add a
+third page there and move tech across — do not grow `UseCasePage`.
+
+**The point of the pilot is losing the text-rich PNGs.** The homepage and How It Works
+carry their meaning inside images: invisible to search engines, unreadable on a phone
+without a horizontal scroller, and uncorrectable without asking Manu to re-render. Three
+components here are built as native replacements for exactly those images, which is why
+they take content props rather than hardcoding biotech copy:
+
+| Component | Replaces, if the pilot lands |
+|---|---|
+| `SourceCluster` | How It Works step 01 (`monitor-filter`) |
+| `InsightCard` | homepage §4 (`insight-medicalcomp`) |
+| `RoleBar` | How It Works step 02 (`role-based-intelligence`) |
+
+If that happens it also retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28`
+— the re-render, the 2× exports, the stale date and the mobile renders all dissolve when
+the text is text.
+
+**The drop's hero was not ported, and could not have been.** It absolutely-positioned
+seven boxes at hardcoded percentage offsets, and they already overlapped *in Manu's own
+rendering* — two collided at 1440px with one clipped mid-word, two more truncated by
+1000px. `SourceCluster` puts the chips in a grid so they cannot collide at any width.
+The one positioned element is the core, laid over a centre cell that an empty
+`aria-hidden` spacer holds open; that is safe because the cell beneath is guaranteed
+empty, and keeping the core outside the `<ul>` is what leaves the seven sources as one
+uninterrupted list. `.source-cluster-hole`'s `min-height` is what makes the middle row
+taller than a chip row, and `align-items: center` (not `stretch`) is what stops the two
+chips flanking the core growing to match it.
+
+**The insight card is labelled illustrative, and must stay labelled.** It carries a
+visible "an illustrative example, not a real signal" note, and its timestamp is
+deliberately **relative** ("Detected 2 days ago") — the sketch dated it "May 2, 2025",
+already fifteen months stale on arrival, which is the same defect filed against the
+homepage artwork as `mbz-et8e.28` item 5. An absolute date in a fabricated example rots
+the day it ships. The draft options are labels, not buttons, because a real button that
+does nothing is worse than a label that never claimed to be one.
+
+Manu's emoji iconography is not carried over — the site draws its own line icons in
+`CategoryIcon.jsx`, which now holds eight more, so they take the page's stroke and colour
+and render identically everywhere.
+
+The nine-question "Turn Market Buzz into Signals" `ProblemList` is **gone from biotech**
+with the user's approval. `ProblemList` and tech's `problems` content both stay; tech
+still renders it.
 
 Full page weight is 281 KB (91 KB gzipped text + 189 KB of AVIF), plus ~44 KB of
 Google Fonts. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no

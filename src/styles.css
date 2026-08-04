@@ -1897,6 +1897,393 @@ footer h4 {
 }
 
 /* ============================================================
+   Industry pages (mbz-et8e.38). Built native rather than as artwork, as the
+   pilot for doing the same to the homepage and How It Works. Everything below
+   reuses the existing tokens and the shared .card surface; nothing here
+   introduces a new colour, radius or shadow.
+   ============================================================ */
+
+/* A paragraph where CategoryCard has a list. Matches .category-lines li so the
+   two shapes read as one family. */
+.category-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* --- Hero source cluster --------------------------------------------------
+
+   Chips are GRID ITEMS, never absolutely positioned. The sketch placed seven
+   boxes at hardcoded percentage offsets and they already overlapped in its own
+   rendering (two collided at 1440px, two more truncated by 1000px). Grid cells
+   cannot overlap at any width, which is the whole reason for this shape.
+
+   THIS ONE BLOCK IS MOBILE-FIRST, against the rest of the file. Stacked is the
+   default and the ring is the enhancement, because the stacked treatment is
+   needed in two independent situations -- a narrow screen, and a source list
+   that is not 6-8 long (see SourceCluster.jsx). Written desktop-first, those
+   same eight declarations had to appear twice and be kept in step by hand. */
+.source-cluster {
+  margin: var(--spacing-3xl) auto 0;
+  max-width: 880px;
+}
+
+.source-cluster-ring {
+  display: flex;
+  flex-direction: column;
+}
+
+.source-cluster-chips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Not stretch: in the ring the middle row is deliberately taller than a chip
+     (see .source-cluster-hole), and stretching made the two chips flanking the
+     core twice the height of the six around them. */
+  align-items: center;
+}
+
+/* Stacked: the core leads. It follows the <ul> in the DOM -- which is what lets
+   the seven sources stay one uninterrupted list -- so order pulls it up. */
+.source-cluster-core {
+  order: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin: 0 auto var(--spacing-lg);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  /* A soft pool of brand light, so the centre reads as the subject the chips
+     are arranged around rather than as an eighth chip. */
+  background: radial-gradient(
+    circle,
+    rgba(110, 224, 255, 0.16),
+    transparent 68%
+  );
+}
+
+.source-cluster-core .category-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.source-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid #ffffff14;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.source-chip .category-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
+/* Holds the centre cell open for the core. The min-height is what makes the
+   middle row taller than a chip row, so the centre reads as the thing the ring
+   is arranged around rather than as a gap where a chip is missing. Rendered
+   only in the ring -- stacked, it would just be an empty cell. */
+.source-cluster-hole {
+  visibility: hidden;
+  min-height: 104px;
+}
+
+.source-cluster-caption {
+  margin: var(--spacing-lg) auto 0;
+  max-width: var(--lead-measure);
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+}
+
+/* The ring proper: three columns with the core laid over the centre cell. The
+   core is the one positioned element here, and that is safe precisely because
+   the cell beneath it is a guaranteed-empty spacer. */
+@media (min-width: 901px) {
+  .source-cluster-ring.is-ring {
+    display: block;
+    position: relative;
+  }
+
+  .source-cluster-ring.is-ring .source-cluster-chips {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .source-cluster-ring.is-ring .source-cluster-core {
+    order: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    margin: 0;
+    border-radius: var(--radius-full);
+  }
+}
+
+/* --- Worked insight example ---------------------------------------------- */
+
+.insight-card {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  border: 1px solid #ffffff14;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #0f1a45cc, #0c1538cc);
+  box-shadow: var(--shadow-md);
+  text-align: left;
+}
+
+.insight-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid #ffffff14;
+}
+
+.insight-card-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+/* The sketch used a filled purple pill and a filled green one. Here they are
+   outlined in the site's own accent instead: two filled badges side by side
+   fight for attention, and neither is a status the reader can act on. */
+.insight-tag,
+.insight-impact {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--ring);
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.insight-detected {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* The card takes the 1400px wide measure so its four-across source and draft
+   rows have room, but PROSE inside it must not: at the full width the summary
+   ran ~110 characters, against the 700px the rest of the site holds text to. */
+.insight-headline {
+  margin: var(--spacing-lg) 0 var(--spacing-sm);
+  max-width: var(--lead-measure);
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.2;
+  text-align: left;
+}
+
+.insight-summary {
+  margin: 0;
+  max-width: var(--lead-measure);
+  color: var(--muted);
+}
+
+.insight-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+}
+
+.insight-block h4,
+.insight-strip h4 {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.insight-block p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.insight-count {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Markers are drawn rather than listed: a bullet glyph reads as decoration next
+   to a heading that already says these are recommended actions. */
+.insight-actions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.insight-actions li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--muted);
+}
+
+.insight-actions li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(145deg, var(--brand-2), var(--brand));
+}
+
+.insight-strip {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid #ffffff14;
+}
+
+.insight-sources,
+.insight-drafts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-md);
+}
+
+.insight-sources li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.insight-sources .category-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.insight-sources strong {
+  display: block;
+  font-size: 15px;
+}
+
+.insight-sources span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Labels, not buttons — see the note in InsightCard.jsx. Styled with a border
+   and no hover so they do not invite a click that goes nowhere. */
+.insight-drafts li {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px dashed #ffffff24;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.insight-note {
+  margin: var(--spacing-lg) 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* --- Role bar ------------------------------------------------------------- */
+
+.role-bar {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border: 1px solid #ffffff14;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #101c4acc, #0b1332cc);
+}
+
+.role-bar-heading {
+  margin: 0 0 var(--spacing-md);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand);
+  text-align: left;
+}
+
+.role-bar-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.role-bar-items strong {
+  display: block;
+}
+
+.role-bar-items span {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .insight-split,
+  .role-bar-items {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .insight-sources,
+  .insight-drafts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .source-cluster-chips {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .insight-card {
+    padding: var(--spacing-lg);
+  }
+
+  .insight-sources,
+  .insight-drafts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ============================================================
    Final overrides. These rules must stay LAST in the file: several of them tie
    on specificity with the base rules they override (.section p.lead,
    .info-block p.lead, .signal-mark, .signal-mark polyline) and win only by

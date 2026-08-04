@@ -62,7 +62,10 @@ deploy-live: ## Publish the LIVE site -> marketbuzzr.com (main branch only)
 
 snapshots: ## List the snapshot directories the deploy script protects
 	@echo "Frozen tags PRESERVED_DIRS keeps a live deploy from deleting:"
-	@grep -E '^const PRESERVED_DIRS' $(DEPLOY_SCRIPT) \
+	@# Read the whole declaration, not just its first line: the list is free to
+	@# wrap across lines as it grows, and a single-line grep silently printed
+	@# nothing the first time it did.
+	@sed -n '/const PRESERVED_DIRS/,/\]/p' $(DEPLOY_SCRIPT) \
 	  | grep -oE '"[^"]+"' | tr -d '"' | sed 's/^/  /'
 	@echo
 	@echo "The rolling sandbox is protected too -- it is the first entry, held in"

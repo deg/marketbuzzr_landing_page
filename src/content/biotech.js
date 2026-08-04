@@ -1,103 +1,160 @@
-// Use Case: Biotech. Copy lifted from Manu's doc ("Market Intelligence for
-// Biotech Companies" section).
+// Biotechnology industry page, rebuilt from Manu's drop_05 sketch — the first
+// handoff delivered as HTML rather than artwork (drop_05 in the design repo).
+//
+// The sketch is a drawing by an artist agent, not a page to drop in. What is
+// taken from it is the copy and the *idea* of a worked insight example; its
+// palette (light), its iconography (emoji) and its hero layout (seven
+// absolutely-positioned boxes that already overlap in its own rendering) are
+// not. See mbz-et8e.38.
+//
+// THIS PAGE IS A PILOT. If the native-HTML approach works, the homepage and How
+// It Works lose their text-rich PNGs the same way, so the blocks below are
+// shaped as reusable content contracts rather than biotech-specific markup:
+// `sources` feeds the same component that would replace How It Works step 01,
+// `insight` the homepage's insight artwork, `roles` How It Works step 02.
+//
+// Icon names are keys in components/CategoryIcon.jsx. The sketch's emoji are
+// deliberately not carried over — the site draws its own icons so they take the
+// page's stroke and colour and render the same everywhere.
 export const biotech = {
   slug: "biotech",
   title: "Market Intelligence for Biotech Teams — MarketBuzzr",
+
   hero: {
-    kicker: "Market Intelligence for Biotech Companies",
+    kicker: "MARKETBUZZR FOR BIOTECHNOLOGY",
     title: "Always know what's happening around your pipeline",
     sub: [
-      "Understand what patients, caregivers, KOLs, competitors, and the broader market are saying about your therapy — outside of clinical data.",
+      "Understand what patients, caregivers, KOLs, competitors and the broader market are saying about your therapy — outside of clinical data.",
+      "MarketBuzzr brings fragmented external signals together and turns them into indication- and molecule-specific intelligence your team can act on.",
     ],
-    ctaLabel: "Get your MarketBuzzr",
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
   },
-  intro: [
-    {
-      heading: "Built for Lean Biotech Teams",
-      paragraphs: [
-        "Clinical data tells only part of the story. The real-world narrative around your molecule is already forming across patient and caregiver communities, KOL discussions, conference commentary, biotech blogs, YouTube uploads, Reddit threads, advocacy groups, and competitor communications.",
-        "MarketBuzzr structures these fragmented external signals into indication- and molecule-specific intelligence, helping you understand how your therapy is being perceived, discussed, and positioned across the ecosystem.",
+
+  // The hero visual: the outside conversations that form around a molecule.
+  // `centre` is what they are all about; `items` are where they happen.
+  sources: {
+    centre: "Your molecule",
+    caption:
+      "The conversations forming around your therapy, across the places they actually happen.",
+    items: [
+      { icon: "people", label: "Patient & caregiver communities" },
+      { icon: "message", label: "KOLs & expert discussions" },
+      { icon: "calendar", label: "Conferences & event coverage" },
+      { icon: "article", label: "Biotech media & blogs" },
+      { icon: "video", label: "YouTube & video content" },
+      { icon: "threads", label: "Reddit & online communities" },
+      { icon: "building", label: "Competitor communications" },
+    ],
+  },
+
+  intro: {
+    heading: "See what's happening beyond the clinical data",
+    paragraphs: [
+      "The real-world narrative around your molecule is already forming across patient and caregiver communities, KOL discussions, conference commentary, biotech media, YouTube, Reddit, advocacy groups and competitor communications.",
+      "MarketBuzzr structures these fragmented signals into indication- and molecule-specific intelligence, helping you understand how your therapy is being perceived, discussed and positioned across the ecosystem.",
+    ],
+    emphasis: "Clinical data tells only part of the story.",
+  },
+
+  // An illustrative example of what the product produces, not a real signal.
+  //
+  // `detected` is deliberately RELATIVE. The sketch dated this "May 2, 2025",
+  // which was fifteen months stale on arrival — the same defect already filed
+  // against the homepage artwork as mbz-et8e.28 item 5. An absolute date in a
+  // fabricated example rots the moment it ships; a relative one never does.
+  insight: {
+    label: "Example insight",
+    disclaimer: "An illustrative example, not a real signal.",
+    tag: "Emerging patient signal",
+    detected: "Detected 2 days ago",
+    impact: "High impact",
+    headline:
+      "Caregiver discussions point to growing concern around treatment burden",
+    summary:
+      "Recent conversations across patient communities and caregiver discussions show increasing attention to administration frequency and its impact on day-to-day treatment routines.",
+    actions: {
+      heading: "Recommended actions",
+      items: [
+        "Assess whether treatment burden is emerging as a meaningful perception driver",
+        "Compare how competing therapies are being discussed around convenience and administration",
+        "Incorporate recurring caregiver questions into upcoming patient engagement",
       ],
     },
-  ],
-  cards: {
+    implication: {
+      heading: "Strategic implication",
+      text: "Treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication — even where clinical efficacy remains the primary point of differentiation.",
+    },
+    sources: {
+      heading: "Sources",
+      items: [
+        { icon: "people", name: "Patient community", kind: "External discussion" },
+        { icon: "heart", name: "Caregiver forum", kind: "Community signal" },
+        { icon: "message", name: "KOL discussion", kind: "Expert commentary" },
+        { icon: "calendar", name: "Conference commentary", kind: "Event coverage" },
+      ],
+    },
+    drafts: {
+      heading: "Turn this insight into work",
+      items: [
+        "Executive brief",
+        "Competitive brief",
+        "Board talking points",
+        "Action plan",
+      ],
+    },
+  },
+
+  // Who acts on that same insight, and what they get. The wording is
+  // deliberately close to How It Works step 02, which makes the same point in a
+  // PNG this component is a candidate to replace.
+  roles: {
+    heading: "One signal, read three ways",
     items: [
-      {
-        heading: "Treatment Perception",
-        description:
-          "How patients, caregivers, and the broader ecosystem understand your molecule shapes expectations long before approval. We track how it is being discussed in terms of outcomes, burden, and real-world experience.",
-        note: "Understand how your therapy is perceived beyond clinical endpoints",
-      },
-      {
-        heading: "Early Safety & Blind Spot Detection",
-        description:
-          "Not all important signals appear in clinical or internal reporting. We surface emerging discussions around safety, tolerability, and treatment approach that may indicate early perception shifts or concerns worth addressing proactively.",
-        note: "Spot emerging safety and perception signals to avoid blind spots",
-      },
-      {
-        heading: "Caregiver & Community Insights",
-        description:
-          "Families and caregivers are often the most active voices in patient communities. Their discussions reveal unmet needs, practical challenges, and recurring questions that help teams better understand real-world context around their molecule.",
-        note: "Surface caregiver and patient perspectives",
-      },
-      {
-        heading: "Competitor & Conference Intelligence",
-        description:
-          "We analyze how competing therapies, mechanisms, and companies are being discussed across biotech blogs, conference coverage, YouTube uploads, KOL commentary, and patient communities, helping teams stay aligned with how the landscape is actually evolving.",
-        note: "Understand how competitors are positioning their therapies",
-      },
+      { name: "Executive", outputs: "Executive brief · Board talking points" },
+      { name: "Marketing", outputs: "Blog post · LinkedIn post" },
+      { name: "Sales", outputs: "Battlecard · Talk track" },
     ],
   },
-  problems: {
-    title: "Turn Market Buzz into Signals",
-    intro:
-      "MarketBuzzr continuously turns fragmented external conversations into structured, indication- and molecule-specific intelligence — helping biotech teams separate noise from emerging signals across the ecosystem.",
+
+  features: {
+    heading: "Real-world intelligence around your molecule",
     items: [
       {
-        question: "Missing what patients and families are saying?",
-        answer: "Families may already be discussing safety concerns or treatment struggles that haven't reached your team yet.",
+        icon: "people",
+        heading: "Treatment perception",
+        description:
+          "Understand how patients, caregivers and the broader ecosystem perceive your therapy beyond clinical endpoints — including outcomes, treatment burden and real-world experience.",
       },
       {
-        question: "Missing input for your patient or caregiver workshops?",
-        answer: "Important concerns and real-world experiences are often already being discussed in communities before they are ever addressed in structured engagement sessions.",
+        icon: "shield",
+        heading: "Early signals & blind spots",
+        description:
+          "Surface emerging discussions around safety, tolerability and treatment approach that may indicate perception shifts or concerns worth understanding earlier.",
       },
       {
-        question: "Relying only on clinical data?",
-        answer: "The real-world experience of patients can look very different from your study assumptions.",
+        icon: "heart",
+        heading: "Patient & caregiver insights",
+        description:
+          "Identify recurring needs, practical challenges and questions being discussed across patient and caregiver communities.",
       },
       {
-        question: "Worried about hidden safety perception?",
-        answer: "Early concerns about tolerability or treatment approach often surface in communities long before formal reporting.",
-      },
-      {
-        question: "Do you fully understand how your molecule is perceived?",
-        answer: "Expectations, fears, and misunderstandings may already be shaping your external narrative.",
-      },
-      {
-        question: "Losing track of competitor messaging?",
-        answer: "Competing therapies may already be shaping how patients and caregivers think about treatment options.",
-      },
-      {
-        question: "Missing what families say after conferences and announcements?",
-        answer: "Key interpretations of your data may already be spreading through YouTube, blogs, and community discussions.",
-      },
-      {
-        question: "Do you know what caregivers struggle with day to day?",
-        answer: "The real barriers to adoption are often discussed outside any formal channel.",
-      },
-      {
-        question: "Too much happening across the ecosystem to follow manually?",
-        answer: "The most important signals are already out there — just fragmented across dozens of sources.",
+        icon: "target",
+        heading: "Competitor & conference intelligence",
+        description:
+          "Understand how competing therapies, mechanisms and companies are being discussed across biotech media, conferences, KOL commentary and patient communities.",
       },
     ],
+    closer:
+      "MarketBuzzr gives lean biotech teams a continuously updated view of the conversations shaping their therapy and indication — without adding operational overhead or replacing existing clinical, regulatory or commercial workflows.",
   },
+
   closing: {
-    heading: "Real-World Intelligence Around Your Molecule",
+    heading: "Stay closer to the conversations shaping your therapy",
     paragraphs: [
-      "MarketBuzzr gives biotech teams a continuously updated view of how their molecule is being discussed outside clinical and regulatory channels. We structure signals from biotech media, patient and caregiver communities, KOL discussions, conferences, YouTube uploads, Reddit threads, and competitor communications into clear, indication-specific intelligence aligned with your strategic priorities.",
-      "This helps teams identify blind spots earlier, understand real-world perception shifts, and stay aligned with how the landscape is evolving — without adding operational overhead or replacing existing clinical, regulatory, or commercial workflows.",
-      "See how MarketBuzzr can help your team stay closer to the conversations shaping your therapy and indication.",
+      "See emerging signals earlier, understand how your molecule is being perceived, and stay aligned with how your indication is evolving.",
     ],
-    ctaLabel: "Book a Demo",
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
   },
 };
