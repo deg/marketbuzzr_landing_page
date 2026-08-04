@@ -53,7 +53,7 @@ const IndustryPage = ({ data }) => {
           the signal and the bar is who acts on it, and the bar runs edge to edge
           along the bottom rather than floating below as a second panel. The
           wrapper clips, which is what lets the bar square off against it. */}
-      <section className="section container container-wide industry-example">
+      <section className="section container industry-example">
         <div className="insight-wrap">
           <InsightCard {...insight} />
           <RoleBar {...roles} />

@@ -2069,6 +2069,49 @@ footer h4 {
   line-height: 1.5;
 }
 
+/* GEOMETRY, which the first comparison pass missed entirely: it collected every
+   element's width and then only diffed typography, so 29 of 32 elements were
+   sitting at a different width and nothing reported it.
+
+   His container is 1180px; ours was on the site's 1400px wide measure. And his
+   prose is not held to one reading measure -- the intro runs 850px, the closing
+   line 920px, and the insight card's headline and summary run the full width of
+   the card. Ours capped all of them at --lead-measure, which is why paragraphs
+   that set in two lines for him set in three for us. */
+/* His exact form. `max-width: 1180px; padding: 0 20px` is NOT the same thing:
+   box-sizing is border-box site-wide, so that yields 1140px of content and left
+   every element on the page 40px narrower than his. */
+.industry-page .container {
+  width: min(1180px, calc(100% - 40px));
+  max-width: none;
+  padding: 0;
+}
+
+.industry-page .info-block {
+  max-width: 850px;
+}
+
+/* The block is 850px wide but its paragraphs were still taking the site's 700px
+   reading measure from the Final overrides, so the block was wider than anything
+   in it. */
+.industry-page .info-block p.lead {
+  max-width: none;
+}
+
+/* The closing line under the capability row; his carries max-width:920px. */
+.industry-page .feature-row + .lead {
+  max-width: 920px;
+  margin-top: 42px;
+}
+
+/* Uncapped, as his are. They are long lines -- around 100 characters at this
+   width -- but the card is his design and holding them to 700px inside an
+   1140px card left an obvious empty column down the right. */
+.industry-page .insight-headline,
+.industry-page .insight-summary {
+  max-width: none;
+}
+
 :root[data-theme="light"] .industry-page {
   --brand: #5d22d6;
   --muted: #2e3c61;
@@ -2282,8 +2325,8 @@ footer h4 {
    not care that the block sits later in the file. */
 .hero-split {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: var(--spacing-3xl);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 56px;
   align-items: center;
   text-align: left;
 }
@@ -2556,12 +2599,18 @@ footer h4 {
     /* Capped in px as well as proportional: past about 1440 the column stops
        growing but the percentages kept pushing the chips outward, so the overlap
        drifted away at wide viewports. */
-    --ring-rx: min(31%, 190px);
-    --ring-ry: min(40%, 215px);
+    /* Retuned after the container came down from 1352px to his 1180px: the
+       aside column is now 517px, not 704px, and the radii that worked in the
+       wider box put two chips into a 9px corner overlap. Taller and narrower is
+       what clears it -- the collisions in this arrangement are always between
+       angularly-adjacent chips at a similar y, so vertical spread is the lever,
+       not horizontal. */
+    --ring-rx: min(28%, 140px);
+    --ring-ry: min(48%, 260px);
 
     position: relative;
     display: block;
-    min-height: 500px;
+    min-height: 580px;
   }
 
   .source-cluster-chips {
@@ -2897,7 +2946,6 @@ footer h4 {
 
 .industry-cta p {
   margin: 0;
-  max-width: 46em;
   color: #d5def7;
 }
 
