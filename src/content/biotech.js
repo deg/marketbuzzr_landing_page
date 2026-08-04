@@ -32,8 +32,9 @@ export const biotech = {
   },
 
   // The hero visual: the outside conversations that form around a therapy.
-  // `items` are where they happen; the centre of the ring is an unlabelled mark,
-  // because the caption below it already names what they are all about.
+  // `items` are where they happen; the mark at the centre is unlabelled, and so
+  // is the arrangement as a whole. Both the eyebrow and the two paragraphs
+  // beside it already say what this is.
   //
   // LABELS ARE SHORTER THAN THE SKETCH'S, deliberately. Its wording — "Patient &
   // caregiver communities", "Conferences & event coverage" — wraps to two lines
@@ -42,9 +43,10 @@ export const biotech = {
   // caregiver communities, KOL discussions, conference commentary, biotech
   // media, YouTube, Reddit, advocacy groups and competitor communications. A
   // chip is a label, not a sentence.
+  // No caption. An earlier version carried "The conversations forming around
+  // your therapy, across the places they actually happen." -- invented here, not
+  // in the sketch, and a restatement of the two paragraphs sitting beside it.
   sources: {
-    caption:
-      "The conversations forming around your therapy, across the places they actually happen.",
     items: [
       { icon: "people", label: "Patients & caregivers" },
       { icon: "message", label: "KOLs & experts" },

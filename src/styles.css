@@ -9,6 +9,9 @@
   --muted: #c2d1f5;
   --brand: #6ee0ff;
   --brand-2: #5ea4ff;
+  /* Third stop, used only by the DNA mark's gradient: two stops of a close
+     hue read as flat at that size. */
+  --brand-3: #a06bff;
   --ring: rgba(110, 224, 255, 0.35);
   --link-color: #86d5ff;
 
@@ -106,6 +109,7 @@
   --muted: #2e3c61;
   --brand: #5f22d8;
   --brand-2: #7c4dff;
+  --brand-3: #d63bd6;
   --ring: rgba(95, 34, 216, 0.3);
   --link-color: #4b22c3;
 
@@ -2213,10 +2217,22 @@ footer h4 {
   );
 }
 
-/* Its own aspect ratio, so height is not restated. */
+/* Its own aspect ratio, so height is not restated. Rotated because the sketch
+   draws the helix on the diagonal, which also stops it reading as a vertical
+   divider between the chips either side of it. */
 .dna-mark {
-  width: 50px;
+  width: 74px;
   height: auto;
+  transform: rotate(38deg);
+}
+
+@media (min-width: 1250px) {
+  /* Large enough that the chips actually lap it. At 116px they cleared the ink
+     entirely at every width -- measured, not eyeballed -- and the arrangement
+     read as a ring with a small icon in the hole rather than chips over a mark. */
+  .dna-mark {
+    width: 210px;
+  }
 }
 
 .source-chip {
@@ -2275,30 +2291,65 @@ footer h4 {
   font-size: 15px;
 }
 
-@media (min-width: 901px) {
+/* Between a phone and the scatter: two columns. Seven chips in one column makes
+   the hero very tall at these widths, and the scatter does not fit yet. */
+@media (min-width: 561px) {
+  .source-cluster-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* The scatter. Chips are absolutely positioned on a common ellipse, each at the
+   angle its index earns, so the shape is derived from the item count rather than
+   hand-placed -- unlike the sketch, whose seven boxes carried fixed percentage
+   offsets and collided with each other in its own rendering.
+
+   The chips DELIBERATELY lap the mark; that is the effect. What they must not do
+   is collide with each other or leave the container. The ellipse is much wider
+   than it is tall because chips are wide and short, so the left and right of a
+   circle would collide long before the top and bottom did.
+
+   1250px IS MEASURED, NOT CHOSEN. Below it the hero's right-hand column cannot
+   hold seven ~200px chips on any ellipse: at 1200px one chip still escapes the
+   container at these radii, and tighter radii start colliding instead. Tuning
+   only at 1440 hid this -- the first version of this block was clean there and
+   broken at every width from 901 to 1280. */
+@media (min-width: 1250px) {
   .source-cluster-ring {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--spacing-sm);
-    /* Not stretch: the middle row is taller than a chip because the mark is in
-       it, and stretching grew the two chips flanking the mark to match. */
-    align-items: center;
+    /* Capped in px as well as proportional: past about 1440 the column stops
+       growing but the percentages kept pushing the chips outward, so the overlap
+       drifted away at wide viewports. */
+    --ring-rx: min(34%, 215px);
+    --ring-ry: min(44%, 250px);
+
+    position: relative;
+    display: block;
+    min-height: 600px;
   }
 
   .source-cluster-chips {
-    display: contents;
+    display: block;
+  }
+
+  .source-cluster-ring .source-chip {
+    position: absolute;
+    left: calc(50% + var(--cos) * var(--ring-rx));
+    top: calc(50% + var(--sin) * var(--ring-ry));
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
   }
 
   .source-cluster-core {
     order: 0;
-    grid-area: 2 / 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     margin: 0;
-    padding: var(--spacing-sm);
-  }
-
-  /* Sibling of the ring inside the <figure>, not a grid item of it. */
-  .source-cluster-caption {
-    text-align: center;
+    padding: 0;
+    /* No pool of light behind it any more: at this size the mark holds the
+       centre on its own, and the glow only muddied the chips lying over it. */
+    background: none;
   }
 }
 

@@ -45,14 +45,15 @@ const DnaMark = () => (
         x2="0"
         y2="132"
       >
-        <stop offset="0%" stopColor="var(--brand-2)" />
-        <stop offset="100%" stopColor="var(--brand)" />
+        <stop offset="0%" stopColor="var(--brand)" />
+        <stop offset="50%" stopColor="var(--brand-3)" />
+        <stop offset="100%" stopColor="var(--brand-2)" />
       </linearGradient>
     </defs>
 
     {/* Behind the axis: thinner and faded, drawn first so the front strands
         overlap them at the crossings. */}
-    <g stroke="url(#dna-strand)" strokeWidth="3" opacity="0.38">
+    <g stroke="url(#dna-strand)" strokeWidth="3.4" opacity="0.42">
       <path d="M46.8 31.0C44.4 32.2 36.9 35.7 32.0 38.0C27.1 40.3 20.7 42.7 17.2 45.0C13.7 47.3 12.0 50.8 11.0 52.0" />
       <path d="M46.8 87.0C44.4 88.2 36.9 91.7 32.0 94.0C27.1 96.3 20.7 98.7 17.2 101.0C13.7 103.3 12.0 106.8 11.0 108.0" />
       <path d="M32.0 10.0C29.5 11.2 20.7 14.7 17.2 17.0C13.7 19.3 12.0 22.8 11.0 24.0" />
@@ -62,7 +63,7 @@ const DnaMark = () => (
 
     {/* The base pairs. Length follows the gap between the strands, so they
         vanish at the crossings; opacity follows depth. */}
-    <g stroke="url(#dna-strand)" strokeWidth="2.4">
+    <g stroke="url(#dna-strand)" strokeWidth="2.8">
       <path d="M16.4 17.5H47.6" opacity="0.77" />
       <path d="M11.1 24.9H52.9" opacity="0.57" />
       <path d="M19.7 32.4H44.3" opacity="0.40" />
@@ -80,7 +81,7 @@ const DnaMark = () => (
     </g>
 
     {/* In front of the axis: full weight, drawn last. */}
-    <g stroke="url(#dna-strand)" strokeWidth="4">
+    <g stroke="url(#dna-strand)" strokeWidth="4.6">
       <path d="M32.0 10.0C34.5 11.2 43.3 14.7 46.8 17.0C50.3 19.3 52.0 22.8 53.0 24.0" />
       <path d="M17.2 59.0C19.6 60.2 27.1 63.7 32.0 66.0C36.9 68.3 43.3 70.7 46.8 73.0C50.3 75.3 52.0 78.8 53.0 80.0" />
       <path d="M17.2 115.0C19.6 116.2 29.5 120.8 32.0 122.0" />
