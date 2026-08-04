@@ -1968,11 +1968,12 @@ footer h4 {
   );
 }
 
-/* Larger than a chip's icon: with no label, the mark alone has to hold the
-   centre of the ring. */
-.source-cluster-core .category-icon {
-  width: 56px;
-  height: 56px;
+/* Much larger than a chip's icon: with no label, the mark alone has to hold the
+   centre of the ring, and it carries detail a 24px chip icon cannot. Its own
+   aspect ratio, so height is not restated. */
+.dna-mark {
+  width: 50px;
+  height: auto;
 }
 
 .source-chip {
@@ -2002,7 +2003,11 @@ footer h4 {
    only in the ring -- stacked, it would just be an empty cell. */
 .source-cluster-hole {
   visibility: hidden;
-  min-height: 104px;
+  /* Sized to clear the DNA mark plus the padding its glow needs. At 104px --
+     right for the small line icon this replaced -- the taller mark overlapped
+     the chips above and below it at every width above 900px. Re-measure if the
+     mark's width changes; its height is 132/64 of that plus 2x --spacing-lg. */
+  min-height: 168px;
 }
 
 .source-cluster-caption {

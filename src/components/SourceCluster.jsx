@@ -1,5 +1,6 @@
 import React from "react";
 import CategoryIcon from "./CategoryIcon";
+import DnaMark from "./DnaMark";
 
 // The external sources forming a conversation around one thing, with that thing
 // at the centre. Built to be reusable: How It Works step 01 makes this same
@@ -62,7 +63,7 @@ const SourceCluster = ({ caption, items }) => {
             its own. Decorative, hence aria-hidden: the caption carries the
             meaning for assistive technology. */}
         <div className="source-cluster-core" aria-hidden="true">
-          <CategoryIcon name="dna" />
+          <DnaMark />
         </div>
       </div>
       {caption && (
