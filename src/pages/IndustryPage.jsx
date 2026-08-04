@@ -3,7 +3,7 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import SectionTitle from "../components/SectionTitle";
 import CategoryIcon from "../components/CategoryIcon";
-import CtaPanel from "../components/CtaPanel";
+import DemoButton from "../components/DemoButton";
 import SourceCluster from "../components/SourceCluster";
 import InsightCard from "../components/InsightCard";
 import RoleBar from "../components/RoleBar";
@@ -49,24 +49,28 @@ const IndustryPage = ({ data }) => {
         ))}
       </section>
 
-      {/* The example and the roles read as one unit: the card is the signal, the
-          bar is who acts on it. Kept in one section so the spacing between them
-          stays tighter than the spacing between sections. */}
-      <section className="section container container-wide">
-        <InsightCard {...insight} />
-        <RoleBar {...roles} />
+      {/* ONE rounded surface holding both, as the sketch draws it: the card is
+          the signal and the bar is who acts on it, and the bar runs edge to edge
+          along the bottom rather than floating below as a second panel. The
+          wrapper clips, which is what lets the bar square off against it. */}
+      <section className="section container container-wide industry-example">
+        <div className="insight-wrap">
+          <InsightCard {...insight} />
+          <RoleBar {...roles} />
+        </div>
       </section>
 
-      {/* Four capabilities on the shared .card surface in the shared 2-up .grid.
-          The only thing this shape needs that CategoryCard does not is a
-          paragraph where it has a list, so it borrows .category-card for the
-          icon-above-heading layout rather than forking a near-identical card. */}
+      {/* Four across, divided by hairlines rather than boxed as cards — the
+          sketch's shape. They are short and parallel, and four bordered cards
+          made them look like four separate offers instead of one set. */}
       <section className="section container">
         <SectionTitle title={features.heading} />
-        <div className="grid">
+        <div className="feature-row">
           {features.items.map((item) => (
-            <div className="card category-card" key={item.heading}>
-              <CategoryIcon name={item.icon} />
+            <div className="feature" key={item.heading}>
+              <span className="feature-badge">
+                <CategoryIcon name={item.icon} />
+              </span>
               <h3>{item.heading}</h3>
               <p>{item.description}</p>
             </div>
@@ -75,14 +79,23 @@ const IndustryPage = ({ data }) => {
         <p className="lead">{features.closer}</p>
       </section>
 
-      <section className="section container">
-        <CtaPanel
-          as="h2"
-          heading={closing.heading}
-          paragraphs={closing.paragraphs}
-          ctaLabel={closing.ctaPrimary}
-          secondaryCtaLabel={closing.ctaSecondary}
-        />
+      {/* Full-bleed dark band with the copy left and the buttons right, as the
+          sketch has it — not the site's centred rounded panel. It is the only
+          dark thing on the light theme and that is the point: it closes the page
+          rather than sitting on it. */}
+      <section className="industry-cta">
+        <div className="container industry-cta-grid">
+          <div>
+            <h2>{closing.heading}</h2>
+            {closing.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+          <div className="cta-actions">
+            <DemoButton label={closing.ctaPrimary} className="cta" />
+            <DemoButton label={closing.ctaSecondary} className="cta-secondary" />
+          </div>
+        </div>
       </section>
     </>
   );

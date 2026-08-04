@@ -67,24 +67,24 @@ export const biotech = {
     emphasis: "Clinical data tells only part of the story.",
   },
 
-  // An illustrative example of what the product produces, not a real signal.
+  // A worked example of what the product produces, verbatim from the sketch.
   //
-  // `detected` is deliberately RELATIVE. The sketch dated this "May 2, 2025",
-  // which was fifteen months stale on arrival — the same defect already filed
-  // against the homepage artwork as mbz-et8e.28 item 5. An absolute date in a
-  // fabricated example rots the moment it ships; a relative one never does.
+  // `detected` READS "May 2, 2025" BECAUSE THAT IS WHAT MANU WROTE. An earlier
+  // version here changed it to a relative "Detected 2 days ago" on the grounds
+  // that a fixed date in a fabricated example goes stale — which is true, and
+  // is filed as mbz-et8e.28 item 5, and was still not ours to decide. The date
+  // is his copy. Do not quietly improve it again; raise it and wait.
   insight: {
     label: "Example insight",
-    disclaimer: "An illustrative example, not a real signal.",
     tag: "Emerging patient signal",
-    detected: "Detected 2 days ago",
+    detected: "May 2, 2025 • 9:42 AM",
     impact: "High impact",
     headline:
       "Caregiver discussions point to growing concern around treatment burden",
     summary:
       "Recent conversations across patient communities and caregiver discussions show increasing attention to administration frequency and its impact on day-to-day treatment routines.",
     actions: {
-      heading: "Recommended actions",
+      heading: "Recommended Actions",
       items: [
         "Assess whether treatment burden is emerging as a meaningful perception driver",
         "Compare how competing therapies are being discussed around convenience and administration",
@@ -92,7 +92,7 @@ export const biotech = {
       ],
     },
     implication: {
-      heading: "Strategic implication",
+      heading: "Strategic Implication",
       text: "Treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication — even where clinical efficacy remains the primary point of differentiation.",
     },
     sources: {
@@ -105,25 +105,23 @@ export const biotech = {
       ],
     },
     drafts: {
-      heading: "Turn this insight into work",
+      heading: "Turn Insight Into Action",
       items: [
-        "Executive brief",
-        "Competitive brief",
-        "Board talking points",
-        "Action plan",
+        "Draft Executive Brief",
+        "Draft Competitive Brief",
+        "Draft Board Talking Points",
+        "Draft Action Plan",
       ],
     },
   },
 
-  // Who acts on that same insight, and what they get. The wording is
-  // deliberately close to How It Works step 02, which makes the same point in a
-  // PNG this component is a candidate to replace.
+  // Who acts on that same insight, and what they get. No heading: the sketch's
+  // role bar carries none, and "One signal, read three ways" was invented here.
   roles: {
-    heading: "One signal, read three ways",
     items: [
-      { name: "Executive", outputs: "Executive brief · Board talking points" },
-      { name: "Marketing", outputs: "Blog post · LinkedIn post" },
-      { name: "Sales", outputs: "Battlecard · Talk track" },
+      { name: "Executive", outputs: "Executive Brief · Board Talking Points" },
+      { name: "Marketing", outputs: "Blog Post · LinkedIn Post" },
+      { name: "Sales", outputs: "Battlecard · Talk Track" },
     ],
   },
 

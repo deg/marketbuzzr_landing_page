@@ -46,6 +46,13 @@
   --overlay-3: rgba(255, 255, 255, 0.1);
   --scrim: rgba(0, 4, 18, 0.72);
 
+  /* A second accent meaning "good news / do this", distinct from the brand. The
+     insight card uses it for the impact badge and the action ticks; the brand
+     alone made those read as the same kind of statement as the signal type. */
+  --positive: #6fe3b8;
+  --positive-soft: #10402f;
+  --accent-soft: #16295e;
+
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -110,6 +117,9 @@
   --brand: #5f22d8;
   --brand-2: #7c4dff;
   --brand-3: #d63bd6;
+  --positive: #087a57;
+  --positive-soft: #eaf9f2;
+  --accent-soft: #f2edff;
   --ring: rgba(95, 34, 216, 0.3);
   --link-color: #4b22c3;
 
@@ -2146,8 +2156,11 @@ footer h4 {
   gap: 14px;
 }
 
-.hero-split .cta-actions .cta,
-.hero-split .cta-actions .cta-secondary {
+/* Both the hero's buttons and the closing band's: the sketch uses one button
+   shape throughout, and leaving the band on the site's pill made the page end
+   in a different language from the one it opened in. */
+:is(.hero-split, .industry-cta) .cta-actions .cta,
+:is(.hero-split, .industry-cta) .cta-actions .cta-secondary {
   border-radius: 10px;
   padding: 14px 22px;
   font-size: 17px;
@@ -2155,8 +2168,8 @@ footer h4 {
   box-shadow: none;
 }
 
-.hero-split .cta-actions .cta:hover,
-.hero-split .cta-actions .cta-secondary:hover {
+:is(.hero-split, .industry-cta) .cta-actions .cta:hover,
+:is(.hero-split, .industry-cta) .cta-actions .cta-secondary:hover {
   box-shadow: var(--shadow-md);
 }
 
@@ -2231,7 +2244,7 @@ footer h4 {
      entirely at every width -- measured, not eyeballed -- and the arrangement
      read as a ring with a small icon in the hole rather than chips over a mark. */
   .dna-mark {
-    width: 210px;
+    width: 132px;
   }
 }
 
@@ -2319,12 +2332,12 @@ footer h4 {
     /* Capped in px as well as proportional: past about 1440 the column stops
        growing but the percentages kept pushing the chips outward, so the overlap
        drifted away at wide viewports. */
-    --ring-rx: min(34%, 215px);
-    --ring-ry: min(44%, 250px);
+    --ring-rx: min(31%, 190px);
+    --ring-ry: min(40%, 215px);
 
     position: relative;
     display: block;
-    min-height: 600px;
+    min-height: 500px;
   }
 
   .source-cluster-chips {
@@ -2353,15 +2366,44 @@ footer h4 {
   }
 }
 
+/* The intro block, at the sketch's weight and measure. Ours ran lighter and
+   wider, which was most of why the two pages read differently below the hero. */
+.industry-example {
+  padding-top: 0;
+}
+
+:root[data-theme="light"] .info-block h2,
+:root[data-theme="light"] .industry-cta h2 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+:root[data-theme="light"] .section p.lead {
+  font-size: 18px;
+  color: #2e3c61;
+}
+
 /* --- Worked insight example ---------------------------------------------- */
 
-.insight-card {
+/* One surface, clipped, so the role bar squares off against its bottom edge
+   instead of floating below it as a second panel. */
+.insight-wrap {
   margin-top: var(--spacing-xl);
-  padding: var(--spacing-xl);
   border: 1px solid var(--edge);
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
   background: linear-gradient(180deg, var(--surface), var(--surface-2));
   box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+:root[data-theme="light"] .insight-wrap {
+  border-color: #e8e8f1;
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(30, 39, 93, 0.12);
+}
+
+.insight-card {
+  padding: 26px;
   text-align: left;
 }
 
@@ -2382,19 +2424,29 @@ footer h4 {
   align-items: center;
 }
 
-/* The sketch used a filled purple pill and a filled green one. Here they are
-   outlined in the site's own accent instead: two filled badges side by side
-   fight for attention, and neither is a status the reader can act on. */
+/* Filled, and each in its own colour, as the sketch draws them. An earlier
+   version outlined both in the brand accent on the theory that two filled
+   badges compete; that also threw away the fact that "high impact" is a
+   different KIND of statement from the signal type, which the green says
+   instantly and a matching outline does not. */
 .insight-tag,
 .insight-impact {
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--ring);
-  color: var(--brand);
+  padding: 7px 12px;
+  border-radius: 9px;
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+
+.insight-tag {
+  background: var(--accent-soft);
+  color: var(--brand);
+}
+
+.insight-impact {
+  background: var(--positive-soft);
+  color: var(--positive);
 }
 
 .insight-detected {
@@ -2428,17 +2480,25 @@ footer h4 {
 
 .insight-block h4,
 .insight-strip h4 {
-  margin: 0 0 var(--spacing-sm);
+  margin: 0 0 12px;
   color: var(--brand);
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+/* Green, matching its tick marks — the actions are the "do this" half of the
+   card and the implication is the "so what" half. */
+.insight-block-actions h4 {
+  color: var(--positive);
 }
 
 .insight-block p {
   margin: 0;
   color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 .insight-count {
@@ -2446,8 +2506,6 @@ footer h4 {
   font-weight: 600;
 }
 
-/* Markers are drawn rather than listed: a bullet glyph reads as decoration next
-   to a heading that already says these are recommended actions. */
 .insight-actions {
   margin: 0;
   padding: 0;
@@ -2458,19 +2516,28 @@ footer h4 {
 
 .insight-actions li {
   position: relative;
-  padding-left: 26px;
+  padding-left: 30px;
   color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
 }
 
+/* A tick in a soft disc, as the sketch has it. A plain dot read as a bullet
+   list; these are things to do, and the tick says so. */
 .insight-actions li::before {
-  content: "";
+  content: "\2713";
   position: absolute;
-  left: 4px;
-  top: 0.55em;
-  width: 8px;
-  height: 8px;
+  left: 0;
+  top: 0.15em;
+  width: 20px;
+  height: 20px;
   border-radius: var(--radius-full);
-  background: linear-gradient(145deg, var(--brand-2), var(--brand));
+  background: var(--positive-soft);
+  color: var(--positive);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 20px;
+  text-align: center;
 }
 
 .insight-strip {
@@ -2512,15 +2579,16 @@ footer h4 {
   font-size: 13px;
 }
 
-/* Labels, not buttons — see the note in InsightCard.jsx. Styled with a border
-   and no hover so they do not invite a click that goes nowhere. */
+/* Labels, not buttons — see the note in InsightCard.jsx — but drawn as the
+   sketch draws them: a solid hairline and accent text. They were dashed and
+   grey, which read as disabled rather than as an offer. */
 .insight-drafts li {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px dashed var(--edge-3);
-  border-radius: var(--radius-sm);
-  color: var(--muted);
+  padding: 12px;
+  border: 1px solid var(--edge-3);
+  border-radius: 10px;
+  color: var(--brand);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -2531,24 +2599,132 @@ footer h4 {
   font-style: italic;
 }
 
-/* --- Role bar ------------------------------------------------------------- */
+/* --- Capability row and closing band ------------------------------------- */
 
-.role-bar {
-  margin-top: var(--spacing-lg);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  border: 1px solid var(--edge);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, #101c4acc, #0b1332cc);
+/* Four across, separated by hairlines rather than boxed. Four bordered cards
+   made these read as four separate offers; they are one set. */
+.feature-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: var(--spacing-2xl);
 }
 
-.role-bar-heading {
-  margin: 0 0 var(--spacing-md);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.feature {
+  padding: 0 14px;
+  text-align: center;
+}
+
+.feature + .feature {
+  border-left: 1px solid var(--edge);
+}
+
+.feature-badge {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+}
+
+.feature-badge .category-icon {
+  width: 27px;
+  height: 27px;
+}
+
+.feature h3 {
+  margin: 0 0 8px;
   color: var(--brand);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Full-bleed dark band closing the page, copy left and buttons right. Dark in
+   BOTH themes by design -- it is the full stop, and on the light page it is the
+   only dark thing, which is what makes it land. */
+.industry-cta {
+  margin-top: var(--spacing-3xl);
+  padding: 44px 0;
+  background: linear-gradient(120deg, #081638, #101e4f);
+  color: #ffffff;
+}
+
+.industry-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: center;
+}
+
+.industry-cta h2 {
+  margin: 0 0 10px;
+  color: #ffffff;
   text-align: left;
+}
+
+.industry-cta p {
+  margin: 0;
+  max-width: 46em;
+  color: #d5def7;
+}
+
+/* The band is dark in both themes, so the light theme's white-on-brand rule
+   would put white text on a light-lilac secondary button. Restate both. */
+.industry-cta .cta-actions {
+  justify-content: flex-end;
+}
+
+:root[data-theme="light"] .industry-cta .cta-secondary {
+  background: transparent;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .feature-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-xl);
+  }
+
+  .feature + .feature {
+    border-left: 0;
+  }
+
+  .industry-cta-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .industry-cta .cta-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .feature-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Role bar ------------------------------------------------------------- */
+
+/* Always this navy, in both themes, and edge to edge along the bottom of the
+   wrapper rather than a floating panel. It was a translucent surface tint
+   before, which in the light theme left brand-purple text on near-navy and was
+   very nearly unreadable. Fixed colours here because the band is dark by design
+   rather than by theme. */
+.role-bar {
+  padding: 17px 26px;
+  background: #071638;
+  color: #ffffff;
 }
 
 .role-bar-items {
@@ -2557,16 +2733,18 @@ footer h4 {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-lg);
+  gap: 18px;
 }
 
 .role-bar-items strong {
   display: block;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .role-bar-items span {
-  color: var(--muted);
-  font-size: 15px;
+  color: #d7def4;
+  font-size: 13px;
 }
 
 @media (max-width: 900px) {

@@ -10,13 +10,13 @@ import CategoryIcon from "./CategoryIcon";
 // impossible to correct without asking Manu to re-render (mbz-et8e.12,
 // mbz-et8e.28 items 1-2). Every string here is editable in a content module.
 //
-// It is ILLUSTRATIVE and says so twice: `label` names it for assistive
-// technology, and `disclaimer` prints under the card so no sighted reader is
-// invited to mistake the example for a live signal or a real clinical finding.
-// Do not drop either to make the card look more like a screenshot.
+// `label` names it for assistive technology. A visible "an illustrative example,
+// not a real signal" line used to print under the card as well; it was invented
+// here rather than taken from the sketch, and has been removed along with the
+// other copy that was not Manu's. Whether a fabricated example needs a visible
+// marker is a real question, but it is his to answer -- see mbz-et8e.12.
 const InsightCard = ({
   label,
-  disclaimer,
   tag,
   detected,
   impact,
@@ -40,7 +40,7 @@ const InsightCard = ({
     <p className="insight-summary">{summary}</p>
 
     <div className="insight-split">
-      <div className="insight-block">
+      <div className="insight-block insight-block-actions">
         <h4>{actions.heading}</h4>
         <ul className="insight-actions">
           {actions.items.map((item) => (
@@ -71,9 +71,9 @@ const InsightCard = ({
       </ul>
     </div>
 
-    {/* Deliberately NOT buttons. They illustrate what the product offers; on a
-        marketing page they would be dead controls, and a real button that does
-        nothing is worse than a label that never claimed to. */}
+    {/* Styled as the sketch draws them, but still NOT buttons: on a marketing
+        page they would be dead controls, and a real button that does nothing is
+        worse than a label that never claimed to be one. */}
     <div className="insight-strip">
       <h4>{drafts.heading}</h4>
       <ul className="insight-drafts">
@@ -83,7 +83,6 @@ const InsightCard = ({
       </ul>
     </div>
 
-    <p className="insight-note">{disclaimer}</p>
   </article>
 );
 
