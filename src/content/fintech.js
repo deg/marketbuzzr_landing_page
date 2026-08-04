@@ -21,8 +21,6 @@ export const fintech = {
       "Regulatory shifts. Competitor moves. New technologies. Partnerships. Funding. Changing customer expectations.",
       "MarketBuzzr monitors the developments shaping your market, identifies what matters to your business, and turns them into intelligence you can act on.",
     ],
-    ctaPrimary: "Try for Free",
-    ctaSecondary: "Book a Demo",
   },
 
   sources: {
@@ -48,7 +46,6 @@ export const fintech = {
   },
 
   insight: {
-    label: "Example insight",
     tag: "Competitor launch",
     detected: "May 2, 2025 • 9:42 AM",
     impact: "High impact",
@@ -57,7 +54,6 @@ export const fintech = {
     summary:
       "PayNova announced the launch of its real-time B2B payments platform in 31 European countries, enabling instant cross-border payments for businesses.",
     actions: {
-      heading: "Recommended Actions",
       items: [
         "Analyze how this impacts our competitive positioning and differentiation",
         "Assess potential changes in enterprise requirements and expectations",
@@ -65,11 +61,9 @@ export const fintech = {
       ],
     },
     implication: {
-      heading: "Strategic Implication",
       text: "This move strengthens PayNova's position with enterprise customers and raises the bar for speed and transparency in B2B payments. Expect increased competitive pressure and potential shifts in partner relationships and customer expectations.",
     },
     sources: {
-      heading: "Sources",
       items: [
         { icon: "article", name: "Industry publication", kind: "Market coverage" },
         { icon: "release", name: "Company press release", kind: "Official announcement" },
@@ -78,7 +72,6 @@ export const fintech = {
       ],
     },
     drafts: {
-      heading: "Turn Insight Into Action",
       items: ["Blog Post", "LinkedIn Post", "Battlecard", "Talk Track"],
     },
   },
@@ -140,7 +133,5 @@ export const fintech = {
     paragraphs: [
       "See what matters sooner, understand what it means for your business, and act while it still matters.",
     ],
-    ctaPrimary: "Try for Free",
-    ctaSecondary: "Book a Demo",
   },
 };

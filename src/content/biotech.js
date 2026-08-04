@@ -27,8 +27,6 @@ export const biotech = {
       "Understand what patients, caregivers, KOLs, competitors and the broader market are saying about your therapy—outside of clinical data.",
       "MarketBuzzr brings fragmented external signals together and turns them into indication- and molecule-specific intelligence your team can act on.",
     ],
-    ctaPrimary: "Try for Free",
-    ctaSecondary: "Book a Demo",
   },
 
   // The hero visual: the outside conversations that form around a therapy.
@@ -75,7 +73,6 @@ export const biotech = {
   // is filed as mbz-et8e.28 item 5, and was still not ours to decide. The date
   // is his copy. Do not quietly improve it again; raise it and wait.
   insight: {
-    label: "Example insight",
     tag: "Emerging patient signal",
     detected: "May 2, 2025 • 9:42 AM",
     impact: "High impact",
@@ -84,7 +81,6 @@ export const biotech = {
     summary:
       "Recent conversations across patient communities and caregiver discussions show increasing attention to administration frequency and its impact on day-to-day treatment routines.",
     actions: {
-      heading: "Recommended Actions",
       items: [
         "Assess whether treatment burden is emerging as a meaningful perception driver",
         "Compare how competing therapies are being discussed around convenience and administration",
@@ -92,11 +88,9 @@ export const biotech = {
       ],
     },
     implication: {
-      heading: "Strategic Implication",
       text: "The conversation suggests that treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication—even where clinical efficacy remains the primary point of differentiation.",
     },
     sources: {
-      heading: "Sources",
       items: [
         { icon: "people", name: "Patient community", kind: "External discussion" },
         { icon: "heart", name: "Caregiver forum", kind: "Community signal" },
@@ -105,7 +99,6 @@ export const biotech = {
       ],
     },
     drafts: {
-      heading: "Turn Insight Into Action",
       items: [
         "Draft Executive Brief",
         "Draft Competitive Brief",
@@ -162,7 +155,5 @@ export const biotech = {
     paragraphs: [
       "See emerging signals earlier, understand how your molecule is being perceived, and stay aligned with how your indication is evolving.",
     ],
-    ctaPrimary: "Try for Free",
-    ctaSecondary: "Book a Demo",
   },
 };

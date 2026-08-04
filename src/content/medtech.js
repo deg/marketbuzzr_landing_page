@@ -23,8 +23,6 @@ export const medtech = {
       "Regulatory shifts. Competitor launches. New technologies. Clinical developments. Funding. Partnerships. Changing customer needs.",
       "MarketBuzzr monitors the developments shaping your market, identifies what matters to your business, and turns them into intelligence you can act on.",
     ],
-    ctaPrimary: "Try for Free",
-    ctaSecondary: "Book a Demo",
   },
 
   sources: {
@@ -53,7 +51,6 @@ export const medtech = {
   },
 
   insight: {
-    label: "Example insight",
     tag: "Regulatory change",
     detected: "May 2, 2025 • 9:42 AM",
     impact: "High impact",
@@ -61,7 +58,6 @@ export const medtech = {
     summary:
       "New guidance introduces additional expectations for lifecycle management and oversight of AI-enabled medical devices, with implications for product strategy and market readiness.",
     actions: {
-      heading: "Recommended Actions",
       items: [
         "Assess impact on our product roadmap and planned launches",
         "Analyze how the new requirements could shift our competitive position",
@@ -69,11 +65,9 @@ export const medtech = {
       ],
     },
     implication: {
-      heading: "Strategic Implication",
       text: "The change could affect development timelines and competitive positioning across AI-enabled device categories. Companies that adapt earlier may gain an advantage in product readiness, messaging and market confidence.",
     },
     sources: {
-      heading: "Sources",
       items: [
         { icon: "bank", name: "Regulatory update", kind: "Official guidance" },
         { icon: "article", name: "Industry publication", kind: "Market coverage" },
@@ -82,7 +76,6 @@ export const medtech = {
       ],
     },
     drafts: {
-      heading: "Turn Insight Into Action",
       items: [
         "Draft Executive Brief",
         "Draft Internal Update",
@@ -149,7 +142,5 @@ export const medtech = {
     paragraphs: [
       "See what matters sooner, understand what it means for your business, and act while it still matters.",
     ],
-    ctaPrimary: "Try for Free",
-    ctaSecondary: "Book a Demo",
   },
 };

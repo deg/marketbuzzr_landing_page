@@ -7,6 +7,7 @@ import DemoButton from "../components/DemoButton";
 import SourceCluster from "../components/SourceCluster";
 import InsightCard from "../components/InsightCard";
 import RoleBar from "../components/RoleBar";
+import { industryChrome } from "../content/industryChrome";
 
 // The industry-page template, built from Manu's drop_05 sketch and currently
 // used only by Biotechnology (mbz-et8e.38).
@@ -21,9 +22,39 @@ import RoleBar from "../components/RoleBar";
 // The route stays /use-cases/biotech. Renaming it to /industries/biotechnology
 // would break the nav and any external link for no reader benefit; the four
 // missing pages can take /industries/* without this one moving.
+// The page's furniture — the insight card's four headings and the two CTA
+// labels — lives in industryChrome and is merged UNDER the page's own content,
+// so a page overrides simply by saying so. Only the blocks that actually carry
+// shared labels are merged; everything else is the page's alone.
+const withChrome = (data) => ({
+  ...data,
+  insight: {
+    ...industryChrome.insight,
+    ...data.insight,
+    actions: { ...industryChrome.insight.actions, ...data.insight.actions },
+    implication: {
+      ...industryChrome.insight.implication,
+      ...data.insight.implication,
+    },
+    sources: { ...industryChrome.insight.sources, ...data.insight.sources },
+    drafts: { ...industryChrome.insight.drafts, ...data.insight.drafts },
+  },
+  hero: {
+    ctaPrimary: industryChrome.ctaPrimary,
+    ctaSecondary: industryChrome.ctaSecondary,
+    ...data.hero,
+  },
+  closing: {
+    ctaPrimary: industryChrome.ctaPrimary,
+    ctaSecondary: industryChrome.ctaSecondary,
+    ...data.closing,
+  },
+});
+
 const IndustryPage = ({ data }) => {
   useDocumentTitle(data.title);
-  const { hero, sources, intro, insight, roles, features, closing } = data;
+  const { hero, sources, intro, insight, roles, features, closing } =
+    withChrome(data);
   // Six go into three columns; four (or fewer) keep one row of their own.
   const featureCols = features.items.length % 3 === 0 ? 3 : 4;
 
