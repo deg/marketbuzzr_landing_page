@@ -28,6 +28,31 @@ not apply here.
 
 Package manager is **yarn** (Yarn 1, pinned via `packageManager`). Never use npm.
 
+## Where the briefs live
+
+Every design instruction for this site comes from Manu as a numbered handoff
+package, and they live in a **separate repo**,
+`~/Documents/marketbuzzr/marketbuzzr_landing_page_design/`. Nothing in this repo
+is the source of truth for what a page should say — the drops are, and the memos
+back to him live beside them.
+
+| Drop | Covers | Unzips to |
+|---|---|---|
+| `drop_01_Marketbuzzr_Homepage_CTO_Handoff_MD.zip` | homepage, 1st | `marketbuzzr_homepage_handoff_md/` |
+| `drop_02_Marketbuzzr_Homepage_Revised_CTO_Handoff.zip` | homepage, 2nd | `Marketbuzzr_Homepage_Revised_CTO_Handoff/` |
+| `drop_03_Marketbuzzr_Homepage_CTO_Handoff_file_aug3.zip` | homepage, 3rd — **current** | `Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/` |
+| `drop_04_Marketbuzzr_How_It_Works_CTO_Handoff_Updated.zip` | How It Works — **current** | *(flat, no wrapper)* |
+
+**Code comments and beads cite drops by number**, not by path. They used to point
+at loose unversioned folders under `~/Documents/marketbuzzr/`, which have since
+been consolidated here; the folder names survive as the directories inside drops
+01–03, so an old reference still resolves once you unzip.
+
+`MarketBuzzr-Website-Outstanding-Items.docx` in that repo is the running list of
+what we are waiting on from Manu, and is the outward-facing twin of `mbz-et8e.28`.
+Keep the two in step. It supersedes the earlier `-Homepage-` titled file, which is
+kept only for history.
+
 ## Architecture
 
 Entry: `src/main.jsx` mounts `App` into `#root` inside a **`HashRouter`**. Routes are
@@ -89,9 +114,8 @@ deck asks for a break at a specific point.
 ### The homepage (2026-08 redesign)
 
 `pages/Home.jsx` renders eight sections in the order set by Manu's **final**
-handoff brief
-(`~/Documents/marketbuzzr/Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/`).
-That is the **third** brief and supersedes both earlier folders — read it, not
+handoff brief — **`drop_03`** in the design repo (see Where the briefs live).
+That is the **third** brief and supersedes both earlier drops — read it, not
 them. It reads Promise → Problem → Product Proof → How It Works → Who It's For →
 What You Track → CTA. Each section has its own component; none of them is
 generic, so read the component before changing a section:
@@ -150,10 +174,10 @@ of waste off the homepage, tracked as `mbz-et8e.34`.
 ### The How It Works page (2026-08)
 
 `pages/HowItWorks.jsx` is Hero → 01 → 02 → 03 → Final CTA and deliberately
-nothing else, from Manu's separate How It Works brief
-(`~/Documents/marketbuzzr/Marketbuzzr_How_It_Works_revised/`). That brief forbids
-additions by name: no fourth step, no sources grid, no separate weekly-report
-section, no feature grid, no FAQ. **Read it before adding a section here.**
+nothing else, from Manu's separate How It Works brief — **`drop_04`** in the
+design repo. That brief forbids additions by name: no fourth step, no sources
+grid, no separate weekly-report section, no feature grid, no FAQ. **Read it
+before adding a section here.**
 
 The three steps are stacked full-width sections, not a three-column layout and
 not alternating 50/50 splits — both were ruled out because they shrink the

@@ -11,8 +11,9 @@ import roleWebp from "../assets/role-based-intelligence.webp";
 import actionAvif from "../assets/turn-into-action.avif";
 import actionWebp from "../assets/turn-into-action.webp";
 
-// Hero -> 01 -> 02 -> 03 -> CTA, per Manu's How It Works handoff brief
-// (~/Documents/marketbuzzr/Marketbuzzr_How_It_Works_revised/). The three steps
+// Hero -> 01 -> 02 -> 03 -> CTA, per Manu's How It Works handoff brief —
+// drop_04 in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/). The three steps
 // are one continuous story — find what matters, make it relevant to the reader,
 // help the reader act — and the brief forbids anything else on this page.
 //

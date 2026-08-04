@@ -1,6 +1,6 @@
 // How It Works copy, from Manu's "MarketBuzzr — How It Works Page, Final CTO /
-// Claude Implementation Handoff"
-// (~/Documents/marketbuzzr/Marketbuzzr_How_It_Works_revised/).
+// Claude Implementation Handoff" — drop_04 in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/).
 //
 // The page is deliberately Hero -> 01 -> 02 -> 03 -> CTA and nothing else. The
 // brief is explicit that the simplicity is the point: no fourth step, no

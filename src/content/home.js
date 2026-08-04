@@ -1,6 +1,6 @@
 // Homepage copy, from Manu's "Marketbuzzr Homepage — Final CTO / Claude
-// Handoff"
-// (~/Documents/marketbuzzr/Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/).
+// Handoff" — drop_03 in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/).
 // That is the third brief and supersedes both earlier ones: it reorders the page
 // again, restores the LESS NOISE transition and replaces all three assets. Keys
 // appear in its section order so copy edits trace back to it.

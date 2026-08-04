@@ -18,8 +18,8 @@ import signalsWebp from "../assets/market-signals.webp";
 import insightAvif from "../assets/insight-medicalcomp.avif";
 import insightWebp from "../assets/insight-medicalcomp.webp";
 
-// Section order follows the FINAL handoff brief
-// (~/Documents/marketbuzzr/Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/),
+// Section order follows the FINAL handoff brief — drop_03 in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/),
 // the third and latest. It reads Promise -> Problem -> Product Proof -> How It
 // Works -> Who It's For -> What You Track -> CTA. Against the previous build it
 // moves Insight above the flow, moves Industries below it, and reinstates the
