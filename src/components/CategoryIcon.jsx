@@ -109,16 +109,16 @@ const PATHS = {
   heart: (
     <path d="M12 20.5C6.5 17 3.5 13.6 3.5 9.9A4.4 4.4 0 0 1 12 8a4.4 4.4 0 0 1 8.5 1.9c0 3.7-3 7.1-8.5 10.6z" />
   ),
-  // The molecule at the centre of the source cluster — a simple chain, drawn
-  // rather than borrowed from an emoji so it takes the page's stroke and colour.
-  molecule: (
+  // The subject at the centre of the source cluster: a DNA double helix, which
+  // is what the sketch drew. An earlier version here was a generic molecule
+  // diagram — right family, wrong picture, and it read as neither.
+  // Two strands crossing TWICE, which is what makes it read as a helix. A single
+  // crossing — the obvious first attempt — draws an hourglass, not DNA.
+  dna: (
     <>
-      <circle cx="12" cy="4.5" r="2" />
-      <circle cx="5.5" cy="9.5" r="2" />
-      <circle cx="18.5" cy="9.5" r="2" />
-      <circle cx="8" cy="18" r="2" />
-      <circle cx="16" cy="18" r="2" />
-      <path d="M10.6 6.1L7 8M13.4 6.1L17 8M6.6 11.2L7.4 16M17.4 11.2L16.6 16M10 18h4" />
+      <path d="M7.5 2.5c0 3 9 4 9 7s-9 4-9 7 9 4 9 7" />
+      <path d="M16.5 2.5c0 3-9 4-9 7s9 4 9 7-9 4-9 7" />
+      <path d="M8.6 4.5h6.8M9.2 12.5h5.6M8.6 20.5h6.8" />
     </>
   ),
 };

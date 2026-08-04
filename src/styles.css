@@ -1948,32 +1948,31 @@ footer h4 {
 }
 
 /* Stacked: the core leads. It follows the <ul> in the DOM -- which is what lets
-   the seven sources stay one uninterrupted list -- so order pulls it up. */
+   the seven sources stay one uninterrupted list -- so order pulls it up.
+   Unlabelled by design (see SourceCluster.jsx), so this is a mark in a pool of
+   light rather than a captioned tile. */
 .source-cluster-core {
   order: -1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
   margin: 0 auto var(--spacing-lg);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--text);
+  padding: var(--spacing-lg);
+  color: var(--brand);
   /* A soft pool of brand light, so the centre reads as the subject the chips
      are arranged around rather than as an eighth chip. */
   background: radial-gradient(
     circle,
-    rgba(110, 224, 255, 0.16),
-    transparent 68%
+    rgba(110, 224, 255, 0.18),
+    transparent 70%
   );
 }
 
+/* Larger than a chip's icon: with no label, the mark alone has to hold the
+   centre of the ring. */
 .source-cluster-core .category-icon {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
 }
 
 .source-chip {
@@ -2033,9 +2032,7 @@ footer h4 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    flex-direction: column;
     margin: 0;
-    border-radius: var(--radius-full);
   }
 }
 

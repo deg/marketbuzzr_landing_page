@@ -31,10 +31,10 @@ export const biotech = {
     ctaSecondary: "Book a Demo",
   },
 
-  // The hero visual: the outside conversations that form around a molecule.
-  // `centre` is what they are all about; `items` are where they happen.
+  // The hero visual: the outside conversations that form around a therapy.
+  // `items` are where they happen; the centre of the ring is an unlabelled mark,
+  // because the caption below it already names what they are all about.
   sources: {
-    centre: "Your molecule",
     caption:
       "The conversations forming around your therapy, across the places they actually happen.",
     items: [

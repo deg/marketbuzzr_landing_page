@@ -33,7 +33,7 @@ const HOLE_AT = 4;
 const RING_MIN = 6;
 const RING_MAX = 8;
 
-const SourceCluster = ({ centre, caption, items }) => {
+const SourceCluster = ({ caption, items }) => {
   const isRing = items.length >= RING_MIN && items.length <= RING_MAX;
 
   return (
@@ -55,9 +55,14 @@ const SourceCluster = ({ centre, caption, items }) => {
             </li>
           ))}
         </ul>
+        {/* No label, matching the sketch. An earlier version captioned this
+            "Your molecule", which was invented here and read as jargon floating
+            in the middle of a diagram — the sub-headline above and the caption
+            below both already say "your therapy", so the mark needs no words of
+            its own. Decorative, hence aria-hidden: the caption carries the
+            meaning for assistive technology. */}
         <div className="source-cluster-core" aria-hidden="true">
-          <CategoryIcon name="molecule" />
-          <span>{centre}</span>
+          <CategoryIcon name="dna" />
         </div>
       </div>
       {caption && (
