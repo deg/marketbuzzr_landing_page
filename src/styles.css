@@ -2173,7 +2173,12 @@ footer h4 {
   border-color: #6336db;
 }
 
-:root[data-theme="light"] .industry-page .cta-actions .cta-secondary {
+/* HERO ONLY. This sat on .industry-page and so also hit the closing band, where
+   it put purple text on a purple border against dark navy -- the band's own
+   white-on-transparent rule has the same specificity and simply came earlier in
+   the file, so this one won. The band is dark in both themes; its buttons are
+   not the hero's. */
+:root[data-theme="light"] .hero-split .cta-actions .cta-secondary {
   color: #4b22c3;
   border-color: #6336db;
 }
@@ -2955,7 +2960,10 @@ footer h4 {
   justify-content: flex-end;
 }
 
-:root[data-theme="light"] .industry-cta .cta-secondary {
+/* Not theme-scoped: the band is dark in BOTH themes, so its buttons should not
+   change with the theme at all. It had been light-only, which left the dark
+   theme's translucent-overlay secondary sitting on navy at 2.41:1. */
+.industry-cta .cta-secondary {
   background: transparent;
   border-color: #ffffff;
   color: #ffffff;
