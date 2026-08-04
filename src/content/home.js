@@ -90,13 +90,13 @@ export const home = {
   industries: {
     title: "Built for Teams in Dynamic Markets",
     lead: "For teams operating in markets where regulation, competition, technology and customer behavior can quickly change the direction of the business.",
-    // FIX-BEFORE-RELEASE (mbz-et8e.18): four of these point at placeholder pages. Build the pages, or
-    // drop the `to` and render those tiles non-interactive. Moving this section
-    // to §6 keeps them below the fold, but they still must not ship.
-    // Every tile links. Biotechnology and Enterprise Technology reach real
-    // use-case pages; the other four reach the not-yet-implemented placeholder
-    // (mbz-et8e.16), which is deliberate during the design cycle and must not
-    // ship — see the gate in mbz-et8e.18.
+    // FIX-BEFORE-RELEASE (mbz-et8e.18): TWO of these still point at placeholder
+    // pages — Life Sciences and Public Safety & Defense Technology. Build them,
+    // or drop the `to` and render those tiles non-interactive.
+    //
+    // Was four. Medical Technology and Financial Technology now reach real
+    // industry pages built from Manu's drop_05 sketches (mbz-et8e.39), and
+    // Biotechnology and Enterprise Technology already did.
     items: [
       {
         name: "Medical Technology",

@@ -18,6 +18,8 @@ import NotImplemented from "./pages/NotImplemented";
 import { ModalContext } from "./ModalContext";
 import { biotech } from "./content/biotech";
 import { tech } from "./content/tech";
+import { fintech } from "./content/fintech";
+import { medtech } from "./content/medtech";
 
 // Theme switch for review: ?theme=light or ?theme=dark, dark by default. The
 // query works inside the hash, so marketbuzzr.com/new/#/use-cases/biotech?theme=light
@@ -88,6 +90,18 @@ const App = () => {
             <Route
               path="/use-cases/tech"
               element={<UseCasePage data={tech} />}
+            />
+            {/* The two industries Manu has now supplied sketches for. These
+                URLs are the ones content/home.js already links to from the
+                Industries section, so building them closes two of the four dead
+                links that mbz-et8e.18 gates on. */}
+            <Route
+              path="/industries/financial-technology"
+              element={<IndustryPage data={fintech} />}
+            />
+            <Route
+              path="/industries/medical-technology"
+              element={<IndustryPage data={medtech} />}
             />
             <Route
               path="/use-cases"

@@ -2494,6 +2494,7 @@ footer h4 {
    the sources stay one uninterrupted list -- so order pulls it up. */
 .source-cluster-core {
   order: -1;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2509,25 +2510,38 @@ footer h4 {
   );
 }
 
-/* Its own aspect ratio, so height is not restated. Rotated because the sketch
-   draws the helix on the diagonal, which also stops it reading as a vertical
-   divider between the chips either side of it. */
-.dna-mark {
+/* Height comes from the mark's own ratio and the tilt from its own rotation,
+   both published by HeroMark as custom properties -- a helix is tall and set on
+   the diagonal, a payment card is wide and barely tilted, and neither should
+   have to be restated here. */
+.hero-mark {
   width: 74px;
   height: auto;
-  transform: rotate(38deg);
+  transform: rotate(var(--mark-rotate, 0deg));
 }
 
 @media (min-width: 1250px) {
   /* Large enough that the chips actually lap it. At 116px they cleared the ink
      entirely at every width -- measured, not eyeballed -- and the arrangement
      read as a ring with a small icon in the hole rather than chips over a mark. */
-  .dna-mark {
+  .hero-mark {
     width: 132px;
+  }
+
+  /* Wider than the helix because it is a landscape shape: at the same width a
+     card reads as much smaller than a helix of the same nominal size. */
+  .hero-mark-card {
+    width: 190px;
   }
 }
 
 .source-chip {
+  /* Above the mark. The core follows the <ul> in the DOM so it would otherwise
+     paint on top, and a wide mark then covers a chip's label -- the FinTech
+     card hid the first word of "Payments innovation". In the sketch the chips
+     are always legible and the mark passes behind them. */
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -2888,10 +2902,18 @@ footer h4 {
 
 /* Four across, separated by hairlines rather than boxed. Four bordered cards
    made these read as four separate offers; they are one set. */
+/* Columns come from the item count. Biotech has four capabilities and the two
+   later industries have six; at a hardcoded repeat(4) the sixth wrapped onto a
+   row of its own.
+
+   The count is set EXPLICITLY by the component rather than left to auto-fit,
+   because the hairline dividers need to know where a row starts -- with auto-fit
+   the column count changes with the viewport and no selector can track it, so
+   the "no border at the start of a row" rule would be wrong at some widths. */
 .feature-row {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 26px;
+  grid-template-columns: repeat(var(--feature-cols, 4), minmax(0, 1fr));
+  gap: 26px 0;
   margin-top: var(--spacing-2xl);
 }
 
@@ -2902,6 +2924,13 @@ footer h4 {
 
 .feature + .feature {
   border-left: 1px solid var(--edge);
+}
+
+/* No divider at the start of a row: it would draw a stray rule down the left of
+   the block. One rule per column count, because nth-child cannot take a var. */
+.feature-row-3 .feature:nth-child(3n + 1),
+.feature-row-4 .feature:nth-child(4n + 1) {
+  border-left: 0;
 }
 
 .feature-badge {
@@ -2980,6 +3009,11 @@ footer h4 {
   .feature-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--spacing-xl);
+  }
+
+  /* The per-column-count rules above no longer describe the layout here. */
+  .feature-row .feature {
+    border-left: 0;
   }
 
   .feature + .feature {

@@ -24,6 +24,8 @@ import RoleBar from "../components/RoleBar";
 const IndustryPage = ({ data }) => {
   useDocumentTitle(data.title);
   const { hero, sources, intro, insight, roles, features, closing } = data;
+  // Six go into three columns; four (or fewer) keep one row of their own.
+  const featureCols = features.items.length % 3 === 0 ? 3 : 4;
 
   return (
     <div className="industry-page">
@@ -60,12 +62,20 @@ const IndustryPage = ({ data }) => {
         </div>
       </section>
 
-      {/* Four across, divided by hairlines rather than boxed as cards — the
-          sketch's shape. They are short and parallel, and four bordered cards
-          made them look like four separate offers instead of one set. */}
+      {/* Divided by hairlines rather than boxed as cards — the sketch's shape.
+          They are short and parallel, and bordered cards made one set look like
+          several separate offers.
+
+          The column count is computed here rather than left to CSS auto-fit,
+          because the dividers have to know where a row begins: biotech has four
+          capabilities and the later industries have six, and three columns suit
+          six far better than four does. */}
       <section className="section container">
         <SectionTitle title={features.heading} />
-        <div className="feature-row">
+        <div
+          className={`feature-row feature-row-${featureCols}`}
+          style={{ "--feature-cols": featureCols }}
+        >
           {features.items.map((item) => (
             <div className="feature" key={item.heading}>
               <span className="feature-badge">

@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryIcon from "./CategoryIcon";
-import DnaMark from "./DnaMark";
+import HeroMark from "./HeroMark";
 
 // The external sources forming a conversation around one thing, with that thing
 // at the centre. Built to be reusable: How It Works step 01 makes the same point
@@ -24,7 +24,7 @@ import DnaMark from "./DnaMark";
 // the mark, which looked like a heading for it.
 const START_ANGLE = -100;
 
-const SourceCluster = ({ items }) => (
+const SourceCluster = ({ items, mark }) => (
   <figure className="source-cluster">
     <div className="source-cluster-ring">
       <ul className="source-cluster-chips">
@@ -49,7 +49,7 @@ const SourceCluster = ({ items }) => (
           "Your molecule", which was invented here and read as jargon floating in
           the middle of a diagram. Decorative, hence aria-hidden. */}
       <div className="source-cluster-core" aria-hidden="true">
-        <DnaMark />
+        <HeroMark name={mark} />
       </div>
     </div>
   </figure>

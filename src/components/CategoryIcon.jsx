@@ -109,6 +109,76 @@ const PATHS = {
   heart: (
     <path d="M12 20.5C6.5 17 3.5 13.6 3.5 9.9A4.4 4.4 0 0 1 12 8a4.4 4.4 0 0 1 8.5 1.9c0 3.7-3 7.1-8.5 10.6z" />
   ),
+  // --- Added for the FinTech and MedTech industry pages. ---
+
+  // Regulation and policy — a classical portico, the standard mark for an
+  // institution or a regulator.
+  bank: (
+    <>
+      <path d="M3 9.5L12 4l9 5.5" />
+      <path d="M5.5 9.5v9M10 9.5v9M14 9.5v9M18.5 9.5v9" />
+      <path d="M3 21h18" />
+    </>
+  ),
+  // Product launches — a rocket.
+  rocket: (
+    <>
+      <path d="M12 2.5c3 2 4.5 5.3 4.5 9 0 2-.5 3.7-1.2 5H8.7C8 15.2 7.5 13.5 7.5 11.5c0-3.7 1.5-7 4.5-9z" />
+      <circle cx="12" cy="10" r="2" />
+      <path d="M8.7 16.5L6 19.5l3-.6M15.3 16.5l2.7 3-3-.6" />
+    </>
+  ),
+  // Payments innovation — a bolt.
+  bolt: <path d="M13.5 2.5L5 13.5h5.5L10 21.5 19 10.5h-5.5z" />,
+  // AI and emerging technology — a processor.
+  chip: (
+    <>
+      <path d="M7.5 7.5h9v9h-9z" />
+      <path d="M4.5 4.5h15v15h-15z" />
+      <path d="M9.5 4.5v-2M14.5 4.5v-2M9.5 21.5v-2M14.5 21.5v-2M4.5 9.5h-2M4.5 14.5h-2M21.5 9.5h-2M21.5 14.5h-2" />
+    </>
+  ),
+  // Partnerships and M&A — two hands meeting.
+  handshake: (
+    <>
+      <path d="M2.5 12.5l3.5-3.5 4 1 2 2-2 2-2-1.5" />
+      <path d="M21.5 12.5L18 9l-4 1" />
+      <path d="M10 14l2 2 2-2 2 2 2-2" />
+      <path d="M2.5 12.5l3 3M21.5 12.5l-3 3" />
+    </>
+  ),
+  // Funding and investment — stacked coins.
+  coins: (
+    <>
+      <ellipse cx="12" cy="6" rx="7" ry="2.8" />
+      <path d="M5 6v5c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8V6" />
+      <path d="M5 11v5c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8v-5" />
+    </>
+  ),
+  // Clinical developments — a stethoscope.
+  clinical: (
+    <>
+      <path d="M6 3v5a4.5 4.5 0 0 0 9 0V3" />
+      <path d="M4 3h3M14 3h3" />
+      <path d="M10.5 12.5v3a4.5 4.5 0 0 0 9 0v-1.2" />
+      <circle cx="19.5" cy="12" r="2" />
+    </>
+  ),
+  // Financial news and wire coverage — a globe.
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
+    </>
+  ),
+  // A press release or briefing — a sheet with a seal.
+  release: (
+    <>
+      <path d="M5.5 3.5h13v17h-13z" />
+      <path d="M8.5 8h7M8.5 11.5h7M8.5 15h4" />
+    </>
+  ),
 };
 
 const CategoryIcon = ({ name }) => (

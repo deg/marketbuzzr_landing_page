@@ -43,8 +43,8 @@ const InsightCard = ({
       <div className="insight-block insight-block-actions">
         <h4>{actions.heading}</h4>
         <ul className="insight-actions">
-          {actions.items.map((item) => (
-            <li key={item}>{item}</li>
+          {actions.items.map((item, i) => (
+            <li key={i}>{item}</li>
           ))}
         </ul>
       </div>
@@ -77,8 +77,10 @@ const InsightCard = ({
     <div className="insight-strip">
       <h4>{drafts.heading}</h4>
       <ul className="insight-drafts">
-        {drafts.items.map((item) => (
-          <li key={item}>{item}</li>
+        {/* Keyed by index, not by text: MedTech's list contains the same
+            label twice, which is legal content and a duplicate React key. */}
+        {drafts.items.map((item, i) => (
+          <li key={i}>{item}</li>
         ))}
       </ul>
     </div>
