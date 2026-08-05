@@ -1,5 +1,26 @@
 import React from "react";
 
+// ORIGINAL ARTWORK. Every path in this file was drawn for this site — there is
+// no icon library behind it, nothing is traced from a screenshot, and there is
+// no third-party licence to carry or attribute. Manu's August handover asks for
+// exactly this and asks that the answer be recorded in the codebase: "Use
+// legally licensed open source icons with a license suitable for commercial web
+// use, or create original SVG icons with a similar simple line style. If an
+// external icon library is used, record the library name and license in the
+// codebase." This comment is that record (mbz-et8e.52.6).
+//
+// It is also why the set can grow on demand: twelve of these were added for
+// artwork of his that arrived using emoji, which cannot ship — the colour ones
+// are the operating system's own font, licensed for its devices and a different
+// picture on every platform.
+//
+// COLOUR COMES FROM THE CALLER, via currentColor. Site chrome uses --brand, the
+// same turquoise as the primary CTA, which is what his icon section asks for.
+// Two places deliberately do not: the role dashboard tints each icon with its
+// role's colour, and the insight card's sources use his card palette. Both are
+// inside artwork he supplied, where the colour is carrying meaning rather than
+// being site chrome.
+//
 // Six line icons for the intelligence categories. Deliberately plain geometry
 // drawn on a 24x24 box with a single stroke weight, so they read as one set
 // rather than six unrelated pictures. Stroke is currentColor, so the card
