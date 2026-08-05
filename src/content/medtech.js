@@ -19,9 +19,12 @@ export const medtech = {
   hero: {
     kicker: "MARKETBUZZR FOR MEDICAL TECHNOLOGY",
     title: "Stay ahead of the changes shaping MedTech",
+    // ONE PARAGRAPH, his revised dark page's. It replaces the two this page
+    // shipped -- a staccato list line and then a sentence -- and folds the list
+    // into the sentence. His August handover generalises it to every industry
+    // page: "Hero copy is one concise paragraph under the headline."
     sub: [
-      "Regulatory shifts. Competitor launches. New technologies. Clinical developments. Funding. Partnerships. Changing customer needs.",
-      "MarketBuzzr monitors the developments shaping your market, identifies what matters to your business, and turns them into intelligence you can act on.",
+      "MarketBuzzr monitors regulatory shifts, competitor launches, new technologies, clinical developments, funding, partnerships and changing customer needs to identify what matters to your business and turn it into intelligence you can act on.",
     ],
   },
 
@@ -46,7 +49,10 @@ export const medtech = {
     heading: "See what matters. Understand what it means.",
     paragraphs: [
       "In MedTech, a regulatory update, competitor launch or emerging technology can quickly change the market.",
-      "MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities—so you can see what deserves attention and what to do next.",
+      // Comma, not an em dash. His revised page drops the dash here, and his
+      // August handover makes it a rule for the whole site: "No dashes in
+      // marketing copy. Rewrite naturally instead."
+      "MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities, so you can see what deserves attention and what to do next.",
     ],
   },
 
