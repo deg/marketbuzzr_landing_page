@@ -1,48 +1,30 @@
-import { home } from "./home";
-
-// Site navigation, following the brief's "Recommended Navigation".
+// Site navigation, from Manu's August 2026 handover, section 2 and the
+// acceptance checklist — drop_06_MarketBuzzr_CTO_Website_Handover_Aug2026.docx
+// in the design repo.
 //
-// Two judgement calls worth knowing about:
+// Wordmark left, two links centre, two CTAs right. The checklist is explicit
+// that this is the whole of it: "Top navigation contains only MarketBuzzr, How
+// It Works, Industries, Try for Free and Book a Demo."
 //
-// 1. HOW IT WORKS sits under Product. The brief's list omits it, but it is a
-//    real page with real content, and dropping it from the nav would leave it
-//    reachable only from one link on the homepage. The brief was written
-//    assuming a larger site where it would live under something; Product is
-//    where it fits.
+// WHAT THAT REMOVED, so nobody restores it by accident. Product (which held How
+// It Works), Solutions, Resources and Pricing — the last three pointed at pages
+// that have never existed and were three of the five links gated by
+// mbz-et8e.18. The Industries dropdown went too: /industries is a real page now
+// (mbz-et8e.47) and is the entry point his brief intends, so the six industries
+// are reachable from there rather than from a menu.
 //
-// 2. INDUSTRIES REPLACES THE OLD "USE CASES" DROPDOWN rather than sitting
-//    beside it. They would have overlapped almost entirely — both lead to the
-//    biotech and tech pages — and the brief names Industries, not Use Cases.
-//    The industry list is imported rather than restated so the nav and section
-//    7 cannot drift apart.
-//
-// FIX-BEFORE-RELEASE (mbz-et8e.18): Solutions, Resources and Pricing point at
-// pages that do not exist, as do four of the six industries. Build them, or drop
-// the items.
+// LOGIN WENT WITH THEM, and that one is worth a second look. It was the only
+// route from the marketing site into the product, and "only" in his checklist
+// leaves no room for it. Removing it is what the brief says; whether he meant
+// to strand returning customers is a question for him, raised in the
+// outstanding-items memo. Restoring it is a three-line change if he says so.
 export const nav = {
   items: [
-    {
-      label: "Product",
-      items: [{ label: "How It Works", to: "/how-it-works" }],
-    },
-    { label: "Solutions", to: "/solutions" },
-    {
-      label: "Industries",
-      items: home.industries.items.map(({ name, to }) => ({
-        label: name,
-        to,
-      })),
-    },
-    { label: "Resources", to: "/resources" },
-    { label: "Pricing", to: "/pricing" },
+    { label: "How It Works", to: "/how-it-works" },
+    { label: "Industries", to: "/industries" },
   ],
-  // The app root, NOT /login — there is no login page. The product's root route
-  // is wrapped in ProtectedRoute, which raises the login modal for anyone not
-  // signed in, so this is where "Login" should land.
-  //   /login      -> 200 but only the SPA shell; no such route exists
-  //   /api/login  -> 405, it is a POST-only backend endpoint (nginx.conf)
-  // The one nav destination that genuinely exists today, and currently the only
-  // route from the marketing site into the product.
-  login: { label: "Login", href: "https://mvp.marketbuzzr.com/" },
-  cta: "Book a Demo",
+  // Both, in his order, and the fills are set by the shared CTA rules: Try for
+  // Free filled, Book a Demo outlined (mbz-et8e.52.4).
+  ctaPrimary: "Try for Free",
+  ctaSecondary: "Book a Demo",
 };

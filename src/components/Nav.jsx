@@ -1,57 +1,43 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import DemoButton from "./DemoButton";
 import { nav } from "../content/nav";
 
 const linkClass = ({ isActive }) => (isActive ? "nav-link active" : "nav-link");
 
+// The top bar, from Manu's August handover section 2: wordmark left, How It
+// Works and Industries centre, Try for Free and Book a Demo right.
+//
+// THE DROPDOWN MACHINERY IS GONE (mbz-et8e.52.5). There were two menus, Product
+// and Industries, and with them an open-menu state, a ref, an Escape handler and
+// a document-wide mousedown listener. His structure has no menus, so all of that
+// was dead — and dead code that attaches window listeners is worse than dead
+// markup. If a menu is wanted again it comes back from git history rather than
+// being carried unused.
+//
+// The mobile hamburger stays. Two links and two buttons still need somewhere to
+// go on a narrow screen, and .nav-menu is what puts them there.
 const Nav = () => {
-  const [menuOpen, setMenuOpen] = useState(false); // mobile hamburger
-  // One label at a time rather than a flag per dropdown: opening a second
-  // closes the first, which is what a menu bar should do.
-  const [openMenu, setOpenMenu] = useState(null);
-  const linksRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
-  const closeAll = useCallback(() => {
-    setMenuOpen(false);
-    setOpenMenu(null);
-  }, []);
+  const closeAll = useCallback(() => setMenuOpen(false), []);
 
-  // Collapse everything whenever the route changes (e.g. after a selection).
+  // Collapse the mobile menu whenever the route changes, e.g. after a selection.
   useEffect(() => {
     closeAll();
   }, [pathname, closeAll]);
 
-  // Close an open dropdown on Escape or a click outside the link row.
-  useEffect(() => {
-    if (!openMenu) return undefined;
-    const onKey = (e) => {
-      if (e.key === "Escape") setOpenMenu(null);
-    };
-    const onClick = (e) => {
-      if (linksRef.current && !linksRef.current.contains(e.target)) {
-        setOpenMenu(null);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    document.addEventListener("mousedown", onClick);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.removeEventListener("mousedown", onClick);
-    };
-  }, [openMenu]);
-
   return (
     <nav>
       <div className="container nav-inner">
-        <Link
-          to="/"
-          className="brand"
-          onClick={closeAll}
-          aria-label="MarketBuzzr home"
-        >
-          <div className="brand-badge">M</div>
+        {/* The wordmark is TEXT, not the M tile it replaced. His brief: "The
+            MarketBuzzr wordmark should use the bright, bold typographic
+            treatment shown in the reference. Do not use a separate icon logo."
+            The aria-label went with the tile — the link has a readable name of
+            its own now, and a label that merely repeated it would be noise. */}
+        <Link to="/" className="brand" onClick={closeAll}>
+          MarketBuzzr
         </Link>
 
         <button
@@ -67,75 +53,24 @@ const Nav = () => {
         </button>
 
         <div className={`nav-menu ${menuOpen ? "open" : ""}`}>
-          <div className="nav-links" ref={linksRef}>
-            {nav.items.map((item) =>
-              item.items ? (
-                <div className="nav-dropdown" key={item.label}>
-                  <button
-                    type="button"
-                    className={
-                      // A dropdown reads as current when the page you are on is
-                      // one of its children.
-                      item.items.some((child) => child.to === pathname)
-                        ? "nav-link nav-dropdown-toggle active"
-                        : "nav-link nav-dropdown-toggle"
-                    }
-                    aria-haspopup="true"
-                    aria-expanded={openMenu === item.label}
-                    onClick={() =>
-                      setOpenMenu((open) =>
-                        open === item.label ? null : item.label,
-                      )
-                    }
-                  >
-                    {item.label}
-                    <span className="nav-caret" aria-hidden="true">
-                      ▾
-                    </span>
-                  </button>
-                  <div
-                    className={
-                      openMenu === item.label
-                        ? "nav-dropdown-panel open"
-                        : "nav-dropdown-panel"
-                    }
-                  >
-                    {item.items.map((child) => (
-                      <NavLink
-                        key={child.to}
-                        to={child.to}
-                        onClick={closeAll}
-                        className={({ isActive }) =>
-                          isActive
-                            ? "nav-dropdown-item active"
-                            : "nav-dropdown-item"
-                        }
-                      >
-                        {child.label}
-                      </NavLink>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <NavLink
-                  key={item.label}
-                  to={item.to}
-                  className={linkClass}
-                  onClick={closeAll}
-                >
-                  {item.label}
-                </NavLink>
-              ),
-            )}
+          <div className="nav-links">
+            {nav.items.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={linkClass}
+                onClick={closeAll}
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
 
+          {/* Both CTAs, and the shared .cta / .cta-secondary rules give them the
+              filled and outlined treatments his brief pairs with these labels. */}
           <div className="nav-actions">
-            {/* Login leaves the marketing site for the product, so it is a
-                plain anchor rather than a router link. */}
-            <a className="nav-login" href={nav.login.href}>
-              {nav.login.label}
-            </a>
-            <DemoButton label={nav.cta} className="primary" />
+            <DemoButton label={nav.ctaPrimary} className="cta" />
+            <DemoButton label={nav.ctaSecondary} className="cta-secondary" />
           </div>
         </div>
       </div>
