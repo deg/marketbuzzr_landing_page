@@ -20,6 +20,7 @@ import { biotech } from "./content/biotech";
 import { enterpriseTech } from "./content/enterpriseTech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
+import { otherIndustries } from "./content/otherIndustries";
 import { publicSafety } from "./content/publicSafety";
 
 // Review options set from the address bar. The registry in options.js is empty
@@ -85,12 +86,13 @@ const App = () => {
               path="/use-cases/tech"
               element={<IndustryPage data={enterpriseTech} />}
             />
-            {/* The industries with their own pages. Every path here is one
-                content/home.js already links to from the Industries section, so
-                each of these closes one of the dead links mbz-et8e.18 gates on.
-                Public Safety & Defense Technology has no approved HTML of its
-                own and is built from the template and the handover's locked copy
-                (mbz-et8e.52.11). */}
+            {/* The industries built since the template existed. Every path here
+                is one content/home.js links to, and with Other Industries in
+                place none of the six industry links is dead any more — the last
+                of the five that mbz-et8e.18 gates on. Medical, Financial and
+                Biotechnology come from Manu's approved dark HTML; Public Safety
+                and Other Industries are built from the template and the August
+                handover's locked copy. */}
             <Route
               path="/industries/financial-technology"
               element={<IndustryPage data={fintech} />}
@@ -102,6 +104,10 @@ const App = () => {
             <Route
               path="/industries/public-safety-defense-technology"
               element={<IndustryPage data={publicSafety} />}
+            />
+            <Route
+              path="/industries/other-industries"
+              element={<IndustryPage data={otherIndustries} />}
             />
             {/* The entry page the homepage's "Explore all industries" link
                 has pointed at since §6 was built. Until now that link reached

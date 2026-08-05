@@ -126,17 +126,14 @@ export const home = {
     // the name rather than in that page's own module for the same reason: a
     // second list keyed by name is a list that drifts. §6 does not render it.
     //
-    // FIX-BEFORE-RELEASE (mbz-et8e.18): ONE of these still points at a
-    // placeholder page — Life Sciences. Build it, or drop the `to` and render
-    // that tile non-interactive. Note this list is now rendered on TWO pages,
-    // and /industries gives each one a full card, so the dead tile is more
-    // prominent there than it is here.
+    // EVERY LINK HERE NOW REACHES A REAL PAGE. That was four dead, then two,
+    // then one; Life Sciences was the last, and the August handover removes it
+    // from the set rather than asking for it to be built (section 7 lists the
+    // six, and Other Industries is the sixth). Nothing in this list is gated by
+    // mbz-et8e.18 any more.
     //
-    // Was four dead links, then two. Medical Technology and Financial
-    // Technology reached real pages built from Manu's drop_05 sketches
-    // (mbz-et8e.39); Biotechnology and Enterprise Technology already did; and
-    // Public Safety & Defense Technology is now built from the shared template
-    // and the August handover's locked copy (mbz-et8e.52.11).
+    // THE ORDER IS HIS, from handover section 7. It differs from the order this
+    // list carried before, which had Life Sciences third.
     items: [
       {
         name: "Medical Technology",
@@ -150,12 +147,6 @@ export const home = {
         to: "/use-cases/biotech",
         blurb:
           "Follow competitors, research, clinical developments, market perception and the signals shaping your therapeutic landscape.",
-      },
-      {
-        name: "Life Sciences",
-        to: "/industries/life-sciences",
-        blurb:
-          "Stay on top of research, regulation, partnerships, competitors and market developments across your scientific and commercial ecosystem.",
       },
       {
         name: "Financial Technology",
@@ -174,6 +165,16 @@ export const home = {
         to: "/use-cases/tech",
         blurb:
           "Track competitors, product launches, customer trends, technology shifts and emerging growth opportunities across your category.",
+      },
+      // The one entry with no drop_06 card copy, because it is not in that
+      // brief's list. Written from what section 7 asks this page to say: that
+      // MarketBuzzr "supports highly specialized and niche markets, including
+      // categories that do not fit a predefined industry".
+      {
+        name: "Other Industries",
+        to: "/industries/other-industries",
+        blurb:
+          "Track the competitors, sources and conversations that define your market, including specialized niches with no predefined category.",
       },
     ],
     exploreLabel: "Explore all industries",

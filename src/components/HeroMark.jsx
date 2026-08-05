@@ -155,6 +155,34 @@ const MARKS = {
       </>
     ),
   },
+
+  // Concentric rings with a crosshair, for Other Industries — the page about a
+  // market that has no predefined category, where the subject is the focusing
+  // rather than the industry. Original SVG, same three layers as the rest.
+  //
+  // The one mark with no rotation. The others are tilted to stop a rectilinear
+  // drawing looking pasted on; a ring is symmetrical, so all a tilt would do is
+  // knock the crosshair off the horizontal and look like a mistake.
+  target: {
+    viewBox: "0 0 128 128",
+    ratio: 1,
+    rotate: 0,
+    render: (
+      <>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="3" opacity="0.42">
+          <circle cx="64" cy="72" r="46" />
+        </g>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="3.2">
+          <circle cx="64" cy="64" r="28" />
+          <path d="M64 6v16M64 106v16M6 64h16M106 64h16" />
+        </g>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="4.6">
+          <circle cx="64" cy="64" r="46" />
+          <circle cx="64" cy="64" r="10" />
+        </g>
+      </>
+    ),
+  },
 };
 
 const HeroMark = ({ name = "dna" }) => {
