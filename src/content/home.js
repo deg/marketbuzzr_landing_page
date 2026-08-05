@@ -22,8 +22,11 @@ export const home = {
   hero: {
     eyebrow: "STRATEGIC INTELLIGENCE FOR TEAMS IN DYNAMIC MARKETS",
     title: "Stay Ahead of the Signals That Shape Your Market",
+    // drop_06 replaces this line verbatim, and says why: no em dash or hyphen
+    // as punctuation. That is the second brief running to name dash punctuation
+    // as the problem, so treat it as a standing rule rather than a one-off.
     sub: [
-      "MarketBuzzr continuously monitors your competitors, industry, regulation and market conversations—surfacing what matters, what it means for your business, and what to do next.",
+      "MarketBuzzr continuously tracks your competitors, industry, and market conversations to surface what matters most for your business, your role, and your goals.",
     ],
     emphasis:
       "Clear insights. Actionable recommendations. Ready-to-use drafts.",
@@ -58,7 +61,12 @@ export const home = {
     title: "Your Market Moves Faster Than Anyone Can Follow",
     paragraphs: [
       "Competitors move. Regulations change. Customer priorities shift. New technologies and market trends emerge.",
-      "The signals are everywhere—but fragmented across sources and rarely interpreted with your business in mind.",
+      // drop_06's second copy edit. His quoted string ("Signals are
+      // everywhere—but fragmented.") truncates this sentence at the em dash
+      // rather than reproducing it, so "replace with exactly" governs the
+      // wording of the replacement and not how much of the line goes; the
+      // qualifier stays, since it is what sets MarketBuzzr up.
+      "Signals are everywhere. They’re just fragmented across sources and rarely interpreted with your business in mind.",
       "Most of it doesn't matter to you.",
       "Some of it could change your strategy.",
     ],
