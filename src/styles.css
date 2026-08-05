@@ -83,10 +83,18 @@
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 250ms ease-in-out;
 
-  /* Typography */
-  --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, sans-serif;
+  /* Typography. ONE FACE, and it is the industry pages' rather than the older
+     pages'. Manu's August handover makes the approved dark industry pages the
+     typography reference and says to apply it to the homepage and How It Works
+     — that direction is easy to get backwards, and only the CTA colour flows
+     the other way. Hanken Grotesk is retired (mbz-et8e.52.1).
+
+     The two tokens stay distinct even though they now hold the same value:
+     they are separate ideas, and a later round that wants a display face has
+     one place to put it. */
+  --font-display: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
 }
 
 /* Reset and Base Styles */
@@ -3000,13 +3008,14 @@ footer h4 {
    chip labels. Both are on his list to confirm.
    ========================================================================== */
 .industry-page {
-  /* Inter, not the site's Hanken Grotesk. Manu's sketch asks for Inter and
-     never loads it, so what it actually renders in is the system font; matching
-     his rendering would have meant copying an accident. This matches his
-     intent. The older pages keep Hanken Grotesk — two faces on the site for as
-     long as pages are being moved across one at a time. */
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, sans-serif;
+  /* The font-family that used to sit here is gone: Inter is the site's face
+     now, so scoping it to these three said nothing. It also never reached
+     their headings, which take --font-display and so stayed Hanken Grotesk —
+     the reference pages were themselves half-and-half until mbz-et8e.52.1.
+
+     The scale below is still scoped, and is still the difference between these
+     pages and the rest: 16/400/1.5 against the site's 20/500/1.6. Adopting it
+     everywhere is mbz-et8e.52.2, and this block goes when that lands. */
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
