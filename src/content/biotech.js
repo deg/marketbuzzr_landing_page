@@ -23,9 +23,13 @@ export const biotech = {
   hero: {
     kicker: "MARKETBUZZR FOR BIOTECHNOLOGY",
     title: "Always know what's happening around your pipeline",
+    // ONE PARAGRAPH, his revised dark page's, verbatim. It replaces the two
+    // this page shipped and folds them into one — the August handover's rule
+    // for every industry page: "Hero copy is one concise paragraph under the
+    // headline." Note his own wording drops the hyphens from "indication and
+    // molecule specific", which is the same no-dashes rule (mbz-et8e.52.10).
     sub: [
-      "Understand what patients, caregivers, KOLs, competitors and the broader market are saying about your therapy—outside of clinical data.",
-      "MarketBuzzr brings fragmented external signals together and turns them into indication- and molecule-specific intelligence your team can act on.",
+      "MarketBuzzr brings together what patients, caregivers, KOLs, competitors and the broader market are saying about your therapy and turns these fragmented external signals into indication and molecule specific intelligence your team can act on.",
     ],
   },
 
@@ -58,9 +62,10 @@ export const biotech = {
 
   intro: {
     heading: "See what's happening beyond the clinical data",
+    // Also one paragraph, also his: "The 'See What Matters' section uses one
+    // concise paragraph under the headline."
     paragraphs: [
-      "The real-world narrative around your molecule is already forming across patient and caregiver communities, KOL discussions, conference commentary, biotech media, YouTube, Reddit, advocacy groups and competitor communications.",
-      "MarketBuzzr structures these fragmented signals into indication- and molecule-specific intelligence, helping you understand how your therapy is being perceived, discussed and positioned across the ecosystem.",
+      "MarketBuzzr brings together patient and caregiver communities, KOL discussions, conference commentary, biotech media, YouTube, Reddit, advocacy groups and competitor communications to show how your therapy is being perceived, discussed and positioned across the ecosystem.",
     ],
     emphasis: "Clinical data tells only part of the story.",
   },
@@ -88,7 +93,7 @@ export const biotech = {
       ],
     },
     implication: {
-      text: "The conversation suggests that treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication—even where clinical efficacy remains the primary point of differentiation.",
+      text: "The conversation suggests that treatment burden may be becoming a more important part of how patients and caregivers evaluate therapies in the indication, even where clinical efficacy remains the primary point of differentiation.",
     },
     sources: {
       items: [
@@ -125,7 +130,7 @@ export const biotech = {
         icon: "people",
         heading: "Treatment perception",
         description:
-          "Understand how patients, caregivers and the broader ecosystem perceive your therapy beyond clinical endpoints—including outcomes, treatment burden and real-world experience.",
+          "Understand how patients, caregivers and the broader ecosystem perceive your therapy beyond clinical endpoints, including outcomes, treatment burden and real-world experience.",
       },
       {
         icon: "shield",
@@ -147,7 +152,7 @@ export const biotech = {
       },
     ],
     closer:
-      "MarketBuzzr gives lean biotech teams a continuously updated view of the conversations shaping their therapy and indication—without adding operational overhead or replacing existing clinical, regulatory or commercial workflows.",
+      "MarketBuzzr gives lean biotech teams a continuously updated view of the conversations shaping their therapy and indication, without adding operational overhead or replacing existing clinical, regulatory or commercial workflows.",
   },
 
   closing: {

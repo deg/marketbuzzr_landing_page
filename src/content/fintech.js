@@ -41,7 +41,7 @@ export const fintech = {
     heading: "See what matters. Understand what it means.",
     paragraphs: [
       "In financial services, a regulatory change, new product launch or emerging technology can quickly shift customer expectations and the competitive landscape.",
-      "MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities—so you can see what deserves attention and what to do next.",
+      "MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities, so you can see what deserves attention and what to do next.",
     ],
   },
 
