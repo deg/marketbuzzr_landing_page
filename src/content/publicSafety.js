@@ -80,8 +80,11 @@ export const publicSafety = {
     // inventing its own would make the fleet inconsistent for no reader gain.
     detected: "May 2, 2025 • 9:42 AM",
     impact: "High impact",
+    // Ends with a full stop, like MedTech's, FinTech's, Enterprise Technology's
+    // and Other Industries'. Biotechnology's does not, and that one is Manu's
+    // own wording from his sketch; the four that are not his agree.
     headline:
-      "A national public safety agency opens its next generation communications program to competitive bid",
+      "A national public safety agency opens its next generation communications program to competitive bid.",
     summary:
       "The published requirement covers radio, broadband and dispatch systems across regional response teams, and weights its evaluation criteria toward open standards and interoperability with equipment from other suppliers.",
     implication: {
