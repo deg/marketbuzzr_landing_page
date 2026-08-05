@@ -2030,6 +2030,45 @@ footer h4 {
     --mobile-artwork-width: 1000px;
   }
 }
+/* ============================================================
+   FIX-BEFORE-RELEASE (mbz-et8e.18): delete this block.
+   DEV-ONLY. Everything below pairs with src/components/DevOnly.jsx and must
+   not ship — see mbz-et8e.18. Amber and hazard-striped so scaffolding is one
+   recognisable thing, matching the not-implemented page.
+   ============================================================ */
+.dev-note {
+  max-width: var(--lead-measure);
+  margin: var(--spacing-lg) auto 0;
+  padding: var(--spacing-md);
+  border: 2px dashed #f0a53a;
+  border-radius: var(--radius-sm);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(240, 165, 58, 0.06) 0 12px,
+    transparent 12px 24px
+  );
+  text-align: left;
+}
+
+.dev-note p {
+  margin: var(--spacing-sm) 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.dev-note-tag {
+  display: inline-block;
+  padding: 2px var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  background: #f0a53a;
+  color: #241500;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 /* FIX-BEFORE-RELEASE (mbz-et8e.18): restyle for a real not-found page; the route itself stays.
    Not-yet-implemented page. Deliberately unlike the rest of the site — amber,
    hazard-striped and monospaced — because it must be impossible to mistake for

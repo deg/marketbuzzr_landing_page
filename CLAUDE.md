@@ -303,10 +303,11 @@ grep -rn "FIX-BEFORE-RELEASE" src
 
 **`yarn deploy` refuses the live target while any tag remains** (`scripts/deploy.mjs`).
 `yarn deploy:new` is exempt — the sandbox is where this is meant to be visible.
-Each tag says what to do, and they do not all mean delete. Beads issue
-`mbz-et8e.18` gates the merge.
+Each tag says what to do, and they do not all mean delete. `src/components/DevOnly.jsx`
+holds all the dev-only React so removing it is a deletion rather than a hunt.
+Beads issue `mbz-et8e.18` gates the merge.
 
-There are **6 tags across 6 files**, all of which block:
+There are **8 tags across 7 files**:
 
 | Where | What it needs |
 |---|---|
@@ -316,14 +317,18 @@ There are **6 tags across 6 files**, all of which block:
 | `pages/Home.jsx` | A decision, not a code change — see `mbz-et8e.12`. |
 
 **`Home.jsx`'s tag is now the only thing holding back the fabricated product
-announcement in the insight artwork.** A visible dev note used to sit under that
-visual saying so; it was removed on the user's instruction in `mbz-et8e.48`, and
-`DevOnly.jsx` and the `.dev-note` CSS block went with it, since it was the only
-`<DevNote>` on the site and `DevNote` was that file's only export. Both of those
-tags said "delete this", so retiring them was the fix rather than a strip-to-pass
-— but it means the on-page warning is gone and the tag is all that is left. The
-memo's §1 was updated to match, because it told Manu the page carried a visible
-note.
+announcement in the insight artwork.** A visible `<DevNote>` used to sit under
+that visual saying so, and was removed on the user's instruction in
+`mbz-et8e.48`. The memo's §1 was updated to match, because it had told Manu the
+page carried a visible note. The tag is all that is left, and it says so itself.
+
+**Removing that note is not a reason to remove `DevOnly.jsx`.** It briefly was —
+`.48` deleted the component and its CSS too, because that note was the only
+`<DevNote>` on the site and both files carry tags reading "delete this". They
+were restored in `mbz-et8e.50`: the request was to take down one note, not to
+retire the mechanism for having notes, and How It Works uses it again
+immediately. **Those two tags come off when the design cycle ends, not when the
+last note happens to go.**
 
 **The risk is the merge, not the deploy.** `yarn deploy` is already refused from
 any branch but `main`, so the live site cannot be reached from `redesign` by
