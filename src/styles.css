@@ -234,11 +234,11 @@ body {
   padding: 0 var(--spacing-lg);
 }
 
-/* §3 opts into the same wider measure the full-bleed visuals use, because its
-   artwork sits in a column and the brief wants it materially larger — at the
-   1100px measure the 55% column is only ~605px. Ties with .container on
-   specificity and wins by source order, so it must stay below it. The 1024px
-   media query below only changes padding, so it is unaffected. */
+/* The wider measure the full-bleed visuals use, opted into by a section whose
+   content is a split rather than prose — now only the industry pages' hero.
+   Ties with .container on specificity and wins by source order, so it must stay
+   below it. The 1024px media query below only changes padding, so it is
+   unaffected. */
 .container-wide {
   max-width: 1400px;
 }
@@ -440,22 +440,16 @@ h1 {
   margin: 0 auto var(--spacing-lg);
 }
 
-/* LOAD-BEARING for §2, which now puts artwork in the right-hand column.
-   .product-frame breaks out of the text container by shifting its left edge to
-   50% and pulling back half its own width. That only works when the parent
-   spans the page: inside a split column the 50% resolves against the column
-   instead of the viewport, so the image lands off-centre and overflows the
-   window — measured at a 1280 viewport it ran x=363 to x=1595, 315px past the
-   right edge. This rule puts the frame back in normal flow at column width.
-
-   The section that first needed this (the old personalization split) is gone,
-   so it is easy to read this rule as leftover and delete it. It is not. */
-.problem-grid .product-frame {
-  position: static;
-  left: auto;
-  transform: none;
-  width: 100%;
-}
+/* NO PAGE PUTS A .product-frame INSIDE A SPLIT COLUMN ANY MORE, and there used
+   to be a rule here putting it back into normal flow when one did. It went with
+   §3's 45/55 split in drop_06. Recorded because the failure is silent and the
+   fix is not obvious: .product-frame breaks out by shifting its left edge to
+   50% and pulling back half its own width, which only works when the parent
+   spans the page. Inside a column the 50% resolves against the column, so the
+   artwork lands off-centre and overflows the window — measured at a 1280
+   viewport it ran x=363 to x=1595, 315px past the right edge. A future split
+   layout holding artwork needs position: static / left: auto / transform: none
+   / width: 100% on the frame. */
 
 /* The hero visual takes the same breakout width as the other artwork, so the
    four do not render at two different scales down the page. This is a
@@ -1442,10 +1436,6 @@ footer h4 {
   box-shadow: 0 0 80px 30px var(--artwork-ground, transparent);
 }
 
-.signals-visual {
-  --artwork-ground: #020925;
-}
-
 .insight-visual {
   --artwork-ground: #000b2d;
 }
@@ -1515,10 +1505,12 @@ footer h4 {
   height: auto;
 }
 
-/* The last stop of the illustration's own radial ground. Following --bg rather
-   than a literal is what lets it dissolve into the page in either theme; see
-   the note beside the gradient in HeroAnimation.jsx. */
-.hero-anim-fade {
+/* The last stop of a drawn artwork's own radial ground — the hero and §3's
+   Worth Your Attention both end on it. Following --bg rather than a literal is
+   what lets each dissolve into the page instead of ending at a rectangle; see
+   the note beside the gradient in HeroAnimation.jsx. A presentation attribute
+   cannot read a custom property, which is why this lives here at all. */
+.artwork-fade {
   stop-color: var(--bg);
 }
 
@@ -1745,15 +1737,22 @@ footer h4 {
   }
 }
 
-/* The blanket reduced-motion rule near the top of this file pins every
-   animation to its LAST keyframe, and three of the ones above are least visible
-   there: the insight cards end at 20% opacity and the drift groups at 12-25%,
-   which would leave the right-hand third of the hero almost blank and the
-   source chips too faint to read. Motion is what the visitor asked to lose, not
-   the picture, so each of these is pinned to the frame that reads best instead
-   — full strength for the cards, the 50% peak for the drift groups. The nodes
-   are left alone: their last keyframe is the resting state they spend most of
-   the loop in anyway. */
+/* The blanket reduced-motion rule near the top of this file cuts every duration
+   to 0.01ms. WHAT AN ELEMENT THEN SETTLES ON IS ITS BASE STYLE, NOT ITS LAST
+   KEYFRAME — no fill-mode is set, so the animation stops contributing entirely
+   once it has finished. That is worth stating plainly because the two land in
+   very different places, and both are wrong here (all measured):
+
+     .hero-anim-output   base 0.24, so the right-hand third goes near-blank
+     .hero-anim-drift-*  NO base opacity, so they revert to 1 and the noise
+                         becomes the loudest thing in the picture
+
+   Motion is what the visitor asked to lose, not the picture, so each is given
+   the state that reads best instead — full strength for the insight cards, the
+   50% peak for the drift groups, which are the frames the loop spends its time
+   near. The nodes are left alone: their base 0.58 is the resting state they sit
+   at for most of the loop anyway. The same rule and the same reasoning apply to
+   the Worth Your Attention block further down. */
 @media (prefers-reduced-motion: reduce) {
   .hero-anim-output {
     opacity: 1;
@@ -1781,6 +1780,251 @@ footer h4 {
 
   .hero-anim-drift-c {
     opacity: 0.45;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   §3's Worth Your Attention animation
+
+   Manu's, from drop_06's assets/worth-your-attention-animation.html — see the
+   header of components/WorthYourAttention.jsx for what was changed and why. His
+   durations, delays and keyframe values are kept exactly; only the names are
+   prefixed, since `dash`, `converge` and `attention` in a shared stylesheet are
+   an accident waiting to happen, and the url() inside wyaSignalSelect has to
+   carry the same prefix as the filter it names in the markup.
+
+   Like the hero it takes .product-frame's sizing and needs none of that rule's
+   ground bleed: the SVG's own radial already ends on the page background.
+   --------------------------------------------------------------------------- */
+.wya svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wya-header {
+  animation: wyaHeaderPulse 4s ease-in-out infinite;
+}
+
+/* Nine cards on one 9s loop, each a second behind the last, so exactly one is
+   at full strength at any moment and the eye is led round the field. */
+.wya-signal {
+  opacity: 0.42;
+  animation: wyaSignalSelect 9s ease-in-out infinite;
+}
+
+.wya-signal-2 {
+  animation-delay: 1s;
+}
+
+.wya-signal-3 {
+  animation-delay: 2s;
+}
+
+.wya-signal-4 {
+  animation-delay: 3s;
+}
+
+.wya-signal-5 {
+  animation-delay: 4s;
+}
+
+.wya-signal-6 {
+  animation-delay: 5s;
+}
+
+.wya-signal-7 {
+  animation-delay: 6s;
+}
+
+.wya-signal-8 {
+  animation-delay: 7s;
+}
+
+.wya-signal-9 {
+  animation-delay: 8s;
+}
+
+.wya-converge {
+  stroke-dasharray: 9 18;
+  stroke-linecap: round;
+  animation: wyaDash 1.8s linear infinite;
+}
+
+/* The pulse's own offset-path and delay are set inline from the same data the
+   line is drawn from — only the motion is here. */
+.wya-pulse {
+  animation: wyaTravel 9s linear infinite;
+}
+
+.wya-attention {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wyaAttentionPulse 2.6s ease-in-out infinite;
+}
+
+.wya-check {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wyaCheckPulse 2.6s ease-in-out infinite;
+}
+
+/* Three drift speeds over the background field, the same device the hero uses
+   to keep the market's noise from settling into one rhythm.
+
+   EACH DECLARES ITS RESTING OPACITY as well as its animation, and that is not
+   redundant. An animation with no fill-mode leaves the element on its BASE
+   style once it finishes, not on its last keyframe — so under the blanket
+   reduced-motion rule, which cuts every duration to 0.01ms, a group with no
+   opacity of its own reverts to the initial value of 1. Measured before these
+   three lines: all three layers came back at full strength, which made the
+   decorative noise the loudest thing in the picture. */
+.wya-noise-a {
+  opacity: 0.14;
+  animation: wyaFloatA 5.5s ease-in-out infinite;
+}
+
+.wya-noise-b {
+  opacity: 0.12;
+  animation: wyaFloatB 6.7s ease-in-out infinite;
+}
+
+.wya-noise-c {
+  opacity: 0.1;
+  animation: wyaFloatC 7.8s ease-in-out infinite;
+}
+
+@keyframes wyaDash {
+  to {
+    stroke-dashoffset: -54;
+  }
+}
+
+@keyframes wyaTravel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+/* His, with one correction: he declares 100% twice, at .36 and again at .48,
+   so the second silently won and the first stop was dead. Written here as the
+   0.48 the browser actually produced, so the sequence reads as what it does. */
+@keyframes wyaSignalSelect {
+  0%,
+  7% {
+    opacity: 0.36;
+    filter: none;
+  }
+  10%,
+  20% {
+    opacity: 1;
+    filter: url(#wya-card-glow);
+  }
+  25%,
+  100% {
+    opacity: 0.48;
+    filter: none;
+  }
+}
+
+@keyframes wyaFloatA {
+  0%,
+  100% {
+    opacity: 0.14;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(6px, -4px);
+  }
+}
+
+@keyframes wyaFloatB {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0.26;
+    transform: translate(-5px, 5px);
+  }
+}
+
+@keyframes wyaFloatC {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0.22;
+    transform: translate(4px, 3px);
+  }
+}
+
+@keyframes wyaAttentionPulse {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.82;
+  }
+  50% {
+    transform: scale(1.035);
+    opacity: 1;
+  }
+}
+
+@keyframes wyaCheckPulse {
+  0%,
+  100% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes wyaHeaderPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Explicit resting states, same as the hero's block above. The blanket rule
+   cuts every duration to 0.01ms, and each of these then settles on its base
+   style: the nine cards on their 0.42 and the header on 1. Motion is what the
+   visitor asked to lose, not the picture, and this artwork's whole point is
+   WHICH developments are lit — at 0.42 none of them is, so each pins to full
+   strength and the header to its own bright frame.
+
+   THE TRAVELLING PULSES ARE HIDDEN RATHER THAN PARKED. With no animation they
+   sit at offset-distance 0, which is nine bright dots stopped dead on the nine
+   cards, saying nothing. They carry nothing the converging lines do not already
+   show, and those survive as static dashes. */
+@media (prefers-reduced-motion: reduce) {
+  .wya-signal {
+    opacity: 1;
+  }
+
+  .wya-header {
+    opacity: 0.85;
+  }
+
+  .wya-attention {
+    transform: none;
+    opacity: 1;
+  }
+
+  .wya-pulse {
+    display: none;
   }
 }
 
@@ -1822,23 +2066,26 @@ footer h4 {
     max-width: none;
   }
 
-  /* §3 sets no held width on purpose, so it renders full-width with no
-     scroller. The brief asks for "copy then full-width visual" here and — unlike
-     the hero and the insight — attaches no readability caveat to it. That suits
-     the artwork: its point is "lots of noise, one thing worth attention", which
-     the composition carries rather than the labels, most of which are
-     deliberately blurred shapes. Its labels do fall below the ~8px floor the
-     other two hold to; that is the trade the brief asks for.
-
-     Stated as an explicit width rather than by dropping the variable, because
-     dropping it just falls back to the 1000px default and re-creates the
-     scroller. */
-  .signals-visual img {
-    width: 100%;
-  }
-
   .insight-visual {
     --mobile-artwork-width: 1024px;
+  }
+
+  /* §3's animation is held the same way, but the rules above are written for
+     <picture>/<img> and this is an inline <svg>, so it needs its own pair.
+     Same arithmetic as the images: the smallest type that carries the story is
+     the 17-unit signal-card label on a 1380-unit canvas, and 660px is where
+     that reaches the ~8px floor a high-DPI phone needs (17 × 660/1380 = 8.1).
+     That is under two screens of panning at 390px, the cheapest scroller on
+     the page. Manu's brief asks for exactly this trade in as many words:
+     "avoid simply shrinking the full desktop composition until text becomes
+     illegible". */
+  .wya {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .wya svg {
+    width: max(660px, 100%);
   }
 
   /* The How It Works artwork, measured the same way rather than inheriting the
@@ -1994,33 +2241,12 @@ footer h4 {
   font-size: 18px;
 }
 
-/* §2 Problem — copy beside the signal cloud, 45/55 per the brief. */
-.problem-grid {
-  display: grid;
-  grid-template-columns: 45fr 55fr;
-  gap: var(--spacing-3xl);
-  align-items: center;
-}
-
-/* Left-aligned against the site's centred default: this is a column of prose
-   next to a visual, not a centred lead paragraph. */
-.problem-copy {
-  text-align: left;
-}
-
-.problem-copy h2 {
-  text-align: left;
-}
-
-.problem-copy p {
-  color: var(--muted);
-  margin: 0 0 var(--spacing-md);
-}
-
-.problem-closer {
-  color: var(--text);
-  font-weight: 700;
-}
+/* §3's own rules are gone as of drop_06. It was .problem-grid, a 45/55 split
+   with left-aligned prose beside the artwork; the new animation needs the full
+   width to stay legible, so the section is now SectionTitle + centred leads +
+   a full-width visual — every part of it a rule that already existed. Its four
+   paragraphs are .lead and its closer is .lead .lead-strong, the same pair §4
+   uses. See the comment in pages/Home.jsx. */
 
 /* §4 — five stages with a thin connector between them. Steps and connectors are
    siblings in one grid: five 1fr columns for the steps, four auto columns for
@@ -2303,16 +2529,13 @@ footer h4 {
 }
 
 @media (max-width: 820px) {
-  /* minmax(0, …) rather than a bare 1fr: a grid track's automatic minimum is
-     its content's min-content size, so once §2's artwork is held at 1000px
-     inside its scroller the track grows to fit it, .product-frame's width:100%
-     resolves against that inflated track, and the page gains ~630px of
-     horizontal overflow. Measured before this line: track 1018px at a 390px
-     viewport. */
-  .problem-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-2xl);
-  }
+  /* §3's grid stacked here before drop_06 made the section full-width. Its
+     track needed minmax(0, 1fr) rather than a bare 1fr, and any new grid that
+     will hold one of these scrollers needs the same: a track's automatic
+     minimum is its content's min-content size, so an artwork held at 1000px
+     inside a scroller inflates the track, .product-frame's width:100% resolves
+     against the inflated track, and the page gains horizontal overflow.
+     Measured at the time: track 1018px at a 390px viewport, ~630px of overflow. */
 }
 
 /* ============================================================

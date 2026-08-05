@@ -11,9 +11,8 @@ import CategoryCard from "../components/CategoryCard";
 import IndustryTile from "../components/IndustryTile";
 import ProductImage from "../components/ProductImage";
 import HeroAnimation from "../components/HeroAnimation";
+import WorthYourAttention from "../components/WorthYourAttention";
 import { DevNote } from "../components/DevOnly";
-import signalsAvif from "../assets/market-signals.avif";
-import signalsWebp from "../assets/market-signals.webp";
 import insightAvif from "../assets/insight-medicalcomp.avif";
 import insightWebp from "../assets/insight-medicalcomp.webp";
 
@@ -51,27 +50,31 @@ const Home = () => {
       {/* §2 Hero transition — a compact bridge, deliberately not a section. */}
       <BrandDivider steps={divider} />
 
-      {/* §3 Problem. Copy left, signal artwork right; stacks copy-first on
-          narrow screens. The artwork must NOT take the .product-frame breakout
-          here — see the rule in styles.css that suppresses it inside a column. */}
-      <section className="section container container-wide">
-        <div className="problem-grid">
-          <div className="problem-copy">
-            <h2>{problem.title}</h2>
-            {problem.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-            <p className="problem-closer">{problem.closer}</p>
-          </div>
-          <ProductImage
-            className="signals-visual"
-            avif={signalsAvif}
-            webp={signalsWebp}
-            width={1163}
-            height={1011}
-            alt={problem.visualAlt}
-          />
-        </div>
+      {/* §3 Problem. Copy above a full-width visual, the same shape as §4.
+          This was a 45/55 split with the copy beside the artwork, and drop_06
+          ended that: its Worth Your Attention animation is a wide composition
+          whose nine card labels are 17 units on a 1380 canvas, so inside the
+          55% column they would render around 7px — the failure Manu's own
+          responsive note names ("avoid simply shrinking the full desktop
+          composition until text becomes illegible"). Full width instead, where
+          they clear 15px.
+
+          That also retired .problem-grid, .problem-copy and the rule that
+          suppressed .product-frame's breakout inside the column: the copy is
+          now ordinary centred leads and the visual takes the breakout normally,
+          so all of it is reuse rather than section-specific CSS. */}
+      <section className="section container">
+        <SectionTitle title={problem.title} />
+        {problem.paragraphs.map((p, i) => (
+          <p className="lead" key={i}>
+            {p}
+          </p>
+        ))}
+        <p className="lead lead-strong">{problem.closer}</p>
+        <WorthYourAttention
+          title={problem.visualTitle}
+          description={problem.visualAlt}
+        />
       </section>
 
       {/* §4 Product Proof / Insight. The four explanatory cards that used to

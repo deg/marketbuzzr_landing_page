@@ -71,8 +71,17 @@ export const home = {
       "Some of it could change your strategy.",
     ],
     closer: "MarketBuzzr helps you know the difference.",
+    // Now drawn rather than photographed — Manu's drop_06 "Worth Your
+    // Attention" animation, which replaced the AVIF that said the same thing.
+    // Like the hero's pair, these become the SVG's <title> and <desc> rather
+    // than an <img alt>: the picture is a diagram, its labels are told to a
+    // screen reader as one thing, and this is the only prose form of it.
+    visualTitle: "How MarketBuzzr separates what matters from the noise",
+    // Kept in step with what is actually drawn: the nine developments named
+    // below are the nine cards, and the endpoint they converge on is the
+    // animation's own words.
     visualAlt:
-      "Many market signals compete for attention, while a smaller set of important developments is highlighted as worth attention.",
+      "A field of market activity moves continuously in the background. Nine developments light up in turn — a competitor launch, an FDA update, a new market entrant, an industry trend, a shift in customer sentiment, a funding round, a new partnership, a technology shift and a regulatory change — and each streams down to converge on a single point marked Worth Your Attention.",
   },
 
   // §4 Product Proof / Insight

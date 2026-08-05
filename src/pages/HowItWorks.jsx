@@ -20,9 +20,9 @@ import actionWebp from "../assets/turn-into-action.webp";
 // The steps are sequential full-width sections rather than a three-column
 // layout or alternating 50/50 text/image splits; the brief rules both out
 // because they shrink the supplied artwork below the size its embedded text
-// needs. That also means .product-frame's breakout works here as designed: the
-// section spans the page, so the rule that suppresses it inside a column
-// (.problem-grid .product-frame) neither applies nor should be copied.
+// needs. That also means .product-frame's breakout works here as designed,
+// since the section spans the page. The homepage reached the same conclusion
+// for its own §3 in drop_06 and dropped its split.
 //
 // No <main> wrapper. The brief sketches one, but also says to prefer the
 // existing codebase's conventions — and no page on this site has one.

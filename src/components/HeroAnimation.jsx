@@ -245,11 +245,11 @@ const HeroAnimation = ({ title, description }) => (
               a presentation attribute cannot read a custom property, and it is
               worth the indirection: measured across the left edge, the seam is
               2/255 in the dark theme and would be white against navy in the
-              light one. */}
+              light one. Shared with WorthYourAttention, which does the same. */}
           <radialGradient id="hero-anim-bg" cx="52%" cy="51%" r="70%">
             <stop offset="0%" stopColor="#17245f" />
             <stop offset="42%" stopColor="#0a163d" />
-            <stop offset="100%" className="hero-anim-fade" />
+            <stop offset="100%" className="artwork-fade" />
           </radialGradient>
           <radialGradient id="hero-anim-core-grad">
             <stop offset="0%" stopColor="#ac8dff" />
