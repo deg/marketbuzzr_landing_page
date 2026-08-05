@@ -352,13 +352,22 @@ uninterrupted list. `.source-cluster-hole`'s `min-height` is what makes the midd
 taller than a chip row, and `align-items: center` (not `stretch`) is what stops the two
 chips flanking the core growing to match it.
 
-**The insight card is labelled illustrative, and must stay labelled.** It carries a
-visible "an illustrative example, not a real signal" note, and its timestamp is
-deliberately **relative** ("Detected 2 days ago") — the sketch dated it "May 2, 2025",
-already fifteen months stale on arrival, which is the same defect filed against the
-homepage artwork as `mbz-et8e.28` item 5. An absolute date in a fabricated example rots
-the day it ships. The draft options are labels, not buttons, because a real button that
-does nothing is worse than a label that never claimed to be one.
+**Whether the insight card needs an illustrative marker is still open, and the
+card currently has none.** Both halves of an earlier answer have been reverted, so
+do not reinstate either without reading why. A visible "an illustrative example,
+not a real signal" line, and a relative timestamp reading "Detected 2 days ago",
+were both invented here rather than taken from the sketch, and both went in
+`mbz-et8e.38` when the page was matched to what Manu actually drew. The card ships
+his absolute "May 2, 2025 • 9:42 AM" on all three industry pages.
+
+That date is now about fifteen months stale, which is the same defect the memo
+raises against the homepage artwork. The difference is that here it is **text, not
+pixels**, so it costs one line to change rather than a re-render — see
+`mbz-et8e.53`. Whether a fabricated example also needs a visible marker is his
+call, not ours (`mbz-et8e.12`).
+
+The draft options are labels, not buttons, because a real button that does nothing
+is worse than a label that never claimed to be one.
 
 Manu's emoji iconography is not carried over — the site draws its own line icons in
 `CategoryIcon.jsx`, which now holds eight more, so they take the page's stroke and colour
