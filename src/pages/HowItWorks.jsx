@@ -6,7 +6,6 @@ import CtaPanel from "../components/CtaPanel";
 import ProductImage from "../components/ProductImage";
 import RoleDashboard from "../components/RoleDashboard";
 import DraftFromIdea from "../components/DraftFromIdea";
-import { DevFlag } from "../components/DevOnly";
 import monitorAvif from "../assets/monitor-filter.avif";
 import monitorWebp from "../assets/monitor-filter.webp";
 
@@ -86,15 +85,10 @@ const HowItWorks = () => {
               numeral is the only thing carrying the sequence. */}
           <p className="how-step-number">{step.number}</p>
           <h2>{step.title}</h2>
-          <p className="lead">{step.lead}</p>
-          {/* FIX-BEFORE-RELEASE (mbz-et8e.18): remove once Manu answers.
-              Directly under the line it is about, and on all three, because the
-              question is per-line — drop_06 gives one paragraph per step and
-              lists headline → one concise paragraph → visual, which reads as
-              deleting these, but it names only the closing lines under 01 and
-              02 for deletion and never mentions these. See content/howItWorks.js
-              for the full reasoning and §9 of the memo for the ask. */}
-          <DevFlag>Not in drop_06 — keep this line?</DevFlag>
+          {/* The short line that used to sit here is gone, and so is the flag
+              that asked about it. His August handover gives the same
+              headline-plus-one-paragraph structure a second time with no such
+              line, which is the answer (mbz-et8e.52.8). */}
           <div className="how-step-body">
             <p>{step.body}</p>
           </div>

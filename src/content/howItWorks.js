@@ -7,9 +7,14 @@
 // sources grid, no separate weekly-report section, no feature grid, no FAQ. If
 // a later round wants to add a section here, check that document first.
 //
-// drop_06 shortened every step to ONE paragraph and cut the closing line under
-// steps 01 and 02, leaving 03's. `lead` is the open question — see the note on
-// the first one.
+// SUPERSEDED AGAIN by the August 2026 site handover, section 6, which is now the
+// source for this page's copy: new one-paragraph bodies for all three steps, and
+// three role profiles rather than four.
+//
+// The short line that used to sit under each headline is gone. It was ours, not
+// his, and shipped with a visible flag asking whether it should stay; his
+// handover answers by giving the same headline-plus-one-paragraph structure a
+// second time with no such line (mbz-et8e.52.8).
 //
 // Brand is "MarketBuzzr" throughout — the brief's "Marketbuzzr" is deliberately
 // not adopted (mbz-et8e.2), same call as the homepage.
@@ -49,18 +54,7 @@ export const howItWorks = {
       id: "monitor-filter",
       number: "01",
       title: "Monitor Your Market. Filter the Noise.",
-      // KEPT, NOT CONFIRMED — all three of these. drop_06 gives one paragraph
-      // per step and its Final Page Structure lists headline -> one concise
-      // paragraph -> visual, which reads as deleting them. But it names only
-      // the closing lines under 01 and 02 for deletion and never mentions
-      // these, and deleting copy he did not ask us to delete is the worse
-      // mistake of the two. Each ships with a short visible flag under it
-      // asking him, and the question is in section 9 of the memo.
-      //
-      // Note all three carry an em dash, which he has twice asked us to stop
-      // using as punctuation. If they stay, they get rewritten.
-      lead: "Stay on top of what's changing—without tracking it all yourself.",
-      body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every signal against your company, competitors, products, markets, role and goals, so you see what deserves your attention.",
+      body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every development against your company, products, competitors, goals, role and markets, so you see what deserves your attention.",
       visualAlt:
         "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets to surface only relevant developments.",
       // drop_06: "There should be no additional copy below the section 01
@@ -71,8 +65,7 @@ export const howItWorks = {
       id: "role-based-intelligence",
       number: "02",
       title: "Intelligence Shaped Around Your Role",
-      lead: "Different roles need different intelligence—and different ways to act on it.",
-      body: "MarketBuzzr turns relevant developments into personalized intelligence based on each reader's priorities, giving executives, Marketing, Sales and other teams the insights and opportunities most relevant to the decisions they make.",
+      body: "MarketBuzzr turns relevant developments into personalized insights, opportunities and recommendations based on each reader's priorities, so every role sees the intelligence most relevant to the decisions they make.",
       // Same instruction as 01. The line deleted here — "One market. Different
       // priorities. Intelligence built around each reader." — is not really
       // lost: his animation carries "Same market intelligence. Different
@@ -83,8 +76,7 @@ export const howItWorks = {
       id: "turn-intelligence-into-action",
       number: "03",
       title: "Turn Intelligence Into Action",
-      lead: "Don't just know what happened. Know what to do next.",
-      body: "MarketBuzzr identifies what developments mean for your business, recommends next steps and helps you turn insights into action plans, executive communications, battlecards, outreach, content and more.",
+      body: "MarketBuzzr identifies what developments mean for your business, recommends next steps and helps turn intelligence into action plans, communications, sales enablement and content your team can use.",
       // The only closer that survives drop_06, which calls it out by name:
       // "This is the only one of the three sections that should retain copy
       // below the visual."
@@ -192,31 +184,6 @@ export const howItWorks = {
             tag: "NEW MARKET OPPORTUNITY",
             title: "Rising demand for AI regulatory readiness",
             action: "Draft Outreach Email",
-          },
-        ],
-      },
-      {
-        name: "Customer Success",
-        profile: "Customer Success Profile",
-        tone: "brand",
-        cards: [
-          {
-            icon: "article",
-            tag: "INDUSTRY UPDATE",
-            title: "FDA releases draft guidance on AI in medical devices",
-            action: "Draft Client Update",
-          },
-          {
-            icon: "message",
-            tag: "COMPETITIVE TREND",
-            title: "Competitor launches new AI compliance consulting service",
-            action: "Draft Client Talk Track",
-          },
-          {
-            icon: "trend",
-            tag: "EXPANSION OPPORTUNITY",
-            title: "Existing clients are scaling AI initiatives",
-            action: "Draft Expansion Plan",
           },
         ],
       },
