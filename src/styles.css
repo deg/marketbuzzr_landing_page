@@ -3549,13 +3549,49 @@ footer h4 {
 /* --- Worked insight example ---------------------------------------------- */
 
 /* One surface, clipped, so the role bar squares off against its bottom edge
-   instead of floating below it as a second panel. */
+   instead of floating below it as a second panel.
+   
+   THE CARD IS LIGHT WHILE THE PAGE AROUND IT IS DARK, and that inversion is the
+   whole point rather than a leftover from the retired light theme. This card
+   depicts product output; keeping it light is what makes it read as a
+   screenshot of the app instead of as another section of the marketing site.
+   Manu's revised dark industry pages all draw it this way, and his August
+   handover states it outright: "The insight card itself stays light even though
+   the surrounding page is dark."
+
+   IT IS DONE BY RESCOPING TOKENS, NOT BY REWRITING THE RULES INSIDE. Every rule
+   in the card already reads --text, --muted, --edge, --brand, --positive and
+   their soft variants, so redefining those here flips the whole subtree and
+   leaves ~20 rules untouched. Values are his: ink #0f1b3d, body #2e3c61, rules
+   #e7e9f2, purple #4d23ce for the signal type and the "what it means" heading,
+   green #0a976a for impact and for "do this". Purple survives here even though
+   the August handover bans it from eyebrows and CTAs — that ban is about page
+   chrome, and this card is his own approved artwork. */
 .insight-wrap {
+  --text: #0f1b3d;
+  --muted: #2e3c61;
+  --small: #2e3c61;
+  --edge: #e7e9f2;
+  --edge-4: #c9cfe0;
+  --brand: #4d23ce;
+  --accent-soft: #f2edff;
+  /* HIS DARKER GREEN, used for both. He ships two — #0a976a on the "do this"
+     heading and #087a57 on the impact badge — and the lighter one does not
+     clear WCAG AA on white at this size: measured 3.72:1 for the heading and
+     3.42:1 for the badge against the 4.5:1 that 16px bold needs. #087a57 is his
+     own colour, taken from the same card, and clears both. The two greens are
+     barely separable side by side; the contrast difference is not. */
+  --positive: #087a57;
+  --positive-soft: #eaf9f2;
+
   margin-top: var(--spacing-xl);
-  border: 1px solid var(--edge);
+  border: 1px solid #e8e8f1;
   border-radius: 20px;
-  background: linear-gradient(180deg, var(--surface), var(--surface-2));
-  box-shadow: var(--shadow-md);
+  background: #fff;
+  color: var(--text);
+  /* Deeper than --shadow-md: a light panel needs more separation from a dark
+     page than a dark panel needs from the same page. His is 0 24px 58px. */
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.28);
   overflow: hidden;
 }
 
