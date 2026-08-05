@@ -11,14 +11,13 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import EmailCaptureModal from "./components/EmailCaptureModal";
 import Home from "./pages/Home";
-import UseCasePage from "./pages/UseCasePage";
 import IndustryPage from "./pages/IndustryPage";
 import HowItWorks from "./pages/HowItWorks";
 import Industries from "./pages/Industries";
 import NotImplemented from "./pages/NotImplemented";
 import { ModalContext } from "./ModalContext";
 import { biotech } from "./content/biotech";
-import { tech } from "./content/tech";
+import { enterpriseTech } from "./content/enterpriseTech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
 import { publicSafety } from "./content/publicSafety";
@@ -73,16 +72,18 @@ const App = () => {
         <main id="main" tabIndex={-1}>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* Biotech is the pilot for the new industry-page structure and has
-                moved to IndustryPage; tech stays on UseCasePage until the pilot
-                is judged (mbz-et8e.38). Two templates on purpose, temporarily. */}
+            {/* THE /use-cases/* PATHS ARE HISTORY, NOT A CATEGORY. Both pages
+                are industries and both render IndustryPage; they keep these URLs
+                because they had them before the industry-page system existed and
+                renaming would break the homepage list and any external link for
+                no reader benefit. New pages take /industries/*. */}
             <Route
               path="/use-cases/biotech"
               element={<IndustryPage data={biotech} />}
             />
             <Route
               path="/use-cases/tech"
-              element={<UseCasePage data={tech} />}
+              element={<IndustryPage data={enterpriseTech} />}
             />
             {/* The industries with their own pages. Every path here is one
                 content/home.js already links to from the Industries section, so

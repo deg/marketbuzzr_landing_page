@@ -9,21 +9,17 @@ import InsightCard from "../components/InsightCard";
 import RoleBar from "../components/RoleBar";
 import { industryChrome } from "../content/industryChrome";
 
-// The industry-page template, built from Manu's drop_05 sketch (mbz-et8e.38).
-// It now renders Biotechnology, Medical Technology, Financial Technology and
-// Public Safety & Defense Technology — the first three from his approved dark
-// HTML, the fourth from this template and the August handover's locked copy.
+// THE industry-page template — the only one. Built from Manu's drop_05 sketch
+// (mbz-et8e.38) as a pilot beside UseCasePage, which rendered a different
+// structure for the same kind of page; the August handover settled that by
+// requiring one, and UseCasePage is gone (mbz-et8e.52.12). Every industry page
+// is this component with a different content module. There is nowhere else to
+// add one.
 //
-// WHY THIS IS NOT UseCasePage. That component still renders /use-cases/tech and
-// is deliberately untouched. This page is a pilot for a different structure —
-// hero visual, worked example, roles — and the intent is that tech and the four
-// unbuilt industry pages converge here once it is judged, not that two templates
-// live side by side forever. If you are adding a third page, add it HERE and
-// move tech across rather than growing UseCasePage.
-//
-// The route stays /use-cases/biotech. Renaming it to /industries/biotechnology
-// would break the nav and any external link for no reader benefit; the four
-// missing pages can take /industries/* without this one moving.
+// ROUTES ARE HISTORY, NOT A CATEGORY. Biotechnology and Enterprise Technology
+// keep /use-cases/*, which is where they were before this template existed;
+// renaming would break the homepage list and any external link for no reader
+// benefit. Pages built since take /industries/*.
 // The page's furniture — the insight card's four headings and the two CTA
 // labels — lives in industryChrome and is merged UNDER the page's own content,
 // so a page overrides simply by saying so. Only the blocks that actually carry

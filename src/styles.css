@@ -429,37 +429,6 @@ h1 {
   }
 }
 
-/* Faint signal hairline echoed between sections — the motif as a recurring
-   thread down the page. */
-.signal-divider {
-  display: block;
-  width: 120px;
-  height: 22px;
-  margin: var(--spacing-md) auto;
-  overflow: visible;
-  opacity: 0.55;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 30%,
-    #000 70%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 30%,
-    #000 70%,
-    transparent
-  );
-}
-
-.signal-divider polyline {
-  fill: none;
-  stroke: var(--brand);
-  stroke-width: 1.75;
-}
-
 /* Sections */
 
 /* Horizontal padding is restated, not inherited: this shorthand would otherwise
@@ -604,20 +573,6 @@ h2 {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.signal-mark {
-  display: block;
-  width: 40px;
-  height: 24px;
-  margin-bottom: var(--spacing-sm);
-  overflow: visible;
-}
-
-.signal-mark polyline {
-  fill: none;
-  stroke: var(--brand);
-  stroke-width: 2;
 }
 
 .card h3 {
@@ -1102,28 +1057,10 @@ footer h4 {
 }
 
 /* ============================================================
-   Page content (offering/problem cards, use-case intros, steps)
+   Page content (category cards, intro blocks, steps)
    ============================================================ */
 
-/* Benefit line on use-case cards. More specific than `.card p`. Reserves
-   a two-line minimum vertical box so a 1-line note (e.g. "Surface caregiver
-   and patient perspectives") aligns to the top of the 2-line note next to
-   it in the same grid row, rather than sitting one line below it. */
-.card .card-note {
-  margin-top: auto;
-  padding-top: var(--spacing-sm);
-  color: var(--brand);
-  font-weight: 600;
-  font-style: italic;
-  min-height: 2lh;
-}
-
-/* Problem cards have no icon/link, so let the question/answer sit naturally. */
-.problem-card {
-  justify-content: flex-start;
-}
-
-/* Use Case intro block ("Built for ...") — a centered, narrow lead block. */
+/* A centered, narrow lead block. */
 .info-block {
   max-width: 820px;
 }
@@ -3920,8 +3857,8 @@ footer h4 {
 /* ============================================================
    Final overrides. These rules must stay LAST in the file: several of them tie
    on specificity with the base rules they override (.section p.lead,
-   .info-block p.lead, .signal-mark, .signal-mark polyline) and win only by
-   source order. Moving them earlier silently reverts those overrides.
+   .info-block p.lead) and win only by source order. Moving them earlier
+   silently reverts those overrides.
    ============================================================ */
 
 /* Constrained reading measure on every centered lead/CTA/summary paragraph
@@ -3931,33 +3868,16 @@ footer h4 {
   margin-inline: auto;
 }
 
-/* Drop the noise→signal motif: hero signal line and between-section sine
-   ticks. display: none collapses surrounding margins. SignalLine and
-   SignalDivider still render — deleting this rule is all it takes to bring the
-   motif back if the redesign wants it. */
-:is(.signal-line, .signal-divider) {
-  display: none;
-}
+/* Drop the noise→signal motif's hero line. display: none collapses surrounding
+   margins. SignalLine still renders — deleting this rule is all it takes to
+   bring it back if the redesign wants it. The between-section SignalDivider it
+   used to name went with UseCasePage, the only page that placed one.
 
-/* Card squiggle → original purple spinner-style icon (the look at 96d5624,
-   pre-redesign): purple rounded square with a 270° white ring and center
-   dot. Painted via inline-SVG data URI on the existing .signal-mark <svg>
-   (Chrome doesn't paint ::before/::after on <svg>). */
-.signal-mark {
-  width: 28px;
-  height: 28px;
-  margin: 0 0 var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  background-color: #7d27ff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M 18.24 18.24 A 6 6 0 0 1 9.76 9.76' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='14' cy='14' r='3' fill='white'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  box-shadow: 0 6px 18px rgba(125, 39, 255, 0.35);
-  transition: transform var(--transition-normal);
-}
-.signal-mark polyline {
+   THE LAST PURPLE ICON WENT AT THE SAME TIME. A .signal-mark rule here painted
+   the use-case cards' marks as a purple rounded square, which the August
+   handover's icon system rules out ("Icons should use the same turquoise family
+   as the primary CTA"). It is gone with the component that carried it, so
+   nothing needed recolouring. */
+.signal-line {
   display: none;
-}
-.card:hover .signal-mark {
-  transform: scale(1.1) rotate(5deg);
 }

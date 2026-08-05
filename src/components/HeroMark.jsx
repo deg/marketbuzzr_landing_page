@@ -127,6 +127,34 @@ const MARKS = {
       </>
     ),
   },
+
+  // A stacked cube, for Enterprise Technology: a platform with layers under it.
+  // Original SVG, same three-layer treatment as the others, and set for the same
+  // reason the shield is — without it the page would render the helix.
+  //
+  // The mid-height diamond is what makes it read as a stack rather than a plain
+  // box; drop it and the mark is just a crate.
+  cube: {
+    viewBox: "0 0 120 128",
+    ratio: 128 / 120,
+    rotate: -6,
+    render: (
+      <>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="3" opacity="0.42">
+          <path d="M60 20 108 46 60 72 12 46z" />
+          <path d="M12 46v52l48 26 48-26V46" />
+        </g>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="3.2">
+          <path d="M12 64 60 90l48-26" />
+        </g>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="4.6">
+          <path d="M60 12 108 38 60 64 12 38z" />
+          <path d="M12 38v52l48 26 48-26V38" />
+          <path d="M60 64v52" />
+        </g>
+      </>
+    ),
+  },
 };
 
 const HeroMark = ({ name = "dna" }) => {
