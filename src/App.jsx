@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import UseCasePage from "./pages/UseCasePage";
 import IndustryPage from "./pages/IndustryPage";
 import HowItWorks from "./pages/HowItWorks";
+import Industries from "./pages/Industries";
 import NotImplemented from "./pages/NotImplemented";
 import { ModalContext } from "./ModalContext";
 import { biotech } from "./content/biotech";
@@ -94,6 +95,10 @@ const App = () => {
               path="/industries/medical-technology"
               element={<IndustryPage data={medtech} />}
             />
+            {/* The entry page the homepage's "Explore all industries" link
+                has pointed at since §6 was built. Until now that link reached
+                the placeholder; drop_06 supplied the page's copy. */}
+            <Route path="/industries" element={<Industries />} />
             <Route
               path="/use-cases"
               element={<Navigate to="/use-cases/biotech" replace />}

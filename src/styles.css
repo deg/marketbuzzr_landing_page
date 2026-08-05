@@ -2832,8 +2832,19 @@ footer h4 {
   margin: var(--spacing-2xl) 0 var(--spacing-xl);
 }
 
+/* That bottom margin exists to separate the grid from the homepage's "Explore
+   all industries" link. On /industries the grid ends its section, so the margin
+   only stacks onto the section padding and reads as a missing element. */
+.industry-grid:last-child {
+  margin-bottom: 0;
+}
+
 .industry-tile {
   display: flex;
+  /* Centred, with .industry-accent overriding via its own align-self: stretch.
+     Do not change this to stretch to "help" the blurb: measured, it top-aligns
+     the name in any row made taller by a neighbour, which moved two of the
+     homepage's six by 16px. */
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-lg);
@@ -2856,9 +2867,32 @@ footer h4 {
   opacity: 0.5;
 }
 
-.industry-name {
+/* The middle column. It takes the `flex: 1` the name used to carry, so a tile
+   with no blurb lays out exactly as it did before — verified against the
+   4aug_v5 snapshot, all six homepage tiles identical in height and in where the
+   name sits. `min-width: 0` because the longest industry name is "Public Safety
+   & Defense Technology" and a flex item's automatic minimum would otherwise
+   stop it wrapping. */
+.industry-text {
+  display: flex;
   flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.industry-name {
   font-weight: 700;
+  text-align: left;
+}
+
+/* Only the /industries entry page passes a blurb. Sized and coloured like the
+   category cards' lines, so the two grids read as one family. */
+.industry-blurb {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
   text-align: left;
 }
 

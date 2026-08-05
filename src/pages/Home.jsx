@@ -126,8 +126,17 @@ const Home = () => {
       <section className="section container">
         <SectionTitle title={industries.title} lead={industries.lead} />
         <div className="industry-grid">
+          {/* Named props rather than {...item}. The list gained a `blurb` for
+              the /industries entry page, and a spread put it on these tiles
+              too — measured, it took them from 74px tall to 197px. §6 is a list
+              of names; the copy belongs on the page built to carry it. */}
           {industries.items.map((item) => (
-            <IndustryTile key={item.name} {...item} />
+            <IndustryTile
+              key={item.name}
+              name={item.name}
+              to={item.to}
+              featured={item.featured}
+            />
           ))}
         </div>
         <p className="lead">

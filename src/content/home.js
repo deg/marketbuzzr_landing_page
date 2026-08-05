@@ -117,9 +117,20 @@ export const home = {
   industries: {
     title: "Built for Teams in Dynamic Markets",
     lead: "For teams operating in markets where regulation, competition, technology and customer behavior can quickly change the direction of the business.",
+    // THE SIX INDUSTRIES, AND THIS IS THE ONLY LIST OF THEM. content/nav.js
+    // imports it for the Industries dropdown and content/industries.js imports
+    // it for the /industries page, so all three surfaces move together. Adding
+    // an industry here adds it everywhere; that is the point.
+    //
+    // `blurb` is drop_06's card copy for the /industries page. It lives beside
+    // the name rather than in that page's own module for the same reason: a
+    // second list keyed by name is a list that drifts. §6 does not render it.
+    //
     // FIX-BEFORE-RELEASE (mbz-et8e.18): TWO of these still point at placeholder
     // pages — Life Sciences and Public Safety & Defense Technology. Build them,
-    // or drop the `to` and render those tiles non-interactive.
+    // or drop the `to` and render those tiles non-interactive. Note this list is
+    // now rendered on TWO pages, and /industries gives each one a full card, so
+    // the dead pair is more prominent there than it is here.
     //
     // Was four. Medical Technology and Financial Technology now reach real
     // industry pages built from Manu's drop_05 sketches (mbz-et8e.39), and
@@ -129,15 +140,39 @@ export const home = {
         name: "Medical Technology",
         to: "/industries/medical-technology",
         featured: true,
+        blurb:
+          "Track regulation, competitors, research, product developments and emerging market opportunities.",
       },
-      { name: "Biotechnology", to: "/use-cases/biotech" },
-      { name: "Life Sciences", to: "/industries/life-sciences" },
-      { name: "Financial Technology", to: "/industries/financial-technology" },
+      {
+        name: "Biotechnology",
+        to: "/use-cases/biotech",
+        blurb:
+          "Follow competitors, research, clinical developments, market perception and the signals shaping your therapeutic landscape.",
+      },
+      {
+        name: "Life Sciences",
+        to: "/industries/life-sciences",
+        blurb:
+          "Stay on top of research, regulation, partnerships, competitors and market developments across your scientific and commercial ecosystem.",
+      },
+      {
+        name: "Financial Technology",
+        to: "/industries/financial-technology",
+        blurb:
+          "Track competitor moves, partnerships, regulation, technology shifts and changing market dynamics.",
+      },
       {
         name: "Public Safety & Defense Technology",
         to: "/industries/public-safety-defense-technology",
+        blurb:
+          "Follow competitors, procurement trends, regulation, technology developments, partnerships and emerging operational needs.",
       },
-      { name: "Enterprise Technology", to: "/use-cases/tech" },
+      {
+        name: "Enterprise Technology",
+        to: "/use-cases/tech",
+        blurb:
+          "Track competitors, product launches, customer trends, technology shifts and emerging growth opportunities across your category.",
+      },
     ],
     exploreLabel: "Explore all industries",
     exploreTo: "/industries",

@@ -89,6 +89,7 @@ email-capture modal is open:
 | `/use-cases/biotech` | `pages/IndustryPage.jsx` with `content/biotech.js` |
 | `/use-cases/tech` | `pages/UseCasePage.jsx` with `content/tech.js` |
 | `/use-cases` | redirect → `/use-cases/biotech` |
+| `/industries` | `pages/Industries.jsx` — the entry page, `drop_06` |
 | `/how-it-works` | `pages/HowItWorks.jsx` |
 | anything else | `pages/NotImplemented.jsx` |
 
@@ -276,6 +277,35 @@ before `drop_06`: the two AVIFs it retired were 146.7 KB between them and the
 components replacing them add roughly 2.3 KB gzipped. Step 01's image is not the
 LCP element and stays `loading="lazy"`, which is what the brief conditions on.
 Re-measure rather than trusting this line.
+
+### The `/industries` entry page (2026-08)
+
+`pages/Industries.jsx` is the shortest page component here and is meant to stay
+that way. From `drop_06`'s Industries handover, which asks for one thing over and
+over: that it not look like a new landing page. "Reuse existing components
+wherever possible", "do not create a separate visual style for these cards", "do
+not guess or substitute fonts, navigation styles, CTA styles, colors, or
+spacing". So it is `PageHero` + `SectionTitle` + `IndustryTile` + `CtaPanel` and
+nothing else — no artwork, because "no image or animation is required".
+
+**The six industries live in `content/home.js`, and that is the only list.**
+`content/nav.js` reads it for the Industries dropdown and `content/industries.js`
+reads it for this page, so all three move together. Each item's `blurb` is this
+page's card copy and sits beside the name for the same reason — a second list
+keyed by industry name is a list that drifts.
+
+**Pass named props to `IndustryTile`, not `{...item}`.** The homepage did spread,
+and adding `blurb` to the shared list silently put a paragraph on all six
+homepage tiles — measured, 74px tall to 197px. §6 is a list of names.
+
+**No featured tile here**, unlike the homepage: the brief asks for "all six
+industries as equal navigation boxes". And no eyebrow, which every other page
+has — his page structure lists one paragraph, a supporting line, the section
+heading, the boxes and the closing panel, and a kicker is not among them.
+
+Two of the six still lead nowhere (Life Sciences, Public Safety & Defense
+Technology) and this page gives each a full card, so they are more prominent here
+than on the homepage. They are tagged once, on the shared list.
 
 ### The industry pages (2026-08) — and why there are two page templates
 
