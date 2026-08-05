@@ -120,10 +120,11 @@ const IndustryPage = ({ data }) => {
         <p className="lead">{features.closer}</p>
       </section>
 
-      {/* Full-bleed dark band with the copy left and the buttons right, as the
-          sketch has it — not the site's centred rounded panel. It is the only
-          dark thing on the light theme and that is the point: it closes the page
-          rather than sitting on it. */}
+      {/* Full-bleed band with the copy left and the buttons right, as the sketch
+          has it — not the site's centred rounded panel. In his sketch this was
+          the one dark block on a light page, closing it rather than sitting on
+          it; on our dark ground the same job falls to the band being solid where
+          the sections above it are not. */}
       <section className="industry-cta">
         <div className="container industry-cta-grid">
           <div>

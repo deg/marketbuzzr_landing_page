@@ -4,7 +4,6 @@
   /* Colors */
   --bg: #0b1230;
   --bg-2: #0e173a;
-  --card: #0f1a45cc;
   --text: #d7e2ff;
   --muted: #c2d1f5;
   --brand: #6ee0ff;
@@ -15,15 +14,16 @@
   --ring: rgba(110, 224, 255, 0.35);
   --link-color: #86d5ff;
 
-  /* Surfaces, edges and overlays, promoted from literals so a theme can be
-     swapped by redefining tokens rather than by shipping a second stylesheet.
-     These are the DARK values; [data-theme="light"] overrides them below.
+  /* Surfaces, edges and overlays, promoted from literals so a colour can be
+     changed in one place rather than hunted through the file. There was briefly
+     a light theme that redefined all of these; it was tried against Manu's
+     early sketches, and dark won (mbz-et8e.49). Tokens are worth keeping on
+     their own merits, and every rule in this file is still written against them.
 
      Only identical literals share a token. The three near-identical navies used
      for text on brand-coloured fills (#04162a, #0a0f2a, #05203a) are left as
      literals on purpose: unifying them would have been a visual change hidden
-     inside a refactor, and they need no light variant anyway, since the fill
-     under them stays brand-coloured in both themes. */
+     inside a refactor. */
   --surface: #0f1a45cc;
   --surface-2: #0c1538cc;
   --surface-hi: #102058cc;
@@ -52,7 +52,6 @@
   --positive: #6fe3b8;
   --positive-soft: #10402f;
   --accent-soft: #16295e;
-
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -88,98 +87,6 @@
   --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
-}
-
-/* ============================================================
-   LIGHT THEME. Applied by App.jsx setting data-theme on <html> from ?theme=.
-   A token swap, not a second stylesheet: every rule below the :root block is
-   written against these names and is untouched by the switch.
-
-   BRAND HUE IS DEEPENED, NOT CHANGED. #6ee0ff on white is about 1.4:1 against
-   body text and unreadable; these are the same cyan-to-blue family taken far
-   enough down in lightness to carry text and icons. Manu's sketch uses purple
-   for the same job -- that is a brand decision rather than a theme one, and is
-   deliberately not made here.
-
-   TEXT ON BRAND FILLS HAS TO FLIP. In the dark theme those fills are bright
-   cyan and carry near-black text; deepening the brand for legibility on white
-   makes the same fills dark, so the near-black text becomes dark-on-dark. Every
-   such surface is listed below and turns white. Checked by eye and by contrast
-   ratio, not assumed — the first version of this block asserted the fills stayed
-   light and shipped an unreadable primary button.
-   ============================================================ */
-:root[data-theme="light"] {
-  --bg: #fbfbfe;
-  --bg-2: #ffffff;
-  --card: #ffffffe6;
-  --text: #0f1b3d;
-  --muted: #2e3c61;
-  --brand: #5f22d8;
-  --brand-2: #7c4dff;
-  --brand-3: #d63bd6;
-  --positive: #087a57;
-  --positive-soft: #eaf9f2;
-  --accent-soft: #f2edff;
-  --ring: rgba(95, 34, 216, 0.3);
-  --link-color: #4b22c3;
-
-  --surface: #ffffffe6;
-  --surface-2: #f5f7fde6;
-  --surface-hi: #ffffffe6;
-  --surface-hover: #f2f5ffe6;
-  --surface-hover-2: #eaf0ffe6;
-  --panel: #f4f6fd;
-  --panel-2: #e9eefa;
-  --nav-bg: #fbfbfecc;
-  --nav-bg-fade: #fbfbfe00;
-
-  --edge-faint: #101c3f14;
-  --edge: #101c3f1f;
-  --edge-2: #101c3f24;
-  --edge-2a: #101c3f24;
-  --edge-3: #101c3f2e;
-  --edge-4: #101c3f3d;
-  --overlay-1: rgba(16, 28, 63, 0.04);
-  --overlay-2: rgba(16, 28, 63, 0.06);
-  --overlay-3: rgba(16, 28, 63, 0.09);
-  --scrim: rgba(16, 28, 63, 0.45);
-
-  /* Softer than the dark theme's: the same opacities read as smudges on white. */
-  --shadow-sm: 0 2px 4px rgba(16, 28, 63, 0.06);
-  --shadow-md: 0 8px 24px rgba(16, 28, 63, 0.09);
-  --shadow-lg: 0 18px 48px rgba(16, 28, 63, 0.12);
-  --shadow-xl: 0 32px 90px rgba(16, 28, 63, 0.16);
-}
-
-/* The page wash. The dark theme layers two blue radials over a navy gradient;
-   the same shapes at light values keep the composition rather than flattening
-   the page to plain white. */
-:root[data-theme="light"] body {
-  background:
-    radial-gradient(900px 520px at 72% 12%, rgba(124, 77, 255, 0.13), transparent 62%),
-    linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-}
-
-/* Everything that sits on a brand-coloured fill. Grouped in one place rather
-   than beside each rule so there is a single list to keep in step when another
-   brand-filled control is added. */
-:root[data-theme="light"]
-  :is(
-    .skip-link,
-    .brand-badge,
-    .nav-actions a.primary,
-    .nav-actions button.primary,
-    .cta-actions .cta,
-    .cta-panel a.primary,
-    .cta-panel button.primary,
-    .btn.primary
-  ) {
-  color: #ffffff;
-}
-
-/* Form errors: the dark theme's pale reds vanish on white. */
-:root[data-theme="light"] .modal-error {
-  color: #b3261e;
 }
 
 /* Reset and Base Styles */
@@ -242,7 +149,6 @@ body {
 .container-wide {
   max-width: 1400px;
 }
-
 
 /* Navigation */
 nav {
@@ -1510,6 +1416,13 @@ footer h4 {
    what lets each dissolve into the page instead of ending at a rectangle; see
    the note beside the gradient in HeroAnimation.jsx. A presentation attribute
    cannot read a custom property, which is why this lives here at all. */
+/* WORTH REVISITING once the artwork settles (mbz-et8e.49). This class exists
+   only because a presentation attribute cannot hold var(--bg), and the seam it
+   was introduced to hide measures 2/255 on the dark ground — invisible either
+   way. It earned its keep against the light theme, which is gone. Kept for now
+   because the artwork is still changing and other pieces may need the same
+   trick; if it is still doing nothing when the set is final, both gradients can
+   take the literal and this goes. */
 .artwork-fade {
   stop-color: var(--bg);
 }
@@ -2605,17 +2518,6 @@ footer h4 {
   max-width: none;
 }
 
-:root[data-theme="light"] .industry-page {
-  --brand: #5d22d6;
-  --muted: #2e3c61;
-  --text: #0f1b3d;
-  --edge: #e7e9f2;
-  /* His .small: the timestamp, the source kinds and the implication body. Body
-     copy is --muted; this is a step quieter and is a separate colour, not a
-     lighter version of the same one. */
-  --small: #526080;
-}
-
 /* Type scale */
 .industry-page .hero-split h1 {
   font-size: clamp(42px, 5vw, 68px);
@@ -2661,21 +2563,6 @@ footer h4 {
   line-height: 1.5;
 }
 
-:root[data-theme="light"] .industry-page .cta-actions .cta {
-  background: #5f22d8;
-  border-color: #6336db;
-}
-
-/* HERO ONLY. This sat on .industry-page and so also hit the closing band, where
-   it put purple text on a purple border against dark navy -- the band's own
-   white-on-transparent rule has the same specificity and simply came earlier in
-   the file, so this one won. The band is dark in both themes; its buttons are
-   not the hero's. */
-:root[data-theme="light"] .hero-split .cta-actions .cta-secondary {
-  color: #4b22c3;
-  border-color: #6336db;
-}
-
 .industry-page .source-chip {
   line-height: 1.5;
 }
@@ -2699,10 +2586,6 @@ footer h4 {
   line-height: 1.5;
 }
 
-:root[data-theme="light"] .industry-page .insight-tag {
-  color: #5b2bd0;
-}
-
 .industry-page .insight-detected {
   font-size: 14px;
   font-weight: 400;
@@ -2724,14 +2607,6 @@ footer h4 {
 
 .industry-page .insight-strip h4 {
   color: var(--text);
-}
-
-:root[data-theme="light"] .industry-page .insight-block h4 {
-  color: #4d23ce;
-}
-
-:root[data-theme="light"] .industry-page .insight-block-actions h4 {
-  color: #0a976a;
 }
 
 .industry-page .insight-actions li {
@@ -2765,11 +2640,6 @@ footer h4 {
   line-height: 1.5;
 }
 
-:root[data-theme="light"] .industry-page .insight-drafts li {
-  color: #5229ca;
-  border-color: #ded9ef;
-}
-
 /* Role bar */
 .industry-page .role-bar-items strong {
   font-size: 16px;
@@ -2790,14 +2660,6 @@ footer h4 {
 .industry-page .feature p {
   font-weight: 400;
   line-height: 1.5;
-}
-
-:root[data-theme="light"] .industry-page .feature h3 {
-  color: #5227cf;
-}
-
-:root[data-theme="light"] .industry-page .feature p {
-  color: #405071;
 }
 
 /* 27px, matching the size his emoji render at inside the same 58px disc. */
@@ -3049,34 +2911,6 @@ footer h4 {
   color: var(--brand);
 }
 
-/* In light the chips are raised white cards, as the sketch draws them: a
-   hairline outline on white reads as a form field rather than a floating label.
-   Dark keeps the outline, because a raised white card on navy would be wrong. */
-:root[data-theme="light"] .source-chip {
-  border-color: transparent;
-  /* 14px, not the token's 18px pill: his are cards, and a pill at this size
-     reads as a tag or a filter control instead. */
-  border-radius: 14px;
-  background: #ffffff;
-  box-shadow: 0 10px 24px rgba(44, 38, 98, 0.09);
-  color: var(--text);
-  font-weight: 700;
-}
-
-/* His secondary button is white with an accent border and accent text, which
-   pairs with the filled primary as a matched set. Ours was a translucent
-   overlay with body-coloured text, which on white looked like a disabled
-   control beside the filled one. */
-:root[data-theme="light"] .hero-split .cta-actions .cta-secondary {
-  background: #ffffff;
-  border: 1px solid #6336db;
-  color: #4b22c3;
-}
-
-:root[data-theme="light"] .hero-split .cta-actions .cta-secondary:hover {
-  background: #faf7ff;
-}
-
 .source-cluster-caption {
   margin: var(--spacing-lg) 0 0;
   color: var(--muted);
@@ -3158,17 +2992,6 @@ footer h4 {
   padding-top: 0;
 }
 
-:root[data-theme="light"] .info-block h2,
-:root[data-theme="light"] .industry-cta h2 {
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-
-:root[data-theme="light"] .section p.lead {
-  font-size: 18px;
-  color: #2e3c61;
-}
-
 /* --- Worked insight example ---------------------------------------------- */
 
 /* One surface, clipped, so the role bar squares off against its bottom edge
@@ -3180,12 +3003,6 @@ footer h4 {
   background: linear-gradient(180deg, var(--surface), var(--surface-2));
   box-shadow: var(--shadow-md);
   overflow: hidden;
-}
-
-:root[data-theme="light"] .insight-wrap {
-  border-color: #e8e8f1;
-  background: #ffffff;
-  box-shadow: 0 18px 48px rgba(30, 39, 93, 0.12);
 }
 
 .insight-card {

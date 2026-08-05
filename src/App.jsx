@@ -21,18 +21,12 @@ import { tech } from "./content/tech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
 
-// Review options set from the address bar — today just ?theme=light or
-// ?theme=dark, dark by default. What the options are lives in options.js, and
-// how an address is read and tidied lives in hooks/useOptions.js.
+// Review options set from the address bar. The registry in options.js is empty
+// today — ?theme=light|dark was the one entry and dark is now simply the design
+// (mbz-et8e.49) — so this currently sets nothing and rewrites nothing. It is
+// kept wired up because the next question about an unfinished design will want
+// it, and options.js says how to register one.
 //
-// Nothing is stored anywhere. The address is the only thing that decides, so a
-// page is never light while its own URL says nothing about it, and a link sent
-// to someone else arrives the same way round it left.
-//
-// Only the industry pages are designed for light so far. The homepage's artwork
-// is drawn on near-black grounds (#00041C, #020925, #000B2D) and becomes dark
-// rectangles on a pale background — no CSS fixes that, it needs re-renders. That
-// is known and accepted; pages are being moved to native markup one at a time.
 const useReviewOptions = () => {
   const options = useOptions();
   // Objects are new every render, so the effect keys off the values instead.

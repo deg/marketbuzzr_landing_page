@@ -1,27 +1,34 @@
 // Options that can be switched from the address bar while a design is being
-// reviewed. One entry today; the table exists so the next trial is a line here
-// rather than another pass over the whole app.
+// reviewed.
 //
-// Each option becomes a data attribute on <html> — `theme` sets `data-theme` —
-// which is what styles.css keys its variants off. Values not in the list fall
-// back to the default rather than erroring, so ?theme=blue simply gives dark.
+// THE TABLE IS EMPTY, AND THE MECHANISM AROUND IT IS DELIBERATELY KEPT. It was
+// built for ?theme=light|dark, that trial is over and dark won (mbz-et8e.49),
+// and the next question about an unfinished design will want exactly the same
+// thing. Registering one is the line below and nothing else:
 //
-// WHERE THE VALUE LIVES IN THE ADDRESS is the whole design, and it is BEFORE
-// THE HASH: marketbuzzr.com/4aug_v5/?theme=light#/how-it-works. Hash routing
-// never touches that part of a URL, so an option cannot be dropped by anything
-// that navigates. That is not a hypothetical tidiness argument — the previous
-// version kept it inside the hash, which meant every <Link> had to be wrapped to
-// copy it across, and the one <Navigate> in App.jsx was missed and silently
-// reverted the page to dark. There is nothing left to remember to wrap.
+//   export const OPTIONS = {
+//     layout: { values: ["stacked", "split"], default: "stacked" },
+//   };
 //
-// The form inside the hash — #/how-it-works?theme=light — is still ACCEPTED, and
-// rewritten into the prefix on arrival. Links in that form have already been
-// sent out and have to keep working.
+// That alone gets it read from the address, validated, defaulted, canonicalised
+// into the prefix, and written to <html data-layout="..."> for CSS to key off.
+// Nothing else in the app has to know it exists.
 //
-// This is review scaffolding. When the light design is settled, this file, the
-// hook beside it and the [data-theme] blocks in styles.css come out together.
-export const OPTIONS = {
-  theme: { values: ["dark", "light"], default: "dark" },
-};
+// Two things to know before adding one:
+//
+//   THE DEFAULT SHOULD BE THE UNSCOPED CSS. Write the default's rules as plain
+//   selectors and every other value as an override scoped to [data-<name>].
+//   Retiring the trial is then a deletion, which is what made mbz-et8e.49 a
+//   139-line subtraction with no specificity to untangle. The reverse — the
+//   default scoped, the base belonging to a variant — is the arrangement that
+//   made 648943f a careful piece of work rather than a delete.
+//
+//   VALUES ARE WRITTEN OUT EVEN WHEN THEY ARE THE DEFAULT, so an address always
+//   says which way round the page is. That was a deliberate call for a
+//   debugging switch and would be wrong for a real user preference.
+//
+// Since nothing is registered, nothing runs: no attribute is set and no address
+// is rewritten. It stays that way until this table has an entry.
+export const OPTIONS = {};
 
 export const OPTION_NAMES = Object.keys(OPTIONS);

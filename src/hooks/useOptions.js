@@ -5,10 +5,10 @@ import { OPTIONS, OPTION_NAMES } from "../options";
 //
 // Two places are read, in this order:
 //
-//   1. INSIDE THE HASH — #/how-it-works?theme=light. This is what
+//   1. INSIDE THE HASH — #/how-it-works?layout=split. This is what
 //      useSearchParams returns under HashRouter, and it wins, so following a
 //      link that names an option beats whatever the prefix happened to carry.
-//   2. BEFORE THE HASH — /?theme=light#/how-it-works. This is where an option
+//   2. BEFORE THE HASH — /?layout=split#/how-it-works. This is where an option
 //      lives once canonicalised, and where it survives navigation.
 //
 // Anything unrecognised falls back to the option's default rather than being an
@@ -16,6 +16,8 @@ import { OPTIONS, OPTION_NAMES } from "../options";
 //
 // Reading is separate from writing on purpose: this hook is a pure read, and
 // canonicaliseOptions below is the only thing that touches the address.
+//
+// With an empty registry both return immediately — see options.js.
 export const useOptions = () => {
   const [inHash] = useSearchParams();
   // The prefix query can only change by loading the page, which remounts this.
@@ -34,7 +36,8 @@ export const useOptions = () => {
 //
 // Called after the options have been resolved, so it writes what the page is
 // actually showing rather than what the address asked for — an address that
-// said ?theme=blue ends up saying ?theme=dark, which is what you are looking at.
+// said ?layout=sideways ends up saying ?layout=stacked, which is what you are
+// looking at.
 //
 // Unrelated query parameters are preserved on both sides of the #; only the
 // registered names are moved. Uses replaceState rather than pushState so the
