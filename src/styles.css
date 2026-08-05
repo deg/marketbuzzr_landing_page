@@ -109,15 +109,19 @@ html, body, #root {
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 20px;
-  font-weight: 500;
+  /* THE INDUSTRY PAGES' SCALE, now the site's. Manu's August handover makes
+     their typography the reference for the whole site; they run 16/400/1.5
+     where this used to run 20/500/1.6 (mbz-et8e.52.2). Smaller, lighter and
+     tighter — the single most visible change in that brief. */
+  font-size: 16px;
+  font-weight: 400;
   color: var(--text);
   background:
     radial-gradient(1200px 600px at 50% -10%, #1b4c8f55, transparent 60%),
     radial-gradient(800px 400px at 80% 0%, #5ea4ff22, transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
   background-attachment: fixed;
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -3007,19 +3011,10 @@ footer h4 {
    NOT matched, by decision: Title Case headings with full stops, and his longer
    chip labels. Both are on his list to confirm.
    ========================================================================== */
-.industry-page {
-  /* The font-family that used to sit here is gone: Inter is the site's face
-     now, so scoping it to these three said nothing. It also never reached
-     their headings, which take --font-display and so stayed Hanken Grotesk —
-     the reference pages were themselves half-and-half until mbz-et8e.52.1.
-
-     The scale below is still scoped, and is still the difference between these
-     pages and the rest: 16/400/1.5 against the site's 20/500/1.6. Adopting it
-     everywhere is mbz-et8e.52.2, and this block goes when that lands. */
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-}
+/* .industry-page's typography block is gone. It held Inter and the 16/400/1.5
+   scale; both are the site's own now (mbz-et8e.52.1 and .52.2), so the rule
+   said nothing. Everything below is geometry and colour, which is still
+   specific to these pages. */
 
 /* GEOMETRY, which the first comparison pass missed entirely: it collected every
    element's width and then only diffed typography, so 29 of 32 elements were
