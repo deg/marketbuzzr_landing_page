@@ -1,8 +1,12 @@
 import React from "react";
 import { ICON_PATHS } from "./CategoryIcon";
 
-// The homepage hero, from Manu's drop_05_marketbuzzr-hero-animation-synced.html
-// in the design repo (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/).
+// The homepage hero, from Manu's hero animation in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/). It arrived as
+// drop_05_marketbuzzr-hero-animation-synced.html and was revised by drop_06,
+// whose assets/hero-animation.html is that same file plus one addition: the two
+// animated framing labels near the top. Everything else in drop_06's hero is
+// byte-identical, so the transcription below did not change.
 //
 // It draws natively what used to be an 81 KB AVIF of exactly the same picture:
 // the market's noise on the left, the reader's own context on an orbit around
@@ -280,6 +284,35 @@ const HeroAnimation = ({ title, description }) => (
         </defs>
 
         <rect width="1500" height="900" fill="url(#hero-anim-bg)" />
+
+        {/* The framing copy drop_06 adds — the one thing in that revision's
+            hero file that is not already here. His prose calls it "positioned
+            above the visual"; his FILE puts it inside this viewBox at y=39,
+            over the two things it names, and the file is the artifact he
+            approved. Each label gets an accent rule and a dot at the end the
+            eye should travel toward: the left one starts at its dot and runs
+            outward into the noise, the right one ends at its dot above the
+            first insight card.
+
+            Manu's copy, so by the repo's usual rule it would live in
+            content/home.js — but it is at fixed coordinates inside a
+            transcription whose other forty strings are already here, and
+            splitting two of forty out would make the artwork harder to diff
+            against his file, not easier. */}
+        <g className="hero-anim-copy hero-anim-copy-left" fontFamily="Inter, Arial, sans-serif">
+          <text x="70" y="39" fill="#f4f1ff" fontSize="22" fontWeight="800">
+            Tracking everything in your market
+          </text>
+          <rect className="hero-anim-copy-glow" x="70" y="54" width="275" height="2" rx="1" fill="#8d6cff" filter="url(#hero-anim-soft-glow)" />
+          <circle className="hero-anim-copy-glow" cx="70" cy="55" r="4" fill="#b69cff" filter="url(#hero-anim-soft-glow)" />
+        </g>
+        <g className="hero-anim-copy hero-anim-copy-right" fontFamily="Inter, Arial, sans-serif">
+          <text x="1135" y="39" fill="#f4f1ff" fontSize="22" fontWeight="800">
+            Surfacing what matters to you
+          </text>
+          <rect className="hero-anim-copy-glow" x="1135" y="54" width="285" height="2" rx="1" fill="#4d91ff" filter="url(#hero-anim-soft-glow)" />
+          <circle className="hero-anim-copy-glow" cx="1420" cy="55" r="4" fill="#61d8ff" filter="url(#hero-anim-soft-glow)" />
+        </g>
 
         {/* The market's noise: what is being said, everywhere, all the time. */}
         <g fontFamily="Inter, Arial, sans-serif" filter="url(#hero-anim-shadow)">
