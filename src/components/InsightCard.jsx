@@ -39,7 +39,17 @@ const InsightCard = ({
     <h3 className="insight-headline">{headline}</h3>
     <p className="insight-summary">{summary}</p>
 
+    {/* IMPLICATION FIRST, ACTIONS SECOND, and stacked rather than side by side.
+        Both are his: "Inside the insight card, Strategic Implication appears
+        above Recommended Actions". "Above" only means anything in a stack, and
+        his revised pages draw one — full-width blocks separated by a hairline.
+        It also reads better: what the development means, then what to do about
+        it, which is the order a person would ask them in. */}
     <div className="insight-split">
+      <div className="insight-block">
+        <h4>{implication.heading}</h4>
+        <p>{implication.text}</p>
+      </div>
       <div className="insight-block insight-block-actions">
         <h4>{actions.heading}</h4>
         <ul className="insight-actions">
@@ -47,10 +57,6 @@ const InsightCard = ({
             <li key={i}>{item}</li>
           ))}
         </ul>
-      </div>
-      <div className="insight-block">
-        <h4>{implication.heading}</h4>
-        <p>{implication.text}</p>
       </div>
     </div>
 

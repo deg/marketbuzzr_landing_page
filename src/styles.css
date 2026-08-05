@@ -3664,11 +3664,22 @@ footer h4 {
   color: var(--muted);
 }
 
+/* Stacked, not two columns. His revised pages run these full width, one under
+   the other, divided by a hairline — which is what lets Strategic Implication
+   be "above" Recommended Actions at all. Side by side, that instruction has no
+   meaning and the two read as equal alternatives rather than as a finding and
+   its consequence. */
 .insight-split {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--spacing-xl);
   margin-top: var(--spacing-lg);
+  border-top: 1px solid var(--edge);
+}
+
+.insight-split .insight-block {
+  padding: 22px 0;
+}
+
+.insight-split .insight-block + .insight-block {
+  border-top: 1px solid var(--edge);
 }
 
 .insight-block h4,
@@ -3963,7 +3974,8 @@ footer h4 {
 }
 
 @media (max-width: 900px) {
-  .insight-split,
+  /* .insight-split was here and is not a grid any more — it stacks at every
+     width now, so grid-template-columns and gap did nothing on it. */
   .role-bar-items {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--spacing-lg);
