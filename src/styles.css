@@ -1178,11 +1178,11 @@ footer h4 {
   /* Shared ambient-hover paint: cyan border + lighter gradient. Only the
      shadow base differs between the cards (md) and the larger CTA panel (lg),
      so those two box-shadow declarations live below. */
-  :is(.card, .cta-panel):hover {
+  :is(.card, .cta-panel, .feature):hover {
     border-color: rgba(110, 224, 255, 0.3);
     background: linear-gradient(180deg, var(--surface-hover), var(--surface-hover-2));
   }
-  .card:hover {
+  :is(.card, .feature):hover {
     box-shadow: var(--shadow-md), 0 0 24px rgba(110, 224, 255, 0.1);
   }
   .cta-panel:hover {
@@ -3726,24 +3726,31 @@ footer h4 {
 .feature-row {
   display: grid;
   grid-template-columns: repeat(var(--feature-cols, 4), minmax(0, 1fr));
-  gap: 26px 0;
+  gap: var(--spacing-md);
   margin-top: var(--spacing-2xl);
 }
 
+/* CARDS, NOT COLUMNS. These were columns divided by hairlines, which is what
+   the August handover names and rejects: "The six landscape categories are
+   hover cards, not static columns" (mbz-et8e.52.10). They now take the same
+   surface as .card and join the shared ambient-hover group above, so they warm
+   under the cursor exactly like every other content box on the site rather than
+   inventing a hover of their own.
+
+   The hairline dividers are gone, and with them the two nth-child rules that
+   suppressed a stray rule at the start of each row. That is also why the
+   component's explicit column count no longer has to be exact — nothing depends
+   on knowing where a row begins any more. */
 .feature {
-  padding: 0 14px;
+  padding: var(--spacing-lg) var(--spacing-md);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
   text-align: center;
-}
-
-.feature + .feature {
-  border-left: 1px solid var(--edge);
-}
-
-/* No divider at the start of a row: it would draw a stray rule down the left of
-   the block. One rule per column count, because nth-child cannot take a var. */
-.feature-row-3 .feature:nth-child(3n + 1),
-.feature-row-4 .feature:nth-child(4n + 1) {
-  border-left: 0;
+  transition:
+    border-color var(--transition-normal),
+    background var(--transition-normal),
+    box-shadow var(--transition-normal);
 }
 
 .feature-badge {
