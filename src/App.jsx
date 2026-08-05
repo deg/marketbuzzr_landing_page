@@ -21,6 +21,7 @@ import { biotech } from "./content/biotech";
 import { tech } from "./content/tech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
+import { publicSafety } from "./content/publicSafety";
 
 // Review options set from the address bar. The registry in options.js is empty
 // today — ?theme=light|dark was the one entry and dark is now simply the design
@@ -83,10 +84,12 @@ const App = () => {
               path="/use-cases/tech"
               element={<UseCasePage data={tech} />}
             />
-            {/* The two industries Manu has now supplied sketches for. These
-                URLs are the ones content/home.js already links to from the
-                Industries section, so building them closes two of the four dead
-                links that mbz-et8e.18 gates on. */}
+            {/* The industries with their own pages. Every path here is one
+                content/home.js already links to from the Industries section, so
+                each of these closes one of the dead links mbz-et8e.18 gates on.
+                Public Safety & Defense Technology has no approved HTML of its
+                own and is built from the template and the handover's locked copy
+                (mbz-et8e.52.11). */}
             <Route
               path="/industries/financial-technology"
               element={<IndustryPage data={fintech} />}
@@ -94,6 +97,10 @@ const App = () => {
             <Route
               path="/industries/medical-technology"
               element={<IndustryPage data={medtech} />}
+            />
+            <Route
+              path="/industries/public-safety-defense-technology"
+              element={<IndustryPage data={publicSafety} />}
             />
             {/* The entry page the homepage's "Explore all industries" link
                 has pointed at since §6 was built. Until now that link reached

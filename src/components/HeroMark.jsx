@@ -96,6 +96,37 @@ const MARKS = {
       </>
     ),
   },
+
+  // A shield with a monitoring trace through it, for Public Safety & Defense
+  // Technology. Drawn here rather than taken from a library: the August handover
+  // asks for "legally licensed open source icons ... or create original SVG
+  // icons", and this is original.
+  //
+  // IT EXISTS BECAUSE THE FALLBACK BELOW IS WRONG FOR THIS PAGE. `name` defaults
+  // to the helix, so an industry with no mark of its own quietly renders a DNA
+  // strand — harmless on Biotechnology, which is the only page relying on it,
+  // and plainly wrong beside a defense procurement headline.
+  //
+  // Same three-layer treatment as the other two so the family holds: a faint
+  // copy offset 8px behind, the detail at mid weight, the outline heaviest.
+  shield: {
+    viewBox: "0 0 108 128",
+    ratio: 128 / 108,
+    rotate: -8,
+    render: (
+      <>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="3" opacity="0.42">
+          <path d="M54 16 96 32v40c0 27-17 46-42 54-25-8-42-27-42-54V32L54 16z" />
+        </g>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="3.2">
+          <path d="M26 62h13l8-15 11 28 8-13h14" />
+        </g>
+        <g stroke="url(#hero-mark-gradient)" strokeWidth="4.6">
+          <path d="M54 8 96 24v40c0 27-17 46-42 54-25-8-42-27-42-54V24L54 8z" />
+        </g>
+      </>
+    ),
+  },
 };
 
 const HeroMark = ({ name = "dna" }) => {

@@ -126,15 +126,17 @@ export const home = {
     // the name rather than in that page's own module for the same reason: a
     // second list keyed by name is a list that drifts. §6 does not render it.
     //
-    // FIX-BEFORE-RELEASE (mbz-et8e.18): TWO of these still point at placeholder
-    // pages — Life Sciences and Public Safety & Defense Technology. Build them,
-    // or drop the `to` and render those tiles non-interactive. Note this list is
-    // now rendered on TWO pages, and /industries gives each one a full card, so
-    // the dead pair is more prominent there than it is here.
+    // FIX-BEFORE-RELEASE (mbz-et8e.18): ONE of these still points at a
+    // placeholder page — Life Sciences. Build it, or drop the `to` and render
+    // that tile non-interactive. Note this list is now rendered on TWO pages,
+    // and /industries gives each one a full card, so the dead tile is more
+    // prominent there than it is here.
     //
-    // Was four. Medical Technology and Financial Technology now reach real
-    // industry pages built from Manu's drop_05 sketches (mbz-et8e.39), and
-    // Biotechnology and Enterprise Technology already did.
+    // Was four dead links, then two. Medical Technology and Financial
+    // Technology reached real pages built from Manu's drop_05 sketches
+    // (mbz-et8e.39); Biotechnology and Enterprise Technology already did; and
+    // Public Safety & Defense Technology is now built from the shared template
+    // and the August handover's locked copy (mbz-et8e.52.11).
     items: [
       {
         name: "Medical Technology",

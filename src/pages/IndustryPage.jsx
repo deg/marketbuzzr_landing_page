@@ -9,8 +9,10 @@ import InsightCard from "../components/InsightCard";
 import RoleBar from "../components/RoleBar";
 import { industryChrome } from "../content/industryChrome";
 
-// The industry-page template, built from Manu's drop_05 sketch and currently
-// used only by Biotechnology (mbz-et8e.38).
+// The industry-page template, built from Manu's drop_05 sketch (mbz-et8e.38).
+// It now renders Biotechnology, Medical Technology, Financial Technology and
+// Public Safety & Defense Technology — the first three from his approved dark
+// HTML, the fourth from this template and the August handover's locked copy.
 //
 // WHY THIS IS NOT UseCasePage. That component still renders /use-cases/tech and
 // is deliberately untouched. This page is a pilot for a different structure —
