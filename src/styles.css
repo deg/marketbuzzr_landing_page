@@ -338,8 +338,9 @@ h1 {
   background: linear-gradient(145deg, var(--brand), var(--brand-2));
 }
 
-/* Secondary reads as available, not equal — the brief makes Book a Demo the
-   primary action and Try It Free the alternative. */
+/* Secondary reads as available, not equal. The August handover fixes which is
+   which for the whole site: "Try for Free: filled turquoise treatment... Book a
+   Demo: outlined treatment, not filled" (mbz-et8e.52.4). */
 .cta-actions .cta-secondary {
   background: var(--overlay-1);
   color: var(--text);

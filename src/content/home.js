@@ -30,8 +30,8 @@ export const home = {
     ],
     emphasis:
       "Clear insights. Actionable recommendations. Ready-to-use drafts.",
-    ctaPrimary: "Book a Demo",
-    ctaSecondary: "Try It Free",
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
     // The hero artwork is now drawn rather than photographed — Manu's drop_05
     // animation — so these two strings become its <title> and <desc> rather
     // than an <img alt>. Same job: they are the only textual form of what the
@@ -254,7 +254,7 @@ export const home = {
     paragraphs: [
       "Let MarketBuzzr continuously monitor your market and deliver the intelligence your team needs to stay ahead.",
     ],
-    ctaPrimary: "Book a Demo",
-    ctaSecondary: "Try It Free",
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
   },
 };

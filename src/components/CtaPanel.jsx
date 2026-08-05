@@ -7,7 +7,7 @@ import DemoButton from "./DemoButton";
 const CtaPanel = ({
   heading,
   paragraphs = [],
-  ctaLabel = "Book a Demo",
+  ctaLabel = "Try for Free",
   secondaryCtaLabel,
   as: Heading = "h3",
 }) => (

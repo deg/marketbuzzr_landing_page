@@ -9,7 +9,7 @@ export const tech = {
     sub: [
       "From competitor updates and industry blogs to webinars, YouTube discussions, Reddit threads, and product reviews — we turn fragmented market activity into structured, decision-ready intelligence.",
     ],
-    ctaLabel: "Get your MarketBuzzr",
+    ctaLabel: "Try for Free",
   },
   intro: [
     {
@@ -75,6 +75,6 @@ export const tech = {
       "Instead of maintaining internal trackers, feeds, or AI workflows, MarketBuzzr aggregates signals from blogs, webinars, YouTube, reviews, and community discussions into structured, role-based intelligence.",
       "The result is faster product and messaging decisions, shared context across teams, and a clear understanding of what is actually shaping your market.",
     ],
-    ctaLabel: "Book a Demo",
+    ctaLabel: "Try for Free",
   },
 };

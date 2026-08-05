@@ -22,9 +22,10 @@ import { home } from "./home";
 // subtitle, six boxes, the closing section, its CTAs, and the footer — and a
 // kicker is not among them.
 //
-// CTA LABELS are the homepage's pair. His brief writes "Try It Free" and
-// "Request a Demo"; the second is a typo for "Book a Demo" rather than a third
-// variant of the label, confirmed with the user. Order follows the homepage.
+// CTA LABELS are now the site's, set by the August handover: "Try for Free"
+// filled, "Book a Demo" outlined, those exact words everywhere (mbz-et8e.52.4).
+// This page's own brief wrote "Try It Free" and "Request a Demo" — the latter a
+// typo for "Book a Demo" — and both are superseded.
 export const industries = {
   title: "Market Intelligence for Your Industry — MarketBuzzr",
 
@@ -46,8 +47,8 @@ export const industries = {
     paragraphs: [
       "MarketBuzzr isn't limited to predefined categories. We can build focused market intelligence around almost any industry, niche or market definition.",
     ],
-    ctaPrimary: "Book a Demo",
-    ctaSecondary: "Try It Free",
+    ctaPrimary: "Try for Free",
+    ctaSecondary: "Book a Demo",
   },
 
   items: home.industries.items,
