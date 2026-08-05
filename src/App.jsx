@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { useThemeParam } from "./hooks/useThemeParam";
+import { useOptions, canonicaliseOptions } from "./hooks/useOptions";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import EmailCaptureModal from "./components/EmailCaptureModal";
@@ -21,24 +21,31 @@ import { tech } from "./content/tech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
 
-// Theme switch for review: ?theme=light or ?theme=dark, dark by default.
+// Review options set from the address bar — today just ?theme=light or
+// ?theme=dark, dark by default. What the options are lives in options.js, and
+// how an address is read and tidied lives in hooks/useOptions.js.
 //
-// The address is the only thing that decides. Which query forms are read, and
-// why both are, is in hooks/useThemeParam.js; carrying it from page to page is
-// components/Link.jsx. Nothing is stored anywhere, so a page is never light
-// while its own URL says nothing about it, and a link sent to someone else
-// arrives the same way round it left.
+// Nothing is stored anywhere. The address is the only thing that decides, so a
+// page is never light while its own URL says nothing about it, and a link sent
+// to someone else arrives the same way round it left.
 //
-// Only the industry page is designed for light so far. The homepage's artwork is
-// drawn on near-black grounds (#00041C, #020925, #000B2D) and becomes three dark
+// Only the industry pages are designed for light so far. The homepage's artwork
+// is drawn on near-black grounds (#00041C, #020925, #000B2D) and becomes dark
 // rectangles on a pale background — no CSS fixes that, it needs re-renders. That
 // is known and accepted; pages are being moved to native markup one at a time.
-const useTheme = () => {
-  const theme = useThemeParam();
+const useReviewOptions = () => {
+  const options = useOptions();
+  // Objects are new every render, so the effect keys off the values instead.
+  const applied = Object.values(options).join("|");
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
+    for (const [name, value] of Object.entries(options)) {
+      document.documentElement.dataset[name] = value;
+    }
+    canonicaliseOptions(options);
+    // Keyed off `applied`, not `options`: the object is rebuilt every render, so
+    // depending on it would re-run this forever.
+  }, [applied]);
 };
 
 // Each tab is a "page", so reset scroll to top on navigation.
@@ -52,7 +59,7 @@ const ScrollToTop = () => {
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  useTheme();
+  useReviewOptions();
 
   const openModal = useCallback(() => setIsModalOpen(true), []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);

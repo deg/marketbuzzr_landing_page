@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "../components/Link";
+import { Link } from "react-router-dom";
 import { home } from "../content/home";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";

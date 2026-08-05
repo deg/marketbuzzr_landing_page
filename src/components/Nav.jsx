@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Link, NavLink } from "../components/Link";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import DemoButton from "./DemoButton";
 import { nav } from "../content/nav";
 
