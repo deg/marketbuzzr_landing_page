@@ -303,22 +303,27 @@ grep -rn "FIX-BEFORE-RELEASE" src
 
 **`yarn deploy` refuses the live target while any tag remains** (`scripts/deploy.mjs`).
 `yarn deploy:new` is exempt — the sandbox is where this is meant to be visible.
-Each tag says what to do, and they do not all mean delete. `src/components/DevOnly.jsx`
-holds all the dev-only React so removing it is a deletion rather than a hunt.
-Beads issue `mbz-et8e.18` gates the merge.
+Each tag says what to do, and they do not all mean delete. Beads issue
+`mbz-et8e.18` gates the merge.
 
-There are **8 tags across 7 files**. The revision retired five of the original
-thirteen — scaffolding it made moot — but none of the four that actually block:
+There are **6 tags across 6 files**, all of which block:
 
 | Where | What it needs |
 |---|---|
 | `pages/NotImplemented.jsx` + its CSS + `App.jsx` | **Reframe, do not delete.** The route should ship: a real not-found page is strictly better than the silent redirect to `/` it replaced. Only the "not yet implemented" wording and amber styling must go. Deleting it wholesale reintroduces the original defect. |
-| `content/home.js` | Four industry tiles point at pages that do not exist. Build them, or drop the `to` and render those tiles non-interactive. §3 makes them more prominent than before. |
+| `content/home.js` | Two industry tiles point at pages that do not exist — Life Sciences and Public Safety & Defense Technology. Build them, or drop the `to` and render those tiles non-interactive. |
 | `content/nav.js` | Solutions, Resources and Pricing point at the same placeholder. |
 | `pages/Home.jsx` | A decision, not a code change — see `mbz-et8e.12`. |
 
-The `DevOnly.jsx` and `styles.css` dev-block tags are plain deletions once the
-Home.jsx note goes.
+**`Home.jsx`'s tag is now the only thing holding back the fabricated product
+announcement in the insight artwork.** A visible dev note used to sit under that
+visual saying so; it was removed on the user's instruction in `mbz-et8e.48`, and
+`DevOnly.jsx` and the `.dev-note` CSS block went with it, since it was the only
+`<DevNote>` on the site and `DevNote` was that file's only export. Both of those
+tags said "delete this", so retiring them was the fix rather than a strip-to-pass
+— but it means the on-page warning is gone and the tag is all that is left. The
+memo's §1 was updated to match, because it told Manu the page carried a visible
+note.
 
 **The risk is the merge, not the deploy.** `yarn deploy` is already refused from
 any branch but `main`, so the live site cannot be reached from `redesign` by

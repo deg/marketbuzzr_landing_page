@@ -12,7 +12,6 @@ import IndustryTile from "../components/IndustryTile";
 import ProductImage from "../components/ProductImage";
 import HeroAnimation from "../components/HeroAnimation";
 import WorthYourAttention from "../components/WorthYourAttention";
-import { DevNote } from "../components/DevOnly";
 import insightAvif from "../assets/insight-medicalcomp.avif";
 import insightWebp from "../assets/insight-medicalcomp.webp";
 
@@ -90,15 +89,19 @@ const Home = () => {
           height={1024}
           alt={insight.visualAlt}
         />
-        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): decision open, see mbz-et8e.12. */}
-        <DevNote>
-          The company is now the fictional MedicalComp, but the artwork still
-          announces the “MiniMed 780G” — Medtronic’s real, trademarked product,
-          which a fictional company cannot launch — and still cites Tandem
-          Diabetes Care and MedTech Dive as real sources. The date reads May 2,
-          2025, more than a year stale. Three string edits in this same artwork
-          would close it; see mbz-et8e.12.
-        </DevNote>
+        {/* FIX-BEFORE-RELEASE (mbz-et8e.18): the artwork above is a fabricated
+            product announcement attributed to real companies. It announces the
+            “MiniMed 780G” — Medtronic's real, trademarked product, which the
+            fictional MedicalComp cannot launch — cites Tandem Diabetes Care and
+            MedTech Dive as having covered it, and dates it May 2, 2025, over a
+            year stale. Three string edits in the same artwork would close it.
+
+            A visible dev note used to sit here saying so, and was removed on
+            2026-08-05 (mbz-et8e.48). THIS TAG IS NOW THE ONLY THING STOPPING
+            IT: scripts/deploy.mjs refuses a live deploy while it is present.
+            Do not delete it to get past the gate — the decision is open as
+            mbz-et8e.12, and section 1 of the outstanding-items memo is the
+            same question put to Manu. */}
         <p className="lead lead-strong">{insight.emphasis}</p>
       </section>
 
