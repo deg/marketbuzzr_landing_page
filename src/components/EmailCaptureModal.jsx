@@ -122,9 +122,13 @@ const EmailCaptureModal = ({ open, onClose }) => {
         ) : (
           <>
             <h3 id="modal-title">Thanks for your interest!</h3>
+            {/* His words, from the August handover section 4. It used to say
+                "for a product demo", which had stopped being true: every CTA on
+                the site now leads here and the primary one offers a free trial
+                (mbz-et8e.52.4). */}
             <p>
-              Please let us know your email and we will contact you for a
-              product demo shortly.
+              Please let us know your email and we will contact you to set up
+              your free trial shortly.
             </p>
             <form className="modal-form" onSubmit={handleSubmit} noValidate>
               <label className="modal-label" htmlFor="modal-email">
