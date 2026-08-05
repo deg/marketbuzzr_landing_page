@@ -1,11 +1,15 @@
-// How It Works copy, from Manu's "MarketBuzzr — How It Works Page, Final CTO /
-// Claude Implementation Handoff" — drop_04 in the design repo
-// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/).
+// How It Works copy, from Manu's How It Works handoffs — drop_04 in the design
+// repo (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/) for the page's
+// shape, and drop_06 for the copy in it, which supersedes drop_04's.
 //
 // The page is deliberately Hero -> 01 -> 02 -> 03 -> CTA and nothing else. The
 // brief is explicit that the simplicity is the point: no fourth step, no
 // sources grid, no separate weekly-report section, no feature grid, no FAQ. If
 // a later round wants to add a section here, check that document first.
+//
+// drop_06 shortened every step to ONE paragraph and cut the closing line under
+// steps 01 and 02, leaving 03's. `lead` is the open question — see the note on
+// the first one.
 //
 // Brand is "MarketBuzzr" throughout — the brief's "Marketbuzzr" is deliberately
 // not adopted (mbz-et8e.2), same call as the homepage.
@@ -35,53 +39,227 @@ export const howItWorks = {
   // markup; `number` is copy rather than derived from the index, because it is
   // the label the brief specifies and not an incidental position.
   //
-  // `visualAlt` is shorter here than the homepage's. There the artwork carried
-  // meaning that existed nowhere else, so its alt text had to reconstruct it.
-  // This brief puts every important message in HTML and asks specifically not
-  // to restate the text visible inside the image.
+  // `body` is drop_06's, verbatim. It replaces the two paragraphs each step
+  // used to carry, and every one of them is one sentence.
+  //
+  // `visualAlt` only applies to step 01 now. Steps 02 and 03 are drawn in HTML,
+  // so what they say is real text on the page and needs no alt at all.
   steps: [
     {
       id: "monitor-filter",
       number: "01",
       title: "Monitor Your Market. Filter the Noise.",
+      // KEPT, NOT CONFIRMED — all three of these. drop_06 gives one paragraph
+      // per step and its Final Page Structure lists headline -> one concise
+      // paragraph -> visual, which reads as deleting them. But it names only
+      // the closing lines under 01 and 02 for deletion and never mentions
+      // these, and deleting copy he did not ask us to delete is the worse
+      // mistake of the two. Each ships with a short visible flag under it
+      // asking him, and the question is in section 9 of the memo.
+      //
+      // Note all three carry an em dash, which he has twice asked us to stop
+      // using as punctuation. If they stay, they get rewritten.
       lead: "Stay on top of what's changing—without tracking it all yourself.",
-      paragraphs: [
-        "MarketBuzzr continuously monitors the sources that shape your market—from competitors, industry news and regulation to research, podcasts, webinars and online discussions.",
-        "Every signal is evaluated against your business context—your company, products, competitors, goals, role and markets—so you see what deserves your attention, not everything that happened.",
-      ],
+      body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every signal against your company, competitors, products, markets, role and goals, so you see what deserves your attention.",
       visualAlt:
         "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets to surface only relevant developments.",
-      closer: "Less noise. More signal. More time for what matters.",
+      // drop_06: "There should be no additional copy below the section 01
+      // visual." The line that was here, "Less noise. More signal. More time
+      // for what matters.", is deleted rather than moved.
     },
     {
       id: "role-based-intelligence",
       number: "02",
       title: "Intelligence Shaped Around Your Role",
       lead: "Different roles need different intelligence—and different ways to act on it.",
-      paragraphs: [
-        "MarketBuzzr turns relevant developments into personalized insights, opportunities and recommendations based on each reader's priorities.",
-        "Executives can focus on strategic priorities, growth opportunities and board-level implications. Marketing, Sales, Customer Success and other teams receive intelligence relevant to the decisions they make and the work they do.",
-      ],
-      visualAlt:
-        "Example role-based MarketBuzzr weekly intelligence showing tailored outputs for executives, marketing, sales and customer success, including strategic priorities, growth opportunities, board discussion points, content ideas, battlecards, talk tracks and client updates.",
-      closer:
-        "One market. Different priorities. Intelligence built around each reader.",
+      body: "MarketBuzzr turns relevant developments into personalized intelligence based on each reader's priorities, giving executives, Marketing, Sales and other teams the insights and opportunities most relevant to the decisions they make.",
+      // Same instruction as 01. The line deleted here — "One market. Different
+      // priorities. Intelligence built around each reader." — is not really
+      // lost: his animation carries "Same market intelligence. Different
+      // priorities for each role." as its own caption, so the thought moved
+      // inside the visual. That is only fine because the visual is now HTML.
     },
     {
       id: "turn-intelligence-into-action",
       number: "03",
       title: "Turn Intelligence Into Action",
       lead: "Don't just know what happened. Know what to do next.",
-      paragraphs: [
-        "MarketBuzzr goes beyond summarizing the market. It identifies what developments mean for your business, recommends next steps, and helps you turn intelligence into work your team can use.",
-        "Create action plans, executive communications, board talking points, battlecards, outreach, campaigns, thought-leadership content and more—directly from the opportunities and insights MarketBuzzr identifies.",
-      ],
-      visualAlt:
-        "MarketBuzzr workflow showing a growth opportunity being turned into an action plan by selecting a draft format and generating a context-aware ready-to-use draft.",
+      body: "MarketBuzzr identifies what developments mean for your business, recommends next steps and helps you turn insights into action plans, executive communications, battlecards, outreach, content and more.",
+      // The only closer that survives drop_06, which calls it out by name:
+      // "This is the only one of the three sections that should retain copy
+      // below the visual."
       closer:
         "No blank page. No generic prompt. Your draft starts with the market intelligence and business context already behind the insight.",
     },
   ],
+
+  // Step 02's visual. One dashboard, one role at a time, cycling — his brief is
+  // emphatic that no two profiles appear side by side, which is what rules out
+  // reusing the industry pages' RoleBar.
+  //
+  // `tone` names a token rather than a colour. His four roles are four hues and
+  // that is a real device — the badge, the profile title, the card borders and
+  // the progress dot all take the role's colour, so the whole panel changes
+  // identity together. His literals are #7d58f6 / #2f7ee8 / #6aaf4b / #3ba9b4;
+  // the site's four accents sit in the same hue order and are used instead, so
+  // this introduces no new colour (the same rule the industry pages follow).
+  roleDashboard: {
+    kicker: "Role Based Intelligence",
+    sub: "The same market, filtered for what matters to this role.",
+    // Not a closer under the visual — this is inside it, and it is his. It is
+    // also nearly the line drop_06 deletes from under the section.
+    caption: {
+      emphasis: "Same market intelligence.",
+      rest: " Different priorities for each role.",
+    },
+    badgeLabel: "Prepared for:",
+    roles: [
+      {
+        name: "Executive",
+        profile: "CEO Profile",
+        tone: "brand-3",
+        cards: [
+          {
+            icon: "growth",
+            tag: "GROWTH OPPORTUNITY",
+            title: "Establish a niche in AI/ML medical device regulation",
+            action: "Draft Action Plan",
+          },
+          {
+            icon: "shield",
+            tag: "STRATEGIC PRIORITY",
+            title: "Prioritize neurotechnology and Imaging + SaaS",
+            action: "Draft Internal Memo",
+          },
+          {
+            icon: "message",
+            tag: "BOARD DISCUSSION POINT",
+            title: "Define our response to competitors' platform offerings",
+            action: "Draft Board Talking Points",
+          },
+        ],
+      },
+      {
+        name: "Marketing",
+        profile: "Marketing Profile",
+        tone: "brand-2",
+        cards: [
+          {
+            icon: "idea",
+            tag: "THOUGHT LEADERSHIP",
+            title:
+              "AI regulation readiness: what MedTech companies need to know",
+            action: "Draft Article",
+          },
+          {
+            icon: "target",
+            tag: "CAMPAIGN IDEA",
+            title: "AI regulation readiness campaign for MedTech innovators",
+            action: "Draft Campaign",
+          },
+          {
+            // His icon here is LinkedIn's "in" wordmark. That is someone
+            // else's trademark, and drawing a lookalike is worse than not
+            // drawing it — the label already says LinkedIn in words.
+            icon: "threads",
+            tag: "LINKEDIN POST",
+            title: "3 AI regulation myths holding back MedTech innovation",
+            action: "Draft LinkedIn Post",
+          },
+        ],
+      },
+      {
+        name: "Sales",
+        profile: "Sales Profile",
+        tone: "positive",
+        cards: [
+          {
+            // Crossed swords in his file. `target` is what the homepage
+            // already uses for competitive intelligence.
+            icon: "target",
+            tag: "COMPETITIVE INSIGHT",
+            title: "New entrant offering AI validation platform for SaMD",
+            action: "Draft Battlecard",
+          },
+          {
+            icon: "message",
+            tag: "MESSAGING SHIFT",
+            title: "Competitors lead with AI trust and safety",
+            action: "Draft Talk Track",
+          },
+          {
+            icon: "mail",
+            tag: "NEW MARKET OPPORTUNITY",
+            title: "Rising demand for AI regulatory readiness",
+            action: "Draft Outreach Email",
+          },
+        ],
+      },
+      {
+        name: "Customer Success",
+        profile: "Customer Success Profile",
+        tone: "brand",
+        cards: [
+          {
+            icon: "article",
+            tag: "INDUSTRY UPDATE",
+            title: "FDA releases draft guidance on AI in medical devices",
+            action: "Draft Client Update",
+          },
+          {
+            icon: "message",
+            tag: "COMPETITIVE TREND",
+            title: "Competitor launches new AI compliance consulting service",
+            action: "Draft Client Talk Track",
+          },
+          {
+            icon: "trend",
+            tag: "EXPANSION OPPORTUNITY",
+            title: "Existing clients are scaling AI initiatives",
+            action: "Draft Expansion Plan",
+          },
+        ],
+      },
+    ],
+  },
+
+  // Step 03's visual: the "Draft from this idea" chooser, one format selected at
+  // a time. `cycle` is the order the selection moves in, which is his README's
+  // order and deliberately not the order the options are listed in.
+  draftFromIdea: {
+    title: "Draft from this idea",
+    label: "FORMAT",
+    ctaTemplate: "Draft {format}",
+    footer: "One insight can become whatever work you need next.",
+    options: [
+      {
+        icon: "checklist",
+        name: "Action Plan",
+        blurb: "Step by step plan to move forward",
+      },
+      {
+        icon: "mail",
+        name: "Outreach Email",
+        blurb: "Email to reach out to prospects",
+      },
+      {
+        icon: "message",
+        name: "Talk Track",
+        blurb: "Talking points for sales conversations",
+      },
+      {
+        icon: "people",
+        name: "Board Talking Points",
+        blurb: "Key points for your board discussion",
+      },
+      {
+        icon: "summary",
+        name: "Executive Summary",
+        blurb: "Top line summary for leadership",
+      },
+    ],
+    cycle: [0, 2, 3, 1, 4],
+  },
 
   finalCta: {
     title: "Stop Following the Market Manually.",

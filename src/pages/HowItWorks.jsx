@@ -4,17 +4,17 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import CtaPanel from "../components/CtaPanel";
 import ProductImage from "../components/ProductImage";
+import RoleDashboard from "../components/RoleDashboard";
+import DraftFromIdea from "../components/DraftFromIdea";
+import { DevFlag } from "../components/DevOnly";
 import monitorAvif from "../assets/monitor-filter.avif";
 import monitorWebp from "../assets/monitor-filter.webp";
-import roleAvif from "../assets/role-based-intelligence.avif";
-import roleWebp from "../assets/role-based-intelligence.webp";
-import actionAvif from "../assets/turn-into-action.avif";
-import actionWebp from "../assets/turn-into-action.webp";
 
-// Hero -> 01 -> 02 -> 03 -> CTA, per Manu's How It Works handoff brief —
+// Hero -> 01 -> 02 -> 03 -> CTA, per Manu's How It Works handoff briefs —
 // drop_04 in the design repo
-// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/). The three steps
-// are one continuous story — find what matters, make it relevant to the reader,
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/) for the page's
+// shape, drop_06 for its copy and two of its three visuals. The three steps are
+// one continuous story — find what matters, make it relevant to the reader,
 // help the reader act — and the brief forbids anything else on this page.
 //
 // The steps are sequential full-width sections rather than a three-column
@@ -27,30 +27,39 @@ import actionWebp from "../assets/turn-into-action.webp";
 // No <main> wrapper. The brief sketches one, but also says to prefer the
 // existing codebase's conventions — and no page on this site has one.
 //
-// The artwork is drawn on white while the page is navy. Each figure sets its
-// own --artwork-ground in styles.css so the near-white bleeds outward and the
+// ONLY STEP 01 IS STILL A PICTURE. drop_06 replaced steps 02 and 03 with HTML
+// animations, which are RoleDashboard and DraftFromIdea; step 01 came back
+// unchanged, so it keeps the AVIF already in the repo — verified as the same
+// source, mean channel difference 0.60/255 against his PNG.
+//
+// That image is drawn on white while the page is navy, so it sets its own
+// --artwork-ground in styles.css and the near-white bleeds outward until the
 // edge softens into the page — the same mechanism the homepage uses in the
-// opposite direction. Dark-ground re-renders have been asked for
-// (mbz-et8e.28 item 9); when they arrive this reverts to one value per image.
-const VISUALS = {
-  "monitor-filter": {
-    avif: monitorAvif,
-    webp: monitorWebp,
-    width: 1774,
-    height: 887,
-  },
-  "role-based-intelligence": {
-    avif: roleAvif,
-    webp: roleWebp,
-    width: 1604,
-    height: 981,
-  },
-  "turn-intelligence-into-action": {
-    avif: actionAvif,
-    webp: actionWebp,
-    width: 1503,
-    height: 663,
-  },
+// opposite direction. It used to apply to all three visuals; it is now this one
+// special case, and a dark-ground re-render would delete it altogether. That is
+// the last outstanding artwork ask on this page (mbz-et8e.28, memo §2).
+const MONITOR_VISUAL = {
+  avif: monitorAvif,
+  webp: monitorWebp,
+  width: 1774,
+  height: 887,
+};
+
+// Each step's visual, by id. Step 01 is a picture; the other two are drawn.
+const VISUAL = {
+  "monitor-filter": (step) => (
+    <ProductImage
+      className="how-visual how-visual-monitor-filter"
+      alt={step.visualAlt}
+      {...MONITOR_VISUAL}
+    />
+  ),
+  "role-based-intelligence": () => (
+    <RoleDashboard {...howItWorks.roleDashboard} />
+  ),
+  "turn-intelligence-into-action": () => (
+    <DraftFromIdea {...howItWorks.draftFromIdea} />
+  ),
 };
 
 const HowItWorks = () => {
@@ -78,17 +87,21 @@ const HowItWorks = () => {
           <p className="how-step-number">{step.number}</p>
           <h2>{step.title}</h2>
           <p className="lead">{step.lead}</p>
+          {/* FIX-BEFORE-RELEASE (mbz-et8e.18): remove once Manu answers.
+              Directly under the line it is about, and on all three, because the
+              question is per-line — drop_06 gives one paragraph per step and
+              lists headline → one concise paragraph → visual, which reads as
+              deleting these, but it names only the closing lines under 01 and
+              02 for deletion and never mentions these. See content/howItWorks.js
+              for the full reasoning and §9 of the memo for the ask. */}
+          <DevFlag>Not in drop_06 — keep this line?</DevFlag>
           <div className="how-step-body">
-            {step.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+            <p>{step.body}</p>
           </div>
-          <ProductImage
-            className={`how-visual how-visual-${step.id}`}
-            alt={step.visualAlt}
-            {...VISUALS[step.id]}
-          />
-          <p className="lead lead-strong">{step.closer}</p>
+          {VISUAL[step.id](step)}
+          {/* Only step 03 keeps a line under its visual, and drop_06 says so by
+              name. The other two had one and it is deleted, not moved. */}
+          {step.closer && <p className="lead lead-strong">{step.closer}</p>}
         </section>
       ))}
 

@@ -5,8 +5,8 @@ import React from "react";
 // EVERYTHING IN THIS FILE IS A DEV/DESIGN-CYCLE AFFORDANCE AND MUST NOT SHIP.
 //
 // It is deliberately all in one module so removing it is a deletion rather than
-// a hunt: delete this file, then the handful of <DevNote> usages the compiler
-// will point at. See mbz-et8e.18, which gates the merge.
+// a hunt: delete this file, then the handful of <DevNote> and <DevFlag> usages
+// the compiler will point at. See mbz-et8e.18, which gates the merge.
 //
 // Note that ProductImage is NOT dev-only and must survive this deletion.
 //
@@ -21,4 +21,18 @@ export const DevNote = ({ children }) => (
     <span className="dev-note-tag">Dev note</span>
     <p>{children}</p>
   </aside>
+);
+
+// The same thing, one line, for flagging a specific piece of copy rather than a
+// whole section. It goes DIRECTLY under the line it is about — a block note
+// several paragraphs away, describing "the line above each step", was the
+// version this replaced, and nobody could tell which line it meant.
+//
+// Keep the text to a few words. The reasoning belongs in a code comment and in
+// the memo; this only has to say which line and ask the question.
+export const DevFlag = ({ children }) => (
+  <span className="dev-flag">
+    <span className="dev-flag-tag">Dev</span>
+    {children}
+  </span>
 );

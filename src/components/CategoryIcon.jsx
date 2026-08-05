@@ -196,6 +196,52 @@ export const ICON_PATHS = {
       <path d="M4.5 20.5c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5" />
     </>
   ),
+
+  // --- Added for the How It Works animations (mbz-et8e.46). ---
+  //
+  // Four gaps the existing set could not cover without saying the wrong thing.
+  // Everything else those two animations need was already here.
+
+  // An idea or a piece of thought leadership — a bulb with its base.
+  idea: (
+    <>
+      <path d="M9 17h6" />
+      <path d="M10 20.5h4" />
+      <path d="M12 2.5a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6h5.4c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 2.5z" />
+    </>
+  ),
+
+  // Email and outreach — an envelope. Drawn as a flap rather than a full X so
+  // it stays legible at the 20px these animations use.
+  mail: (
+    <>
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="M3.5 7l8.5 6 8.5-6" />
+    </>
+  ),
+
+  // An action plan — a clipboard whose lines are ticked, where `article` is the
+  // same sheet with plain lines. The two appear in the same animation, so they
+  // have to differ at a glance.
+  checklist: (
+    <>
+      <path d="M9 4.5H7a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V6A1.5 1.5 0 0 0 17 4.5h-2" />
+      <rect x="9" y="2.5" width="6" height="4" rx="1.2" />
+      <path d="M8.5 11.5l1.5 1.5 2.5-2.5" />
+      <path d="M8.5 16l1.5 1.5 2.5-2.5" />
+      <path d="M14.5 11h2M14.5 15.5h2" />
+    </>
+  ),
+
+  // A top-line summary — a sheet led by a heavy rule, so it reads as "the short
+  // version" next to `article`'s even lines.
+  summary: (
+    <>
+      <rect x="4" y="3.5" width="16" height="17" rx="2" />
+      <path d="M7.5 8h9" strokeWidth="2.6" />
+      <path d="M7.5 12.5h9M7.5 16h5.5" />
+    </>
+  ),
 };
 
 const CategoryIcon = ({ name }) => (

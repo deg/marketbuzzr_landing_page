@@ -50,9 +50,12 @@ back to him live beside them.
 |---|---|---|
 | `drop_01_Marketbuzzr_Homepage_CTO_Handoff_MD.zip` | homepage, 1st | `marketbuzzr_homepage_handoff_md/` |
 | `drop_02_Marketbuzzr_Homepage_Revised_CTO_Handoff.zip` | homepage, 2nd | `Marketbuzzr_Homepage_Revised_CTO_Handoff/` |
-| `drop_03_Marketbuzzr_Homepage_CTO_Handoff_file_aug3.zip` | homepage, 3rd — **current** | `Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/` |
-| `drop_04_Marketbuzzr_How_It_Works_CTO_Handoff_Updated.zip` | How It Works — **current** | *(flat, no wrapper)* |
-| `drop_05_marketbuzzr-biotech-landing.html` | Biotechnology — **current** | *(a single HTML file)* |
+| `drop_03_Marketbuzzr_Homepage_CTO_Handoff_file_aug3.zip` | homepage, 3rd — section order | `Marketbuzzr_Final_Homepage_CTO_Handoff_Cropped_Problem/` |
+| `drop_04_Marketbuzzr_How_It_Works_CTO_Handoff_Updated.zip` | How It Works, 1st — page shape only | *(flat, no wrapper)* |
+| `drop_05_marketbuzzr-biotech-landing.html` | Biotechnology, FinTech, MedTech + the hero animation | *(single HTML files)* |
+| `drop_06_marketbuzzr-homepage-cto-handoff.zip` | homepage, 4th — **current** | `marketbuzzr-homepage-cto-handoff/` |
+| `drop_06_marketbuzzr-how-it-works-cto-handoff.zip` | How It Works, 2nd — **current** | `marketbuzzr-how-it-works-cto-handoff/` |
+| `drop_06_MarketBuzzr_Industries_Page_CTO_Handover.docx` | the `/industries` page — not built (`mbz-et8e.47`) | *(a single docx)* |
 
 `drop_05` is the first handoff delivered as **HTML rather than artwork** — a sketch by
 an artist agent, not a page to drop in. Its copy and structure are the deliverable; its
@@ -141,10 +144,10 @@ generic, so read the component before changing a section:
 
 | § | Section | Built from |
 |---|---|---|
-| 1 | Hero | `PageHero` + `ProductImage` |
+| 1 | Hero | `PageHero` + `HeroAnimation` (drawn, not photographed) |
 | 2 | Transition | `BrandDivider` — one line, deliberately not a section |
-| 3 | Problem | copy beside `ProductImage`, in `.problem-grid`, at the wide measure |
-| 4 | Insight | `ProductImage` alone |
+| 3 | Problem | copy above `WorthYourAttention`, full width |
+| 4 | Insight | `ProductImage` alone — the last raster on this page |
 | 5 | Five-step flow | `FlowSteps` (native HTML, no artwork) |
 | 6 | Industries | `IndustryTile` |
 | 7 | Intelligence areas | `CategoryCard` + `CategoryIcon` (six line icons) |
@@ -164,8 +167,13 @@ without visible copy. Note the current artwork draws **five** dimensions, not
 the six that sentence named — "products" is no longer depicted, and the alt text
 follows the artwork.
 
+**Only §4 is still a picture.** The hero became `HeroAnimation` in `mbz-et8e.40`
+and §3 became `WorthYourAttention` in `.44`, both from Manu's own HTML/SVG files,
+so the homepage carries one raster where it used to carry four. What is left is
+the one blocked on a decision (`mbz-et8e.12`).
+
 Images live in `src/assets/` as AVIF with a WebP fallback, encoded from the final
-handoff artwork at `avifenc -q 58` (3.5 MB of source → 189 KB of AVIF). The
+handoff artwork at `avifenc -q 58`. The
 setting is re-derived each round rather than carried over, by comparing against
 source at 2× zoom on the smallest type and on the hero's gradients, where
 banding shows first. The source files are not in this repo.
@@ -193,31 +201,63 @@ of waste off the homepage, tracked as `mbz-et8e.34`.
 ### The How It Works page (2026-08)
 
 `pages/HowItWorks.jsx` is Hero → 01 → 02 → 03 → Final CTA and deliberately
-nothing else, from Manu's separate How It Works brief — **`drop_04`** in the
-design repo. That brief forbids additions by name: no fourth step, no sources
+nothing else, from Manu's How It Works briefs — **`drop_04`** in the design repo
+for the page's shape and **`drop_06`** for its copy and two of its three visuals. That brief forbids additions by name: no fourth step, no sources
 grid, no separate weekly-report section, no feature grid, no FAQ. **Read it
 before adding a section here.**
 
 The three steps are stacked full-width sections, not a three-column layout and
 not alternating 50/50 splits — both were ruled out because they shrink the
 artwork below the size its embedded text needs. That also means `.product-frame`'s
-breakout works normally here; the `.problem-grid .product-frame` suppression is a
-homepage-only rule and must not be copied over.
+breakout works normally here, because the section spans the page. The homepage
+reached the same conclusion for its own §3 in `drop_06` and dropped its split.
 
-**This page's artwork is light, and that inverts the bleed.** All three PNGs are
-drawn on white (`#FEFEFE`) against the navy page, so `.how-visual` sets a
-`box-shadow` directly instead of taking `--artwork-ground`. Its blur is 24px with
-no spread, against the homepage's 80px/30px, and **the difference is load-bearing
-rather than taste**: a dark bleed that overshoots on a dark page is invisible, a
-light one is not. Measured contrast of `--muted` body copy against the ground
-immediately above a figure was 1.70:1 at 80/30 and 9.57:1 at 24/0. Do not
-harmonise the two. Dark-ground re-renders are on the ask list (`mbz-et8e.28`
-item 9) and would delete this whole special case.
+**Only step 01 is still a picture.** `drop_06` replaced steps 02 and 03 with HTML
+animations, built as `RoleDashboard` and `DraftFromIdea` (`mbz-et8e.46`). Step 01
+came back from him unchanged, and the AVIF already in the repo is encoded from
+that same PNG — verified pixel-wise, mean channel difference 0.60/255 — so it
+needed no asset work at all.
 
-Mobile held widths for the 820px scroller are re-derived per artwork, same method
-as the homepage: 1200 / 1100 / 1000px. The middle one is held to its report-card
-copy rather than its smallest text — clearing the 9px tab row and the 8px bottom
-strip would mean showing it at native 1604px, four screens of panning.
+**Those two components are not SVG transcriptions.** His files are HTML and CSS,
+so unlike `HeroAnimation` and `WorthYourAttention` there are no coordinates to
+preserve, no ids to prefix and no SMIL to convert. Each is a panel, a timer and
+an index. What did carry over from that work: emoji become `CategoryIcon` line
+icons, his outer wrapper box is dropped, and nothing renders as a control. His
+step 03 ships a real `<button>`, five radio-styled options and a close control,
+none of which do anything; all of it is presentational, with no `<button>`, no
+`role`, no `tabindex`. The four new icons — `idea`, `mail`, `checklist`,
+`summary` — went into the shared `CategoryIcon`, so they are available site-wide.
+
+**`useCycle` is where the timing and the pause live**, shared by both. It stops
+while the pointer or focus is inside, which is the WCAG 2.2.2 mechanism, and
+stops entirely under `prefers-reduced-motion`, pinned to the first item. A
+visible pause button was considered and rejected: it would be chrome no other
+part of this site has, on a page whose brief says not to redesign it. The
+residual gap — a keyboard-only visitor gets no pause, because nothing here is
+focusable — is site-wide rather than specific to this page, and is recorded on
+`mbz-et8e.46`.
+
+**The role colours are the site's, not his.** He gives the four roles four hues
+and that device is real: the badge, profile name, card borders, tags and progress
+dot all change together. His literals are `#7d58f6` / `#2f7ee8` / `#6aaf4b` /
+`#3ba9b4`; `--brand-3`, `--brand-2`, `--positive` and `--brand` sit in the same
+hue order and are used instead, so this adds no new colour. `--role` is set once
+per role and everything inside reads it.
+
+**Step 01's artwork is light, and that inverts the bleed.** It is drawn on white
+(`#FEFEFE`) against the navy page, so `.how-visual` sets a `box-shadow` directly
+instead of taking `--artwork-ground`. Its blur is 24px with no spread, against
+the homepage's 80px/30px, and **the difference is load-bearing rather than
+taste**: a dark bleed that overshoots on a dark page is invisible, a light one is
+not. Measured contrast of `--muted` body copy against the ground immediately
+above a figure was 1.70:1 at 80/30 and 9.57:1 at 24/0. Do not harmonise the two.
+This used to apply to all three visuals and is now one special case; a dark-ground
+re-render, or a sketch we can rebuild it from, deletes it (`mbz-et8e.28`, memo §2).
+
+One mobile held width is left where there were three — 1200px for step 01. The
+other two need none: they are markup, so they reflow, and their type stays 17px
+and 12px from 1440px right down to 390px instead of being scaled into a
+horizontal scroller.
 
 **CTA labels differ from the homepage on purpose.** This brief specifies primary
 "Try for Free" and secondary "Book a Demo"; the homepage ships the reverse order
@@ -230,11 +270,12 @@ rules (`.steps`, `.step`, `.step-number`, `.step-body`, `.summary-block`,
 `.value-grid`, `.value-box`, `.summary-footnote`) are gone, and so are their
 halves of the selectors they shared with `.card` and `.cta-panel`.
 
-Page weight with everything scrolled in is 92 KB gzipped text + 171 KB of AVIF,
-plus the 79 KB hero the shared preload drags in for nothing (`mbz-et8e.34`). No
-visual is the LCP element on this page — it is the H1 on desktop (344ms) and the
-`.sub` paragraph on phone (260ms) — so all three stay `loading="lazy"`, which is
-what the brief conditions on. Re-measure rather than trusting this line.
+Page weight with everything scrolled in is **133.8 KB** and LCP is 396ms,
+measured at 1440px against the preview build. That is about 147 KB lighter than
+before `drop_06`: the two AVIFs it retired were 146.7 KB between them and the
+components replacing them add roughly 2.3 KB gzipped. Step 01's image is not the
+LCP element and stays `loading="lazy"`, which is what the brief conditions on.
+Re-measure rather than trusting this line.
 
 ### The industry pages (2026-08) — and why there are two page templates
 
@@ -250,15 +291,25 @@ without a horizontal scroller, and uncorrectable without asking Manu to re-rende
 components here are built as native replacements for exactly those images, which is why
 they take content props rather than hardcoding biotech copy:
 
-| Component | Replaces, if the pilot lands |
-|---|---|
-| `SourceCluster` | How It Works step 01 (`monitor-filter`) |
-| `InsightCard` | homepage §4 (`insight-medicalcomp`) |
-| `RoleBar` | How It Works step 02 (`role-based-intelligence`) |
+| Component | Was to replace | What happened |
+|---|---|---|
+| `SourceCluster` | How It Works step 01 (`monitor-filter`) | still the standing offer |
+| `InsightCard` | homepage §4 (`insight-medicalcomp`) | still the standing offer, blocked on `mbz-et8e.12` |
+| `RoleBar` | How It Works step 02 (`role-based-intelligence`) | **overtaken** — see below |
 
-If that happens it also retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28`
-— the re-render, the 2× exports, the stale date and the mobile renders all dissolve when
-the text is text.
+**The pilot won the argument, and Manu is now sending the replacements himself.**
+`drop_06` supplied HTML animations for How It Works steps 02 and 03 and an SVG for
+homepage §3, so three of the four rasters this table was written to displace are gone
+already, and by his hand rather than ours.
+
+`RoleBar`'s row is dead specifically: it puts three roles side by side, and his brief
+for step 02 rules that out by name — "do not show multiple profiles or dashboards side
+by side". Step 02 is `RoleDashboard`, which shows one at a time. `RoleBar` still renders
+on the biotech page and is unaffected there.
+
+What is left of the original claim is the last raster on each page. Closing those two
+retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28` — the re-render, the 2×
+exports, the stale date and the mobile renders all dissolve when the text is text.
 
 **The drop's hero was not ported, and could not have been.** It absolutely-positioned
 seven boxes at hardcoded percentage offsets, and they already overlapped *in Manu's own
@@ -307,7 +358,7 @@ Each tag says what to do, and they do not all mean delete. `src/components/DevOn
 holds all the dev-only React so removing it is a deletion rather than a hunt.
 Beads issue `mbz-et8e.18` gates the merge.
 
-There are **8 tags across 7 files**:
+There are **9 tags across 8 files**:
 
 | Where | What it needs |
 |---|---|
@@ -315,6 +366,7 @@ There are **8 tags across 7 files**:
 | `content/home.js` | Two industry tiles point at pages that do not exist — Life Sciences and Public Safety & Defense Technology. Build them, or drop the `to` and render those tiles non-interactive. |
 | `content/nav.js` | Solutions, Resources and Pricing point at the same placeholder. |
 | `pages/Home.jsx` | A decision, not a code change — see `mbz-et8e.12`. |
+| `pages/HowItWorks.jsx` | A `<DevFlag>` under each step's lead line, asking Manu whether it should stay. `drop_06`'s page structure reads as deleting all three; it never says so. One-line edit either way once he answers. |
 
 **`Home.jsx`'s tag is now the only thing holding back the fabricated product
 announcement in the insight artwork.** A visible `<DevNote>` used to sit under
@@ -369,15 +421,21 @@ as suspect if you add another.
 at ~67% and be hard to read. The breakout centres a wider child inside a narrower
 parent with `left: 50%` + `translateX(-50%)`, which **only works when the parent
 spans the page** — inside a split column the 50% resolves against the column and
-the image overflows the window. `.problem-grid .product-frame` suppresses it, and
-**§2 now depends on that rule**. It reads like leftover from the deleted
-personalization split; it is not.
+the image overflows the window, measured at 315px past the right edge. No layout
+puts a `.product-frame` in a column any more, so the rule that used to suppress
+it is gone; a comment where it stood records what a new split layout would need.
 
-**A bare `1fr` grid track takes its automatic minimum from its content.** Below
-820px the artwork is held at 1000–1400px inside a horizontal scroller so its
-embedded text stays legible, which inflated §2's `1fr` track to 1018px and gave
-the page ~630px of horizontal overflow. `minmax(0, 1fr)` is what stops it. Any
-new grid that will hold one of these scrollers needs the same.
+**A bare `1fr` grid track takes its automatic minimum from its content.** An
+artwork held at 1000–1400px inside a horizontal scroller inflates the track that
+holds it, `.product-frame`'s `width: 100%` then resolves against the inflated
+track, and the page gains horizontal overflow — measured at ~630px before this
+was fixed. `minmax(0, 1fr)` is what stops it. Any new grid that will hold one of
+these scrollers needs the same.
+
+**Drawn visuals need none of the above.** `HeroAnimation`, `WorthYourAttention`,
+`RoleDashboard` and `DraftFromIdea` are markup, so they reflow instead of
+scaling, and their type holds its size at every width. Only two rasters are left
+on the whole site — the homepage insight card and How It Works step 01.
 
 **The "Final overrides" block at the end of the file must stay there.** Several of its
 rules tie on specificity with the base rules they override (`.section p.lead`,
