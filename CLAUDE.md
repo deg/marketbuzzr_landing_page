@@ -432,7 +432,7 @@ undo real fixes.
 ### The one backend dependency: the email-capture form
 
 `src/components/EmailCaptureModal.jsx` is the only component that talks to a server. On
-submit it POSTs `{ email, name, comment, website, source }` to:
+submit it POSTs `{ email, name, phone, comment, website, source }` to:
 
 ```
 ${VITE_API_BASE_URL}/api/landing/conversion

@@ -11,6 +11,7 @@ const CONVERSION_ENDPOINT = `${API_BASE_URL}/api/landing/conversion`;
 const EmailCaptureModal = ({ open, onClose, source = "" }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [comment, setComment] = useState("");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
@@ -18,6 +19,7 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
   const resetForm = useCallback(() => {
     setEmail("");
     setName("");
+    setPhone("");
     setComment("");
     setWebsite("");
     setStatus("idle");
@@ -78,7 +80,7 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
         const response = await fetch(CONVERSION_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, name, comment, website, source }),
+          body: JSON.stringify({ email, name, phone, comment, website, source }),
         });
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
@@ -88,7 +90,7 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
         setStatus("error");
       }
     },
-    [email, name, comment, website, source, status]
+    [email, name, phone, comment, website, source, status]
   );
 
   if (!open) return null;
@@ -162,6 +164,25 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
                 disabled={isSubmitting}
                 autoComplete="name"
                 maxLength={200}
+              />
+              {/* His section 4 asks for email required with name, phone and
+                  comment optional, in that order. type="tel" for the phone
+                  keypad on mobile; no pattern, because international formats
+                  vary enough that any pattern worth writing rejects real
+                  numbers. The 50-char cap matches the backend's. */}
+              <label className="modal-label" htmlFor="modal-phone">
+                Your phone number (optional)
+              </label>
+              <input
+                id="modal-phone"
+                type="tel"
+                className="modal-input"
+                placeholder="Your phone number (optional)"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                disabled={isSubmitting}
+                autoComplete="tel"
+                maxLength={50}
               />
               <label className="modal-label" htmlFor="modal-comment">
                 Comment or question (optional)
