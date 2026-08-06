@@ -273,6 +273,20 @@ h1 {
   letter-spacing: -0.02em;
 }
 
+/* Prose is 18px, not the body's 16px, on every page (mbz-et8e.52.15).
+   Chosen on the reading measure rather than by preference: at the site's 700px
+   --lead-measure, Inter sets 91 characters to the line at 16px and 81 at 18px,
+   against the 45-75 guideline and its 80-character ceiling. 17px, which the
+   industry pages' source file used, lands at 86 and stays outside it.
+
+   A bare `p` deliberately, so unclassed prose -- the CTA panels, the How It
+   Works step bodies -- moves with the classed prose. Anything that sets its own
+   size wins on specificity and is untouched: .feature p, .insight-block p,
+   .role-dash-sub, .draft-idea-footer. */
+p {
+  font-size: 18px;
+}
+
 .sub {
   color: var(--muted);
   margin: 0 auto 22px;
@@ -438,12 +452,23 @@ h1 {
   padding: 56px var(--spacing-lg);
 }
 
-/* Display leading, matching h1's 1.05. Without this h2 inherited the body's
-   1.6, which only showed once headings started wrapping to three lines in a
-   narrow column. */
+/* The industry pages' heading scale, now the site's (mbz-et8e.52.15). It used
+   to run clamp(24px, 3.4vw, 44px)/1.15 with no tracking, which the six industry
+   pages overrode. The max end barely differed; the MIN end is the change. At
+   390px both clamps pin to their minimum, so a section heading went from 24px
+   to 30px -- against 18px prose that is 1.33x rather than 1.67x, which reads as
+   bold body copy rather than as a heading.
+
+   Leading and tracking come with the size rather than after it: 1.08 and -0.03em
+   are what the six pages already set, and taking the size alone would leave the
+   other three looser and wider-tracked than anything else on the site. The 1.08
+   is also why line-height is stated at all: without it h2 inherits the body's,
+   which only shows once a heading wraps in a narrow column. */
 h2 {
-  font-size: clamp(24px, 3.4vw, 44px);
-  line-height: 1.15;
+  font-size: clamp(30px, 3.4vw, 46px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   margin: 0 0 12px 0;
   text-align: center;
 }
@@ -2949,27 +2974,14 @@ footer h4 {
   margin: 14px 0 22px;
 }
 
-.industry-page h2 {
-  font-size: clamp(30px, 3.4vw, 46px);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-}
+/* .industry-page's heading and prose rules are gone. They set the 30/46 clamp
+   with 1.08 and -0.03em, and lifted .sub, p.lead, .insight-summary and the
+   closing paragraph to 18px/400/1.5 — every one of which is now the site's own
+   base (mbz-et8e.52.15), so the rules said nothing.
 
-/* Two classes and a type, to beat .industry-page .section p.lead — the element
-   carries both and the base rule would otherwise flatten it to 400. */
-.industry-page .section p.lead.lead-strong {
-  font-weight: 700;
-}
-
-.industry-page .sub,
-.industry-page .section p.lead,
-.industry-page .insight-summary,
-.industry-page .industry-cta p {
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.5;
-}
+   The .lead-strong override that lived here went with them. It existed only to
+   beat the font-weight:400 in the prose rule above it; with that gone, plain
+   .lead-strong carries the 700 on its own. */
 
 /* Buttons are flat, not gradient, and a size smaller than ours were. */
 .industry-page .cta-actions .cta,
