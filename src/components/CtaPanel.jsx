@@ -21,12 +21,16 @@ const CtaPanel = ({
       // path below is left as it was, so the closing panels on the use-case and
       // how-it-works pages are unaffected.
       <div className="cta-actions">
-        <DemoButton label={ctaLabel} className="cta" />
-        <DemoButton label={secondaryCtaLabel} className="cta-secondary" />
+        <DemoButton label={ctaLabel} className="cta" source="try-free" />
+        <DemoButton
+          label={secondaryCtaLabel}
+          className="cta-secondary"
+          source="book-demo"
+        />
       </div>
     ) : (
       <p>
-        <DemoButton label={ctaLabel} className="primary" />
+        <DemoButton label={ctaLabel} className="primary" source="try-free" />
       </p>
     )}
   </div>

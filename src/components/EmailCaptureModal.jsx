@@ -4,7 +4,11 @@ const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "https://mvp.marketbuzzr.com";
 const CONVERSION_ENDPOINT = `${API_BASE_URL}/api/landing/conversion`;
 
-const EmailCaptureModal = ({ open, onClose }) => {
+// `source` is which CTA opened this — "try-free" or "book-demo" — and is a prop
+// rather than form state because the user never sees or edits it. It goes into
+// the payload so sales can tell the two intents apart (mbz-et8e.15); the
+// backend accepts unknown values rather than rejecting them.
+const EmailCaptureModal = ({ open, onClose, source = "" }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
@@ -74,7 +78,7 @@ const EmailCaptureModal = ({ open, onClose }) => {
         const response = await fetch(CONVERSION_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, name, comment, website }),
+          body: JSON.stringify({ email, name, comment, website, source }),
         });
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
@@ -84,7 +88,7 @@ const EmailCaptureModal = ({ open, onClose }) => {
         setStatus("error");
       }
     },
-    [email, name, comment, website, status]
+    [email, name, comment, website, source, status]
   );
 
   if (!open) return null;

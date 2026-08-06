@@ -132,8 +132,16 @@ const IndustryPage = ({ data }) => {
             ))}
           </div>
           <div className="cta-actions">
-            <DemoButton label={closing.ctaPrimary} className="cta" />
-            <DemoButton label={closing.ctaSecondary} className="cta-secondary" />
+            <DemoButton
+              label={closing.ctaPrimary}
+              className="cta"
+              source="try-free"
+            />
+            <DemoButton
+              label={closing.ctaSecondary}
+              className="cta-secondary"
+              source="book-demo"
+            />
           </div>
         </div>
       </section>

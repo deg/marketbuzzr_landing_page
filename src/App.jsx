@@ -57,7 +57,14 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   useReviewOptions();
 
-  const openModal = useCallback(() => setIsModalOpen(true), []);
+  // Which CTA opened the modal, held here rather than in the modal so it
+  // survives the modal's own reset-on-close (mbz-et8e.15).
+  const [modalSource, setModalSource] = useState("");
+
+  const openModal = useCallback((source = "") => {
+    setModalSource(source);
+    setIsModalOpen(true);
+  }, []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   return (
@@ -127,7 +134,11 @@ const App = () => {
           </Routes>
         </main>
         <Footer />
-        <EmailCaptureModal open={isModalOpen} onClose={closeModal} />
+        <EmailCaptureModal
+          open={isModalOpen}
+          onClose={closeModal}
+          source={modalSource}
+        />
       </ModalContext.Provider>
     </ErrorBoundary>
   );

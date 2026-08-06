@@ -69,8 +69,16 @@ const Nav = () => {
           {/* Both CTAs, and the shared .cta / .cta-secondary rules give them the
               filled and outlined treatments his brief pairs with these labels. */}
           <div className="nav-actions">
-            <DemoButton label={nav.ctaPrimary} className="cta" />
-            <DemoButton label={nav.ctaSecondary} className="cta-secondary" />
+            <DemoButton
+              label={nav.ctaPrimary}
+              className="cta"
+              source="try-free"
+            />
+            <DemoButton
+              label={nav.ctaSecondary}
+              className="cta-secondary"
+              source="book-demo"
+            />
           </div>
         </div>
       </div>

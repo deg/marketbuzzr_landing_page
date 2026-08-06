@@ -40,9 +40,15 @@ const PageHero = ({
       {emphasis && <p className="hero-emphasis">{emphasis}</p>}
       {(ctaLabel || secondaryCtaLabel) && (
         <div className="cta-actions">
-          {ctaLabel && <DemoButton label={ctaLabel} className="cta" />}
+          {ctaLabel && (
+            <DemoButton label={ctaLabel} className="cta" source="try-free" />
+          )}
           {secondaryCtaLabel && (
-            <DemoButton label={secondaryCtaLabel} className="cta-secondary" />
+            <DemoButton
+              label={secondaryCtaLabel}
+              className="cta-secondary"
+              source="book-demo"
+            />
           )}
         </div>
       )}

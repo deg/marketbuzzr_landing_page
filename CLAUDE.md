@@ -111,9 +111,12 @@ not by wiring up a new handler.
 
 ### Copy lives in `src/content/`, not in components
 
-`content/{home,biotech,tech,howItWorks,nav}.js` each export one plain object holding all
-of that page's marketing copy (headings, leads, card arrays, CTA text). The page
-components are presentational and map over those arrays.
+Each module in `src/content/` exports one plain object holding all of that page's
+marketing copy (headings, leads, card arrays, CTA text). The page components are
+presentational and map over those arrays. There are eleven: `home`, `howItWorks`,
+`industries` and `nav` for the shared pages, `industryChrome` for what every industry
+page has in common, and one per industry — `biotech`, `fintech`, `medtech`,
+`publicSafety`, `enterpriseTech`, `otherIndustries`.
 
 `content/nav.js` carries structure that looks like styling but is not: the nav's
 shape, including the two judgement calls it records — How It Works lives under
@@ -429,7 +432,7 @@ undo real fixes.
 ### The one backend dependency: the email-capture form
 
 `src/components/EmailCaptureModal.jsx` is the only component that talks to a server. On
-submit it POSTs `{ email, name, comment, website }` to:
+submit it POSTs `{ email, name, comment, website, source }` to:
 
 ```
 ${VITE_API_BASE_URL}/api/landing/conversion
@@ -437,8 +440,15 @@ ${VITE_API_BASE_URL}/api/landing/conversion
 
 This endpoint lives in the `nutshell-mvp` backend. `website` is a **honeypot** field
 (hidden from humans via the `.honeypot` CSS rule, filled only by bots) — keep it in any
-form refactor. To exercise this form against a real backend in dev, the nutshell-mvp
-stack must be running.
+form refactor. `source` is which CTA was clicked (`"try-free"` or `"book-demo"`), passed
+as a `source` prop on `DemoButton` and carried through `openModal(source)`; every CTA
+opens this one modal, so without it the two intents arrive indistinguishable. To
+exercise this form against a real backend in dev, the nutshell-mvp stack must be running.
+
+**Adding a field to this payload requires a backend change first.** The endpoint's
+Pydantic model is strict, so an unrecognised key is dropped and the request still
+succeeds — the value is lost with nothing anywhere reporting it. Land and deploy the
+backend side, then send it from here (mbz-et8e.15).
 
 ### Styling
 
