@@ -446,9 +446,14 @@ opens this one modal, so without it the two intents arrive indistinguishable. To
 exercise this form against a real backend in dev, the nutshell-mvp stack must be running.
 
 **Adding a field to this payload requires a backend change first.** The endpoint's
-Pydantic model is strict, so an unrecognised key is dropped and the request still
-succeeds — the value is lost with nothing anywhere reporting it. Land and deploy the
+Pydantic model is *permissive* about unknown keys — Pydantic's default is
+`extra='ignore'` — so an unrecognised key is silently dropped and the request still
+returns 204. The value is lost with nothing anywhere reporting it. Land and deploy the
 backend side, then send it from here (mbz-et8e.15).
+
+Do not "fix" that by setting `extra='forbid'`. Dropping unknown keys is what lets this
+separately-deployed site ship a new field without waiting on a backend release; forbidding
+them would turn every such deploy into a hard 422 instead.
 
 ### Styling
 
