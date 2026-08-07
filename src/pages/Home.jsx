@@ -92,14 +92,14 @@ const Home = () => {
         {/* FIX-BEFORE-RELEASE (mbz-et8e.18): the artwork above is a fabricated
             product announcement attributed to real companies. It announces the
             “MiniMed 780G” — Medtronic's real, trademarked product, which the
-            fictional MedicalComp cannot launch — cites Tandem Diabetes Care and
-            MedTech Dive as having covered it, and dates it May 2, 2025, over a
-            year stale. Eight string edits in the same artwork would close it —
-            three names, and the date five times over, since it appears beside
-            the Competitor Launch label and again under each of the four sources.
-            The same card on the six industry pages is text rather than pixels
-            and carries current dates, so this artwork is the only place on the
-            site showing a stale one.
+            fictional MedicalComp cannot launch — and cites Tandem Diabetes Care
+            and MedTech Dive as having covered it. Three names, three string
+            edits, and the artwork is clear.
+
+            Its dates are not part of that. The five inside it read Aug 2026,
+            with the sources inside the week before the card, and they are
+            painted by scripts/redate-insight-card.py (mbz-et8e.53) — go there
+            to move them again, or after any re-render from Manu.
 
             A visible dev note used to sit here saying so, and was removed on
             2026-08-05 (mbz-et8e.48). THIS TAG IS NOW THE ONLY THING STOPPING

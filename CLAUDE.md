@@ -384,11 +384,20 @@ rot in a year is accepted because the site describes where the product is today.
 Six different weekdays and business-hours times, so the set does not read as one
 string pasted six times. Keep both properties in any refresh.
 
-The same date is baked into the homepage's `insight-medicalcomp` artwork **five
-times over** — the card header plus all four source chips, staggered 0–2 days
-behind it — where it is pixels rather than text and needs a re-render. That is
-section 1 of the outstanding-items memo, and it is why the homepage and the
-industry pages currently disagree about what year it is.
+**The homepage's `insight-medicalcomp` artwork carries the same date five times
+over** — the card header plus all four source chips — and there it is pixels, not
+text. `scripts/redate-insight-card.py` paints them, and is the only thing that
+should: it starts from the lossless master in the design repo's `drop_03` rather
+than from `src/assets`, because editing a lossy WEBP re-encodes all 1536×1024 to
+move eleven characters. Run it to move the dates again, or after any re-render
+from Manu. Its docstring records how each render parameter was measured; the one
+worth knowing here is that the text colour must be solved by matching total ink,
+because at 12px no pixel reaches full coverage and the darkest-pixel estimate
+comes out three shades too dark.
+
+Source dates in that artwork must stay on weekdays inside the week before the
+card's own date. A source that postdates the insight it feeds is exactly the kind
+of detail that makes a mockup read as a mistake rather than an illustration.
 
 The draft options are labels, not buttons, because a real button that does nothing
 is worse than a label that never claimed to be one.
