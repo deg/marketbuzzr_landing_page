@@ -1085,11 +1085,6 @@ footer h4 {
    Page content (category cards, intro blocks, steps)
    ============================================================ */
 
-/* A centered, narrow lead block. */
-.info-block {
-  max-width: 820px;
-}
-
 /* Tighten the gap between intro paragraphs: an explicit top margin (and no
    default <p> bottom margin to collapse in). `p.lead` ties .section p.lead on
    specificity and wins by source order. */
@@ -2912,8 +2907,15 @@ footer h4 {
    His container is 1180px; ours was on the site's 1400px wide measure. And his
    prose is not held to one reading measure -- the intro runs 850px, the closing
    line 920px, and the insight card's headline and summary run the full width of
-   the card. Ours capped all of them at --lead-measure, which is why paragraphs
-   that set in two lines for him set in three for us. */
+   the card.
+
+   WE FOLLOW HIM ON THE CARD ONLY (mbz-et8e.52.21). At his widths the intro set
+   99 characters to the line and the closing line 112 on a single line, against
+   a 45-75 guideline with 80 as the usual ceiling, so those two are held to
+   --lead-measure instead. It costs about one extra line per paragraph, which is
+   the same effect the old blanket cap had -- the difference is that here it is
+   the price of a reading measure rather than an unnoticed side effect of one.
+   The card keeps his full width; the .insight-headline rule says why. */
 /* His exact form. `max-width: 1180px; padding: 0 20px` is NOT the same thing:
    box-sizing is border-box site-wide, so that yields 1140px of content and left
    every element on the page 40px narrower than his. */
@@ -2940,20 +2942,17 @@ footer h4 {
   padding-top: 36px;
 }
 
+/* The whole block, not just its paragraphs: capping only p.lead would leave the
+   block wider than anything inside it. The heading is unaffected either way --
+   it measures the same height at 700px as at his 850px on all six pages. */
 .industry-page .info-block {
-  max-width: 850px;
+  max-width: var(--lead-measure);
 }
 
-/* The block is 850px wide but its paragraphs were still taking the site's 700px
-   reading measure from the Final overrides, so the block was wider than anything
-   in it. */
-.industry-page .info-block p.lead {
-  max-width: none;
-}
-
-/* The closing line under the capability row; his carries max-width:920px. */
+/* The closing line under the capability row; his carries max-width:920px, which
+   set it as one 112-character line. */
 .industry-page .feature-row + .lead {
-  max-width: 920px;
+  max-width: var(--lead-measure);
   margin-top: 42px;
 }
 
