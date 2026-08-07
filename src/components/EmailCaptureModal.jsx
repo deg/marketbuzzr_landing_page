@@ -117,7 +117,7 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
             </p>
             <div className="modal-actions">
               <button
-                className="btn"
+                className="cta-secondary"
                 onClick={handleClose}
                 aria-label="Close modal"
               >
@@ -222,7 +222,7 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
               <div className="modal-actions">
                 <button
                   type="button"
-                  className="btn"
+                  className="cta-secondary"
                   onClick={handleClose}
                   disabled={isSubmitting}
                   aria-label="Close modal"
@@ -231,7 +231,7 @@ const EmailCaptureModal = ({ open, onClose, source = "" }) => {
                 </button>
                 <button
                   type="submit"
-                  className="btn primary"
+                  className="cta"
                   disabled={isSubmitting || !email}
                 >
                   {isSubmitting ? "Sending…" : "Confirm"}
