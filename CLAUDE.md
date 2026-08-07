@@ -87,11 +87,19 @@ email-capture modal is open:
 |---|---|
 | `/` | `pages/Home.jsx` |
 | `/use-cases/biotech` | `pages/IndustryPage.jsx` with `content/biotech.js` |
-| `/use-cases/tech` | `pages/UseCasePage.jsx` with `content/tech.js` |
+| `/use-cases/tech` | `pages/IndustryPage.jsx` with `content/enterpriseTech.js` |
+| `/industries/financial-technology` | `pages/IndustryPage.jsx` with `content/fintech.js` |
+| `/industries/medical-technology` | `pages/IndustryPage.jsx` with `content/medtech.js` |
+| `/industries/public-safety-defense-technology` | `pages/IndustryPage.jsx` with `content/publicSafety.js` |
+| `/industries/other-industries` | `pages/IndustryPage.jsx` with `content/otherIndustries.js` |
 | `/use-cases` | redirect → `/use-cases/biotech` |
 | `/industries` | `pages/Industries.jsx` — the entry page, `drop_06` |
 | `/how-it-works` | `pages/HowItWorks.jsx` |
 | anything else | `pages/NotImplemented.jsx` |
+
+The two `/use-cases/*` paths are history, not a category: both are industry pages
+on the same template and keep those URLs only because they predate the industry-page
+system. New pages take `/industries/*`.
 
 The catch-all used to `Navigate to="/"`, which silently returned anyone with a
 typo or a stale link to the homepage with no explanation. It now renders a
@@ -129,10 +137,8 @@ decides how to render it — **do not put `**` or HTML into those strings**.
 
 **To change marketing copy, edit the content module — never the components.**
 
-The two Use Case pages used to be the same component with different content objects.
-**They are not any more**: biotech moved to `IndustryPage.jsx` as the pilot for a new
-structure, tech is still on `UseCasePage.jsx`. That split is deliberate and meant to be
-temporary — see The industry pages below before adding a third.
+All six industry pages are the same component with different content objects — see
+The industry pages below before adding a seventh.
 
 `withBreaks.jsx` turns `\n` inside a content string into `<br/>`, used where the source
 deck asks for a break at a specific point.
@@ -306,19 +312,26 @@ industries as equal navigation boxes". And no eyebrow, which every other page
 has — his page structure lists one paragraph, a supporting line, the section
 heading, the boxes and the closing panel, and a kicker is not among them.
 
-Two of the six still lead nowhere (Life Sciences, Public Safety & Defense
-Technology) and this page gives each a full card, so they are more prominent here
-than on the homepage. They are tagged once, on the shared list.
+All six cards now reach a real page. Two did not when this page was built —
+Life Sciences, which `drop_06` replaced with Other Industries, and Public Safety
+& Defense Technology, which was built in `mbz-et8e.52.11`. That matters here
+because this page gives each industry a full card, so a dead link is more
+prominent on it than on the homepage: check this page, not just §6, before
+adding a seventh industry to the shared list.
 
-### The industry pages (2026-08) — and why there are two page templates
+### The industry pages (2026-08) — one template, six pages
 
-`pages/IndustryPage.jsx` renders **Biotechnology only**, from `drop_05`, the first
-handoff Manu sent as HTML rather than artwork. `pages/UseCasePage.jsx` still renders
-tech and is untouched. **This is a pilot, not a permanent fork** (`mbz-et8e.38`): if it
-holds up, tech and the four unbuilt industry pages converge on `IndustryPage`. Add a
-third page there and move tech across — do not grow `UseCasePage`.
+`pages/IndustryPage.jsx` renders **all six industry destinations**, each from its own
+module in `src/content/`: `biotech`, `fintech`, `medtech`, `publicSafety`,
+`enterpriseTech`, `otherIndustries`. It began as a pilot on Biotechnology alone
+(`mbz-et8e.38`, from `drop_05`, the first handoff Manu sent as HTML rather than
+artwork). The pilot held, and the August handover settled it outright — "all six
+industry destinations must use the same page structure and styling" — so a second
+template, `pages/UseCasePage.jsx`, was deleted along with the `content/tech.js` it
+rendered (`mbz-et8e.52.12`). A seventh industry is a new content module and a route,
+nothing more.
 
-**The point of the pilot is losing the text-rich PNGs.** The homepage and How It Works
+**The point of the template is losing the text-rich PNGs.** The homepage and How It Works
 carry their meaning inside images: invisible to search engines, unreadable on a phone
 without a horizontal scroller, and uncorrectable without asking Manu to re-render. Three
 components here are built as native replacements for exactly those images, which is why
@@ -330,15 +343,15 @@ they take content props rather than hardcoding biotech copy:
 | `InsightCard` | homepage §4 (`insight-medicalcomp`) | still the standing offer, blocked on `mbz-et8e.12` |
 | `RoleBar` | How It Works step 02 (`role-based-intelligence`) | **overtaken** — see below |
 
-**The pilot won the argument, and Manu is now sending the replacements himself.**
+**The argument was won, and Manu is now sending the replacements himself.**
 `drop_06` supplied HTML animations for How It Works steps 02 and 03 and an SVG for
 homepage §3, so three of the four rasters this table was written to displace are gone
 already, and by his hand rather than ours.
 
 `RoleBar`'s row is dead specifically: it puts three roles side by side, and his brief
 for step 02 rules that out by name — "do not show multiple profiles or dashboards side
-by side". Step 02 is `RoleDashboard`, which shows one at a time. `RoleBar` still renders
-on the biotech page and is unaffected there.
+by side". Step 02 is `RoleDashboard`, which shows one at a time. `RoleBar` renders on
+all six industry pages via `IndustryPage.jsx` and is unaffected there.
 
 What is left of the original claim is the last raster on each page. Closing those two
 retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28` — the re-render, the 2×
@@ -384,9 +397,10 @@ Manu's emoji iconography is not carried over — the site draws its own line ico
 `CategoryIcon.jsx`, which now holds eight more, so they take the page's stroke and colour
 and render identically everywhere.
 
-The nine-question "Turn Market Buzz into Signals" `ProblemList` is **gone from biotech**
-with the user's approval. `ProblemList` and tech's `problems` content both stay; tech
-still renders it.
+The nine-question "Turn Market Buzz into Signals" `ProblemList` is **gone**. It came
+off biotech with the user's approval, and its last caller was `UseCasePage.jsx`, so
+the component and `content/tech.js`'s `problems` block went with that template
+(`mbz-et8e.52.12`).
 
 Full page weight is 281 KB (91 KB gzipped text + 189 KB of AVIF), plus ~44 KB of
 Google Fonts. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no
