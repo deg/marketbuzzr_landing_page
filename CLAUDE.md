@@ -356,18 +356,26 @@ taller than a chip row, and `align-items: center` (not `stretch`) is what stops 
 chips flanking the core growing to match it.
 
 **Whether the insight card needs an illustrative marker is still open, and the
-card currently has none.** Both halves of an earlier answer have been reverted, so
-do not reinstate either without reading why. A visible "an illustrative example,
-not a real signal" line, and a relative timestamp reading "Detected 2 days ago",
-were both invented here rather than taken from the sketch, and both went in
-`mbz-et8e.38` when the page was matched to what Manu actually drew. The card ships
-his absolute "May 2, 2025 • 9:42 AM" on all three industry pages.
+card currently has none.** A visible "an illustrative example, not a real signal"
+line was invented here rather than taken from the sketch, and came out in
+`mbz-et8e.38` when the page was matched to what Manu actually drew. Whether a
+fabricated example needs a marker at all is his call, not ours (`mbz-et8e.12`) —
+do not reinstate it without reading that bead.
 
-That date is now about fifteen months stale, which is the same defect the memo
-raises against the homepage artwork. The difference is that here it is **text, not
-pixels**, so it costs one line to change rather than a re-render — see
-`mbz-et8e.53`. Whether a fabricated example also needs a visible marker is his
-call, not ours (`mbz-et8e.12`).
+**The card's timestamp is deliberately ours, and the six pages carry six
+different ones.** His sketch set it to "May 2, 2025 • 9:42 AM" and every page
+copied that one string, so by 2026-08 all six shipped the same fifteen-month-old
+date. `mbz-et8e.53` resolved it by moving the dates forward rather than switching
+back to a relative "Detected 2 days ago" — the absolute form is what he drew, and
+rot in a year is accepted because the site describes where the product is today.
+Six different weekdays and business-hours times, so the set does not read as one
+string pasted six times. Keep both properties in any refresh.
+
+The same date is baked into the homepage's `insight-medicalcomp` artwork **five
+times over** — the card header plus all four source chips, staggered 0–2 days
+behind it — where it is pixels rather than text and needs a re-render. That is
+section 1 of the outstanding-items memo, and it is why the homepage and the
+industry pages currently disagree about what year it is.
 
 The draft options are labels, not buttons, because a real button that does nothing
 is worse than a label that never claimed to be one.

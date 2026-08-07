@@ -94,7 +94,12 @@ const Home = () => {
             “MiniMed 780G” — Medtronic's real, trademarked product, which the
             fictional MedicalComp cannot launch — cites Tandem Diabetes Care and
             MedTech Dive as having covered it, and dates it May 2, 2025, over a
-            year stale. Three string edits in the same artwork would close it.
+            year stale. Eight string edits in the same artwork would close it —
+            three names, and the date five times over, since it appears beside
+            the Competitor Launch label and again under each of the four sources.
+            The same card on the six industry pages is text rather than pixels
+            and carries current dates, so this artwork is the only place on the
+            site showing a stale one.
 
             A visible dev note used to sit here saying so, and was removed on
             2026-08-05 (mbz-et8e.48). THIS TAG IS NOW THE ONLY THING STOPPING

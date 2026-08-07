@@ -66,7 +66,7 @@ export const enterpriseTech = {
 
   insight: {
     tag: "Competitor launch",
-    detected: "May 2, 2025 • 9:42 AM",
+    detected: "Jun 19, 2026 • 2:38 PM",
     impact: "High impact",
     // His headline, word for word, including the full stop — section 8 supplies
     // it and names TechCorp as the mock competitor, which is the same device

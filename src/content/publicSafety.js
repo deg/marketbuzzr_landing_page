@@ -78,7 +78,7 @@ export const publicSafety = {
     // The date the other two industry pages carry. It is Manu's, and biotech's
     // module says in as many words not to quietly improve it; a fourth page
     // inventing its own would make the fleet inconsistent for no reader gain.
-    detected: "May 2, 2025 • 9:42 AM",
+    detected: "Jul 27, 2026 • 1:09 PM",
     impact: "High impact",
     // Ends with a full stop, like MedTech's, FinTech's, Enterprise Technology's
     // and Other Industries'. Biotechnology's does not, and that one is Manu's

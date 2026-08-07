@@ -68,7 +68,7 @@ export const otherIndustries = {
 
   insight: {
     tag: "Competitor positioning",
-    detected: "May 2, 2025 • 9:42 AM",
+    detected: "Jul 14, 2026 • 3:41 PM",
     impact: "High impact",
     headline:
       "A competitor repositions around a segment you already sell to and begins publishing against it.",

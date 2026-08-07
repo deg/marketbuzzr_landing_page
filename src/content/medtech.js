@@ -1,9 +1,9 @@
 // Medical Technology industry page, from Manu's drop_05 sketch
 // (drop_05_marketbuzzr-medtech-landing.html in the design repo).
 //
-// Third page on the IndustryPage template. Copy is his, verbatim, including the
-// "May 2, 2025" timestamp — see the note in biotech.js about not quietly
-// improving it.
+// Third page on the IndustryPage template. Copy is his, verbatim. The one
+// exception is the insight card's timestamp — see the note in biotech.js for
+// why the six pages carry six different dates.
 //
 // NOTE FOR REVIEW: his draft options list "Draft Internal Update" twice, in
 // second and fourth position, where the other two industries have four distinct
@@ -58,7 +58,7 @@ export const medtech = {
 
   insight: {
     tag: "Regulatory change",
-    detected: "May 2, 2025 • 9:42 AM",
+    detected: "Jun 24, 2026 • 8:54 AM",
     impact: "High impact",
     headline: "FDA updates guidance for AI-enabled medical devices.",
     summary:

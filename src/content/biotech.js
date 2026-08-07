@@ -70,16 +70,18 @@ export const biotech = {
     emphasis: "Clinical data tells only part of the story.",
   },
 
-  // A worked example of what the product produces, verbatim from the sketch.
+  // A worked example of what the product produces. The copy is Manu's, from the
+  // sketch; the timestamp is ours.
   //
-  // `detected` READS "May 2, 2025" BECAUSE THAT IS WHAT MANU WROTE. An earlier
-  // version here changed it to a relative "Detected 2 days ago" on the grounds
-  // that a fixed date in a fabricated example goes stale — which is true, and
-  // is filed as mbz-et8e.28 item 5, and was still not ours to decide. The date
-  // is his copy. Do not quietly improve it again; raise it and wait.
+  // `detected` is absolute rather than relative, and each of the six industry
+  // pages sets its own — a different weekday, a different time inside working
+  // hours, so the set does not read as one string pasted six times. Both
+  // properties are deliberate (mbz-et8e.53) and both need keeping. An absolute
+  // date needs refreshing every so often; the card is meant to show the product
+  // surfacing things as they happen.
   insight: {
     tag: "Emerging patient signal",
-    detected: "May 2, 2025 • 9:42 AM",
+    detected: "Jun 8, 2026 • 10:17 AM",
     impact: "High impact",
     headline:
       "Caregiver discussions point to growing concern around treatment burden",

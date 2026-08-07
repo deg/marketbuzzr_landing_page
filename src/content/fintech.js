@@ -2,8 +2,8 @@
 // (drop_05_marketbuzzr-fintech-landing.html in the design repo).
 //
 // Second page on the IndustryPage template. Copy is his, verbatim, including
-// the em dashes and the "May 2, 2025" timestamp — see the note in biotech.js
-// about not quietly improving either.
+// the em dashes. The one exception is the insight card's timestamp — see the
+// note in biotech.js for why the six pages carry six different dates.
 //
 // Two things this page needed that biotech did not, both handled in the shared
 // components rather than here: SIX capabilities where biotech has four, and a
@@ -47,7 +47,7 @@ export const fintech = {
 
   insight: {
     tag: "Competitor launch",
-    detected: "May 2, 2025 • 9:42 AM",
+    detected: "Jul 2, 2026 • 11:26 AM",
     impact: "High impact",
     headline:
       "PayNova launches real-time B2B payments platform across Europe.",
