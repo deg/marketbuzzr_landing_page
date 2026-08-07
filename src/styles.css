@@ -580,7 +580,11 @@ h2 {
     padding: 0 var(--spacing-lg);
   }
 
-  .cta-actions .cta {
+  /* BOTH of them. Naming .cta alone left the outlined button at the full 18px
+     while the filled one shrank, so the pair ran 38px against 55px on a phone
+     (mbz-et8e.52.23) — against a base rule that goes to the trouble of a
+     transparent border to keep them within 2px of each other. */
+  .cta-actions :is(.cta, .cta-secondary) {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 16px;
   }
