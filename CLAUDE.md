@@ -560,8 +560,10 @@ Everything is published from the single `gh-pages` branch:
 | `yarn deploy:snapshot <tag>` | branch `<tag>/` | https://marketbuzzr.com/&lt;tag&gt;/ | any branch |
 
 `/new/` rolls forward with whatever is checked out. A **snapshot is frozen** — built
-from a git tag, so a review point stays reachable after the branch moves on. Live at
-time of writing: `/3aug_v1/` (before the revised-brief round) and `/3aug_v2/` (after).
+from a git tag, so a review point stays reachable after the branch moves on. Run
+`make snapshots` for the list — it is generated from `PRESERVED_DIRS`, so it cannot
+drift. This line used to enumerate them instead and sat three snapshots out of date
+before anyone noticed.
 
 Snapshots build from a **detached git worktree**, so your working tree is never touched
 and a failed build can't strand you on a detached HEAD. `node_modules` is symlinked in
