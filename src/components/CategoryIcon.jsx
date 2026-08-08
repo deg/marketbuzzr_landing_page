@@ -263,6 +263,18 @@ export const ICON_PATHS = {
       <path d="M7.5 12.5h9M7.5 16h5.5" />
     </>
   ),
+  // Competitor Repositioning — two arrows changing places. drop_07's Worth Your
+  // Attention animation is the first of Manu's files to draw its own line icon
+  // rather than reach for an emoji, so this one exists to match a picture
+  // instead of to replace a glyph. Drawn on this box in this set's idiom rather
+  // than traced from his, which is centred on its own origin at a different
+  // scale and would not sit with the rest.
+  swap: (
+    <>
+      <path d="M4 9h15M15 5l4 4-4 4" />
+      <path d="M20 15H5M9 11l-4 4 4 4" />
+    </>
+  ),
 };
 
 const CategoryIcon = ({ name }) => (

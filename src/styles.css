@@ -2075,6 +2075,85 @@ footer h4 {
    Like the hero it takes .product-frame's sizing and needs none of that rule's
    ground bleed: the SVG's own radial already ends on the page background.
    --------------------------------------------------------------------------- */
+/* Homepage §3, copy left and animation right (drop_07 §3.2).
+
+   THE COPY RAIL IS FIXED AND THE VISUAL TAKES THE REST, rather than the two
+   sharing a fraction. This section's job is to give his composition every pixel
+   the page can spare: its card labels are 17 units on a 1380 canvas, so the
+   rendered label size is the visual column's width over 1380, times 17. An even
+   split inside the 1100px text measure gives about 8px; the 1400px measure with
+   a 340px rail gives about 13. That is the whole reason for both choices.
+
+   The rail is not narrower than 340px because the section heading is
+   clamp(30px, 3.4vw, 46px) and starts breaking words below it.
+
+   THE BREAKOUT HAS TO BE SUPPRESSED, and this is the trap CLAUDE.md names.
+   .product-frame centres a wider child inside a narrower parent with left:50%
+   and translateX(-50%), which only resolves correctly when the parent spans the
+   page. In this column the 50% resolves against the column: measured before
+   this rule, the artwork rendered 1392px wide starting 218px in, and the page
+   gained 170px of horizontal overflow at both 1440 and 1280. A rule like this
+   one used to exist for the split that drop_06 removed; it comes back with the
+   split. */
+.problem-split {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.problem-split .product-frame {
+  left: auto;
+  transform: none;
+  width: 100%;
+  margin-top: 0;
+}
+
+/* Left-aligned in its rail rather than centred: the Final overrides block
+   centres every .lead on the page, and a centred ragged column beside a picture
+   reads as a caption.
+
+   THREE CLASSES DELIBERATELY. The Final overrides block sets `.section p.lead`
+   at (0,2,1) and wins on both specificity and source order against the (0,2,0)
+   this would otherwise be — measured, the heading went left and every paragraph
+   under it stayed centred. Adding .problem-split takes it to (0,3,0), which
+   beats (0,2,1) on class count regardless of where the rule sits. */
+.problem-copy {
+  text-align: left;
+}
+
+.problem-split .problem-copy :is(h2, .lead) {
+  max-width: none;
+  margin-inline: 0;
+  text-align: left;
+}
+
+/* One column below the point where the rail stops paying for itself, with the
+   copy first and the animation under it — §3.2's mobile order.
+
+   1200px, not a narrower breakpoint, and the reason is measured. Stacked, the
+   animation gets the whole container; split, it gets the container minus a
+   340px rail. So the split costs the same ~430px at every width, and the
+   narrower the viewport the larger that is as a fraction. Below 1200 the split
+   renders his card labels smaller than the stack does at the SAME width, which
+   is spending legibility for nothing. */
+@media (max-width: 1200px) {
+  .problem-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .problem-copy,
+  .problem-split .problem-copy :is(h2, .lead) {
+    text-align: center;
+  }
+
+  .problem-split .problem-copy .lead {
+    max-width: var(--lead-measure);
+    margin-inline: auto;
+  }
+}
+
 .wya svg {
   display: block;
   width: 100%;
@@ -2085,11 +2164,14 @@ footer h4 {
   animation: wyaHeaderPulse 4s ease-in-out infinite;
 }
 
-/* Nine cards on one 9s loop, each a second behind the last, so exactly one is
-   at full strength at any moment and the eye is led round the field. */
+/* Ten cards on one 10s loop, each a second behind the last, so exactly one is
+   at full strength at any moment and the eye is led round the field. drop_07's
+   v11 adds the tenth card and lengthens the loop to match, keeping the one-per-
+   second cadence — but puts the new card at 4.5s rather than 9s, on the offbeat
+   between Industry Trend and Customer Sentiment Shift. */
 .wya-signal {
   opacity: 0.42;
-  animation: wyaSignalSelect 9s ease-in-out infinite;
+  animation: wyaSignalSelect 10s ease-in-out infinite;
 }
 
 .wya-signal-2 {
@@ -2122,6 +2204,11 @@ footer h4 {
 
 .wya-signal-9 {
   animation-delay: 8s;
+}
+
+/* Competitor Repositioning, last in the array and off the one-per-second grid. */
+.wya-signal-10 {
+  animation-delay: 4.5s;
 }
 
 .wya-converge {
@@ -2171,6 +2258,60 @@ footer h4 {
 .wya-noise-c {
   opacity: 0.1;
   animation: wyaFloatC 7.8s ease-in-out infinite;
+}
+
+/* v11's two layers of grey market noise. They drift in opposite directions on
+   long alternating cycles rather than easing back and forth like the three
+   above, so the field never settles into one rhythm. His own opacities are on
+   each rectangle; these are the group's, and they need stating for the same
+   reduced-motion reason as the three above — the alternate keyframes end at .82
+   and .92, and a group with no opacity of its own would revert to 1. */
+.wya-market-noise-back {
+  opacity: 0.62;
+  animation: wyaMarketNoiseBack 20s ease-in-out infinite alternate;
+}
+
+.wya-market-noise-front {
+  opacity: 0.72;
+  animation: wyaMarketNoiseFront 14s ease-in-out infinite alternate;
+}
+
+/* The rule and dot under the headline, breathing the way the hero's do. */
+.wya-header-glow {
+  opacity: 0.18;
+  animation: wyaHeaderGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes wyaMarketNoiseBack {
+  from {
+    transform: translate(0, 0);
+    opacity: 0.62;
+  }
+  to {
+    transform: translate(-10px, 7px);
+    opacity: 0.82;
+  }
+}
+
+@keyframes wyaMarketNoiseFront {
+  from {
+    transform: translate(0, 0);
+    opacity: 0.72;
+  }
+  to {
+    transform: translate(8px, -5px);
+    opacity: 0.92;
+  }
+}
+
+@keyframes wyaHeaderGlow {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.52;
+  }
 }
 
 @keyframes wyaDash {
@@ -2304,6 +2445,19 @@ footer h4 {
 
   .wya-pulse {
     display: none;
+  }
+
+  /* Both new layers rest at their quieter end, as the three older ones do. */
+  .wya-market-noise-back {
+    opacity: 0.62;
+  }
+
+  .wya-market-noise-front {
+    opacity: 0.72;
+  }
+
+  .wya-header-glow {
+    opacity: 0.3;
   }
 }
 

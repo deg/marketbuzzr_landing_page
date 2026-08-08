@@ -49,27 +49,35 @@ const Home = () => {
       {/* §2 Hero transition — a compact bridge, deliberately not a section. */}
       <BrandDivider steps={divider} />
 
-      {/* §3 Problem. Copy above a full-width visual, the same shape as §4.
-          This was a 45/55 split with the copy beside the artwork, and drop_06
-          ended that: its Worth Your Attention animation is a wide composition
-          whose nine card labels are 17 units on a 1380 canvas, so inside the
-          55% column they would render around 7px — the failure Manu's own
-          responsive note names ("avoid simply shrinking the full desktop
-          composition until text becomes illegible"). Full width instead, where
-          they clear 15px.
+      {/* §3 Problem. Copy left, animation right — drop_07 §3.2, which says it
+          twice: "section copy on the LEFT and the animation on the RIGHT" and
+          "do not place the animation full-width below the copy on desktop".
 
-          That also retired .problem-grid, .problem-copy and the rule that
-          suppressed .product-frame's breakout inside the column: the copy is
-          now ordinary centred leads and the visual takes the breakout normally,
-          so all of it is reuse rather than section-specific CSS. */}
-      <section className="section container">
-        <SectionTitle title={problem.title} />
-        {problem.paragraphs.map((p, i) => (
-          <p className="lead" key={i}>
-            {p}
-          </p>
-        ))}
-        <p className="lead lead-strong">{problem.closer}</p>
+          THIS REVERSES drop_06, WHICH REMOVED THE SAME SPLIT FOR A MEASURED
+          REASON, and the reason has not gone away. His animation is a wide
+          composition whose card labels are 17 units on a 1380 canvas: at full
+          width they render about 17px, and in a column they cannot. The layout
+          below spends everything it can on the visual to limit that — the grid
+          opts into the 1400px measure rather than the 1100px text one, and the
+          copy takes a fixed narrow rail rather than a fraction — which lands
+          the labels near 13px instead of the 8px an even split would give.
+          Measured, not estimated; the number is on mbz-et8e.54.5.
+
+          The visual is NOT given .product-frame's breakout here. That centres a
+          wider child inside a narrower parent with left:50% and only works when
+          the parent spans the page; inside a column the 50% resolves against
+          the column and the artwork overflows the window. The grid is wide
+          instead, which is the same reach without the trap. */}
+      <section className="section container container-wide problem-split">
+        <div className="problem-copy">
+          <SectionTitle title={problem.title} />
+          {problem.paragraphs.map((p, i) => (
+            <p className="lead" key={i}>
+              {p}
+            </p>
+          ))}
+          <p className="lead lead-strong">{problem.closer}</p>
+        </div>
         <WorthYourAttention
           title={problem.visualTitle}
           description={problem.visualAlt}
