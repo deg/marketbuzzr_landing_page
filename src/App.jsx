@@ -21,6 +21,7 @@ import { enterpriseTech } from "./content/enterpriseTech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
 import { otherIndustries } from "./content/otherIndustries";
+import WhatYouGet from "./pages/WhatYouGet";
 import { cybersecurity } from "./content/cybersecurity";
 import { manufacturing } from "./content/manufacturing";
 import { retail } from "./content/retail";
@@ -142,6 +143,9 @@ const App = () => {
               path="/use-cases"
               element={<Navigate to="/use-cases/biotech" replace />}
             />
+            {/* drop_07 §5's new page. Reachable from the bar since §2 put it
+                there two commits earlier. */}
+            <Route path="/what-you-get" element={<WhatYouGet />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             {/* FIX-BEFORE-RELEASE (mbz-et8e.18): keep this route, revisit what it renders.
                 Anything else lands on a visible placeholder. This used to

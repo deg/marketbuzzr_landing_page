@@ -4301,3 +4301,493 @@ footer h4 {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   What You Get (drop_07 §5)
+
+   The page is deliberately made of things that already existed — .card and its
+   hover, PageHero, CtaPanel, .container-wide — because §5 opens by saying to use
+   "the live website and existing component styles as the design source of
+   truth". What follows is only the four arrangements it asks for that had no
+   rule yet.
+   --------------------------------------------------------------------------- */
+
+/* §5.3. FOUR ACROSS ON DESKTOP, which the brief states twice: "display FOUR
+   equal cards NEXT TO EACH OTHER in one row. Do not stack them vertically on
+   desktop." A fixed four-column track rather than auto-fit, because auto-fit
+   would silently drop to three at some width and that is the one outcome ruled
+   out. It goes to two, then one, only below the widths where four cannot fit. */
+.wyg-role-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+}
+
+/* The initials tile. Turquoise family, per §1's icon rule — these stand in for
+   icons on this page, so they follow the same colour. */
+.wyg-role-initials {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: var(--spacing-md);
+  border-radius: 13px;
+  background: var(--accent-soft);
+  border: 1px solid var(--edge-2);
+  color: var(--brand);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.wyg-role-card p,
+.wyg-value-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* §5.4's "critical alignment rule: reserve identical title height/min-height for
+   all three titles so every body paragraph begins on the same horizontal line."
+   Two lines is the measured worst case — "Stay Focused on What Matters" and
+   "Turn Intelligence Into Action" wrap to two in this column and "Understand the
+   Business Impact" to one — so the reserve is 2 lines of the h3's own leading.
+   min-height, not height, so a fourth card with a longer title would grow rather
+   than clip. */
+.wyg-value-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+}
+
+.wyg-value-card h3 {
+  min-height: calc(2 * 1.25 * 20px);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.wyg-value-number {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* §5.5 and §5.6. Copy one side, visual the other, on the wider measure so the
+   visuals have room. .wyg-split-reverse is §5.6's left-hand visual — the only
+   one on the site, and §13's manifest says so twice. Done with `order` rather
+   than by swapping the markup, so the DOM keeps copy before visual and a screen
+   reader gets the section in reading order either way. */
+.wyg-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
+.wyg-split-copy {
+  text-align: left;
+}
+
+.wyg-split .wyg-split-copy :is(h2, .lead) {
+  max-width: none;
+  margin-inline: 0;
+  text-align: left;
+}
+
+.wyg-split-reverse .wyg-split-copy {
+  order: 2;
+}
+
+/* §5.5's visual: six signal chips scattered around one centre. His percentage
+   offsets, which is what keeps the arrangement irregular rather than dialled;
+   they live here so the component never needs a chip's rendered size. */
+.signal-field {
+  margin: 0;
+}
+
+.signal-field-box {
+  position: relative;
+  aspect-ratio: 1.28 / 1;
+  min-height: 360px;
+  border: 1px solid #26375f;
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 50%, #0d2048, #081638 58%, #06112f);
+  overflow: hidden;
+}
+
+.signal-field-chip {
+  position: absolute;
+  padding: 10px 13px;
+  border-radius: 10px;
+  border: 1px solid #30406c;
+  background: #0d1a3e;
+  color: #dce4f4;
+  font-size: 12px;
+  font-weight: 750;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.signal-field-chip-1 { left: 6%; top: 11%; }
+.signal-field-chip-2 { right: 6%; top: 13%; }
+.signal-field-chip-3 { left: 5%; top: 43%; }
+.signal-field-chip-4 { right: 5%; top: 40%; }
+.signal-field-chip-5 { left: 11%; bottom: 11%; }
+.signal-field-chip-6 { right: 9%; bottom: 12%; }
+
+/* The centre. His file defines a .line class for connectors and never uses it,
+   so nothing in his own rendering is actually connected; this glow reaches the
+   chips instead of inventing six line angles he did not supply. */
+.signal-field-centre {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 190px;
+  height: 190px;
+  padding: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(114, 223, 232, 0.28);
+  background: radial-gradient(circle at 35% 30%, #1a3556, #102642 48%, #0b1b34);
+  box-shadow: 0 0 90px 30px rgba(114, 223, 232, 0.06);
+  color: #fff;
+  font-weight: 850;
+  text-align: center;
+}
+
+.signal-field-centre span {
+  display: block;
+  margin-top: 5px;
+  color: #72dfe8;
+  font-size: 13px;
+}
+
+/* §5.6's visual: a light surface on the dark page, like the insight card and the
+   two How It Works panels. Its own ink rather than the page's, for the reason
+   the previous round found the hard way — colour inherits as a resolved value,
+   not as the var() that produced it. */
+.ita-card {
+  --title: #13213f;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #dce3ee;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
+  color: #13213f;
+  text-align: left;
+}
+
+.ita-steps {
+  margin: 0;
+}
+
+.ita-step {
+  padding: 15px 0;
+  border-bottom: 1px solid #e8edf4;
+}
+
+.ita-step:last-of-type {
+  border-bottom: 0;
+}
+
+.ita-step dt {
+  color: #6a7690;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.ita-step dd {
+  margin: 5px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.ita-outputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: var(--spacing-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ita-outputs li {
+  padding: 8px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid #dfd8fa;
+  background: #f2efff;
+  color: #5842b8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 1100px) {
+  .wyg-role-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wyg-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  /* Copy first on a phone in BOTH splits, including the reversed one — §5.6
+     says "copy should appear before its visual or preserve the section reading
+     order in a clean single column". */
+  .wyg-split-reverse .wyg-split-copy {
+    order: 0;
+  }
+
+  .wyg-split-copy,
+  .wyg-split .wyg-split-copy :is(h2, .lead) {
+    text-align: center;
+  }
+
+  .wyg-split .wyg-split-copy .lead {
+    max-width: var(--lead-measure);
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .wyg-value-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Nothing to align once they are stacked, and a reserved height on a
+     one-column card is just a gap. */
+  .wyg-value-card h3 {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .wyg-role-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* What You Get's hero animation (drop_07 §5.2). A light panel, the same
+   treatment the two How It Works animations take, with the same explicit colour
+   — see .role-dash for why that is not optional. His values throughout. */
+.role-tailor {
+  --title: #13213f;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #dfe6f0;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #f9fbfe, #f3f6fb);
+  color: #13213f;
+}
+
+/* Named once for assistive technology, then the panel is hidden from it: a
+   screen reader meets whichever reading is on screen and cannot reach the other
+   three. Visually hidden rather than absent, so it survives in a text browser. */
+.role-tailor-summary {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.role-tailor-shell {
+  min-height: 430px;
+  border: 1px solid #dce3ee;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
+  overflow: hidden;
+  text-align: left;
+}
+
+.role-tailor-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 17px 19px;
+  border-bottom: 1px solid #e5eaf2;
+}
+
+.role-tailor-top strong {
+  font-size: 18px;
+}
+
+.role-tailor-chip {
+  padding: 7px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid #ddd5fb;
+  background: #f2efff;
+  color: #5a42bb;
+  font-size: 11px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.role-tailor-body {
+  padding: 22px 20px;
+}
+
+.role-tailor-kicker {
+  margin: 0;
+  color: #6a7690;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.role-tailor-headline {
+  margin: 8px 0 16px;
+  color: var(--title);
+  font-size: 24px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+/* The one part that changes. Its transition is the fade the component times the
+   swap against; under reduced motion useCycle pins the index to the first role,
+   so this never runs. */
+.role-tailor-result {
+  margin-top: 9px;
+  padding: 18px;
+  border: 1px solid #e1e6ee;
+  border-radius: 14px;
+  background: #fbfcfe;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.role-tailor-result.is-leaving {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.role-tailor-label {
+  margin: 0;
+  color: #6a7690;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.role-tailor-title {
+  margin: 8px 0 6px;
+  color: #182642;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.role-tailor-text {
+  margin: 0;
+  color: #656f88;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.role-tailor-progress {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.role-tailor-progress span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d6dde7;
+  transition: background var(--transition-normal);
+}
+
+.role-tailor-progress span.is-active {
+  background: #2d818a;
+  box-shadow: 0 0 10px rgba(45, 129, 138, 0.4);
+}
+
+@media (max-width: 560px) {
+  .role-tailor {
+    padding: 6px;
+    border-radius: 18px;
+  }
+
+  .role-tailor-shell {
+    min-height: 0;
+  }
+
+  .role-tailor-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .role-tailor-body {
+    padding: 16px 14px;
+  }
+
+  .role-tailor-headline {
+    font-size: 20px;
+  }
+
+  .role-tailor-title {
+    font-size: 18px;
+  }
+}
+
+/* THE SIGNAL FIELD'S min-height IS A WIDTH FLOOR, and that is what put 87px of
+   horizontal overflow on a 390px viewport. aspect-ratio: 1.28/1 with
+   min-height: 360px means the box can never be narrower than 460px, whatever
+   the column does. His own file steps the min-height down to 330 here, which is
+   still 422px wide and still overflows; removing the floor entirely is what lets
+   width drive height instead. §1 allows exactly one horizontally scrolling
+   visual on the site and it is the homepage insight card, not this.
+
+   The rest of this block is his, from the same media query. */
+@media (max-width: 560px) {
+  .signal-field-box {
+    min-height: 0;
+  }
+
+  .signal-field-chip {
+    padding: 8px 10px;
+    font-size: 10.5px;
+  }
+
+  .signal-field-centre {
+    width: 145px;
+    height: 145px;
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .ita-card {
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  .ita-step dd {
+    font-size: 13px;
+  }
+
+  .ita-outputs li {
+    font-size: 10.5px;
+  }
+}
