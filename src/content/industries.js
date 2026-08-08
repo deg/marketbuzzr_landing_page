@@ -13,14 +13,15 @@ import { home } from "./home";
 // So there is nothing here but copy. The page is PageHero + SectionTitle +
 // IndustryTile + CtaPanel, all of which already existed.
 //
-// THE SIX ARE NOT LISTED HERE. They come from home.js, which is the one list
+// THE NINE ARE NOT LISTED HERE. They come from home.js, which is the one list
 // the nav also reads, so the three surfaces cannot drift. His card copy lives
 // beside each name there for the same reason.
 //
-// NO EYEBROW, unlike every other page on the site. His page structure lists
-// nav, headline, one paragraph, the supporting line, the section heading and
-// subtitle, six boxes, the closing section, its CTAs, and the footer — and a
-// kicker is not among them.
+// IT HAS AN EYEBROW AGAIN. drop_06's page structure listed the headline, one
+// paragraph, the supporting line, the section heading, the boxes and the
+// closing panel, with no kicker among them, so this page shipped as the only
+// one on the site without one. drop_07 §6.1 opens with "Eyebrow: INDUSTRIES",
+// which settles it the other way and brings the page into line with the rest.
 //
 // CTA LABELS are now the site's, set by the August handover: "Try for Free"
 // filled, "Book a Demo" outlined, those exact words everywhere (mbz-et8e.52.4).
@@ -29,10 +30,13 @@ import { home } from "./home";
 export const industries = {
   title: "Market Intelligence for Your Industry — MarketBuzzr",
 
+  // All of drop_07 §6.1. The headline moves here from the Other Industries page,
+  // which used it as its own hero and which §12 gives a different one.
   hero: {
-    title: "Market Intelligence for Your Industry",
+    kicker: "INDUSTRIES",
+    title: "Your market is unique. Your intelligence should be too.",
     sub: [
-      "Every market is different. MarketBuzzr adapts to yours by tracking the competitors, sources, conversations and developments that shape your specific industry and niche.",
+      "Every industry moves differently. Different competitors, regulations, technologies, customer expectations and market dynamics shape what matters. MarketBuzzr is built around your niche, your company and your priorities, so you can stay ahead of the developments that could impact your business.",
     ],
     emphasis: "Focused intelligence around your world.",
   },
@@ -42,10 +46,11 @@ export const industries = {
     lead: "See how MarketBuzzr can help teams stay ahead of the developments shaping their market.",
   },
 
+  // §6.4, replacing drop_06's wording for the same panel.
   finalCta: {
     title: "Don't See Your Industry?",
     paragraphs: [
-      "MarketBuzzr isn't limited to predefined categories. We can build focused market intelligence around almost any industry, niche or market definition.",
+      "MarketBuzzr isn't limited to the industries above. We build your market intelligence around your company, your ecosystem and the developments that matter to your team.",
     ],
     ctaPrimary: "Try for Free",
     ctaSecondary: "Book a Demo",

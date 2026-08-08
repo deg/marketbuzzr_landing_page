@@ -26,15 +26,17 @@ const Industries = () => {
     <>
       {/* No CTAs in the hero. His page structure puts them only in the closing
           section, and on a page this short a second pair would be most of it. */}
-      <PageHero title={hero.title} sub={hero.sub} emphasis={hero.emphasis} />
+      <PageHero
+        kicker={hero.kicker}
+        title={hero.title}
+        sub={hero.sub}
+        emphasis={hero.emphasis}
+      />
 
       <section className="section container">
         <SectionTitle title={picker.title} lead={picker.lead} />
         <div className="industry-grid">
           {items.map((item) => (
-            // `featured` is deliberately not forwarded. The homepage leads with
-            // Medical Technology; this page wants all six equal, which his
-            // brief says in as many words.
             <IndustryTile
               key={item.name}
               name={item.name}

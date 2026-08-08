@@ -3042,17 +3042,6 @@ footer h4 {
   transition: all var(--transition-normal);
 }
 
-/* Medical Technology leads without dominating — a brighter accent and border,
-   not a bigger tile. The brief wants it prominent without making the product
-   look MedTech-only. */
-.industry-tile.is-featured {
-  border-color: var(--ring);
-}
-
-.industry-tile.is-featured .industry-accent {
-  opacity: 1;
-}
-
 @media (hover: hover) {
   .industry-tile:hover {
     border-color: rgba(110, 224, 255, 0.3);

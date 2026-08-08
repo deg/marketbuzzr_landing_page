@@ -12,15 +12,15 @@ import { Link } from "react-router-dom";
 //
 // TWO PAGES RENDER THIS, and they want different amounts of it. The homepage's
 // §6 is a list of names. The /industries entry page gives each one a line of
-// copy (`blurb`) and drops the featured treatment, because drop_06 asks for
-// "all six industries as equal navigation boxes" there. Both are the same tile
-// with the same hover, which is what that brief asks for — it forbids a
-// separate visual style for its cards.
-const IndustryTile = ({ name, to, featured, blurb }) => (
-  <Link
-    className={featured ? "industry-tile is-featured" : "industry-tile"}
-    to={to}
-  >
+// copy (`blurb`). Both are the same tile with the same hover, which is what
+// every brief since drop_06 has asked for.
+//
+// NO FEATURED VARIANT. One tile used to take a brighter border to lead the set;
+// drop_07 §6.2 rules that out — "do NOT visually highlight the top row or any
+// single industry with turquoise" — so the prop, the class and its two rules
+// are gone rather than left unused.
+const IndustryTile = ({ name, to, blurb }) => (
+  <Link className="industry-tile" to={to}>
     <span className="industry-accent" aria-hidden="true" />
     {/* Always present, even with no blurb, so the two pages share one layout
         rather than one flexing differently from the other. */}

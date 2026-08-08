@@ -132,9 +132,8 @@ const Home = () => {
       </section>
 
       {/* §6 Industries. The previous brief moved this to §3; this one moves it
-          back down, behind the product proof and the process. Four of the six
-          lead to placeholders during the design cycle — gated from production
-          by mbz-et8e.18. */}
+          back down, behind the product proof and the process. Nine tiles since
+          drop_07 §6.2, and every one of them reaches a real page. */}
       <section className="section container">
         <SectionTitle title={industries.title} lead={industries.lead} />
         <div className="industry-grid">
@@ -147,7 +146,6 @@ const Home = () => {
               key={item.name}
               name={item.name}
               to={item.to}
-              featured={item.featured}
             />
           ))}
         </div>

@@ -128,64 +128,86 @@ export const home = {
   industries: {
     title: "Built for Teams in Dynamic Markets",
     lead: "For teams operating in markets where regulation, competition, technology and customer behavior can quickly change the direction of the business.",
-    // THE SIX INDUSTRIES, AND THIS IS THE ONLY LIST OF THEM. content/nav.js
+    // THE NINE INDUSTRIES, AND THIS IS THE ONLY LIST OF THEM. content/nav.js
     // imports it for the Industries dropdown and content/industries.js imports
     // it for the /industries page, so all three surfaces move together. Adding
     // an industry here adds it everywhere; that is the point.
     //
-    // `blurb` is drop_06's card copy for the /industries page. It lives beside
-    // the name rather than in that page's own module for the same reason: a
-    // second list keyed by name is a list that drifts. §6 does not render it.
+    // SIX BECAME NINE in drop_07 §6.2, and that lands on this page as well as on
+    // /industries — a stated consequence rather than a side effect. §6.2 asks
+    // for a 3x3 grid there, and three rows of three is what §6 renders here too.
     //
-    // EVERY LINK HERE NOW REACHES A REAL PAGE. That was four dead, then two,
-    // then one; Life Sciences was the last, and the August handover removes it
-    // from the set rather than asking for it to be built (section 7 lists the
-    // six, and Other Industries is the sixth). Nothing in this list is gated by
-    // mbz-et8e.18 any more.
+    // `blurb` is §6.3's card copy, and every one of the nine was replaced by it.
+    // It lives beside the name rather than in that page's own module for the
+    // same reason as before: a second list keyed by name is a list that drifts.
+    // §6 does not render it. §6.3 also says "do not add taglines or a second
+    // marketing sentence above these descriptions", so there is one line each.
     //
-    // THE ORDER IS HIS, from handover section 7. It differs from the order this
-    // list carried before, which had Life Sciences third.
+    // NOTHING IS FEATURED ANY MORE. Medical Technology carried `featured: true`
+    // and a brighter border; §6.2 rules that out — "do NOT visually highlight
+    // the top row or any single industry with turquoise" — and §3.3 wants every
+    // box on this page the same size, which a highlight is halfway to breaking.
+    //
+    // ROUTES ARE HISTORY, NOT A CATEGORY, and two of these keep older paths.
+    // Public Safety also keeps its longer URL while its LABEL shortens to §6.2's
+    // "Public Safety"; renaming the route would break external links for no
+    // reader benefit, and §6.3's copy for it still covers defense technology.
+    //
+    // THE ORDER IS HIS, read across the rows of §6.2's table.
     items: [
       {
         name: "Medical Technology",
         to: "/industries/medical-technology",
-        featured: true,
         blurb:
-          "Track regulation, competitors, research, product developments and emerging market opportunities.",
-      },
-      {
-        name: "Biotechnology",
-        to: "/use-cases/biotech",
-        blurb:
-          "Follow competitors, research, clinical developments, market perception and the signals shaping your therapeutic landscape.",
+          "Track regulatory developments, competitor moves, emerging technologies, clinical trends and market shifts shaping the medical technology landscape.",
       },
       {
         name: "Financial Technology",
         to: "/industries/financial-technology",
         blurb:
-          "Track competitor moves, partnerships, regulation, technology shifts and changing market dynamics.",
+          "Track competitor moves, regulation, partnerships, product launches, customer trends and technologies changing how financial services are built and delivered.",
       },
       {
-        name: "Public Safety & Defense Technology",
-        to: "/industries/public-safety-defense-technology",
+        name: "Cybersecurity",
+        to: "/industries/cybersecurity",
         blurb:
-          "Follow competitors, procurement trends, regulation, technology developments, partnerships and emerging operational needs.",
+          "Follow competitor positioning, product launches, partnerships, regulation, emerging technologies and changing customer priorities across the cybersecurity market.",
+      },
+      {
+        name: "Biotechnology",
+        to: "/use-cases/biotech",
+        blurb:
+          "Follow clinical developments, funding, partnerships, regulatory changes, emerging technologies and competitor activity across the biotech landscape.",
       },
       {
         name: "Enterprise Technology",
         to: "/use-cases/tech",
         blurb:
-          "Track competitors, product launches, customer trends, technology shifts and emerging growth opportunities across your category.",
+          "Follow competitor moves, AI and technology shifts, product launches, partnerships, changing customer needs and the trends reshaping enterprise technology.",
       },
-      // The one entry with no drop_06 card copy, because it is not in that
-      // brief's list. Written from what section 7 asks this page to say: that
-      // MarketBuzzr "supports highly specialized and niche markets, including
-      // categories that do not fit a predefined industry".
+      {
+        name: "Manufacturing",
+        to: "/industries/manufacturing",
+        blurb:
+          "Track automation, emerging technologies, supply chain developments, competitor activity, regulation and changing demand across manufacturing markets.",
+      },
+      {
+        name: "Public Safety",
+        to: "/industries/public-safety-defense-technology",
+        blurb:
+          "Track procurement trends, policy and regulation, competitor activity, new technologies, partnerships and evolving priorities across public safety and defense technology.",
+      },
+      {
+        name: "Retail",
+        to: "/industries/retail",
+        blurb:
+          "Follow consumer trends, competitor moves, new technologies, partnerships, channel shifts and changing market dynamics across the retail landscape.",
+      },
       {
         name: "Other Industries",
         to: "/industries/other-industries",
         blurb:
-          "Track the competitors, sources and conversations that define your market, including specialized niches with no predefined category.",
+          "MarketBuzzr can be configured around the competitors, developments, sources and priorities that matter to your business, even when your industry does not fit neatly into a box.",
       },
     ],
     exploreLabel: "Explore all industries",
