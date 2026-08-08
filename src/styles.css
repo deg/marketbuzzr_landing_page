@@ -6,6 +6,19 @@
   --bg-2: #0e173a;
   --text: #d7e2ff;
   --muted: #c2d1f5;
+  /* Titles are brighter than everything else on the page, and the gap is the
+     point: drop_07 §1 asks for "the brighter near-white font color shown in the
+     approved What You Get screenshots" on every headline, section title and
+     card title, and says in the same breath "Do not brighten body copy."
+
+     #f7f8fe is measured rather than judged. It is the single value the
+     brightest pixels of both supplied references resolve to —
+     reference-title-color-what-you-get-hero.png and
+     reference-title-color-role-cards.png — and it is the same literal Manu sets
+     --text to inside his own asset files. Supporting copy in those references
+     sits near #a0abc5, which is DULLER than our --muted; that is why this is a
+     new token rather than a brighter --text, and why --muted does not move. */
+  --title: #f7f8fe;
   --brand: #6ee0ff;
   --brand-2: #5ea4ff;
   /* Third stop, used only by the DNA mark's gradient: two stops of a close
@@ -228,23 +241,27 @@ nav {
   position: relative;
 }
 
-/* ONE EYEBROW, EVERYWHERE, and it is his (mbz-et8e.52.3). The handover asks
-   for "the industry page eyebrow treatment everywhere: small uppercase label,
-   restrained muted light color, increased letter spacing and the short
+/* ONE EYEBROW, EVERYWHERE, and it is his (mbz-et8e.52.3). The August handover
+   asked for "the industry page eyebrow treatment everywhere: small uppercase
+   label, restrained muted light color, increased letter spacing and the short
    horizontal line before the label", and "Do not use purple eyebrow text".
 
    This used to be a bordered pill with a hover state — a large light shape at
    the top of the page that pushed the heading down and read as a control
    rather than a label. His values, from the approved dark industry pages:
-   12px/750, 0.12em tracking, uppercase, and an 18x1 rule 8px before the text.
+   12px/750, 0.12em tracking, uppercase.
+
+   THE SHORT HORIZONTAL RULE IS GONE. It was an 18x1 line 8px before the text,
+   ported from the .eyebrow:before in his own approved industry pages; drop_07
+   §1 retires it site-wide — "remove the decorative dash/line everywhere.
+   Eyebrows should be clean text only." That leaves nothing beside the text, so
+   the flex box and its gap go with it.
 
    The colour is the site's --muted rather than his #9da9c6, on his own
-   instruction: "Supporting text should use the existing muted light tone." The
-   rule takes an edge token for the same reason. */
+   instruction: "Supporting text should use the existing muted light tone." It
+   is body-level and stays there — §1 brightens titles, not this. */
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  display: inline-block;
   color: var(--muted);
   font-size: 12px;
   font-weight: 750;
@@ -252,18 +269,17 @@ nav {
   text-transform: uppercase;
 }
 
-.kicker::before {
-  content: "";
-  width: 18px;
-  height: 1px;
-  background: var(--edge-3);
-}
-
+/* Every heading on the site takes the title colour here, rather than each rule
+   restating it. `body` sets --text and `p` sets --muted, so before this a
+   heading and a paragraph differed by two steps of the same blue; drop_07 §1
+   wants the contrast between them visible. Light surfaces rescope --title the
+   same way they already rescope --text (see .insight-wrap). */
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
   font-optical-sizing: auto;
+  color: var(--title);
 }
 
 h1 {
@@ -752,8 +768,12 @@ footer a:hover {
   margin: 0;
 }
 
+/* The footer's column headings are title-level too, and h4 is not in the shared
+   heading rule above — the site's other h4s sit inside the light insight card,
+   which sets its own ink. */
 footer h4 {
   margin: 0 0 12px 0;
+  color: var(--title);
 }
 
 /* Focus styles for accessibility */
@@ -2521,7 +2541,7 @@ footer h4 {
 }
 
 .flow-step-verb {
-  color: var(--text);
+  color: var(--title);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -2711,7 +2731,10 @@ footer h4 {
   gap: 6px;
 }
 
+/* A card title that is not a heading element — the tile is a link, so the name
+   inside it is a span. It still takes the title colour. */
 .industry-name {
+  color: var(--title);
   font-weight: 700;
   text-align: left;
 }
@@ -3111,7 +3134,7 @@ footer h4 {
   font-weight: 800;
   line-height: 1.03;
   letter-spacing: -0.035em;
-  color: var(--text);
+  color: var(--title);
 }
 
 .hero-split .sub {
@@ -3359,6 +3382,10 @@ footer h4 {
    chrome, and this card is his own approved artwork. */
 .insight-wrap {
   --text: #0f1b3d;
+  /* The card's own ink, for the same reason the rest of these are rescoped: the
+     page's near-white title colour would be invisible on white. This is what
+     lets the shared h1/h2/h3 colour rule stay unconditional. */
+  --title: #0f1b3d;
   --muted: #2e3c61;
   --small: #2e3c61;
   --edge: #e7e9f2;
@@ -3650,9 +3677,14 @@ footer h4 {
   height: 27px;
 }
 
+/* Near-white, not turquoise. These titles were the site's accent colour; drop_07
+   §1 puts card titles on the title colour, and Manu's own approved dark industry
+   page agrees with it rather than with us — his .feature h3 is #f5f7ff. §7 asks
+   for these cards to behave like the homepage category cards, whose titles are
+   plain headings, so this brings the two sets into one family. */
 .feature h3 {
   margin: 0 0 8px;
-  color: var(--brand);
+  color: var(--title);
   font-size: 17px;
   font-weight: 800;
 }
@@ -3683,7 +3715,7 @@ footer h4 {
 
 .industry-cta h2 {
   margin: 0 0 10px;
-  color: #ffffff;
+  color: var(--title);
   text-align: left;
 }
 
