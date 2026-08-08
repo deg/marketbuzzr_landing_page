@@ -35,7 +35,10 @@ export const enterpriseTech = {
     // Sentence case, as on all four other industry pages. His docx writes it
     // title case with a full stop; see publicSafety.js for why the words are
     // kept and the capitals are not.
-    title: "Stay ahead of the changes shaping enterprise technology",
+    // drop_07 §8, the one page-specific revision in that brief: "Hero title:
+    // Stay ahead of the changes shaping the tech industry." Everything else on
+    // this page is kept, with the §7 template rules applied.
+    title: "Stay ahead of the changes shaping the tech industry",
     sub: [
       "MarketBuzzr monitors competitors, product launches, technology shifts, customer trends, partnerships, funding and changing market needs to identify what matters to your business and turn it into intelligence you can act on.",
     ],
@@ -149,7 +152,7 @@ export const enterpriseTech = {
       },
     ],
     closer:
-      "MarketBuzzr helps your team stay on top of the developments that could shape your strategy, products and growth.",
+      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

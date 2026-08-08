@@ -125,7 +125,7 @@ export const fintech = {
       },
     ],
     closer:
-      "MarketBuzzr helps your team stay on top of the developments that could shape your strategy, products and growth.",
+      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

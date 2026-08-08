@@ -3,6 +3,7 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import SectionTitle from "../components/SectionTitle";
 import CategoryIcon from "../components/CategoryIcon";
+import { withBreaks } from "../components/withBreaks";
 import CtaPanel from "../components/CtaPanel";
 import SourceCluster from "../components/SourceCluster";
 import InsightCard from "../components/InsightCard";
@@ -115,7 +116,11 @@ const IndustryPage = ({ data }) => {
             </div>
           ))}
         </div>
-        <p className="lead">{features.closer}</p>
+        {/* withBreaks because drop_07 §7 asks this sentence to break after
+            "could" on desktop. Four of the six pages carry it; the two that do
+            not have their own closing line and no "\n" in it, so this is a
+            no-op for them. */}
+        <p className="lead">{withBreaks(features.closer)}</p>
       </section>
 
       {/* THE SITE'S PANEL, not this page's own band. These pages closed on a
