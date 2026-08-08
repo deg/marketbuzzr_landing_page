@@ -41,6 +41,7 @@ const PRESERVED_DIRS = [
   "4aug_v4",
   "4aug_v5",
   "7aug_v6",
+  "9aug_v7",
 ];
 
 // Directories the live build produces and is entitled to overwrite.
