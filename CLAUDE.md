@@ -55,7 +55,15 @@ back to him live beside them.
 | `drop_05_marketbuzzr-biotech-landing.html` | Biotechnology, FinTech, MedTech + the hero animation | *(single HTML files)* |
 | `drop_06_marketbuzzr-homepage-cto-handoff.zip` | homepage, 4th — **current** | `marketbuzzr-homepage-cto-handoff/` |
 | `drop_06_marketbuzzr-how-it-works-cto-handoff.zip` | How It Works, 2nd — **current** | `marketbuzzr-how-it-works-cto-handoff/` |
-| `drop_06_MarketBuzzr_Industries_Page_CTO_Handover.docx` | the `/industries` page — not built (`mbz-et8e.47`) | *(a single docx)* |
+| `drop_06_MarketBuzzr_Industries_Page_CTO_Handover.docx` | the `/industries` page | *(a single docx)* |
+| `drop_07_MarketBuzzr_CTO_Handover_Aug08_2026_v4.zip` | **the whole site, current** — see below | `MarketBuzzr_CTO_Handover_Aug08_2026_v4/` |
+
+**`drop_07` is the current source of truth for every page.** It says so itself —
+"where this brief conflicts with an earlier handover, use this brief" — and it
+reverses several earlier decisions rather than merely extending them. Its README
+says v3 and names a `_v3.docx`; the zip ships only `_v4.docx`, so the README is
+stale, not a missing file. Its own §14 is a seventeen-item acceptance checklist,
+scored by `acceptance_probe.py` in the design repo (`17/17` as of `mbz-et8e.54`).
 
 `drop_05` is the first handoff delivered as **HTML rather than artwork** — a sketch by
 an artist agent, not a page to drop in. Its copy and structure are the deliverable; its
@@ -88,6 +96,9 @@ email-capture modal is open:
 | `/` | `pages/Home.jsx` |
 | `/use-cases/biotech` | `pages/IndustryPage.jsx` with `content/biotech.js` |
 | `/use-cases/tech` | `pages/IndustryPage.jsx` with `content/enterpriseTech.js` |
+| `/industries/cybersecurity` | `pages/IndustryPage.jsx` with `content/cybersecurity.js` |
+| `/industries/manufacturing` | `pages/IndustryPage.jsx` with `content/manufacturing.js` |
+| `/industries/retail` | `pages/IndustryPage.jsx` with `content/retail.js` |
 | `/industries/financial-technology` | `pages/IndustryPage.jsx` with `content/fintech.js` |
 | `/industries/medical-technology` | `pages/IndustryPage.jsx` with `content/medtech.js` |
 | `/industries/public-safety-defense-technology` | `pages/IndustryPage.jsx` with `content/publicSafety.js` |
@@ -95,6 +106,7 @@ email-capture modal is open:
 | `/use-cases` | redirect → `/use-cases/biotech` |
 | `/industries` | `pages/Industries.jsx` — the entry page, `drop_06` |
 | `/how-it-works` | `pages/HowItWorks.jsx` |
+| `/what-you-get` | `pages/WhatYouGet.jsx` — `drop_07` §5 |
 | anything else | `pages/NotImplemented.jsx` |
 
 The two `/use-cases/*` paths are history, not a category: both are industry pages
@@ -121,10 +133,11 @@ not by wiring up a new handler.
 
 Each module in `src/content/` exports one plain object holding all of that page's
 marketing copy (headings, leads, card arrays, CTA text). The page components are
-presentational and map over those arrays. There are eleven: `home`, `howItWorks`,
-`industries` and `nav` for the shared pages, `industryChrome` for what every industry
-page has in common, and one per industry — `biotech`, `fintech`, `medtech`,
-`publicSafety`, `enterpriseTech`, `otherIndustries`.
+presentational and map over those arrays. There are fifteen: `home`, `howItWorks`,
+`whatYouGet`, `industries` and `nav` for the shared pages, `industryChrome` for what
+every industry page has in common, and one per industry — `biotech`, `fintech`,
+`medtech`, `publicSafety`, `enterpriseTech`, `cybersecurity`, `manufacturing`,
+`retail`, `otherIndustries`.
 
 `content/nav.js` carries structure that looks like styling but is not: the nav's
 shape, including the two judgement calls it records — How It Works lives under
@@ -137,18 +150,17 @@ decides how to render it — **do not put `**` or HTML into those strings**.
 
 **To change marketing copy, edit the content module — never the components.**
 
-All six industry pages are the same component with different content objects — see
-The industry pages below before adding a seventh.
+All nine industry pages are the same component with different content objects — see
+The industry pages below before adding a tenth.
 
 `withBreaks.jsx` turns `\n` inside a content string into `<br/>`, used where the source
 deck asks for a break at a specific point.
 
 ### The homepage (2026-08 redesign)
 
-`pages/Home.jsx` renders eight sections in the order set by Manu's **final**
-handoff brief — **`drop_03`** in the design repo (see Where the briefs live).
-That is the **third** brief and supersedes both earlier drops — read it, not
-them. It reads Promise → Problem → Product Proof → How It Works → Who It's For →
+`pages/Home.jsx` renders eight sections whose ORDER comes from **`drop_03`** and
+whose content has been revised twice since, most recently by **`drop_07` §3**.
+Read `drop_07` first and `drop_03` only for the order. It reads Promise → Problem → Product Proof → How It Works → Who It's For →
 What You Track → CTA. Each section has its own component; none of them is
 generic, so read the component before changing a section:
 
@@ -156,8 +168,8 @@ generic, so read the component before changing a section:
 |---|---|---|
 | 1 | Hero | `PageHero` + `HeroAnimation` (drawn, not photographed) |
 | 2 | Transition | `BrandDivider` — one line, deliberately not a section |
-| 3 | Problem | copy above `WorthYourAttention`, full width |
-| 4 | Insight | `ProductImage` alone — the last raster on this page |
+| 3 | Problem | copy LEFT, `WorthYourAttention` RIGHT — `drop_07` §3.2 |
+| 4 | Insight | `ProductImage` alone — the last raster on the whole site |
 | 5 | Five-step flow | `FlowSteps` (native HTML, no artwork) |
 | 6 | Industries | `IndustryTile` |
 | 7 | Intelligence areas | `CategoryCard` + `CategoryIcon` (six line icons) |
@@ -211,22 +223,39 @@ of waste off the homepage, tracked as `mbz-et8e.34`.
 ### The How It Works page (2026-08)
 
 `pages/HowItWorks.jsx` is Hero → 01 → 02 → 03 → Final CTA and deliberately
-nothing else, from Manu's How It Works briefs — **`drop_04`** in the design repo
-for the page's shape and **`drop_06`** for its copy and two of its three visuals. That brief forbids additions by name: no fourth step, no sources
-grid, no separate weekly-report section, no feature grid, no FAQ. **Read it
-before adding a section here.**
+nothing else, from Manu's How It Works briefs — **`drop_04`** for the page's
+shape, **`drop_06`** for its copy, and **`drop_07` §4** for its hero copy and its
+layout. Those briefs forbid additions by name: no fourth step, no sources grid,
+no separate weekly-report section, no feature grid, no FAQ. **Read them before
+adding a section here.**
 
-The three steps are stacked full-width sections, not a three-column layout and
-not alternating 50/50 splits — both were ruled out because they shrink the
-artwork below the size its embedded text needs. That also means `.product-frame`'s
-breakout works normally here, because the section spans the page. The homepage
-reached the same conclusion for its own §3 in `drop_06` and dropped its split.
+**Every step is copy LEFT, visual RIGHT, in a fixed 640px visual track.** That
+reverses `drop_04` and `drop_06`, which ruled splits out because a column shrinks
+the supplied artwork below the size its embedded text needs. The objection was
+about artwork and there is none left here — all three visuals are markup and
+reflow inside the column instead of scaling down in it. 640px is not a taste
+call: it is the `max-width` Manu's own step 02 and 03 assets set, so it is what
+"the same visual frame width" means in numbers.
 
-**Only step 01 is still a picture.** `drop_06` replaced steps 02 and 03 with HTML
-animations, built as `RoleDashboard` and `DraftFromIdea` (`mbz-et8e.46`). Step 01
-came back from him unchanged, and the AVIF already in the repo is encoded from
-that same PNG — verified pixel-wise, mean channel difference 0.60/255 — so it
-needed no asset work at all.
+Two traps that layout hit, both worth knowing before touching it. An **auto
+inline margin on a grid item beats the default stretch** and shrinks the box to
+its content — step 03 measured 389px inside a 640px track while the other two
+filled it, because their content already exceeded 640. And **`color` is inherited
+as a resolved value, not as the `var()` that produced it**, so rescoping `--text`
+on a light panel does nothing for descendants that set no colour of their own;
+they inherit what `body` computed from the *page's* `--text`. Step 03's five
+option titles rendered in the page's pale blue on a white panel until
+`.role-dash, .draft-idea` set `color` explicitly. `.insight-wrap` had always done
+this; the reason was not written down.
+
+**No step is a picture any more.** `drop_06` replaced steps 02 and 03 with HTML
+animations, built as `RoleDashboard` and `DraftFromIdea` (`mbz-et8e.46`), and
+`drop_07` took step 01 with them (`mbz-et8e.54.8`). The raster could not follow
+that brief into its own 640px frame: measured on Manu's source PNG, its smallest
+type is 8–9px of cap height on a 1774px canvas, which renders about **3.2px** at
+640 — roughly a 4.6px font, against about 10px at the 1400px it used to get.
+`MonitorFilter` says the same three stages with the same labels and holds **12px
+type at every width**, and its 56.6 KB of AVIF/WebP is gone.
 
 **Those two components are not SVG transcriptions.** His files are HTML and CSS,
 so unlike `HeroAnimation` and `WorthYourAttention` there are no coordinates to
@@ -247,33 +276,25 @@ residual gap — a keyboard-only visitor gets no pause, because nothing here is
 focusable — is site-wide rather than specific to this page, and is recorded on
 `mbz-et8e.46`.
 
-**The role colours are the site's, not his.** He gives the four roles four hues
-and that device is real: the badge, profile name, card borders, tags and progress
-dot all change together. His literals are `#7d58f6` / `#2f7ee8` / `#6aaf4b` /
-`#3ba9b4`; `--brand-3`, `--brand-2`, `--positive` and `--brand` sit in the same
-hue order and are used instead, so this adds no new colour. `--role` is set once
-per role and everything inside reads it.
+**Steps 02 and 03 are light panels, and `drop_07` §4.4 forbids reverting them:**
+"do not recolor it back to dark." Done by rescoping tokens on `.role-dash,
+.draft-idea` rather than rewriting the ~40 rules inside — the mechanism
+`.insight-wrap` uses. Values are his.
 
-**Step 01's artwork is light, and that inverts the bleed.** It is drawn on white
-(`#FEFEFE`) against the navy page, so `.how-visual` sets a `box-shadow` directly
-instead of taking `--artwork-ground`. Its blur is 24px with no spread, against
-the homepage's 80px/30px, and **the difference is load-bearing rather than
-taste**: a dark bleed that overshoots on a dark page is invisible, a light one is
-not. Measured contrast of `--muted` body copy against the ground immediately
-above a figure was 1.70:1 at 80/30 and 9.57:1 at 24/0. Do not harmonise the two.
-This used to apply to all three visuals and is now one special case; a dark-ground
-re-render, or a sketch we can rebuild it from, deletes it (`mbz-et8e.28`, memo §2).
+**The four role colours are his hues, darkened, and that is not a free choice.**
+The role accent carries the profile name, the tags and the action line, so it is
+text. Measured against white: his purple `#7d58f6` clears at 4.57:1 and the other
+three do not — blue `#2f7ee8` at 3.98, green `#6aaf4b` at 2.68, teal `#3ba9b4` at
+2.79. Each is dropped in lightness at constant hue until it clears 4.5; purple is
+untouched. **`#2d818a` is the site's one light-surface turquoise** and is used by
+these panels, the industry heroes' topic chips and What You Get alike, so light
+surfaces share one accent rather than each inventing its own.
 
-One mobile held width is left where there were three — 1200px for step 01. The
-other two need none: they are markup, so they reflow, and their type stays 17px
-and 12px from 1440px right down to 390px instead of being scaled into a
-horizontal scroller.
+No held mobile widths are left on this page. All three visuals are markup, so
+they reflow and their type holds its size from 1440px down to 390px.
 
-**CTA labels differ from the homepage on purpose.** This brief specifies primary
-"Try for Free" and secondary "Book a Demo"; the homepage ships the reverse order
-and "Try It Free". Two briefs, two answers — the conflict is a question for Manu
-(`mbz-et8e.28` item 10), not something to settle by editing one page to match the
-other.
+**CTA labels are the site's** — primary "Try for Free", secondary "Book a Demo",
+everywhere, since `drop_07` §1 fixes the pair for the whole site.
 
 The page this replaced was a numbered `<ol>` plus a value-bullet summary. Its
 rules (`.steps`, `.step`, `.step-number`, `.step-body`, `.summary-block`,
@@ -297,7 +318,7 @@ not guess or substitute fonts, navigation styles, CTA styles, colors, or
 spacing". So it is `PageHero` + `SectionTitle` + `IndustryTile` + `CtaPanel` and
 nothing else — no artwork, because "no image or animation is required".
 
-**The six industries live in `content/home.js`, and that is the only list.**
+**The nine industries live in `content/home.js`, and that is the only list.**
 `content/nav.js` reads it for the Industries dropdown and `content/industries.js`
 reads it for this page, so all three move together. Each item's `blurb` is this
 page's card copy and sits beside the name for the same reason — a second list
@@ -307,10 +328,14 @@ keyed by industry name is a list that drifts.
 and adding `blurb` to the shared list silently put a paragraph on all six
 homepage tiles — measured, 74px tall to 197px. §6 is a list of names.
 
-**No featured tile here**, unlike the homepage: the brief asks for "all six
-industries as equal navigation boxes". And no eyebrow, which every other page
-has — his page structure lists one paragraph, a supporting line, the section
-heading, the boxes and the closing panel, and a kicker is not among them.
+**No featured tile anywhere**, on this page or the homepage. One used to lead the
+set with a brighter border; `drop_07` §6.2 rules that out — "do NOT visually
+highlight the top row or any single industry with turquoise" — so the prop, the
+class and its rules are deleted rather than left unused.
+
+**It has an eyebrow again.** `drop_06`'s page structure listed no kicker, so this
+shipped as the only page on the site without one; `drop_07` §6.1 opens with
+"Eyebrow: INDUSTRIES" and settles it the other way.
 
 All six cards now reach a real page. Two did not when this page was built —
 Life Sciences, which `drop_06` replaced with Other Industries, and Public Safety
@@ -319,11 +344,23 @@ because this page gives each industry a full card, so a dead link is more
 prominent on it than on the homepage: check this page, not just §6, before
 adding a seventh industry to the shared list.
 
-### The industry pages (2026-08) — one template, six pages
+### The industry pages (2026-08) — one template, nine pages
 
-`pages/IndustryPage.jsx` renders **all six industry destinations**, each from its own
+`pages/IndustryPage.jsx` renders **all nine industry destinations**, each from its own
 module in `src/content/`: `biotech`, `fintech`, `medtech`, `publicSafety`,
-`enterpriseTech`, `otherIndustries`. It began as a pilot on Biotechnology alone
+`enterpriseTech`, `cybersecurity`, `manufacturing`, `retail`, `otherIndustries`.
+The last three arrived with `drop_07` §9–§11.
+
+**The hero's topic boxes are LIGHT surfaces on the dark page** (`drop_07` §7), as
+the insight card already was. Their turquoise is `#2d818a`, not `--brand`: the
+icon is a meaningful graphic wanting 3:1 and `--brand` measures about 1.5:1 on
+white.
+
+**`outro` is an optional second prose block** and only Other Industries has one,
+because `drop_07` §12 gives that page two headed passages where every other
+industry has one. `features.closer` is optional for the same reason. Both are
+content-driven so the nine stay on ONE template — the alternative was a second
+page component, which `mbz-et8e.52.12` consolidated away. It began as a pilot on Biotechnology alone
 (`mbz-et8e.38`, from `drop_05`, the first handoff Manu sent as HTML rather than
 artwork). The pilot held, and the August handover settled it outright — "all six
 industry destinations must use the same page structure and styling" — so a second
@@ -351,7 +388,7 @@ already, and by his hand rather than ours.
 `RoleBar`'s row is dead specifically: it puts three roles side by side, and his brief
 for step 02 rules that out by name — "do not show multiple profiles or dashboards side
 by side". Step 02 is `RoleDashboard`, which shows one at a time. `RoleBar` renders on
-all six industry pages via `IndustryPage.jsx` and is unaffected there.
+all nine industry pages via `IndustryPage.jsx` and is unaffected there.
 
 What is left of the original claim is the last raster on each page. Closing those two
 retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28` — the re-render, the 2×
@@ -375,14 +412,15 @@ line was invented here rather than taken from the sketch, and came out in
 fabricated example needs a marker at all is his call, not ours (`mbz-et8e.12`) —
 do not reinstate it without reading that bead.
 
-**The card's timestamp is deliberately ours, and the six pages carry six
+**The card's timestamp is deliberately ours, and the nine pages carry nine
 different ones.** His sketch set it to "May 2, 2025 • 9:42 AM" and every page
-copied that one string, so by 2026-08 all six shipped the same fifteen-month-old
-date. `mbz-et8e.53` resolved it by moving the dates forward rather than switching
-back to a relative "Detected 2 days ago" — the absolute form is what he drew, and
-rot in a year is accepted because the site describes where the product is today.
-Six different weekdays and business-hours times, so the set does not read as one
-string pasted six times. Keep both properties in any refresh.
+copied that one string, so by 2026-08 all of them shipped the same
+fifteen-month-old date. `mbz-et8e.53` resolved it by moving the dates forward
+rather than switching back to a relative "Detected 2 days ago" — the absolute
+form is what he drew, and rot in a year is accepted because the site describes
+where the product is today. Nine different weekdays and business-hours times, so
+the set does not read as one string pasted nine times. Keep both properties in
+any refresh, and give a tenth page its own date.
 
 **The homepage's `insight-medicalcomp` artwork carries the same date five times
 over** — the card header plus all four source chips — and there it is pixels, not
@@ -411,10 +449,12 @@ off biotech with the user's approval, and its last caller was `UseCasePage.jsx`,
 the component and `content/tech.js`'s `problems` block went with that template
 (`mbz-et8e.52.12`).
 
-Full page weight is 281 KB (91 KB gzipped text + 189 KB of AVIF), plus ~44 KB of
-Google Fonts. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no
-imagery at all. Re-measure after any asset change rather than trusting this
-line.
+Page weights in this file predate `drop_07` and are not re-measured here.
+**Re-measure rather than trusting any weight line in this document.** What is
+known to have changed: How It Works lost 56.6 KB of source raster when step 01
+became markup, and the homepage animation gained about 1.6 KB gzipped of noise-
+rectangle data. The pre-redesign baseline on `mbz-et8e` was 129.8 KB with no
+imagery at all.
 
 ### Dev scaffolding — must not ship
 
@@ -519,8 +559,9 @@ these scrollers needs the same.
 
 **Drawn visuals need none of the above.** `HeroAnimation`, `WorthYourAttention`,
 `RoleDashboard` and `DraftFromIdea` are markup, so they reflow instead of
-scaling, and their type holds its size at every width. Only two rasters are left
-on the whole site — the homepage insight card and How It Works step 01.
+scaling, and their type holds its size at every width. **One raster is left on
+the whole site** — the homepage insight card, which is blocked on `mbz-et8e.12`.
+How It Works step 01 was the other, and became `MonitorFilter` in `drop_07`.
 
 **The "Final overrides" block at the end of the file must stay there.** Several of its
 rules tie on specificity with the base rules they override (`.section p.lead`,
