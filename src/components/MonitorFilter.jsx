@@ -23,11 +23,11 @@ import CategoryIcon from "./CategoryIcon";
 // story in the reading order, and the arrows would be read as "down arrow" if
 // they were not. Same call FlowSteps made for the same reason.
 //
-// WHAT THE REBUILD RETIRES. The AVIF and WebP pair, and with them .how-visual's
-// standalone box-shadow — that rule existed only because this one artwork was
-// drawn on white against the navy page, so a bleed sized for the dark artwork
-// would have been invisible around it. It was the site's last special case for
-// a light raster on a dark ground.
+// WHAT THE REBUILD RETIRES. The AVIF and WebP pair, and with them both of
+// .how-visual's rules — a standalone box-shadow that existed only because this
+// one artwork was drawn on white against the navy page, and the margin that
+// spaced it off the line below. It was the site's last special case for a light
+// raster on a dark ground.
 const MonitorFilter = ({ sourcesLabel, sources, context, outputs }) => (
   <figure className="monitor-filter">
     <div className="monitor-stage monitor-sources">

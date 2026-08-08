@@ -1387,11 +1387,10 @@ footer h4 {
    drop_07 (mbz-et8e.54.8), so there is no light raster left on the site and no
    asymmetry to preserve.
 
-   Extra space below the figure, because the emphasized closing line follows it
-   directly and .section p.lead only puts 8px between them. */
-.how-step .how-visual {
-  margin-bottom: var(--spacing-2xl);
-}
+   The margin rule that sat here went with it. It spaced .how-visual off the
+   closing line below it, and nothing carries that class since step 01 became
+   MonitorFilter — the visuals are .how-step-visual grid cells now, and the
+   closing line is a row of the same grid. */
 
 .product-frame img {
   display: block;
