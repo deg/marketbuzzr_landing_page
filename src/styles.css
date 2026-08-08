@@ -720,7 +720,19 @@ h2 {
   50% { opacity: 1; }
 }
 
-.cta-panel h3 {
+/* THIS RULE SPENT ITS WHOLE LIFE NOT APPLYING. It was written for an h3, and
+   every caller passes as="h2" — the homepage and How It Works always did, and
+   drop_07 moved the industry pages, What You Get and Industries onto CtaPanel
+   the same way. So all five closing headings took the generic h2 size, 46px,
+   and this clamp was never once used.
+
+   :is(h2, h3) takes the specificity of its most specific argument, so the
+   selector is (0,1,1) and beats the bare `h2` element rule at (0,0,1).
+
+   A closing heading is deliberately smaller than a section heading: it ends the
+   page rather than opening a section, and at 46px it competed with the hero on
+   the homepage, whose closing line runs three sentences. */
+.cta-panel :is(h2, h3) {
   font-size: clamp(22px, 3vw, 36px);
   margin: 0 0 10px 0;
   text-wrap: balance;
