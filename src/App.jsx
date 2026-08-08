@@ -21,6 +21,9 @@ import { enterpriseTech } from "./content/enterpriseTech";
 import { fintech } from "./content/fintech";
 import { medtech } from "./content/medtech";
 import { otherIndustries } from "./content/otherIndustries";
+import { cybersecurity } from "./content/cybersecurity";
+import { manufacturing } from "./content/manufacturing";
+import { retail } from "./content/retail";
 import { publicSafety } from "./content/publicSafety";
 
 // Review options set from the address bar. The registry in options.js is empty
@@ -115,6 +118,21 @@ const App = () => {
             <Route
               path="/industries/other-industries"
               element={<IndustryPage data={otherIndustries} />}
+            />
+            {/* drop_07 §9-§11's three. They take the same template and the same
+                /industries/* shape as everything built since it existed, and
+                their copy is locked in that brief. */}
+            <Route
+              path="/industries/cybersecurity"
+              element={<IndustryPage data={cybersecurity} />}
+            />
+            <Route
+              path="/industries/manufacturing"
+              element={<IndustryPage data={manufacturing} />}
+            />
+            <Route
+              path="/industries/retail"
+              element={<IndustryPage data={retail} />}
             />
             {/* The entry page the homepage's "Explore all industries" link
                 has pointed at since §6 was built. Until now that link reached
