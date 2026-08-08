@@ -14,12 +14,17 @@ import DraftFromIdea from "../components/DraftFromIdea";
 // one continuous story — find what matters, make it relevant to the reader,
 // help the reader act — and the brief forbids anything else on this page.
 //
-// The steps are sequential full-width sections rather than a three-column
-// layout or alternating 50/50 text/image splits; the brief rules both out
-// because they shrink the supplied artwork below the size its embedded text
-// needs. That also means .product-frame's breakout works here as designed,
-// since the section spans the page. The homepage reached the same conclusion
-// for its own §3 in drop_06 and dropped its split.
+// EVERY STEP IS COPY LEFT, VISUAL RIGHT, from drop_07 §4.2: "every numbered
+// step uses COPY LEFT and VISUAL RIGHT", "keep the same visual frame/column
+// width and consistent vertical alignment for all three steps", "do not
+// alternate visual sides". Mobile is copy first with its visual directly below,
+// which is what the single column gives.
+//
+// THIS REVERSES drop_04 AND drop_06, which ruled splits out because they shrink
+// the supplied artwork below the size its embedded text needs. That objection
+// was about artwork, and there is none left here: all three visuals are markup
+// now, so they reflow inside the column instead of scaling down in it. The one
+// that could not — step 01's raster — is what mbz-et8e.54.8 rebuilt.
 //
 // No <main> wrapper. The brief sketches one, but also says to prefer the
 // existing codebase's conventions — and no page on this site has one.
@@ -64,23 +69,35 @@ const HowItWorks = () => {
       />
 
       {steps.map((step) => (
-        <section className="section container how-step" id={step.id} key={step.id}>
-          {/* Not aria-hidden. On the old page the numbers sat in an <ol>, which
-              conveyed order on its own; these are separate sections, so the
-              numeral is the only thing carrying the sequence. */}
-          <p className="how-step-number">{step.number}</p>
-          <h2>{step.title}</h2>
-          {/* The short line that used to sit here is gone, and so is the flag
-              that asked about it. His August handover gives the same
-              headline-plus-one-paragraph structure a second time with no such
-              line, which is the answer (mbz-et8e.52.8). */}
-          <div className="how-step-body">
-            <p>{step.body}</p>
+        <section
+          className="section container container-wide how-step"
+          id={step.id}
+          key={step.id}
+        >
+          <div className="how-step-copy">
+            {/* Not aria-hidden. On the old page the numbers sat in an <ol>,
+                which conveyed order on its own; these are separate sections, so
+                the numeral is the only thing carrying the sequence. */}
+            <p className="how-step-number">{step.number}</p>
+            <h2>{step.title}</h2>
+            {/* The short line that used to sit here is gone, and so is the flag
+                that asked about it. His August handover gives the same
+                headline-plus-one-paragraph structure a second time with no such
+                line, which is the answer (mbz-et8e.52.8). */}
+            <div className="how-step-body">
+              <p>{step.body}</p>
+            </div>
           </div>
-          {VISUAL[step.id](step)}
-          {/* Only step 03 keeps a line under its visual, and drop_06 says so by
-              name. The other two had one and it is deleted, not moved. */}
-          {step.closer && <p className="lead lead-strong">{step.closer}</p>}
+
+          <div className="how-step-visual">{VISUAL[step.id](step)}</div>
+
+          {/* Only step 03 keeps a line under its visual, and both drop_06 and
+              drop_07 §4.5 say so by name. It spans both columns rather than
+              sitting in the copy one, because §4.5 places it "below this
+              section" — under the pair, not beside the visual. */}
+          {step.closer && (
+            <p className="lead lead-strong how-step-closer">{step.closer}</p>
+          )}
         </section>
       ))}
 

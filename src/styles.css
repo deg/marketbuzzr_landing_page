@@ -1156,18 +1156,84 @@ footer h4 {
    (.steps, .step, .step-number, .step-body, .summary-block, .value-grid,
    .value-box, .summary-footnote) are gone, along with their halves of the
    shared hover, button and reading-measure selectors. */
+/* Two columns, copy left and visual right, for all three steps and with no
+   alternating (drop_07 §4.2). The visual track is a FIXED 640px rather than a
+   fraction, which is what makes "the same visual frame/column width" for all
+   three literally true — his own step 02 and 03 assets set that width, and
+   MonitorFilter takes it too. The copy takes whatever is left of the 1400px
+   measure, about 664px at 1440.
+
+   align-items: center is §4.2's "consistent vertical alignment". */
+.how-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 640px;
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
+.how-step-copy {
+  text-align: left;
+}
+
+/* The closer runs under both columns, not beside the visual. */
+.how-step-closer {
+  grid-column: 1 / -1;
+}
+
+/* All three visuals fill the track and are capped by their own 640px, which is
+   what makes §4.2's "same visual frame/column width" literally true.
+
+   THE EXPLICIT width IS LOAD-BEARING. Each visual centres itself with an auto
+   inline margin, and an auto inline margin on a grid item beats the default
+   stretch and shrinks the box to its content. Steps 01 and 02 hid that because
+   their content is already wider than 640; step 03's is not, and it measured
+   389px inside a 640px track — three different frame widths, the one thing this
+   layout is not allowed to have. Same mechanism as the nav's CTA row. */
+.how-step-visual {
+  display: grid;
+  min-width: 0;
+}
+
+.how-step-visual > * {
+  width: 100%;
+}
+
+@media (max-width: 1180px) {
+  .how-step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .how-step-copy {
+    text-align: center;
+  }
+}
+
 .how-step-number {
   font-size: clamp(40px, 6vw, 64px);
   margin: 0 0 var(--spacing-xs);
-  text-align: center;
 }
 
-/* Body prose sits at the same reading measure as the centered leads around it,
-   so the step reads as one column rather than three different widths. */
+/* Body prose sits at the reading measure or the column width, whichever is
+   narrower. In the split it is the column; once the step stacks it is the
+   measure again, and the auto margins centre it the way they always did. */
 .how-step-body {
   max-width: var(--lead-measure);
   margin: var(--spacing-md) auto 0;
-  text-align: center;
+}
+
+.how-step .how-step-copy :is(h2, .how-step-number, .how-step-body) {
+  text-align: inherit;
+}
+
+.how-step .how-step-copy .how-step-body {
+  margin-inline: 0;
+}
+
+@media (max-width: 1180px) {
+  .how-step .how-step-copy .how-step-body {
+    margin-inline: auto;
+  }
 }
 
 .how-step-body p {
@@ -1314,16 +1380,58 @@ footer h4 {
    rule the industry pages follow. --role is set once per role and everything
    inside reads it.
    --------------------------------------------------------------------------- */
+/* BOTH ANIMATIONS ARE LIGHT NOW, and it is done by rescoping tokens rather than
+   rewriting the rules inside — the same mechanism .insight-wrap uses, and for
+   the same reason: every rule in these two already reads --text, --muted, the
+   edge tokens and the four role accents, so redefining them here flips the whole
+   subtree and leaves ~40 rules untouched.
+
+   drop_07 supplies both as light files and says so twice: "the supplied asset is
+   already resized for this layout and uses the approved light intelligence-
+   surface style. Do not recolor it back to dark." Values are his, from
+   marketbuzzr-role-based-single-dashboard-animation-v4-light-right-column.html:
+   ink #13213f, body #67738d, rules #dfe5ef and #e8edf4, panel #ffffff.
+
+   THE FOUR ROLE COLOURS ARE HIS HUES, DARKENED, and that is not a free choice.
+   The role accent carries the profile name, the tags and the action line, so it
+   is text. His own light values measured against white: purple #7d58f6 clears at
+   4.57:1 and the other three do not — blue #2f7ee8 at 3.98, green #6aaf4b at
+   2.68, teal #3ba9b4 at 2.79. Each is dropped in lightness at constant hue and
+   saturation until it clears 4.5:1, which is the same fix .insight-wrap made
+   when his lighter green measured 3.72 on the same ground. Purple is untouched
+   because it already passed.
+
+   --overlay-1 has to move too: it is a 5% WHITE wash, which is invisible on a
+   white panel. It becomes the same weight of the ink instead. */
 .role-dash,
 .draft-idea {
-  margin: var(--spacing-xl) 0 0;
-}
-
-.draft-idea {
-  /* His modal is narrower than his dashboard, and it should be: it is one
-     column of options, not three. */
-  max-width: 820px;
-  margin-inline: auto;
+  --text: #13213f;
+  --title: #13213f;
+  --muted: #67738d;
+  --edge: #e8edf4;
+  --edge-2: #dfe5ef;
+  --edge-3: #dfe5ef;
+  --edge-4: #c9cfe0;
+  --overlay-1: rgba(19, 33, 63, 0.035);
+  --bg-2: #ffffff;
+  --panel-2: #ffffff;
+  --accent-soft: #eef2ff;
+  --shadow-lg: 0 18px 42px rgba(11, 27, 62, 0.1);
+  --brand-3: #7d58f6;
+  --brand-2: #1d73e6;
+  --positive: #4f8238;
+  --brand: #2d818a;
+  /* NOT OPTIONAL, and rescoping the tokens alone does not do it. `color` is
+     inherited as a resolved value, not as the var() that produced it, so any
+     descendant without a colour of its own inherits what body computed from the
+     PAGE's --text — measured, the five option titles and the panel heading in
+     step 03 rendered in the page's pale blue on the white panel. .insight-wrap
+     sets its own colour for exactly this reason. */
+  color: var(--text);
+  margin: var(--spacing-xl) auto 0;
+  /* His .wrap in both files. This is "the standard right-column visual frame"
+     §4.2 asks all three steps to share, in numbers. */
+  max-width: 640px;
 }
 
 .role-dash-tone-brand-3 {
@@ -1376,11 +1484,12 @@ footer h4 {
   background: var(--overlay-1);
 }
 
-/* Fully white, and his brief asks for that by name. It is the one thing in the
-   panel that does not take the role colour. */
+/* The panel's own ink, and the one thing in it that does not take the role
+   colour. It was #fff on the dark panel; on the light one it is the title
+   token, which the rescope above sets to his #13213f. */
 .role-dash-brand {
   margin: 0;
-  color: #fff;
+  color: var(--title);
   font-size: 21px;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -1534,7 +1643,7 @@ footer h4 {
 }
 
 .role-dash-title {
-  color: #fff;
+  color: var(--title);
   font-size: 17px;
   font-weight: 800;
   line-height: 1.35;

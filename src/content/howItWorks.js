@@ -33,8 +33,16 @@ export const howItWorks = {
   hero: {
     eyebrow: "HOW IT WORKS",
     title: "From Market Signals to Strategic Action",
+    // drop_07 §4.1 replaces the hero paragraph and then rules out putting the
+    // old one back: "keep this hero concise. Do not add the older generic
+    // monitoring paragraph beneath it." The line that was here was exactly that
+    // paragraph, so it goes rather than moving down.
+    //
+    // The new one changes what the hero is about. The old one described what the
+    // product watches; this one describes what the reader has to do to start,
+    // which is one meeting.
     sub: [
-      "MarketBuzzr monitors your market, identifies what matters to your business, and turns relevant developments into personalized intelligence you can act on.",
+      "Getting started is simple. In one online setup meeting, we learn about your company, market, competitors, role and goals. From there, MarketBuzzr runs automatically.",
     ],
     ctaPrimary: "Try for Free",
     ctaSecondary: "Book a Demo",
