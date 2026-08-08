@@ -3,7 +3,7 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import SectionTitle from "../components/SectionTitle";
 import CategoryIcon from "../components/CategoryIcon";
-import DemoButton from "../components/DemoButton";
+import CtaPanel from "../components/CtaPanel";
 import SourceCluster from "../components/SourceCluster";
 import InsightCard from "../components/InsightCard";
 import RoleBar from "../components/RoleBar";
@@ -118,32 +118,22 @@ const IndustryPage = ({ data }) => {
         <p className="lead">{features.closer}</p>
       </section>
 
-      {/* Full-bleed band with the copy left and the buttons right, as the sketch
-          has it — not the site's centred rounded panel. In his sketch this was
-          the one dark block on a light page, closing it rather than sitting on
-          it; on our dark ground the same job falls to the band being solid where
-          the sections above it are not. */}
-      <section className="industry-cta">
-        <div className="container industry-cta-grid">
-          <div>
-            <h2>{closing.heading}</h2>
-            {closing.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-          <div className="cta-actions">
-            <DemoButton
-              label={closing.ctaPrimary}
-              className="cta"
-              source="try-free"
-            />
-            <DemoButton
-              label={closing.ctaSecondary}
-              className="cta-secondary"
-              source="book-demo"
-            />
-          </div>
-        </div>
+      {/* THE SITE'S PANEL, not this page's own band. These pages closed on a
+          full-bleed navy band with the copy left and the buttons right, which is
+          how Manu's sketch drew it; drop_07 §1 replaces every page-specific
+          closing container with one component — "reuse the standard box style
+          already used on the Homepage / How It Works rather than creating
+          page-specific CTA containers" — and §7 says the same again for these
+          pages in particular. Same wrapper as Home and Industries, so the three
+          are one layout rather than three that happen to match. */}
+      <section className="section container home-closing">
+        <CtaPanel
+          as="h2"
+          heading={closing.heading}
+          paragraphs={closing.paragraphs}
+          ctaLabel={closing.ctaPrimary}
+          secondaryCtaLabel={closing.ctaSecondary}
+        />
       </section>
     </div>
   );
