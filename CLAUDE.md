@@ -69,8 +69,8 @@ been consolidated here; the folder names survive as the directories inside drops
 
 `MarketBuzzr-Website-Outstanding-Items.docx` in that repo is the running list of
 what we are waiting on from Manu, and is the outward-facing twin of `mbz-et8e.28`.
-Keep the two in step. It supersedes the earlier `-Homepage-` titled file, which is
-kept only for history.
+Keep the two in step. It is the only such list; earlier homepage-only versions are
+in that repo's history if anything needs recovering.
 
 ## Architecture
 
