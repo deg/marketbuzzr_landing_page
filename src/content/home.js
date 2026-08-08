@@ -48,7 +48,7 @@ export const home = {
     // the twelve chips, and the impact ratings the previous artwork showed are
     // gone from this one, so the claim went with them.
     visualAlt:
-      "MarketBuzzr draws market signals from press releases, industry news and reports, webinars, earnings calls, blog posts, newsletters, YouTube and Reddit discussions, research papers, podcasts and regulatory updates into a central engine, evaluates each one against your company, competitors, role, markets and goals, and surfaces only the developments that matter — a competitor launch, a regulatory change, a growth opportunity, a consumer trend — each with ready-to-use drafts to act on it.",
+      "MarketBuzzr draws market signals from press releases, industry news and reports, webinars, earnings calls, blog posts, newsletters, YouTube and Reddit discussions, research papers, podcasts and regulatory updates into a central engine, evaluates each one against your company, competitors, role, markets and goals, and surfaces only the developments that matter: a competitor launch, a regulatory change, a growth opportunity or a consumer trend, each with ready-to-use drafts to act on it.",
   },
 
   // §2 Hero transition. A compact bridge under the hero image — explicitly not
@@ -84,11 +84,13 @@ export const home = {
     // than an <img alt>: the picture is a diagram, its labels are told to a
     // screen reader as one thing, and this is the only prose form of it.
     visualTitle: "How MarketBuzzr separates what matters from the noise",
-    // Kept in step with what is actually drawn: the nine developments named
-    // below are the nine cards, and the endpoint they converge on is the
-    // animation's own words.
+    // Kept in step with what is actually drawn: the ten developments named below
+    // are the ten cards, and the endpoint they converge on is the animation's
+    // own words. It said nine until drop_07's v11 added Competitor
+    // Repositioning, which is the kind of drift only a reader of the alt text
+    // would ever have seen.
     visualAlt:
-      "A field of market activity moves continuously in the background. Nine developments light up in turn — a competitor launch, an FDA update, a new market entrant, an industry trend, a shift in customer sentiment, a funding round, a new partnership, a technology shift and a regulatory change — and each streams down to converge on a single point marked Worth Your Attention.",
+      "A field of market activity moves continuously in the background. Ten developments light up in turn: a competitor launch, a competitor repositioning, an FDA update, a new market entrant, an industry trend, a shift in customer sentiment, a funding round, a new partnership, a technology shift and a regulatory change. Each streams down to converge on a single point marked Worth Your Attention.",
   },
 
   // §4 Product Proof / Insight

@@ -67,6 +67,32 @@
   --overlay-3: rgba(255, 255, 255, 0.1);
   --scrim: rgba(0, 4, 18, 0.72);
 
+  /* --- Light intelligence surfaces -------------------------------------------
+     Five places on this dark site render product output on a light panel: the
+     two How It Works animations, What You Get's role animation and its
+     Intelligence to Action card, How It Works step 01's context filter, and the
+     industry heroes' topic chips. They arrived one per commit and drifted while
+     they did — three inks, three body greys and four near-identical rules
+     between them, all meant to be the same thing.
+
+     --light-accent is the one worth knowing about. The site's --brand measures
+     about 1.5:1 on white, so it cannot carry text or a meaningful graphic
+     there; this is that same hue dropped in lightness until it clears 4.5:1.
+
+     Manu's own insight card is NOT part of this set and does not read these.
+     Its palette (#0f1b3d ink, #4d23ce purple, #087a57 green) is his, measured
+     against his artwork, and rescoped locally on .insight-wrap. */
+  --light-ink: #13213f;
+  --light-body: #67738d;
+  --light-label: #6a7690;
+  --light-rule: #dfe5ef;
+  --light-rule-soft: #e8edf4;
+  --light-panel: #ffffff;
+  --light-panel-2: #f5f8fd;
+  --light-accent: #2d818a;
+  --light-accent-soft: #eef2ff;
+  --light-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
+
   /* A second accent meaning "good news / do this", distinct from the brand. The
      insight card uses it for the impact badge and the action ticks; the brand
      alone made those read as the same kind of statement as the signal type. */
@@ -1388,9 +1414,9 @@ footer h4 {
 
    drop_07 supplies both as light files and says so twice: "the supplied asset is
    already resized for this layout and uses the approved light intelligence-
-   surface style. Do not recolor it back to dark." Values are his, from
-   marketbuzzr-role-based-single-dashboard-animation-v4-light-right-column.html:
-   ink #13213f, body #67738d, rules #dfe5ef and #e8edf4, panel #ffffff.
+   surface style. Do not recolor it back to dark." The values came from
+   marketbuzzr-role-based-single-dashboard-animation-v4-light-right-column.html
+   and are now the site's --light-* set, which every light surface reads.
 
    THE FOUR ROLE COLOURS ARE HIS HUES, DARKENED, and that is not a free choice.
    The role accent carries the profile name, the tags and the action line, so it
@@ -1405,22 +1431,22 @@ footer h4 {
    white panel. It becomes the same weight of the ink instead. */
 .role-dash,
 .draft-idea {
-  --text: #13213f;
-  --title: #13213f;
-  --muted: #67738d;
-  --edge: #e8edf4;
-  --edge-2: #dfe5ef;
-  --edge-3: #dfe5ef;
+  --text: var(--light-ink);
+  --title: var(--light-ink);
+  --muted: var(--light-body);
+  --edge: var(--light-rule-soft);
+  --edge-2: var(--light-rule);
+  --edge-3: var(--light-rule);
   --edge-4: #c9cfe0;
   --overlay-1: rgba(19, 33, 63, 0.035);
-  --bg-2: #ffffff;
-  --panel-2: #ffffff;
-  --accent-soft: #eef2ff;
+  --bg-2: var(--light-panel);
+  --panel-2: var(--light-panel);
+  --accent-soft: var(--light-accent-soft);
   --shadow-lg: 0 18px 42px rgba(11, 27, 62, 0.1);
   --brand-3: #7d58f6;
   --brand-2: #1d73e6;
   --positive: #4f8238;
-  --brand: #2d818a;
+  --brand: var(--light-accent);
   /* NOT OPTIONAL, and rescoping the tokens alone does not do it. `color` is
      inherited as a resolved value, not as the var() that produced it, so any
      descendant without a colour of its own inherits what body computed from the
@@ -3548,11 +3574,13 @@ footer h4 {
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid #dfe5ef;
+  border: 1px solid var(--light-rule);
   border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, #ffffff, #f5f8fd);
+  background: linear-gradient(180deg, var(--light-panel), var(--light-panel-2));
+  /* Not --light-shadow: this is a small chip on navy, and the panel shadow is
+     sized for a large surface. */
   box-shadow: 0 10px 26px rgba(4, 12, 34, 0.36);
-  color: #13213f;
+  color: var(--light-ink);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.3;
@@ -3563,7 +3591,7 @@ footer h4 {
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
-  color: #2d818a;
+  color: var(--light-accent);
 }
 
 .source-cluster-caption {
@@ -4175,13 +4203,19 @@ footer h4 {
    sources pass THROUGH a pale sheet. Tokens are rescoped rather than the rules
    inside being rewritten, the same way .insight-wrap does it. */
 .monitor-context {
-  --title: #0f1b3d;
-  --muted: #46557d;
+  --title: var(--light-ink);
+  --muted: var(--light-body);
+  /* Explicit, for the reason .role-dash records: colour inherits as a resolved
+     value, so rescoping the tokens alone leaves any descendant without its own
+     colour holding the PAGE's pale blue on this white panel. Nothing in here
+     shows it today because every child sets its own, which is exactly what
+     makes it a trap rather than a bug. */
+  color: var(--light-ink);
   padding: var(--spacing-lg);
-  border: 1px solid #e2e6f2;
+  border: 1px solid var(--light-rule);
   border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, #ffffff, #f4f7fd);
-  box-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
+  background: linear-gradient(180deg, var(--light-panel), var(--light-panel-2));
+  box-shadow: var(--light-shadow);
   text-align: center;
 }
 
@@ -4191,7 +4225,7 @@ footer h4 {
   width: 42px;
   height: 42px;
   border-radius: var(--radius-md, 10px);
-  background: #eef2ff;
+  background: var(--light-accent-soft);
   color: #4d23ce;
 }
 
@@ -4473,14 +4507,15 @@ footer h4 {
    the previous round found the hard way — colour inherits as a resolved value,
    not as the var() that produced it. */
 .ita-card {
-  --title: #13213f;
+  --title: var(--light-ink);
   margin: 0;
   padding: 20px;
-  border: 1px solid #dce3ee;
+  border: 1px solid var(--light-rule);
   border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
-  color: #13213f;
+  background: var(--light-panel);
+  /* Explicit, not inherited. Colour inherits as a resolved value, so a light
+     surface that only rescopes --title still hands descendants the page's ink. */
+  color: var(--light-ink);
   text-align: left;
 }
 
@@ -4490,7 +4525,7 @@ footer h4 {
 
 .ita-step {
   padding: 15px 0;
-  border-bottom: 1px solid #e8edf4;
+  border-bottom: 1px solid var(--light-rule-soft);
 }
 
 .ita-step:last-of-type {
@@ -4498,7 +4533,7 @@ footer h4 {
 }
 
 .ita-step dt {
-  color: #6a7690;
+  color: var(--light-label);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.09em;
@@ -4581,15 +4616,17 @@ footer h4 {
    treatment the two How It Works animations take, with the same explicit colour
    — see .role-dash for why that is not optional. His values throughout. */
 .role-tailor {
-  --title: #13213f;
+  --title: var(--light-ink);
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
   padding: 10px;
-  border: 1px solid #dfe6f0;
+  border: 1px solid var(--light-rule);
   border-radius: 22px;
+  /* The outer wrap is his soft tint rather than the panel white; the .shell
+     inside it is the panel. */
   background: linear-gradient(180deg, #f9fbfe, #f3f6fb);
-  color: #13213f;
+  color: var(--light-ink);
 }
 
 /* Named once for assistive technology, then the panel is hidden from it: a
@@ -4606,10 +4643,10 @@ footer h4 {
 
 .role-tailor-shell {
   min-height: 430px;
-  border: 1px solid #dce3ee;
+  border: 1px solid var(--light-rule);
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
+  background: var(--light-panel);
+  box-shadow: var(--light-shadow);
   overflow: hidden;
   text-align: left;
 }
@@ -4620,7 +4657,7 @@ footer h4 {
   align-items: center;
   gap: var(--spacing-sm);
   padding: 17px 19px;
-  border-bottom: 1px solid #e5eaf2;
+  border-bottom: 1px solid var(--light-rule-soft);
 }
 
 .role-tailor-top strong {
@@ -4644,7 +4681,7 @@ footer h4 {
 
 .role-tailor-kicker {
   margin: 0;
-  color: #6a7690;
+  color: var(--light-label);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.11em;
@@ -4682,7 +4719,7 @@ footer h4 {
 
 .role-tailor-label {
   margin: 0;
-  color: #6a7690;
+  color: var(--light-label);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -4719,7 +4756,7 @@ footer h4 {
 }
 
 .role-tailor-progress span.is-active {
-  background: #2d818a;
+  background: var(--light-accent);
   box-shadow: 0 0 10px rgba(45, 129, 138, 0.4);
 }
 
