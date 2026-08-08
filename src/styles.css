@@ -1919,27 +1919,12 @@ footer h4 {
   animation-delay: 6.4s;
 }
 
-.hero-anim-core {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: heroAnimCore 2.8s ease-in-out infinite;
-}
-
-/* The highlight sweeping the orbit, one lap every 8s — the beat the nodes and
-   the insight cards are both timed against. It is drawn parked at the top of
-   the circle and spun about the circle's centre, so transform-box has to stay
-   view-box (the default) rather than fill-box: the origin below is a point on
-   the 1500x900 canvas, not a corner of this group's own two dots. */
-.hero-anim-scan {
-  transform-origin: 760px 440px;
-  animation: heroAnimScan 8s linear infinite;
-}
-
-@keyframes heroAnimScan {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* THE CORE NO LONGER BREATHES AND THE ORBIT NO LONGER HAS A SCANNER. drop_07
+   §3.1 describes the approved hero as a "static dimensional navy sphere, no
+   pulse, no internal reflection, no rotating white ball", so the 2.8s core
+   scale and the 8s highlight sweeping the orbit are both gone. The 8s beat
+   survives: it is still what the five nodes and the four insight cards are
+   timed against, they just no longer have anything visibly leading them. */
 
 /* Three drift speeds over the source chips and the dot field, so the market's
    noise never settles into a single rhythm. */
@@ -1992,16 +1977,6 @@ footer h4 {
   100% {
     opacity: 0.55;
     filter: none;
-  }
-}
-
-@keyframes heroAnimCore {
-  0%,
-  100% {
-    transform: scale(0.985);
-  }
-  50% {
-    transform: scale(1.035);
   }
 }
 

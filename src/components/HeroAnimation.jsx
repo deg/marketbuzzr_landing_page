@@ -3,20 +3,27 @@ import { ICON_PATHS } from "./CategoryIcon";
 
 // The homepage hero, from Manu's hero animation in the design repo
 // (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/). It arrived as
-// drop_05_marketbuzzr-hero-animation-synced.html and was revised by drop_06,
-// whose assets/hero-animation.html is that same file plus one addition: the two
-// animated framing labels near the top. Everything else in drop_06's hero is
-// byte-identical, so the transcription below did not change.
+// drop_05_marketbuzzr-hero-animation-synced.html, was revised by drop_06 --
+// which added only the two animated framing labels near the top -- and is now
+// drop_07's marketbuzzr-hero-built-around-you-v5-static-center.html.
+//
+// WHAT v5 CHANGED, all of it in the middle of the picture: the orbit tightens
+// from r240 to r175 and every context node moves in with it; the glowing purple
+// disc carrying the M and the MARKETBUZZR wordmark becomes a lit navy sphere
+// carrying the promise, "Built Around You"; and the white highlight that swept
+// the orbit is gone. Nothing on the left or right of the canvas moved -- the
+// noise field, the twelve inbound flows, the four insight cards and the framing
+// copy are all as they were.
 //
 // It draws natively what used to be an 81 KB AVIF of exactly the same picture:
 // the market's noise on the left, the reader's own context on an orbit around
-// the MarketBuzzr core, and the insights that come out of it on the right. The
-// point of the change is that the ~40 pieces of text in it are now text --
-// selectable, translatable, searchable, and readable by a screen reader -- where
-// before they were pixels. This follows the industry pages (mbz-et8e.38/.39) in
-// dropping the text-rich handoff images.
+// the core, and the insights that come out of it on the right. The point of the
+// change is that the ~40 pieces of text in it are now text -- selectable,
+// translatable, searchable, and readable by a screen reader -- where before they
+// were pixels. This follows the industry pages (mbz-et8e.38/.39) in dropping the
+// text-rich handoff images.
 //
-// SIX DELIBERATE DEPARTURES from his file, all recorded in the outstanding-items
+// FIVE DELIBERATE DEPARTURES from his file, all recorded in the outstanding-items
 // memo. Everything else is a transcription, and his coordinates are kept exactly
 // so the composition can be diffed against the original.
 //
@@ -51,17 +58,7 @@ import { ICON_PATHS } from "./CategoryIcon";
 //      a constant and wrap, sizes and colours cycle. The loops below reproduce
 //      his coordinates exactly, and are checked against the original.
 //
-//   5. THE TRAVELLING HIGHLIGHT IS A CSS ROTATION, where his is SVG's own
-//      <animateMotion> along a path. It had to move for a reason and stayed for
-//      a better one. SMIL does not start on elements React inserts after the
-//      document has loaded -- measured, the highlight sat parked at the top of
-//      the orbit and never moved. And since his path is a plain circle about
-//      (760,440), travelling it IS a rotation about that point, so the CSS
-//      version is not an approximation: same centre, same 8s, same direction.
-//      Being CSS, it is also covered by the reduced-motion rule below, which
-//      markup animation never would have been.
-//
-//   6. REDUCED MOTION IS HANDLED, which his file does nothing about. Most of it
+//   5. REDUCED MOTION IS HANDLED, which his file does nothing about. Most of it
 //      falls out of the blanket rule in styles.css, but that rule pins every
 //      animation to its last keyframe and `heroAnimOutReveal` ends at 20%
 //      opacity, so the four insight cards would freeze almost invisible. There
@@ -128,12 +125,17 @@ const OUTBOUND_FLOWS = [
 // The reader's own context, spaced around one orbit starting at the top and
 // running clockwise. Two labels sit out to the side rather than under their node
 // because at those positions the orbit runs through the text.
+//
+// PULLED IN WITH THE ORBIT for drop_07's v5 hero. Every node moves, because the
+// circle they sit on went from r240 to r175; these are his coordinates, not a
+// recomputation from the new radius. The offset from node to label is unchanged
+// in each case, so the two side labels still clear the ring the same way.
 const CONTEXT_NODES = [
-  { cx: 760, cy: 200, fill: "#111a49", stroke: "#9a77ff", tone: "#b59cff", icon: "building", label: "YOUR COMPANY", lx: 760, ly: 148, labelTone: "#b38cff" },
-  { cx: 988, cy: 366, fill: "#0f2047", stroke: "#3c91f3", tone: "#72baff", icon: "target", label: "YOUR GOALS", lx: 1036, ly: 410, labelTone: "#61a9ff" },
-  { cx: 901, cy: 634, fill: "#121947", stroke: "#8b6bff", tone: "#b29cff", icon: "globe", label: "YOUR MARKETS", lx: 901, ly: 688, labelTone: "#b29cff" },
-  { cx: 619, cy: 634, fill: "#25133d", stroke: "#e85cb9", tone: "#ff7fd3", icon: "person", label: "YOUR ROLE", lx: 619, ly: 688, labelTone: "#ff7fd3" },
-  { cx: 532, cy: 366, fill: "#0f2940", stroke: "#2ad2d8", tone: "#58e2e8", icon: "people", label: "YOUR COMPETITORS", lx: 484, ly: 410, labelTone: "#58e2e8" },
+  { cx: 760, cy: 265, fill: "#111a49", stroke: "#9a77ff", tone: "#b59cff", icon: "building", label: "YOUR COMPANY", lx: 760, ly: 213, labelTone: "#b38cff" },
+  { cx: 926, cy: 386, fill: "#0f2047", stroke: "#3c91f3", tone: "#72baff", icon: "target", label: "YOUR GOALS", lx: 974, ly: 430, labelTone: "#61a9ff" },
+  { cx: 863, cy: 582, fill: "#121947", stroke: "#8b6bff", tone: "#b29cff", icon: "globe", label: "YOUR MARKETS", lx: 863, ly: 636, labelTone: "#b29cff" },
+  { cx: 657, cy: 582, fill: "#25133d", stroke: "#e85cb9", tone: "#ff7fd3", icon: "person", label: "YOUR ROLE", lx: 657, ly: 636, labelTone: "#ff7fd3" },
+  { cx: 594, cy: 386, fill: "#0f2940", stroke: "#2ad2d8", tone: "#58e2e8", icon: "people", label: "YOUR COMPETITORS", lx: 546, ly: 430, labelTone: "#58e2e8" },
 ];
 
 // Four insight cards, evenly stacked 176 apart. Everything inside a card is a
@@ -249,12 +251,24 @@ const HeroAnimation = ({ title, description }) => (
             <stop offset="42%" stopColor="#0a163d" />
             <stop offset="100%" className="artwork-fade" />
           </radialGradient>
-          <radialGradient id="hero-anim-core-grad">
-            <stop offset="0%" stopColor="#ac8dff" />
-            <stop offset="32%" stopColor="#7148ed" />
-            <stop offset="68%" stopColor="#24105e" />
-            <stop offset="100%" stopColor="#091333" />
+          {/* The core's two gradients, from drop_07's v5 hero. The radial is
+              off-centre at 34%/27%, which is what makes a flat disc read as a
+              lit sphere; the linear runs turquoise to purple along its edge at
+              low opacity, so the rim picks up both accents without either
+              becoming a second light source. His purple-to-black coreGrad went
+              with the glowing core it filled — and is unreferenced in his own
+              v5 file too, not just here. */}
+          <radialGradient id="hero-anim-core-sphere" cx="34%" cy="27%" r="82%">
+            <stop offset="0%" stopColor="#1a3556" />
+            <stop offset="38%" stopColor="#132b49" />
+            <stop offset="72%" stopColor="#0e223d" />
+            <stop offset="100%" stopColor="#0b1b34" />
           </radialGradient>
+          <linearGradient id="hero-anim-core-edge" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#78dfe7" stopOpacity=".30" />
+            <stop offset="52%" stopColor="#557287" stopOpacity=".20" />
+            <stop offset="100%" stopColor="#8c73e8" stopOpacity=".12" />
+          </linearGradient>
           <filter id="hero-anim-node-glow" x="-100%" y="-100%" width="300%" height="300%">
             <feGaussianBlur stdDeviation="8" result="b" />
             <feMerge>
@@ -359,26 +373,20 @@ const HeroAnimation = ({ title, description }) => (
           ))}
         </g>
 
-        {/* The orbit the reader's own context sits on. */}
-        <circle cx="760" cy="440" r="240" fill="none" stroke="#6d5cc8" strokeWidth="1.4" opacity=".42" />
+        {/* The orbit the reader's own context sits on. Tighter and quieter than
+            drop_06's: r175 rather than r240, and both strokes stepped down in
+            weight and opacity, which is drop_07 §3.1's "tighter outer orbit". */}
+        <circle cx="760" cy="440" r="175" fill="none" stroke="#536783" strokeWidth="1.2" opacity=".34" />
         <circle
           cx="760"
           cy="440"
-          r="240"
+          r="175"
           fill="none"
           stroke="url(#hero-anim-orbit)"
-          strokeWidth="2.2"
-          opacity=".72"
+          strokeWidth="1.8"
+          opacity=".56"
           strokeDasharray="2 8"
         />
-
-        {/* The highlight travelling that orbit, checking each node in turn.
-            Drawn parked at the top of the circle and spun about its centre --
-            see the note on the orbit above. */}
-        <g className="hero-anim-scan" filter="url(#hero-anim-soft-glow)">
-          <circle cx="760" cy="200" r="8" fill="#fff" />
-          <circle cx="760" cy="200" r="18" fill="#79dfff" opacity=".18" />
-        </g>
 
         <g fontFamily="Inter, Arial, sans-serif">
           {CONTEXT_NODES.map((node, i) => (
@@ -392,15 +400,33 @@ const HeroAnimation = ({ title, description }) => (
           ))}
         </g>
 
-        {/* The core, breathing. */}
-        <g className="hero-anim-core">
-          <circle cx="760" cy="440" r="120" fill="none" stroke="#8d6cff" strokeWidth="3.4" opacity=".46" filter="url(#hero-anim-soft-glow)" />
-          <circle cx="760" cy="440" r="96" fill="url(#hero-anim-core-grad)" stroke="#9f83ff" strokeWidth="2.2" filter="url(#hero-anim-soft-glow)" />
-          <text x="760" y="430" textAnchor="middle" fontSize="64" fontWeight="950" fill="#fff">
-            M
+        {/* The core. It was the MarketBuzzr wordmark inside a glowing purple
+            disc; drop_07 §3.1 makes it a plain lit sphere carrying the promise
+            instead, "Built Around You" — the M and the wordmark are gone, and so
+            are the outer glow ring and the soft-glow filter that lit both.
+
+            NO PULSE, AND HIS OWN FILE STILL PULSES. §3.1 lists five properties
+            of the approved asset; four are in the file (the centre copy, the
+            static sphere, no rotating white ball, the tighter orbit) and "no
+            pulse" is not — it keeps a .pulseCore class and a 2.8s scale
+            animation on this group. Reading that as a leftover rather than an
+            instruction, because he names it in a list of things he says the
+            asset already does. Raised in the outstanding-items memo; one line
+            either way if he says otherwise. */}
+        <g>
+          <circle
+            cx="760"
+            cy="440"
+            r="88"
+            fill="url(#hero-anim-core-sphere)"
+            stroke="url(#hero-anim-core-edge)"
+            strokeWidth="1.5"
+          />
+          <text x="760" y="434" textAnchor="middle" fontSize="18" fontWeight="700" fill="#f4f8ff">
+            Built Around
           </text>
-          <text x="760" y="474" textAnchor="middle" fontSize="18" fontWeight="850" fill="#f0edff" letterSpacing="2.4">
-            MARKETBUZZR
+          <text x="760" y="458" textAnchor="middle" fontSize="18" fontWeight="700" fill="#72dfe8">
+            You
           </text>
         </g>
 
