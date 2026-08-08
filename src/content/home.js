@@ -58,17 +58,24 @@ export const home = {
 
   // §3 Problem
   problem: {
-    title: "Your Market Moves Faster Than Anyone Can Follow",
+    // The break is drop_07 §3.3's: "force the desktop line break after
+    // 'faster'". SectionTitle runs the title through withBreaks, so this is a
+    // hard <br/> on desktop and a plain wrap once the heading is narrower than
+    // the break anyway.
+    title: "Your Market Moves Faster\nThan Anyone Can Follow",
+    // ONE PARAGRAPH, NOT FOUR. drop_07 §3.3: "the paragraph below it beginning
+    // with competitors moving, regulations changing, etc. must be one concise
+    // paragraph." This was four stacked short ones. His sentences are kept
+    // word for word and only the paragraph breaks between them go — the
+    // instruction is about the shape of the block, and rewriting approved copy
+    // to make it shorter would be answering a question he did not ask.
+    //
+    // drop_06's edit to the second sentence survives inside it. His quoted
+    // string ("Signals are everywhere—but fragmented.") truncated the sentence
+    // at the em dash rather than reproducing it, so "replace with exactly"
+    // governed the wording and not how much of the line went.
     paragraphs: [
-      "Competitors move. Regulations change. Customer priorities shift. New technologies and market trends emerge.",
-      // drop_06's second copy edit. His quoted string ("Signals are
-      // everywhere—but fragmented.") truncates this sentence at the em dash
-      // rather than reproducing it, so "replace with exactly" governs the
-      // wording of the replacement and not how much of the line goes; the
-      // qualifier stays, since it is what sets MarketBuzzr up.
-      "Signals are everywhere. They’re just fragmented across sources and rarely interpreted with your business in mind.",
-      "Most of it doesn't matter to you.",
-      "Some of it could change your strategy.",
+      "Competitors move. Regulations change. Customer priorities shift. New technologies and market trends emerge. Signals are everywhere. They’re just fragmented across sources and rarely interpreted with your business in mind. Most of it doesn't matter to you. Some of it could change your strategy.",
     ],
     closer: "MarketBuzzr helps you know the difference.",
     // Now drawn rather than photographed — Manu's drop_06 "Worth Your
@@ -87,9 +94,13 @@ export const home = {
   // §4 Product Proof / Insight
   insight: {
     title: "Every Insight. Clear. Actionable. Ready to Use.",
-    lead: "MarketBuzzr doesn't just tell you what happened. It shows what it could mean for your business—and what you can do next.",
-    emphasis:
-      "Discover what you didn't know. Pressure-test what you think you already know.",
+    // The em dash before "and what you can do next" is gone, which is drop_07
+    // §3.3 naming this line specifically and §1's site-wide rule doing the same
+    // thing generally.
+    lead: "MarketBuzzr doesn't just tell you what happened. It shows what it could mean for your business, and what you can do next.",
+    // NO `emphasis` HERE, DELIBERATELY. It read "Discover what you didn't know.
+    // Pressure-test what you think you already know." drop_07 §3.3 removes it
+    // outright: "do not replace it with another sentence."
     visualAlt:
       "MarketBuzzr competitor-launch insight showing the market signal, strategic implication, recommended actions, transparent sources and draft actions.",
   },

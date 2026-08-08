@@ -115,7 +115,6 @@ const Home = () => {
             Do not delete it to get past the gate — the decision is open as
             mbz-et8e.12, and section 1 of the outstanding-items memo is the
             same question put to Manu. */}
-        <p className="lead lead-strong">{insight.emphasis}</p>
       </section>
 
       {/* §5 The five-step flow, built natively. No paragraph under the heading,
