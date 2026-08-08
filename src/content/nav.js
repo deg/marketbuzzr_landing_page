@@ -1,27 +1,38 @@
-// Site navigation, from Manu's August 2026 handover, section 2 and the
-// acceptance checklist — drop_06_MarketBuzzr_CTO_Website_Handover_Aug2026.docx
-// in the design repo.
+import { home } from "./home";
+
+// Site navigation, from drop_07 §2 in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/).
 //
-// Wordmark left, two links centre, two CTAs right. The checklist is explicit
-// that this is the whole of it: "Top navigation contains only MarketBuzzr, How
-// It Works, Industries, Try for Free and Book a Demo."
+// Wordmark, then How It Works, What You Get and Industries, then the two CTAs.
+// §2 asks for those three links to sit "closer to the logo than in the current
+// implementation so they read as one navigation group", which is a reversal:
+// the August handover centred them and this brief pulls them back left.
 //
-// WHAT THAT REMOVED, so nobody restores it by accident. Product (which held How
-// It Works), Solutions, Resources and Pricing — the last three pointed at pages
-// that have never existed and were three of the five links gated by
-// mbz-et8e.18. The Industries dropdown went too: /industries is a real page now
-// (mbz-et8e.47) and is the entry point his brief intends, so the six industries
-// are reachable from there rather than from a menu.
+// THE INDUSTRIES DROPDOWN IS BACK. drop_06's checklist said the bar contained
+// "only MarketBuzzr, How It Works, Industries, Try for Free and Book a Demo",
+// and the menu machinery was deleted on that reading (mbz-et8e.52.5). §2 says
+// "Industries uses a dropdown. Use the industry order in Section 6", so it
+// returns, recovered from that commit rather than rewritten.
 //
-// LOGIN WENT WITH THEM, and that one is worth a second look. It was the only
-// route from the marketing site into the product, and "only" in his checklist
-// leaves no room for it. Removing it is what the brief says; whether he meant
-// to strand returning customers is a question for him, raised in the
-// outstanding-items memo. Restoring it is a three-line change if he says so.
+// THE ENTRY PAGE IS THE FIRST ITEM IN THE PANEL. /industries is a real page and
+// the dropdown toggle is a button, not a link, so without this the page his own
+// §6 specifies would be unreachable from the bar. Not something §2 asks for; it
+// is what keeps §2 and §6 from contradicting each other.
+//
+// The industry list is imported rather than restated. content/home.js is the
+// only list of industries on the site and this and content/industries.js both
+// read it, so the bar cannot drift from the grid.
 export const nav = {
   items: [
     { label: "How It Works", to: "/how-it-works" },
-    { label: "Industries", to: "/industries" },
+    { label: "What You Get", to: "/what-you-get" },
+    {
+      label: "Industries",
+      items: [
+        { label: "All Industries", to: "/industries" },
+        ...home.industries.items.map(({ name, to }) => ({ label: name, to })),
+      ],
+    },
   ],
   // Both, in his order, and the fills are set by the shared CTA rules: Try for
   // Free filled, Book a Demo outlined (mbz-et8e.52.4).

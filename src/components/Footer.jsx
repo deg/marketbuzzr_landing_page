@@ -4,12 +4,12 @@ const Footer = () => (
   <footer id="contact">
     <div className="container footer-grid">
       <div>
-        <div className="footer-brand">
-          <div className="brand-badge">M</div>
-          MarketBuzzr
-        </div>
+        {/* The wordmark alone. drop_07 §2: "Footer brand: remove the separate
+            'M'. Show only MarketBuzzr." The M tile that stood here was the last
+            of it on the site — the bar dropped its own in mbz-et8e.52.5. */}
+        <div className="footer-brand">MarketBuzzr</div>
         <p className="footer-note">
-          © 2025–{new Date().getFullYear()} MarketBuzzr — All rights reserved.
+          © 2025–{new Date().getFullYear()} MarketBuzzr. All rights reserved.
         </p>
       </div>
       <div>

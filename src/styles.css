@@ -218,18 +218,9 @@ nav {
    which is how the bar ended up with a FILLED "Book a Demo", the one
    combination his brief rules out.
 
-   Only size and spacing are set here: a nav button should be smaller than a
-   hero button, and that is the only thing about it that is nav-specific. */
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.nav-actions :is(.cta, .cta-secondary) {
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: 15px;
-}
+   Only size is nav-specific, and that rule now lives beside the base one it
+   overrides rather than above it — see mbz-et8e.52.24. The bar's layout rules
+   are in the navigation block further down. */
 
 /* Hero Section */
 /* Horizontal padding is restated rather than inherited from .container: this
@@ -372,9 +363,19 @@ p {
   transform: translateY(0);
 }
 
-/* Only size, as with .nav-actions: a dialog button sits under a form rather
-   than in a hero, and that is the only thing about it that is modal-specific. */
-.modal-actions :is(.cta, .cta-secondary) {
+/* ONLY SIZE, and these two must stay AFTER the base rule above. Both tie it on
+   specificity at (0,2,0), so they win on source order alone; the nav's copy of
+   this rule used to sit before it and therefore never applied, which is how the
+   bar shipped hero-sized buttons at every width — 152x55 at 18px, measured
+   (mbz-et8e.52.24). Two further element-based copies at the 768px and 480px
+   breakpoints were (0,1,1) and could not have applied either; they are gone.
+
+   drop_07 §2 wants this smaller still: "smaller Try for Free and Book a Demo
+   buttons so they align visually with the logo and navigation text." The nav
+   link beside them is 16px, so 15px type in a button that is padded like a nav
+   link is what puts the three on one line. The modal's is unchanged; a dialog
+   button sits under a form rather than in a hero, which is its own reason. */
+:is(.nav-actions, .modal-actions) :is(.cta, .cta-secondary) {
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: 15px;
 }
@@ -569,12 +570,6 @@ h2 {
     flex-shrink: 0;
   }
 
-  .nav-actions a,
-  .nav-actions button {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 16px;
-    white-space: nowrap;
-  }
 
   /* Keep the horizontal gutter here too — this breakpoint is exactly where
      content running to the screen edge is most obvious. */
@@ -613,11 +608,6 @@ h2 {
     gap: var(--spacing-xs);
   }
 
-  .nav-actions a,
-  .nav-actions button {
-    padding: 5px var(--spacing-xs);
-    font-size: 16px;
-  }
 
   .brand {
     font-size: 18px;
@@ -754,12 +744,12 @@ footer a:hover {
   }
 }
 
+/* Just the wordmark now, so the flex row that held it beside the M tile goes
+   with the tile (drop_07 §2). It reads as a brand mark rather than body copy,
+   so it takes the title colour like the bar's. */
 .footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--title);
   margin-bottom: 12px;
 }
 
@@ -949,24 +939,76 @@ footer h4 {
   gap: var(--spacing-lg);
 }
 
-/* Three zones, as his table draws them: wordmark left, links CENTRE, CTAs
-   right. The links used to sit against the wordmark; auto margins on both
-   sides of .nav-links is what centres them in the space between, without
-   giving either neighbour a fixed width to fight over. */
+/* THE LINKS SIT AGAINST THE WORDMARK, and this is a reversal. The August
+   handover centred them in the space between wordmark and CTAs, done with auto
+   margins on both sides; drop_07 §2 asks for the opposite — "move How It Works,
+   What You Get and Industries closer to the logo than in the current
+   implementation so they read as one navigation group".
+
+   So the auto margin moves to .nav-actions, which pushes only the CTAs right
+   and leaves the links where the flex line starts. Neither neighbour needs a
+   fixed width for this to hold. */
 .nav-links {
-  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  margin-inline-start: auto;
 }
 
-.nav-links {
+/* --- Industries dropdown --------------------------------------------------
+   Recovered from mbz-et8e.52.5, the commit that deleted it, rather than
+   rewritten: drop_07 §2 asks for the menu that brief removed. */
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-caret {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.nav-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 232px;
+  display: none;
+  flex-direction: column;
+  padding: var(--spacing-xs);
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--edge-3);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 60;
+}
+
+.nav-dropdown-panel.open {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-lg);
+}
+
+.nav-dropdown-item {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 16px;
+  white-space: nowrap;
+  transition: background var(--transition-fast);
+}
+
+.nav-dropdown-item:hover {
+  background: var(--overlay-2);
+}
+
+.nav-dropdown-item.active {
+  color: var(--brand);
 }
 
 .nav-link {
@@ -1053,8 +1095,34 @@ footer h4 {
     justify-content: space-between;
   }
 
+  /* The menu is a column here, so the pair separates with a top margin. The
+     inline auto margin that pushes them right on desktop has to be undone
+     rather than ignored: on a stretched column child it overrides the stretch
+     and shrinks the row to its content, measured at x=110 in a 390px viewport
+     instead of starting at the gutter. */
   .nav-actions {
     margin-top: var(--spacing-sm);
+    margin-inline-start: 0;
+  }
+
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  /* In the column the panel is a nested list rather than an overlay: static, so
+     it pushes the CTAs down instead of covering them. */
+  .nav-dropdown-panel {
+    position: static;
+    min-width: 0;
+    padding: 0 0 0 var(--spacing-md);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Let the longer industry names wrap inside the narrow mobile menu. */
+  .nav-dropdown-item {
+    white-space: normal;
   }
 }
 
