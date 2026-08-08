@@ -54,7 +54,9 @@ const IndustryPage = ({ data }) => {
   useDocumentTitle(data.title);
   const { hero, sources, intro, insight, roles, features, outro, closing } =
     withChrome(data);
-  // Six go into three columns; four (or fewer) keep one row of their own.
+  // A multiple of three goes into three columns; anything else keeps one row of
+  // its own. Six on most pages, three on Other Industries since drop_07 §12 cut
+  // that block down, and four on Biotechnology.
   const featureCols = features.items.length % 3 === 0 ? 3 : 4;
 
   return (

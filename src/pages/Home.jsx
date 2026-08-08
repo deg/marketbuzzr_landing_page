@@ -60,7 +60,8 @@ const Home = () => {
           below spends everything it can on the visual to limit that — the grid
           opts into the 1400px measure rather than the 1100px text one, and the
           copy takes a fixed narrow rail rather than a fraction — which lands
-          the labels near 13px instead of the 8px an even split would give.
+          the labels at 12.2px instead of the 8.2px an even split of the same
+          measure would give.
           Measured, not estimated; the number is on mbz-et8e.54.5.
 
           The visual is NOT given .product-frame's breakout here. That centres a

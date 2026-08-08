@@ -62,8 +62,11 @@ back to him live beside them.
 "where this brief conflicts with an earlier handover, use this brief" — and it
 reverses several earlier decisions rather than merely extending them. Its README
 says v3 and names a `_v3.docx`; the zip ships only `_v4.docx`, so the README is
-stale, not a missing file. Its own §14 is a seventeen-item acceptance checklist,
-scored by `acceptance_probe.py` in the design repo (`17/17` as of `mbz-et8e.54`).
+stale, not a missing file. Its own §14 is an **eighteen**-item acceptance
+checklist, scored by `acceptance_probe.py` in the design repo, which passes all
+eighteen as of `mbz-et8e.54` and adds one check of its own. It was briefly
+recorded here and in several commit messages as seventeen, because two of his
+items were run as a single check.
 
 `drop_05` is the first handoff delivered as **HTML rather than artwork** — a sketch by
 an artist agent, not a page to drop in. Its copy and structure are the deliverable; its
@@ -304,9 +307,10 @@ halves of the selectors they shared with `.card` and `.cta-panel`.
 Page weight with everything scrolled in is **133.8 KB** and LCP is 396ms,
 measured at 1440px against the preview build. That is about 147 KB lighter than
 before `drop_06`: the two AVIFs it retired were 146.7 KB between them and the
-components replacing them add roughly 2.3 KB gzipped. Step 01's image is not the
-LCP element and stays `loading="lazy"`, which is what the brief conditions on.
-Re-measure rather than trusting this line.
+components replacing them add roughly 2.3 KB gzipped. Both figures predate
+`drop_07`, which took the third image off this page as well, so the page is
+lighter again and carries no raster at all. Re-measure rather than trusting this
+line.
 
 ### The `/industries` entry page (2026-08)
 
@@ -337,12 +341,11 @@ class and its rules are deleted rather than left unused.
 shipped as the only page on the site without one; `drop_07` §6.1 opens with
 "Eyebrow: INDUSTRIES" and settles it the other way.
 
-All six cards now reach a real page. Two did not when this page was built —
-Life Sciences, which `drop_06` replaced with Other Industries, and Public Safety
-& Defense Technology, which was built in `mbz-et8e.52.11`. That matters here
+All nine cards reach a real page, and the three `drop_07` added were built
+before the list grew so that stayed true through the round. That matters here
 because this page gives each industry a full card, so a dead link is more
 prominent on it than on the homepage: check this page, not just §6, before
-adding a seventh industry to the shared list.
+adding a tenth industry to the shared list.
 
 ### The industry pages (2026-08) — one template, nine pages
 
@@ -365,7 +368,7 @@ page component, which `mbz-et8e.52.12` consolidated away. It began as a pilot on
 artwork). The pilot held, and the August handover settled it outright — "all six
 industry destinations must use the same page structure and styling" — so a second
 template, `pages/UseCasePage.jsx`, was deleted along with the `content/tech.js` it
-rendered (`mbz-et8e.52.12`). A seventh industry is a new content module and a route,
+rendered (`mbz-et8e.52.12`). A tenth industry is a new content module and a route,
 nothing more.
 
 **The point of the template is losing the text-rich PNGs.** The homepage and How It Works
@@ -418,9 +421,11 @@ copied that one string, so by 2026-08 all of them shipped the same
 fifteen-month-old date. `mbz-et8e.53` resolved it by moving the dates forward
 rather than switching back to a relative "Detected 2 days ago" — the absolute
 form is what he drew, and rot in a year is accepted because the site describes
-where the product is today. Nine different weekdays and business-hours times, so
-the set does not read as one string pasted nine times. Keep both properties in
-any refresh, and give a tenth page its own date.
+where the product is today. Nine DIFFERENT DATES, each on a weekday and in
+business hours, so the set does not read as one string pasted nine times — they
+fall on five distinct weekdays, which is all nine dates can manage. An earlier
+version of this line claimed nine different weekdays, of which there are seven.
+Keep the properties that hold in any refresh, and give a tenth page its own date.
 
 **The homepage's `insight-medicalcomp` artwork carries the same date five times
 over** — the card header plus all four source chips — and there it is pixels, not
