@@ -1272,41 +1272,16 @@ footer h4 {
   --artwork-ground: #000b2d;
 }
 
-/* The How It Works artwork runs the other way: all three are drawn on white
-   (#FEFEFE sampled at every corner) against the navy page, so the same bleed
-   that stops the homepage's dark artwork reading as a black rectangle here
-   stops these reading as white ones.
+/* The light-on-dark bleed that used to sit here is GONE, with the artwork it
+   existed for. All three How It Works visuals were drawn on white against the
+   navy page, so each needed a small, tight box-shadow rather than the homepage's
+   wide dark one — a wide light haze put --muted body copy on a near-grey ground
+   at 1.70:1. Steps 02 and 03 stopped being pictures in drop_06 and step 01 in
+   drop_07 (mbz-et8e.54.8), so there is no light raster left on the site and no
+   asymmetry to preserve.
 
-   The BLUR AND SPREAD ARE MUCH SMALLER THAN THE DARK CASE, and that asymmetry
-   is not a stylistic preference. A dark bleed on a dark page is invisible where
-   it overshoots; a light one is not. Contrast of the --muted body copy against
-   the ground in the 40px band right above a figure, where the copy sits closest:
-
-                                        1440px    390px
-     80px/30px, the homepage's values   1.70:1    2.08:1   (AA wants 4.5:1)
-     24px/0                             9.57:1    9.79:1
-
-   The haze reaches far enough at 80/30 to put the end of the paragraph on a
-   near-grey ground; at 24px with no spread the edge still dissolves and nothing
-   leaks into the copy. Do not "harmonise" this back to the homepage's numbers.
-
-   Dark-ground re-renders have been asked for (mbz-et8e.28 item 9); when they
-   arrive this whole block goes and the artwork joins the rule above.
-
-   No radius, deliberately: the homepage dropped rounded corners because they
-   read as a card even with no border, and the brief here forbids cards too.
-
-   Written as .product-frame.how-visual, not bare .how-visual: it overrides
-   .product-frame's own box-shadow, and a single class would tie with it and win
-   only by source order — the trap this file's header block is about. Same reason
-   the margin below is scoped to .how-step.
-
-   Extra space below, because the emphasized closing line follows the figure
+   Extra space below the figure, because the emphasized closing line follows it
    directly and .section p.lead only puts 8px between them. */
-.product-frame.how-visual {
-  box-shadow: 0 0 24px 0 #fefefe;
-}
-
 .how-step .how-visual {
   margin-bottom: var(--spacing-2xl);
 }
@@ -2521,18 +2496,10 @@ footer h4 {
     width: max(660px, 100%);
   }
 
-  /* One held width left on How It Works, where there were three. Steps 02 and
-     03 stopped being pictures in drop_06 (mbz-et8e.46) and reflow like any
-     other markup, so the whole scroller-and-panning trade only applies to
-     step 01 now. Measured the same way: the smallest line that carries the
-     story is 12px at 1774 wide, which needs 1183px to clear the ~8px floor a
-     high-DPI phone wants.
-
-     A dark-ground re-render, or a sketch we can rebuild it from, deletes this
-     last one too — see mbz-et8e.28 and §2 of the memo. */
-  .how-visual-monitor-filter {
-    --mobile-artwork-width: 1200px;
-  }
+  /* NO HELD WIDTHS LEFT ON How It Works. There were three; steps 02 and 03
+     stopped being pictures in drop_06 (mbz-et8e.46) and step 01 in drop_07
+     (mbz-et8e.54.8), so all three are markup and reflow like any other. The
+     scroller-and-panning trade does not apply to any of them. */
 }
 /* ============================================================
    FIX-BEFORE-RELEASE (mbz-et8e.18): delete this block.
@@ -4015,4 +3982,210 @@ footer h4 {
    nothing needed recolouring. */
 .signal-line {
   display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   How It Works step 01 — MonitorFilter
+
+   Three stages down a column: the market's sources, YOUR CONTEXT filtering
+   them, three developments that come out. Manu's artwork runs the same three
+   left to right, and this runs them top to bottom because drop_07 §4.2 puts
+   every step's visual in one narrow column. See the component for the
+   measurement that retired the raster.
+
+   These rules sit before the Final overrides block deliberately: nothing here
+   ties with anything in it. .monitor-context-title is a heading-shaped element
+   that is not a heading, so it takes --title explicitly.
+   --------------------------------------------------------------------------- */
+
+/* 640px is the frame, not the column. Manu's own step 02 and 03 assets set
+   .wrap to max-width 640px, which is what "the standard right-column visual
+   frame" in §4.2 means in numbers, so this holds the same width whether the
+   column around it is wider or narrower. Without it the context list spreads
+   across a full-width section and the two columns drift a screen apart. */
+.monitor-filter {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-xl) auto 0;
+  width: 100%;
+  max-width: 640px;
+}
+
+.monitor-stage {
+  width: 100%;
+}
+
+.monitor-stage-label {
+  margin: 0 0 var(--spacing-md);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* The source cloud. Centred and wrapping rather than scattered: SourceCluster's
+   golden-angle scatter is built for a tall narrow hero column and needs ~460px
+   of height to keep its chips apart, which is most of this figure's budget. */
+.monitor-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.monitor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px var(--spacing-md);
+  border: 1px solid var(--edge-2);
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.monitor-chip .category-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--brand);
+}
+
+/* The one light surface in the figure, because it is the one mechanism: his
+   sources pass THROUGH a pale sheet. Tokens are rescoped rather than the rules
+   inside being rewritten, the same way .insight-wrap does it. */
+.monitor-context {
+  --title: #0f1b3d;
+  --muted: #46557d;
+  padding: var(--spacing-lg);
+  border: 1px solid #e2e6f2;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #ffffff, #f4f7fd);
+  box-shadow: 0 18px 42px rgba(11, 27, 62, 0.28);
+  text-align: center;
+}
+
+.monitor-context-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md, 10px);
+  background: #eef2ff;
+  color: #4d23ce;
+}
+
+.monitor-context-mark .category-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.monitor-context-title {
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+  color: var(--title);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* Two columns of three, which is his single column of six folded to fit a
+   column that is wider than it is tall at this point in the figure. */
+.monitor-context-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-sm) var(--spacing-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.monitor-context-items li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--title);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.monitor-context-items .category-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: #4d23ce;
+}
+
+/* What comes out: three cards, one per surfaced development. */
+.monitor-outputs ul {
+  display: grid;
+  gap: var(--spacing-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.monitor-output {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border: 1px solid var(--edge-2);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  color: var(--title);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.monitor-output-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+  color: var(--brand);
+}
+
+.monitor-output-mark .category-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* The flow between stages. Decorative, so the component hides it from assistive
+   technology; drawn rather than a glyph so it takes the page's colour. */
+.monitor-arrow {
+  width: 1px;
+  height: 26px;
+  margin: 0;
+  background: linear-gradient(180deg, var(--edge-3), var(--brand));
+  position: relative;
+}
+
+.monitor-arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid var(--brand);
+  border-bottom: 1px solid var(--brand);
+  transform: translate(-50%, 2px) rotate(45deg);
+}
+
+@media (max-width: 520px) {
+  .monitor-context-items {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

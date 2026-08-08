@@ -263,6 +263,20 @@ export const ICON_PATHS = {
       <path d="M7.5 12.5h9M7.5 16h5.5" />
     </>
   ),
+  // --- Added for How It Works step 01, when it stopped being a picture. ---
+
+  // The reader's products — a box seen in three-quarter view, which is what
+  // Manu's artwork draws. `chip` is the set's other product-ish icon and reads
+  // as hardware specifically, so it could not stand in.
+  box: (
+    <>
+      <path d="M12 2.6 3.5 7v10L12 21.4 20.5 17V7z" />
+      <path d="M3.5 7 12 11.4 20.5 7M12 11.4v10" />
+    </>
+  ),
+  // The context filter itself — a funnel. Only step 01 uses it, and only
+  // because his artwork puts one at the top of the YOUR CONTEXT panel.
+  funnel: <path d="M3 4.5h18l-7 8v7l-4 2v-9z" />,
   // Competitor Repositioning — two arrows changing places. drop_07's Worth Your
   // Attention animation is the first of Manu's files to draw its own line icon
   // rather than reach for an emoji, so this one exists to match a picture
