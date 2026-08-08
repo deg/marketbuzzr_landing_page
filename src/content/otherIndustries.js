@@ -1,5 +1,24 @@
-// Other Industries, built from section 8 of Manu's August 2026 handover
-// (drop_06_MarketBuzzr_CTO_Website_Handover_Aug2026.docx in the design repo).
+// Other Industries, rewritten from drop_07 §12 in the design repo
+// (~/Documents/marketbuzzr/marketbuzzr_landing_page_design/). That section
+// replaces this page's copy wholesale, and it is the longest §12 has ever been:
+// eyebrow, headline, hero paragraph, six right-side cards, a three-item block,
+// two headed prose passages and a closing panel.
+//
+// ITS OLD HEADLINE IS NOW THE ENTRY PAGE'S. This page opened on "Your market is
+// unique. Your intelligence should be too."; §6.1 gives that line to
+// /industries and §12 gives this page "Your industry doesn't have to fit into a
+// box." Both moved in the same round, so neither is lost.
+//
+// THE ONE STRUCTURAL ADDITION. §12 gives this page TWO headed prose passages
+// where every other industry has one. "Intelligence that reflects your
+// priorities" is the intro block and "From market developments to action" is
+// `outro`, which IndustryPage renders only when a page supplies it. That keeps
+// this page on the one template rather than forking a second component, which
+// is what mbz-et8e.52.12 consolidated away.
+//
+// Superseded: section 8 of the August 2026 handover
+// (drop_06_MarketBuzzr_CTO_Website_Handover_Aug2026.docx), which this was
+// originally built from.
 //
 // This is the sixth industry destination, and section 7 puts it in the list in
 // place of Life Sciences. It is the one page in the set that is not about an
@@ -32,37 +51,36 @@ export const otherIndustries = {
   title: "Market Intelligence for Niche and Specialized Markets — MarketBuzzr",
 
   hero: {
-    kicker: "MARKETBUZZR FOR YOUR INDUSTRY",
-    title: "Your market is unique. Your intelligence should be too.",
+    kicker: "OTHER INDUSTRIES",
+    title: "Your industry doesn't have to fit into a box",
     sub: [
-      "MarketBuzzr adapts to your specific industry, niche and competitive landscape by tracking the sources, companies, conversations and developments that matter to your business.",
+      "Every market has its own dynamics. MarketBuzzr adapts to your company, your competitive landscape and your priorities, giving your team intelligence built around the market you actually operate in.",
     ],
   },
 
-  // Deliberately the most generic set of chips on any industry page: these are
-  // the kinds of place a signal comes from rather than the topics of one market,
-  // which is what "the sources, companies, conversations and developments" in
-  // his hero paragraph describes.
+  // §12's six right-side cards, replacing the seven generic source chips this
+  // page carried. His labels; his one-line descriptions are not rendered,
+  // because a chip on this template is a label and giving one page a second
+  // line would make it the odd one out among nine. Noted for him rather than
+  // designed around.
   sources: {
     mark: "target",
     items: [
-      { icon: "building", label: "Your competitors" },
-      { icon: "article", label: "Industry media" },
-      { icon: "threads", label: "Forums & communities" },
-      { icon: "video", label: "YouTube & webinars" },
-      { icon: "calendar", label: "Conferences & events" },
-      { icon: "release", label: "Company announcements" },
-      { icon: "bank", label: "Regulation & policy" },
+      { icon: "building", label: "Competitor moves" },
+      { icon: "trend", label: "Market shifts" },
+      { icon: "bank", label: "Regulatory developments" },
+      { icon: "chip", label: "Technology & innovation" },
+      { icon: "people", label: "Customer trends" },
+      { icon: "handshake", label: "Partnerships & M&A" },
     ],
   },
 
+  // §12's first headed passage, verbatim.
   intro: {
-    // No heading is given for this section on this page. Using the one his
-    // MedTech and FinTech pages both carry rather than inventing a sixth
-    // variation.
-    heading: "See what matters. Understand what it means.",
+    heading: "Intelligence that reflects your priorities",
     paragraphs: [
-      "MarketBuzzr learns your company, market, competitors, goals and priorities, then evaluates developments across your ecosystem to show you what deserves attention and what to do next.",
+      "Whether you're operating in an established category, a specialized niche or a market that spans several industries, the intelligence you need is rarely generic.",
+      "MarketBuzzr connects developments across your market and puts them in the context of your company and goals, helping your team understand what changed, why it matters and where it may require action.",
     ],
   },
 
@@ -105,57 +123,50 @@ export const otherIndustries = {
     ],
   },
 
+  // §12's "Built around your market", three items where this page carried six.
+  // His headings and his descriptions, so the six invented ones go -- that is
+  // the last of this page's invented copy, which updates_from_claude.md logged.
+  //
+  // No closing line under them. §12 gives the block a heading and three items
+  // and moves straight on, and IndustryPage renders that line only when a page
+  // supplies one.
   features: {
-    // His section headline, sentence case and without the full stop the other
-    // five section headings also do without.
     heading: "Built around your market",
-    // His six category names. The descriptions are not his.
     items: [
       {
-        icon: "building",
-        heading: "Your competitors",
+        icon: "compass",
+        heading: "Define what matters to you",
         description:
-          "Follow the companies you actually compete with, whether or not the category has a name yet, and what they are telling the buyers you share.",
+          "Tell us about your company, your market, your competitors and the priorities your team cares about. We use that context to build intelligence around your specific business.",
       },
       {
-        icon: "article",
-        heading: "Your industry sources",
+        icon: "globe",
+        heading: "Track the right ecosystem",
         description:
-          "Track the publications, analysts, communities and events your market pays attention to, including the small ones a general tool would never reach.",
-      },
-      {
-        icon: "trend",
-        heading: "Your market dynamics",
-        description:
-          "Understand what is changing in pricing, demand, regulation, technology and the expectations of the people who buy from you.",
+          "MarketBuzzr follows relevant competitors, industry sources, regulatory developments, technologies and market activity across your ecosystem.",
       },
       {
         icon: "target",
-        heading: "Your opportunities",
+        heading: "Surface what deserves attention",
         description:
-          "Spot the segments, partnerships, use cases and openings worth pursuing before they become obvious to everyone else.",
-      },
-      {
-        icon: "shield",
-        heading: "Your risks",
-        description:
-          "See the shifts, new entrants and changes in sentiment that could affect your position, early enough to decide what to do about them.",
-      },
-      {
-        icon: "compass",
-        heading: "Your priorities",
-        description:
-          "Every development is judged against your company, products, goals and role, so what reaches you is what bears on the decisions you make.",
+          "Instead of adding more information to your plate, MarketBuzzr identifies the developments that could matter to your business and explains why.",
       },
     ],
-    closer:
-      "MarketBuzzr works from your definition of your market rather than a predefined category, which is what lets it fit a specialized or niche business as readily as a large one.",
+  },
+
+  // §12's second headed passage. The only page with one; see the header.
+  outro: {
+    heading: "From market developments to action",
+    paragraphs: [
+      "Stay informed about competitor moves, changing customer needs, regulatory developments, emerging technologies, partnerships, growth opportunities and other shifts relevant to your business.",
+      "And when something deserves action, MarketBuzzr helps your team take the next step with actionable insights and ready-to-use drafts.",
+    ],
   },
 
   closing: {
-    heading: "Whatever your market, start with what matters",
+    heading: "Let's build intelligence around your market",
     paragraphs: [
-      "See what MarketBuzzr finds for your company and turn the developments shaping your market into intelligence you can act on.",
+      "Tell us what matters to your business and we'll show you what MarketBuzzr can find.",
     ],
   },
 };

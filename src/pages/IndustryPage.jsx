@@ -52,7 +52,7 @@ const withChrome = (data) => ({
 
 const IndustryPage = ({ data }) => {
   useDocumentTitle(data.title);
-  const { hero, sources, intro, insight, roles, features, closing } =
+  const { hero, sources, intro, insight, roles, features, outro, closing } =
     withChrome(data);
   // Six go into three columns; four (or fewer) keep one row of their own.
   const featureCols = features.items.length % 3 === 0 ? 3 : 4;
@@ -117,11 +117,32 @@ const IndustryPage = ({ data }) => {
           ))}
         </div>
         {/* withBreaks because drop_07 §7 asks this sentence to break after
-            "could" on desktop. Four of the six pages carry it; the two that do
-            not have their own closing line and no "\n" in it, so this is a
-            no-op for them. */}
-        <p className="lead">{withBreaks(features.closer)}</p>
+            "could" on desktop. Seven of the nine pages carry that sentence; the
+            others have their own closing line with no "\n" in it, so this is a
+            no-op for them.
+
+            Optional, because Other Industries has no line here: §12 gives that
+            block a heading and three items and then moves straight on. */}
+        {features.closer && <p className="lead">{withBreaks(features.closer)}</p>}
       </section>
+
+      {/* A SECOND PROSE BLOCK, AND ONLY ONE PAGE HAS ONE. drop_07 §12 gives
+          Other Industries two headed passages where every other industry has
+          one -- "Intelligence that reflects your priorities" is the intro above
+          and "From market developments to action" is this. Rendering it from
+          content keeps that page on this template; the alternative was a second
+          page component, which mbz-et8e.52.12 consolidated away for good
+          reasons. */}
+      {outro && (
+        <section className="section container info-block">
+          <h2>{outro.heading}</h2>
+          {outro.paragraphs.map((p, i) => (
+            <p className="lead" key={i}>
+              {p}
+            </p>
+          ))}
+        </section>
+      )}
 
       {/* THE SITE'S PANEL, not this page's own band. These pages closed on a
           full-bleed navy band with the copy left and the buttons right, which is
