@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { home } from "../content/home";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
@@ -8,6 +7,7 @@ import CtaPanel from "../components/CtaPanel";
 import BrandDivider from "../components/BrandDivider";
 import FlowSteps from "../components/FlowSteps";
 import CategoryCard from "../components/CategoryCard";
+import ExploreLink from "../components/ExploreLink";
 import IndustryTile from "../components/IndustryTile";
 import ProductImage from "../components/ProductImage";
 import HeroAnimation from "../components/HeroAnimation";
@@ -125,11 +125,7 @@ const Home = () => {
       <section className="section container">
         <SectionTitle title={flow.title} />
         <FlowSteps steps={flow.steps} />
-        <p className="lead">
-          <Link className="text-link" to={flow.linkTo}>
-            {flow.linkLabel} →
-          </Link>
-        </p>
+        <ExploreLink label={flow.linkLabel} to={flow.linkTo} />
       </section>
 
       {/* §6 Industries. The previous brief moved this to §3; this one moves it
@@ -150,16 +146,12 @@ const Home = () => {
             />
           ))}
         </div>
-        <p className="lead">
-          <Link className="text-link" to={industries.exploreTo}>
-            {industries.exploreLabel} →
-          </Link>
-        </p>
+        <ExploreLink label={industries.exploreLabel} to={industries.exploreTo} />
       </section>
 
-      {/* §7 Intelligence areas. The closing link is drop_10's README and its
-          checklist item 3, and it is deliberately §6's link with a different
-          destination — "styled like 'Explore all industries →'". */}
+      {/* §7 Intelligence areas. Its closing link is drop_10's README and its
+          checklist item 3, which asks for it "styled like 'Explore all
+          industries →'" — hence ExploreLink, shared with §5 and §6. */}
       <section className="section container">
         <SectionTitle title={categories.title} lead={categories.lead} />
         <div className="category-grid">
@@ -167,11 +159,7 @@ const Home = () => {
             <CategoryCard key={item.heading} {...item} />
           ))}
         </div>
-        <p className="lead">
-          <Link className="text-link" to={categories.exploreTo}>
-            {categories.exploreLabel} →
-          </Link>
-        </p>
+        <ExploreLink label={categories.exploreLabel} to={categories.exploreTo} />
       </section>
 
       {/* §8 Final CTA */}
