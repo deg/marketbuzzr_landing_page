@@ -3914,6 +3914,24 @@ footer h4 {
     transform: translate(-50%, -50%);
     white-space: nowrap;
   }
+}
+
+/* THE HOVER LIFT HAS TO BE RESTATED HERE, and this is the fifth instance of the
+   trap this file's header block is about. A chip in the ring is absolutely
+   positioned and centred on its point with translate(-50%, -50%). That rule and
+   `.source-chip:hover` both measure (0,2,0), and the ring's sits later, so above
+   1250px the plain translateY(-2px) lost on source order and only the border and
+   shadow responded — measured at 1440, the chip's box did not move by a pixel.
+
+   Raising the hover rule's specificity would have been the wrong fix: it would
+   then have won and dropped the -50%/-50% centring, throwing the chip half its
+   own box off its point. The lift has to be composed with the centring, which is
+   what this does (mbz-et8e.55.8). */
+@media (min-width: 1250px) and (hover: hover) and
+  (prefers-reduced-motion: no-preference) {
+  .source-cluster-ring .source-chip:hover {
+    transform: translate(-50%, calc(-50% - 2px));
+  }
 
   .source-cluster-core {
     order: 0;
