@@ -56,17 +56,35 @@ back to him live beside them.
 | `drop_06_marketbuzzr-homepage-cto-handoff.zip` | homepage, 4th — **current** | `marketbuzzr-homepage-cto-handoff/` |
 | `drop_06_marketbuzzr-how-it-works-cto-handoff.zip` | How It Works, 2nd — **current** | `marketbuzzr-how-it-works-cto-handoff/` |
 | `drop_06_MarketBuzzr_Industries_Page_CTO_Handover.docx` | the `/industries` page | *(a single docx)* |
-| `drop_07_MarketBuzzr_CTO_Handover_Aug08_2026_v4.zip` | **the whole site, current** — see below | `MarketBuzzr_CTO_Handover_Aug08_2026_v4/` |
+| `drop_07_MarketBuzzr_CTO_Handover_Aug08_2026_v4.zip` | the whole site, 1st | `MarketBuzzr_CTO_Handover_Aug08_2026_v4/` |
+| `drop_09_MarketBuzzr_CTO_Handover_Aug09_2026_v9.zip` | the whole site — **folded into drop_10** | `MarketBuzzr_CTO_Handover_Aug09_2026_v9/` |
+| `drop_10_MarketBuzzr_CTO_Handover_Aug09_2026_v10.zip` | **the whole site, current** — see below | `MarketBuzzr_CTO_Handover_Aug09_2026_v10/` |
 
-**`drop_07` is the current source of truth for every page.** It says so itself —
-"where this brief conflicts with an earlier handover, use this brief" — and it
-reverses several earlier decisions rather than merely extending them. Its README
-says v3 and names a `_v3.docx`; the zip ships only `_v4.docx`, so the README is
-stale, not a missing file. Its own §14 is an **eighteen**-item acceptance
-checklist, scored by `acceptance_probe.py` in the design repo, which passes all
-eighteen as of `mbz-et8e.54` and adds one check of its own. It was briefly
-recorded here and in several commit messages as seventeen, because two of his
-items were run as a single check.
+**`drop_10` is the current source of truth for every page**, and its baseline is
+the frozen `/9aug_v7/` snapshot rather than whatever is checked out. Its §11 is a
+**twenty-five**-item acceptance checklist, scored by `acceptance_probe.py` in the
+design repo, which passes all twenty-five as of `mbz-et8e.55`.
+
+**Two of those twenty-five contradict the brief that carries them.** Items 15 and
+16 survive from v9 and say the What You Get four-role section is replaced by the
+six category cards; §5.2, the README and item 2 all say the opposite. The probe
+encodes the resolution and prints the deviation rather than leaving a check that
+can never pass.
+
+**`drop_09` was never implemented separately and does not need to be.** v10
+repeats its §§1–4 and §§6–9 word for word and either adds to or reverses the
+rest, so implementing v10 implemented v9. There is deliberately no drop_09 bead
+set. Its README cites "v8 revision instructions" and there is no drop_08 here;
+drop_07's README had the same defect, so a stale reference is the likely
+explanation rather than a missing package.
+
+`drop_07` remains the source for everything drop_10 does not touch, and its own
+§14 checklist still runs as a regression net. It said so itself — "where this
+brief conflicts with an earlier handover, use this brief" — and its README says
+v3 while the zip ships only `_v4.docx`, which is stale rather than a missing
+file. Its §14 is **eighteen** items, briefly recorded here and in several commit
+messages as seventeen because two of his were run as one check. Two of the
+eighteen were corrected in `mbz-et8e.55.14` where drop_10 reversed them.
 
 `drop_05` is the first handoff delivered as **HTML rather than artwork** — a sketch by
 an artist agent, not a page to drop in. Its copy and structure are the deliverable; its
@@ -171,11 +189,11 @@ generic, so read the component before changing a section:
 |---|---|---|
 | 1 | Hero | `PageHero` + `HeroAnimation` (drawn, not photographed) |
 | 2 | Transition | `BrandDivider` — one line, deliberately not a section |
-| 3 | Problem | copy LEFT, `WorthYourAttention` RIGHT — `drop_07` §3.2 |
-| 4 | Insight | `ProductImage` alone — the last raster on the whole site |
+| 3 | Problem | copy LEFT, `WorthYourAttention` RIGHT — a 45/55 split since `drop_10` §3.1 |
+| 4 | Insight | `ProductImage` alone |
 | 5 | Five-step flow | `FlowSteps` (native HTML, no artwork) |
-| 6 | Industries | `IndustryTile` |
-| 7 | Intelligence areas | `CategoryCard` + `CategoryIcon` (six line icons) |
+| 6 | Industries | `IndustryTile`, closing on a link to `/industries` |
+| 7 | Intelligence areas | `CategoryCard` + `CategoryIcon`, closing on a link to `/what-you-get` (`drop_10`) |
 | 8 | Final CTA | `CtaPanel` with a secondary label |
 
 **The order has now changed three times, and so has the divider.** `BrandDivider`
@@ -192,10 +210,18 @@ without visible copy. Note the current artwork draws **five** dimensions, not
 the six that sentence named — "products" is no longer depicted, and the alt text
 follows the artwork.
 
-**Only §4 is still a picture.** The hero became `HeroAnimation` in `mbz-et8e.40`
-and §3 became `WorthYourAttention` in `.44`, both from Manu's own HTML/SVG files,
-so the homepage carries one raster where it used to carry four. What is left is
-the one blocked on a decision (`mbz-et8e.12`).
+**Only §4 is still a picture on this page.** The hero became `HeroAnimation` in
+`mbz-et8e.40` and §3 became `WorthYourAttention` in `.44`, both from Manu's own
+HTML/SVG files, so the homepage carries one raster where it used to carry four.
+What is left is the one blocked on a decision (`mbz-et8e.12`). How It Works
+carries the site's other one again since `drop_10` §4.1.
+
+**§3's split is 45/55 and that number is his** (`drop_10` §3.1, `mbz-et8e.55.3`).
+It was a fixed 340px copy rail, which spent width on the visual deliberately:
+`WorthYourAttention`'s signal-card labels are 17 units on a 1380-unit canvas, so
+they fell from 12.2px to 9.0px when the copy column grew. He calls 45/55 a visual
+target rather than a rigid requirement; it is shipped as written and the number
+went to him in the memo.
 
 Images live in `src/assets/` as AVIF with a WebP fallback, encoded from the final
 handoff artwork at `avifenc -q 58`. The
@@ -251,16 +277,24 @@ option titles rendered in the page's pale blue on a white panel until
 `.role-dash, .draft-idea` set `color` explicitly. `.insight-wrap` had always done
 this; the reason was not written down.
 
-**No step is a picture any more.** `drop_06` replaced steps 02 and 03 with HTML
-animations, built as `RoleDashboard` and `DraftFromIdea` (`mbz-et8e.46`), and
-`drop_07` took step 01 with them (`mbz-et8e.54.8`). The raster could not follow
-that brief into its own 640px frame: measured on Manu's source PNG, its smallest
-type is 8–9px of cap height on a 1774px canvas, which renders about **3.2px** at
-640 — roughly a 4.6px font, against about 10px at the 1400px it used to get.
-`MonitorFilter` says the same three stages with the same labels and holds **12px
-type at every width**, and its 56.6 KB of AVIF/WebP is gone.
+**Step 01 is a picture again, and steps 02 and 03 are not.** `drop_10` §4.1 puts
+`01-monitor-filter.png` back — "do not recreate the image in HTML" — inside the
+same 640px frame §4.2 set. That reverses `mbz-et8e.54.8`, whose measurement has
+not changed: the PNG's smallest type is 8–9px of cap height on a 1774px canvas,
+which renders about **3.2px** at 640, roughly a 4.6px font. `MonitorFilter` held
+12px at every width. He set the frame width himself in his own step 02 and 03
+assets, so the trade is his with the constraint in front of him; the number is on
+`mbz-et8e.55.1` and in the memo. **`MonitorFilter`, its content block and its
+~100 lines of CSS are PARKED, not deleted** — this page's step 01 has now
+reversed twice in three drops.
 
-**Those two components are not SVG transcriptions.** His files are HTML and CSS,
+**Step 02 changed panels, not story.** `drop_10` §4.2 gives it
+`marketbuzzr-what-you-get-role-animation-v1.html`, which is `RoleTailoring` —
+What You Get's hero until this drop. The two pages traded animations and their
+content blocks travelled with them (`mbz-et8e.55.2`). Step 03 is untouched, which
+§4.3 says by name.
+
+**`RoleTailoring` and `DraftFromIdea` are not SVG transcriptions.** His files are HTML and CSS,
 so unlike `HeroAnimation` and `WorthYourAttention` there are no coordinates to
 preserve, no ids to prefix and no SMIL to convert. Each is a panel, a timer and
 an index. What did carry over from that work: emoji become `CategoryIcon` line
@@ -289,12 +323,15 @@ The role accent carries the profile name, the tags and the action line, so it is
 text. Measured against white: his purple `#7d58f6` clears at 4.57:1 and the other
 three do not — blue `#2f7ee8` at 3.98, green `#6aaf4b` at 2.68, teal `#3ba9b4` at
 2.79. Each is dropped in lightness at constant hue until it clears 4.5; purple is
-untouched. **`#2d818a` is the site's one light-surface turquoise** and is used by
-these panels, the industry heroes' topic chips and What You Get alike, so light
-surfaces share one accent rather than each inventing its own.
+untouched. **`#2d818a` is the site's light-surface turquoise for TEXT** and is
+used by these panels and What You Get alike, so light surfaces share one accent
+rather than each inventing its own. The industry heroes' chip ICONS left that set
+in `drop_10` §7 — see `--light-accent-icon` under Styling.
 
-No held mobile widths are left on this page. All three visuals are markup, so
-they reflow and their type holds its size from 1440px down to 390px.
+Steps 02 and 03 hold no mobile width: both are markup, so they reflow and their
+type holds its size from 1440px down to 390px. Step 01 is a raster again and
+holds none either, because §4.1 rules out a scroller — it scales to the column
+and its type scales with it.
 
 **CTA labels are the site's** — primary "Try for Free", secondary "Book a Demo",
 everywhere, since `drop_07` §1 fixes the pair for the whole site.
@@ -304,13 +341,11 @@ rules (`.steps`, `.step`, `.step-number`, `.step-body`, `.summary-block`,
 `.value-grid`, `.value-box`, `.summary-footnote`) are gone, and so are their
 halves of the selectors they shared with `.card` and `.cta-panel`.
 
-Page weight with everything scrolled in is **133.8 KB** and LCP is 396ms,
-measured at 1440px against the preview build. That is about 147 KB lighter than
-before `drop_06`: the two AVIFs it retired were 146.7 KB between them and the
-components replacing them add roughly 2.3 KB gzipped. Both figures predate
-`drop_07`, which took the third image off this page as well, so the page is
-lighter again and carries no raster at all. Re-measure rather than trusting this
-line.
+**Every page-weight figure in this document is stale and none is re-measured
+here.** The last one recorded for this page, 133.8 KB with LCP 396ms at 1440,
+predates both `drop_07` and `drop_10`; `drop_10` §4.1 alone put 59 KB of
+AVIF/WebP back on it. Re-measure rather than trusting any weight line in this
+file.
 
 ### The `/industries` entry page (2026-08)
 
@@ -319,8 +354,15 @@ that way. From `drop_06`'s Industries handover, which asks for one thing over an
 over: that it not look like a new landing page. "Reuse existing components
 wherever possible", "do not create a separate visual style for these cards", "do
 not guess or substitute fonts, navigation styles, CTA styles, colors, or
-spacing". So it is `PageHero` + `SectionTitle` + `IndustryTile` + `CtaPanel` and
-nothing else — no artwork, because "no image or animation is required".
+spacing". So it is `PageHero` + `IndustryTile` + `CtaPanel` and nothing else —
+no artwork, because "no image or animation is required".
+
+**The grid has no heading over it since `drop_10` §6**, which deletes three
+strings by quoting each: the hero's "Focused intelligence around your world.",
+the section heading "Explore MarketBuzzr by Industry" and its supporting line.
+That emptied the `picker` block outright, so `SectionTitle` went with it and the
+nine tiles are the whole section. The 220px between the hero and the grid was
+those margins; it is 104px now (`mbz-et8e.55.5`).
 
 **The nine industries live in `content/home.js`, and that is the only list.**
 `content/nav.js` reads it for the Industries dropdown and `content/industries.js`
@@ -341,6 +383,11 @@ class and its rules are deleted rather than left unused.
 shipped as the only page on the site without one; `drop_07` §6.1 opens with
 "Eyebrow: INDUSTRIES" and settles it the other way.
 
+**The nine card labels keep their capitals**, and are one of the two sets §8
+exempts from the sentence-case sweep — see
+`reference-industries-grid-title-case.png`. The other is the homepage's six
+category-card titles.
+
 All nine cards reach a real page, and the three `drop_07` added were built
 before the list grew so that stayed true through the round. That matters here
 because this page gives each industry a full card, so a dead link is more
@@ -355,9 +402,25 @@ module in `src/content/`: `biotech`, `fintech`, `medtech`, `publicSafety`,
 The last three arrived with `drop_07` §9–§11.
 
 **The hero's topic boxes are LIGHT surfaces on the dark page** (`drop_07` §7), as
-the insight card already was. Their turquoise is `#2d818a`, not `--brand`: the
-icon is a meaningful graphic wanting 3:1 and `--brand` measures about 1.5:1 on
-white.
+the insight card already was. Their icons take `--light-accent-icon` since
+`drop_10` §7 — see Styling for the measurement. They also carry a hover now:
+brighter border, deeper shadow, a 2px lift behind `prefers-reduced-motion`. They
+are `<li>` and not controls, so there is no focus state to match.
+
+**The hero's CTAs are the site's pill**, since `drop_10` §7 — "current
+industry-page CTAs are too square". The `.hero-split .cta-actions` geometry
+override went whole rather than by `border-radius` alone, because its padding and
+suppressed glow were part of what read as square (`mbz-et8e.55.7`). That was the
+last place on the site speaking two button languages.
+
+**The intro block is ONE paragraph on all nine**, from `drop_10` §7, and the
+template renders no `emphasis` line at all. It used to render one
+unconditionally, which put an empty `<p>` and its margin on the eight pages that
+never set the key; Biotechnology, the one that did, opens its paragraph with that
+sentence instead. §7 also deletes "MarketBuzzr helps your team stay on top of the
+developments that could shape your strategy, products and growth." from the seven
+pages carrying it — Biotechnology's own closing line is different and stays
+(`mbz-et8e.55.6`).
 
 **`outro` is an optional second prose block** and only Other Industries has one,
 because `drop_07` §12 gives that page two headed passages where every other
@@ -382,6 +445,7 @@ they take content props rather than hardcoding biotech copy:
 | `SourceCluster` | How It Works step 01 (`monitor-filter`) | still the standing offer |
 | `InsightCard` | homepage §4 (`insight-medicalcomp`) | still the standing offer, blocked on `mbz-et8e.12` |
 | `RoleBar` | How It Works step 02 (`role-based-intelligence`) | **overtaken** — see below |
+| `MonitorFilter` | How It Works step 01, again | **built, then reversed** by `drop_10` §4.1; parked |
 
 **The argument was won, and Manu is now sending the replacements himself.**
 `drop_06` supplied HTML animations for How It Works steps 02 and 03 and an SVG for
@@ -390,12 +454,16 @@ already, and by his hand rather than ours.
 
 `RoleBar`'s row is dead specifically: it puts three roles side by side, and his brief
 for step 02 rules that out by name — "do not show multiple profiles or dashboards side
-by side". Step 02 is `RoleDashboard`, which shows one at a time. `RoleBar` renders on
-all nine industry pages via `IndustryPage.jsx` and is unaffected there.
+by side". Step 02 shows one at a time — `RoleDashboard` until `drop_10` §4.2,
+`RoleTailoring` since. `RoleBar` renders on all nine industry pages via
+`IndustryPage.jsx` and is unaffected there.
 
-What is left of the original claim is the last raster on each page. Closing those two
-retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28` — the re-render, the 2×
-exports, the stale date and the mobile renders all dissolve when the text is text.
+**The argument is not settled, and `drop_10` moved it backwards.** §4.1 put step
+01's raster back over the native rebuild that had replaced it, so the site
+carries two rasters again — that one and the homepage insight card. The
+`MonitorFilter` row above is what that looks like when it goes the other way:
+built, measured, and reversed by the next brief. Closing the insight card still
+retires `mbz-et8e.12` and items 1, 2, 5 and 11 of `mbz-et8e.28`.
 
 **The drop's hero was not ported, and could not have been.** It absolutely-positioned
 seven boxes at hardcoded percentage offsets, and they already overlapped *in Manu's own
@@ -476,15 +544,17 @@ Each tag says what to do, and they do not all mean delete. `src/components/DevOn
 holds all the dev-only React so removing it is a deletion rather than a hunt.
 Beads issue `mbz-et8e.18` gates the merge.
 
-There are **9 tags across 8 files**:
+There are **6 tags across 5 files**. This line read "9 across 8" for several
+rounds after three of them were resolved, so count with the grep above rather
+than trusting it: `content/home.js` and `content/nav.js` lost theirs when the
+nine industry pages were built, and `pages/HowItWorks.jsx` lost its `<DevFlag>`
+in `mbz-et8e.52.8`.
 
 | Where | What it needs |
 |---|---|
 | `pages/NotImplemented.jsx` + its CSS + `App.jsx` | **Reframe, do not delete.** The route should ship: a real not-found page is strictly better than the silent redirect to `/` it replaced. Only the "not yet implemented" wording and amber styling must go. Deleting it wholesale reintroduces the original defect. |
-| `content/home.js` | Two industry tiles point at pages that do not exist — Life Sciences and Public Safety & Defense Technology. Build them, or drop the `to` and render those tiles non-interactive. |
-| `content/nav.js` | Solutions, Resources and Pricing point at the same placeholder. |
 | `pages/Home.jsx` | A decision, not a code change — see `mbz-et8e.12`. |
-| `pages/HowItWorks.jsx` | A `<DevFlag>` under each step's lead line, asking Manu whether it should stay. `drop_06`'s page structure reads as deleting all three; it never says so. One-line edit either way once he answers. |
+| `components/DevOnly.jsx` + its CSS | Delete when the design cycle ends, not when the last note happens to go — see below. |
 
 **`Home.jsx`'s tag is now the only thing holding back the fabricated product
 announcement in the insight artwork.** A visible `<DevNote>` used to sit under
@@ -533,13 +603,46 @@ them would turn every such deploy into a hard 422 instead.
 
 ### Styling
 
+**One headline treatment site-wide since `drop_10` §1**, which asks Home and How
+It Works to match What You Get: weight 800, line-height 1.03, tracking -0.035em,
+all on the base `h1`. The SIZE deliberately does not travel — `.hero-split`'s
+smaller clamp exists because a 45% column needs it, and copying it would make the
+homepage headline smaller. `.industry-page .hero-split h1`'s own `font-weight:
+700` went with this: it was written to be heavier than the site's default and had
+become lighter than it (`mbz-et8e.55.9`).
+
+**An eyebrow takes its headline's alignment** (`drop_10` §1), and `.section >
+.kicker` is the whole mechanism. `.kicker` is an inline-block, so it answers to
+its parent's `text-align`, and `.section` sets none — which left two eyebrows
+hard left under centred headings. The direct-child combinator is the scope on
+purpose: a left-aligned section puts its eyebrow inside the copy column, where it
+already inherits left and this rule cannot reach it (`mbz-et8e.55.10`).
+
 All CSS is in `src/styles.css` (~1900 lines). Design tokens (colors, spacing, radii,
 shadows, transitions, fonts, `--lead-measure`) are CSS custom properties in `:root` —
 reuse them (`var(--brand)`, `var(--spacing-lg)`, …) rather than introducing new literals.
 Dark theme throughout. Class names are plain (`.modal`, `.cta-panel`, `.grid`); no CSS
 modules or utility framework.
 
-Four traps in this stylesheet, all of which have bitten:
+**`--light-accent-icon` is the light-surface turquoise for ICONS, and it is not
+`--light-accent`.** `drop_10` §7 asked the industry hero chips' icons for "the
+existing MarketBuzzr turquoise", which taken literally is `--brand` at 1.53:1 on
+the chip — the measurement that produced `--light-accent` in the first place. He
+was right about the symptom: `--light-accent` `#2d818a` is hue 186 at 51%
+saturation, and `--brand` is hue 193 at 100%, which is why one reads green beside
+the other. So this is `--brand`'s hue and saturation with lightness dropped until
+it clears 3:1 — `hsl(193, 100%, 37%)`, `#0094bd`, at 3.52:1 on white and 3.30:1
+on the chip's tint. **It is below 4.5:1 and must never carry text**;
+`--light-accent` is still what light surfaces use for that (`mbz-et8e.55.8`).
+
+Five traps in this stylesheet, all of which have bitten:
+
+**A rule written before the thing it overrides loses on source order even when
+it looks right.** Two in one round: `.product-frame`'s mobile gutter had to sit
+beside `.product-frame` rather than in the 768px block near the top of the file,
+and `.role-tailor`'s margin had to go on its own rule 3000 lines down rather than
+in a grouped one earlier. Both silently did nothing first (`mbz-et8e.55.2`,
+`mbz-et8e.55.11`).
 
 **`padding: X 0` on an element that also carries `.container` silently destroys
 the horizontal gutter.** `.hero` and `.section` both did this, so content ran
@@ -563,10 +666,17 @@ was fixed. `minmax(0, 1fr)` is what stops it. Any new grid that will hold one of
 these scrollers needs the same.
 
 **Drawn visuals need none of the above.** `HeroAnimation`, `WorthYourAttention`,
-`RoleDashboard` and `DraftFromIdea` are markup, so they reflow instead of
-scaling, and their type holds its size at every width. **One raster is left on
-the whole site** — the homepage insight card, which is blocked on `mbz-et8e.12`.
-How It Works step 01 was the other, and became `MonitorFilter` in `drop_07`.
+`RoleTailoring`, `RoleDashboard` and `DraftFromIdea` are markup, so they reflow
+instead of scaling, and their type holds its size at every width. **Two rasters
+are left on the site** — the homepage insight card, blocked on `mbz-et8e.12`, and
+How It Works step 01, which `drop_10` §4.1 put back over the native rebuild that
+had replaced it (`mbz-et8e.55.1`).
+
+**`WorthYourAttention` no longer scrolls on mobile and no longer holds a width.**
+`drop_10` §10 rules the scroller out, so it scales to the content width instead
+and its 17-unit signal labels render 4.4px at 390 against the 8.1px the held
+660px bought. The homepage insight card KEEPS its scroller, which §10 protects by
+name as "the intentional exception" — do not "fix" it.
 
 **The "Final overrides" block at the end of the file must stay there.** Several of its
 rules tie on specificity with the base rules they override (`.section p.lead`,
