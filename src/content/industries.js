@@ -53,7 +53,7 @@ export const industries = {
 
   // §6.4, replacing drop_06's wording for the same panel.
   finalCta: {
-    title: "Don't See Your Industry?",
+    title: "Don't see your industry?",
     paragraphs: [
       "MarketBuzzr isn't limited to the industries above. We build your market intelligence around your company, your ecosystem and the developments that matter to your team.",
     ],

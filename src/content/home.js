@@ -21,7 +21,7 @@ export const home = {
   // §1 Hero
   hero: {
     eyebrow: "STRATEGIC INTELLIGENCE FOR TEAMS IN DYNAMIC MARKETS",
-    title: "Stay Ahead of the Signals That Shape Your Market",
+    title: "Stay ahead of the signals that shape your market",
     // drop_06 replaces this line verbatim, and says why: no em dash or hyphen
     // as punctuation. That is the second brief running to name dash punctuation
     // as the problem, so treat it as a standing rule rather than a one-off.
@@ -62,7 +62,7 @@ export const home = {
     // 'faster'". SectionTitle runs the title through withBreaks, so this is a
     // hard <br/> on desktop and a plain wrap once the heading is narrower than
     // the break anyway.
-    title: "Your Market Moves Faster\nThan Anyone Can Follow",
+    title: "Your market moves faster\nthan anyone can follow",
     // ONE PARAGRAPH, NOT FOUR. drop_07 §3.3: "the paragraph below it beginning
     // with competitors moving, regulations changing, etc. must be one concise
     // paragraph." This was four stacked short ones. His sentences are kept
@@ -95,7 +95,7 @@ export const home = {
 
   // §4 Product Proof / Insight
   insight: {
-    title: "Every Insight. Clear. Actionable. Ready to Use.",
+    title: "Every insight. Clear. Actionable. Ready to use.",
     // The em dash before "and what you can do next" is gone, which is drop_07
     // §3.3 naming this line specifically and §1's site-wide rule doing the same
     // thing generally.
@@ -113,7 +113,7 @@ export const home = {
   // diagram that used to sit here with these five native steps, and is explicit
   // that no paragraph belongs under the heading.
   flow: {
-    title: "From Market Signals to Strategic Action",
+    title: "From market signals to strategic action",
     steps: [
       { verb: "MONITOR", label: "Signals from everywhere" },
       { verb: "FILTER", label: "Through your context" },
@@ -121,14 +121,14 @@ export const home = {
       { verb: "RECOMMEND", label: "What to do next" },
       { verb: "CREATE", label: "Ready-to-use drafts" },
     ],
-    linkLabel: "Explore How It Works",
+    linkLabel: "Explore how it works",
     linkTo: "/how-it-works",
   },
 
   // §6 Industries. Moved up to §3 by the previous brief and back down to here
   // by this one, which puts the product proof and the process ahead of it.
   industries: {
-    title: "Built for Teams in Dynamic Markets",
+    title: "Built for teams in dynamic markets",
     lead: "For teams operating in markets where regulation, competition, technology and customer behavior can quickly change the direction of the business.",
     // THE NINE INDUSTRIES, AND THIS IS THE ONLY LIST OF THEM. content/nav.js
     // imports it for the Industries dropdown and content/industries.js imports
@@ -218,7 +218,7 @@ export const home = {
 
   // §7 Intelligence areas
   categories: {
-    title: "Intelligence Across What Matters to Your Business",
+    title: "Intelligence across what matters to your business",
     lead: "One intelligence layer across the market developments strategic teams need to understand.",
     // Four short lines each — the brief is explicit that these are not
     // paragraphs. Each item gets its own icon (mbz-et8e.8).
@@ -295,7 +295,7 @@ export const home = {
 
   // §8 Final CTA
   finalCta: {
-    title: "Know What Changed. Understand What It Means. Know What to Do Next.",
+    title: "Know what changed. Understand what it means. Know what to do next.",
     paragraphs: [
       "Let MarketBuzzr continuously monitor your market and deliver the intelligence your team needs to stay ahead.",
     ],

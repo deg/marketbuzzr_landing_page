@@ -32,7 +32,7 @@ export const howItWorks = {
 
   hero: {
     eyebrow: "HOW IT WORKS",
-    title: "From Market Signals to Strategic Action",
+    title: "From market signals to strategic action",
     // drop_07 §4.1 replaces the hero paragraph and then rules out putting the
     // old one back: "keep this hero concise. Do not add the older generic
     // monitoring paragraph beneath it." The line that was here was exactly that
@@ -62,7 +62,7 @@ export const howItWorks = {
     {
       id: "monitor-filter",
       number: "01",
-      title: "Monitor Your Market. Filter the Noise.",
+      title: "Monitor your market. Filter the noise.",
       body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every development against your company, products, competitors, goals, role and markets, so you see what deserves your attention.",
       visualAlt:
         "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets to surface only relevant developments.",
@@ -73,7 +73,7 @@ export const howItWorks = {
     {
       id: "role-based-intelligence",
       number: "02",
-      title: "Intelligence Shaped Around Your Role",
+      title: "Intelligence shaped around your role",
       body: "MarketBuzzr turns relevant developments into personalized insights, opportunities and recommendations based on each reader's priorities, so every role sees the intelligence most relevant to the decisions they make.",
       // Same instruction as 01. The line deleted here — "One market. Different
       // priorities. Intelligence built around each reader." — is not really
@@ -84,7 +84,7 @@ export const howItWorks = {
     {
       id: "turn-intelligence-into-action",
       number: "03",
-      title: "Turn Intelligence Into Action",
+      title: "Turn intelligence into action",
       body: "MarketBuzzr identifies what developments mean for your business, recommends next steps and helps turn intelligence into action plans, communications, sales enablement and content your team can use.",
       // The only closer that survives drop_06, which calls it out by name:
       // "This is the only one of the three sections that should retain copy
@@ -212,7 +212,7 @@ export const howItWorks = {
   },
 
   finalCta: {
-    title: "Stop Following the Market Manually.",
+    title: "Stop following the market manually.",
     paragraphs: [
       "Let MarketBuzzr monitor what's changing, surface what deserves your attention, and help you turn intelligence into action.",
     ],

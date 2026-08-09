@@ -8,22 +8,23 @@
 // hero is PageHero with an aside like the industry pages, the role cards take
 // the homepage's category-card treatment, and it closes on the site's CtaPanel.
 //
-// COPY IS HIS, VERBATIM, INCLUDING CAPITALISATION. The industry pages normalise
-// his title case to sentence case, because those nine have to read as one set
-// and were built from a sketch rather than from locked copy. This page has no
-// sibling to match and §5 supplies "approved copy" line by line, so it is left
-// exactly as written.
+// THE WORDS ARE HIS; THE CAPITALISATION IS NOT ANY MORE. drop_07 §5 supplied
+// "approved copy" line by line and it shipped in his title case, since this page
+// had no sibling to match. drop_10 §1 and §8 end that: sentence case for every
+// page and section headline site-wide, and §8's own example — "Turn intelligence
+// into action" — is one of this page's value cards. Only the four role names
+// keep their capitals, being names (mbz-et8e.55.13).
 //
-// THREE SUPPLIED ASSETS, placed by §13's manifest: the role animation right of
-// the hero, the All Signals visual right of its copy, and the Intelligence to
-// Action visual LEFT of its copy. That last one is the only left-hand visual on
-// the site and §13 states it twice.
+// THREE SUPPLIED ASSETS: the hero animation, which drop_10 §5.1 changed to the
+// role dashboard, then the All Signals visual right of its copy and the
+// Intelligence to Action visual LEFT of its copy. That last one is the only
+// left-hand visual on the site and drop_07 §13 states it twice.
 export const whatYouGet = {
   title: "What You Get — MarketBuzzr",
 
   hero: {
     kicker: "WHAT YOU GET",
-    title: "Intelligence Built Around Your Role and Goals.",
+    title: "Intelligence built around your role and goals.",
     sub: [
       "MarketBuzzr brings you the developments that matter to your business, explains what they mean for you and helps you turn them into action. Automatically delivered and personalized to your role, goals and priorities.",
     ],
@@ -149,7 +150,7 @@ export const whatYouGet = {
   // also cycles four (mbz-et8e.28).
   roleCards: {
     kicker: "BUILT AROUND EACH READER",
-    title: "Different Roles. Different Priorities.",
+    title: "Different roles. Different priorities.",
     lead: "MarketBuzzr evaluates developments against each reader's role, goals and business context, so everyone gets intelligence relevant to the decisions they make.",
     items: [
       {
@@ -183,24 +184,24 @@ export const whatYouGet = {
   // content/howItWorks.js makes for its three steps.
   value: {
     kicker: "THE VALUE",
-    title: "From Market Noise to Business Impact.",
+    title: "From market noise to business impact.",
     lead: "MarketBuzzr does more than collect information. It helps you focus on what deserves attention, understand why it matters and move from insight to action.",
     items: [
       {
         number: "01",
-        title: "Stay Focused on What Matters",
+        title: "Stay focused on what matters",
         description:
           "MarketBuzzr follows the companies, sources and conversations shaping your market and surfaces the developments most relevant to your business and priorities.",
       },
       {
         number: "02",
-        title: "Understand the Business Impact",
+        title: "Understand the business impact",
         description:
           "Every important development is interpreted in the context of your company, role and goals, helping you understand what changed and why it matters to you.",
       },
       {
         number: "03",
-        title: "Turn Intelligence Into Action",
+        title: "Turn intelligence into action",
         description:
           "Strategic implications, recommended actions and ready to use drafts help your team move from knowing what happened to doing something about it.",
       },
@@ -210,7 +211,7 @@ export const whatYouGet = {
   // §5.5. Copy left, supplied visual right.
   signals: {
     kicker: "KNOW WHAT MATTERS",
-    title: "All the Signals. Only What Matters to You.",
+    title: "All the signals. Only what matters to you.",
     lead: "MarketBuzzr follows the sources and conversations shaping your market, filters the noise and surfaces the developments most relevant to your business, goals and priorities.",
     visual: {
       centre: "Worth Your Attention",
@@ -232,7 +233,7 @@ export const whatYouGet = {
   // runs that way, and §13's manifest says so twice.
   action: {
     kicker: "FROM INTELLIGENCE TO ACTION",
-    title: "Know What to Do Next.",
+    title: "Know what to do next.",
     lead: "Knowing what happened is only the beginning. MarketBuzzr explains why a development matters to your business, identifies its strategic implications and recommends what to do next.",
     visual: {
       steps: [
@@ -264,7 +265,7 @@ export const whatYouGet = {
   },
 
   finalCta: {
-    title: "Set It Up Once. Stay Informed Automatically.",
+    title: "Set it up once. Stay informed automatically.",
     paragraphs: [
       "After one simple setup meeting, MarketBuzzr continuously monitors your market and delivers intelligence built around your company, your role and the goals that matter to your business. Stay informed automatically and see what MarketBuzzr finds for you.",
     ],
