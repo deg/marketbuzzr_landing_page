@@ -653,17 +653,26 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  /* 16px HORIZONTAL, WHICH IS THE SITE'S MOBILE GUTTER. drop_10 §10: "on
+     mobile, centre the animation container within the page... align the
+     visual's left edge with the logo/content margin and its right edge with the
+     hamburger/content margin so it sits symmetrically inside the mobile
+     viewport."
+
+     The animation was already symmetric; it was inset further than everything
+     else, because .hero kept 24px here while .section and the nav both drop to
+     16px. Measured at 390 the visual ran 24 to 366 against the wordmark's 16.
+     Fixing the hero's gutter rather than the animation's own margins is what
+     "the content margin" means, and it takes the hero copy with it, which is
+     the same 16px every section below already uses (mbz-et8e.55.11). */
   .hero {
-    padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-lg);
+    padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-lg);
   }
 
   .sub {
     padding: 0 var(--spacing-md);
   }
 
-  /* Width stays 92%: .hero zeroes out .container's horizontal padding, so that
-     percentage is the only thing keeping the visual off the screen edges. Only
-     the whitespace above it needs to come down at this size. */
   .hero .hero-anim {
     margin-top: var(--spacing-2xl);
   }
@@ -1450,6 +1459,30 @@ footer h4 {
      rejected: content sits 1.3% from the hero's left edge and the insight card
      starts 2.7% from its top, so any fade deep enough to work would clip. */
   box-shadow: 0 0 80px 30px var(--artwork-ground, transparent);
+}
+
+/* THE MOBILE GUTTER IS 16px, NOT THE 24px THE WIDTH ABOVE ASSUMES. That formula
+   was written when --spacing-lg was the gutter at every width; .section drops
+   to --spacing-md below 768 and the nav sits at 16px too, so the hero animation
+   ended up 8px inside everything around it — measured at 390 it ran 24 to 366
+   against the wordmark's 16.
+
+   drop_10 §10 asks for exactly that edge: "align the visual's left edge with
+   the logo/content margin and its right edge with the hamburger/content margin
+   so it sits symmetrically inside the mobile viewport" (mbz-et8e.55.11).
+
+   IT HAS TO SIT HERE, not in the 768px block near the top of the file. That
+   block is written before .product-frame is, and this ties with it on
+   specificity, so up there it would lose on source order and silently do
+   nothing.
+
+   The insight card is the other .product-frame on a phone and gains the same
+   16px of frame. Its scroller is untouched, which is what §10 protects when it
+   keeps that card's horizontal scroll "exactly as is". */
+@media (max-width: 768px) {
+  .product-frame {
+    width: calc(100vw - 2 * var(--spacing-md));
+  }
 }
 
 .insight-visual {
@@ -2770,22 +2803,23 @@ footer h4 {
     --mobile-artwork-width: 1024px;
   }
 
-  /* §3's animation is held the same way, but the rules above are written for
-     <picture>/<img> and this is an inline <svg>, so it needs its own pair.
-     Same arithmetic as the images: the smallest type that carries the story is
-     the 17-unit signal-card label on a 1380-unit canvas, and 660px is where
-     that reaches the ~8px floor a high-DPI phone needs (17 × 660/1380 = 8.1).
-     That is under two screens of panning at 390px, the cheapest scroller on
-     the page. Manu's brief asks for exactly this trade in as many words:
-     "avoid simply shrinking the full desktop composition until text becomes
-     illegible". */
-  .wya {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-  }
+  /* §3's ANIMATION IS NO LONGER HELD, and no longer scrolls. drop_10 §10:
+     "Worth Your Attention animation: remove horizontal scrolling on mobile.
+     Scale/reflow the animation so the complete visual is well aligned and fully
+     contained within the content width."
 
+     It was held at 660px inside a scroller, which is where its 17-unit signal
+     labels on a 1380-unit canvas reach the ~8px floor a high-DPI phone needs
+     (17 × 660/1380 = 8.1). Scaled to the 358px content width at 390 they render
+     4.4px. There is no third option: the artwork is Manu's SVG with fixed
+     coordinates, so "reflow" would mean redesigning a supplied asset, which the
+     brief's own preamble forbids. Same trade he made for step 01, and it goes
+     to him in the same memo entry (mbz-et8e.55.11).
+
+     The insight card below is deliberately NOT changed: §10 keeps its scroller
+     as "the intentional exception". */
   .wya svg {
-    width: max(660px, 100%);
+    width: 100%;
   }
 
   /* HOW IT WORKS STEP 01 OPTS OUT OF THE SCROLLER ENTIRELY, and it is the only
@@ -3067,11 +3101,23 @@ footer h4 {
    under. Verb and label stack in the second column without needing a wrapper
    element, by giving the step two rows and spanning the numeral across both. */
 @media (max-width: 900px) {
+  /* THE FLOW SITS IN THE MIDDLE OF THE SCREEN, not against its left edge.
+     drop_10 §10: "shift the entire step flow further toward the horizontal
+     centre of the mobile screen. Do not leave the number column pinned too far
+     left. Preserve the vertical sequence and spacing."
+
+     width: fit-content is what does it. The track then sizes to the widest
+     step's content rather than to the container, and margin-inline: auto
+     centres the block that results. The steps keep width: 100%, so all five
+     still measure the same and their numerals stay on one axis — centring each
+     step individually would have staggered them, which is the "preserve the
+     vertical sequence" half of the instruction (mbz-et8e.55.11). */
   .flow-steps {
     grid-template-columns: 1fr;
     justify-items: start;
     gap: var(--spacing-sm);
-    max-width: var(--lead-measure);
+    width: fit-content;
+    max-width: min(var(--lead-measure), 100%);
     margin-inline: auto;
   }
 
