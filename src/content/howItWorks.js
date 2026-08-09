@@ -55,15 +55,17 @@ export const howItWorks = {
   // `body` is drop_06's, verbatim. It replaces the two paragraphs each step
   // used to carry, and every one of them is one sentence.
   //
-  // NO STEP CARRIES A `visualAlt` ANY MORE. All three visuals are drawn in HTML
-  // now, so what they say is real text on the page rather than something an alt
-  // string has to restate (mbz-et8e.54.8).
+  // `visualAlt` applies to step 01 alone. It is a picture again (drop_10 §4.1),
+  // so what it says has to be restated for anyone who cannot see it; steps 02
+  // and 03 are drawn in HTML and their words are real text on the page.
   steps: [
     {
       id: "monitor-filter",
       number: "01",
       title: "Monitor Your Market. Filter the Noise.",
       body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every development against your company, products, competitors, goals, role and markets, so you see what deserves your attention.",
+      visualAlt:
+        "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets to surface only relevant developments.",
       // drop_06: "There should be no additional copy below the section 01
       // visual." The line that was here, "Less noise. More signal. More time
       // for what matters.", is deleted rather than moved.
@@ -92,18 +94,13 @@ export const howItWorks = {
     },
   ],
 
-  // Step 01's visual, and it stopped being a picture in mbz-et8e.54.8. It says
-  // exactly what Manu's 01-monitor-filter.png says, in the same three stages and
-  // with the same labels: the market's sources on the left, YOUR CONTEXT as the
-  // filter in the middle, and three surfaced developments on the right.
-  //
-  // drop_07 §4.3 asks to "keep the current 01 visual/image, but resize/reframe
-  // it to the standard right-column visual frame", and adds "do not redesign the
-  // visual content unless needed for responsive fit". That frame is 640px wide
-  // in his own step 02 and 03 assets, and the raster could not survive it — its
-  // smallest type is 8-9px of cap height on a 1774px canvas, which is about
-  // 3.2px at 640. The content is unchanged; only the arrangement is, from three
-  // panels side by side to three stacked, which is what a narrow column wants.
+  // PARKED, NOT LIVE. This is MonitorFilter's copy, and MonitorFilter is what
+  // drop_10 §4.1 replaced with the raster it was built from. It says exactly
+  // what 01-monitor-filter.png says, in the same three stages and with the same
+  // labels: the market's sources, YOUR CONTEXT as the filter, three surfaced
+  // developments. Kept because this page's step 01 has reversed twice in three
+  // drops, and because rebuilding it from the picture a second time would be
+  // the same work again (mbz-et8e.55.1).
   monitorFilter: {
     sourcesLabel: "Your market",
     sources: [

@@ -3,9 +3,11 @@ import { howItWorks } from "../content/howItWorks";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import CtaPanel from "../components/CtaPanel";
-import MonitorFilter from "../components/MonitorFilter";
+import ProductImage from "../components/ProductImage";
 import RoleDashboard from "../components/RoleDashboard";
 import DraftFromIdea from "../components/DraftFromIdea";
+import monitorAvif from "../assets/monitor-filter.avif";
+import monitorWebp from "../assets/monitor-filter.webp";
 
 // Hero -> 01 -> 02 -> 03 -> CTA, per Manu's How It Works handoff briefs —
 // drop_04 in the design repo
@@ -29,20 +31,34 @@ import DraftFromIdea from "../components/DraftFromIdea";
 // No <main> wrapper. The brief sketches one, but also says to prefer the
 // existing codebase's conventions — and no page on this site has one.
 //
-// NO STEP IS A PICTURE ANY MORE. drop_06 replaced steps 02 and 03 with HTML
-// animations, which are RoleDashboard and DraftFromIdea, and drop_07 took step
-// 01 with them — see MonitorFilter for why the raster could not follow this
-// brief into a 640px column. All three visuals are markup, so all three reflow
-// instead of scaling, and the --artwork-ground special case this page carried
-// for its one light-on-dark raster is gone with it.
+// STEP 01 IS A PICTURE AGAIN, on Manu's instruction. drop_10 §4.1 supplies
+// assets/01-monitor-filter.png and says "replace the current HTML recreation in
+// Step 01 with this exact static image. Do not recreate the image in HTML",
+// naming the same 640px frame §4.2 set. That reverses mbz-et8e.54.8, whose
+// reason has not gone away: measured on this same PNG, its smallest type is 8–9
+// px of cap height on a 1774px canvas, about 3.2px at 640. He set the frame
+// width himself, so the trade is his; the number is on mbz-et8e.55.1 and in the
+// memo. MonitorFilter is PARKED, not deleted — this page's visuals have now
+// reversed twice.
 //
-// That also closes the last outstanding artwork ask on this page: memo §2 asked
-// Manu for a dark-ground re-render of 01, and there is nothing left to
-// re-render (mbz-et8e.28).
+// Steps 02 and 03 stay drawn, from drop_06.
 
-// Each step's visual, by id. All three are drawn.
+const MONITOR_VISUAL = {
+  avif: monitorAvif,
+  webp: monitorWebp,
+  width: 1774,
+  height: 887,
+};
+
+// Each step's visual, by id. Step 01 is a picture; the other two are drawn.
 const VISUAL = {
-  "monitor-filter": () => <MonitorFilter {...howItWorks.monitorFilter} />,
+  "monitor-filter": (step) => (
+    <ProductImage
+      className="how-visual"
+      alt={step.visualAlt}
+      {...MONITOR_VISUAL}
+    />
+  ),
   "role-based-intelligence": () => (
     <RoleDashboard {...howItWorks.roleDashboard} />
   ),

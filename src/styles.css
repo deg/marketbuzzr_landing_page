@@ -453,16 +453,14 @@ p {
   margin: 0 auto var(--spacing-lg);
 }
 
-/* NO PAGE PUTS A .product-frame INSIDE A SPLIT COLUMN ANY MORE, and there used
-   to be a rule here putting it back into normal flow when one did. It went with
-   §3's 45/55 split in drop_06. Recorded because the failure is silent and the
-   fix is not obvious: .product-frame breaks out by shifting its left edge to
-   50% and pulling back half its own width, which only works when the parent
-   spans the page. Inside a column the 50% resolves against the column, so the
-   artwork lands off-centre and overflows the window — measured at a 1280
-   viewport it ran x=363 to x=1595, 315px past the right edge. A future split
-   layout holding artwork needs position: static / left: auto / transform: none
-   / width: 100% on the frame. */
+/* ONE PAGE PUTS A .product-frame INSIDE A SPLIT COLUMN — How It Works step 01,
+   since drop_10 §4.1 put the raster back. The failure it has to avoid is
+   silent and the fix is not obvious: .product-frame breaks out by shifting its
+   left edge to 50% and pulling back half its own width, which only works when
+   the parent spans the page. Inside a column the 50% resolves against the
+   column, so the artwork lands off-centre and overflows the window — measured
+   at a 1280 viewport it ran x=363 to x=1595, 315px past the right edge.
+   .product-frame.how-visual is what opts out; see it further down. */
 
 /* The hero visual takes the same breakout width as the other artwork, so the
    four do not render at two different scales down the page. This is a
@@ -1391,18 +1389,37 @@ footer h4 {
   --artwork-ground: #000b2d;
 }
 
-/* The light-on-dark bleed that used to sit here is GONE, with the artwork it
-   existed for. All three How It Works visuals were drawn on white against the
-   navy page, so each needed a small, tight box-shadow rather than the homepage's
-   wide dark one — a wide light haze put --muted body copy on a near-grey ground
-   at 1.70:1. Steps 02 and 03 stopped being pictures in drop_06 and step 01 in
-   drop_07 (mbz-et8e.54.8), so there is no light raster left on the site and no
-   asymmetry to preserve.
+/* How It Works step 01, the site's one light-on-dark raster and its one framed
+   artwork inside a column (drop_10 §4.1, mbz-et8e.55.1). Two departures from
+   .product-frame, both required:
 
-   The margin rule that sat here went with it. It spaced .how-visual off the
-   closing line below it, and nothing carries that class since step 01 became
-   MonitorFilter — the visuals are .how-step-visual grid cells now, and the
-   closing line is a row of the same grid. */
+   IT DOES NOT BREAK OUT. §4.1 puts it "inside the same standard right-side
+   visual frame used for Steps 02 and 03", which is the 640px .how-step-visual
+   cell. The breakout's left: 50% resolves against that cell rather than the
+   page — see the note above .hero-emphasis for what that measured.
+
+   ITS BLEED IS TIGHT AND LIGHT. The artwork is drawn on white, so the
+   homepage's wide dark haze becomes a wide LIGHT haze, which put --muted body
+   copy on a near-grey ground:
+
+                                        1440px    390px
+     80px/30px, the homepage's values   1.70:1    2.08:1   (AA wants 4.5:1)
+     24px/0                             9.57:1    9.79:1
+
+   At 24px with no spread the edge still dissolves and nothing leaks into the
+   copy. Do not "harmonise" this back to the homepage's numbers. A dark-ground
+   re-render retires the whole block (mbz-et8e.28).
+
+   Written as .product-frame.how-visual, not bare .how-visual: it overrides
+   .product-frame's own box-shadow, and a single class would tie with it and win
+   only by source order — the trap this file's header block is about. */
+.product-frame.how-visual {
+  position: static;
+  left: auto;
+  transform: none;
+  width: 100%;
+  box-shadow: 0 0 24px 0 #fefefe;
+}
 
 .product-frame img {
   display: block;
@@ -2666,10 +2683,24 @@ footer h4 {
     width: max(660px, 100%);
   }
 
-  /* NO HELD WIDTHS LEFT ON How It Works. There were three; steps 02 and 03
-     stopped being pictures in drop_06 (mbz-et8e.46) and step 01 in drop_07
-     (mbz-et8e.54.8), so all three are markup and reflow like any other. The
-     scroller-and-panning trade does not apply to any of them. */
+  /* HOW IT WORKS STEP 01 OPTS OUT OF THE SCROLLER ENTIRELY, and it is the only
+     picture that does. drop_10 §4.1: "Mobile: image below the Step 01 copy, fit
+     to the viewport with sensible side margins and no horizontal scrolling."
+     That instruction and the held-width trade are mutually exclusive — the
+     trade buys legible embedded type by letting the reader pan, and he has
+     ruled panning out here. So the artwork shrinks to the column instead, and
+     its smallest type goes with it. That is the §4.1 regression on
+     mbz-et8e.55.1, at its worst on a phone.
+
+     Steps 02 and 03 need nothing: they stopped being pictures in drop_06
+     (mbz-et8e.46) and reflow like any other markup. */
+  .product-frame.how-visual picture {
+    overflow-x: visible;
+  }
+
+  .product-frame.how-visual img {
+    width: 100%;
+  }
 }
 /* ============================================================
    FIX-BEFORE-RELEASE (mbz-et8e.18): delete this block.
@@ -4160,13 +4191,19 @@ footer h4 {
 }
 
 /* ---------------------------------------------------------------------------
-   How It Works step 01 — MonitorFilter
+   MonitorFilter — PARKED (mbz-et8e.55.1)
 
    Three stages down a column: the market's sources, YOUR CONTEXT filtering
    them, three developments that come out. Manu's artwork runs the same three
-   left to right, and this runs them top to bottom because drop_07 §4.2 puts
-   every step's visual in one narrow column. See the component for the
-   measurement that retired the raster.
+   left to right, and this ran them top to bottom because drop_07 §4.2 puts
+   every step's visual in one narrow column.
+
+   NOTHING RENDERS THESE RULES. drop_10 §4.1 put step 01 back on the raster
+   MonitorFilter was built from, so the component has no caller. Both are kept
+   rather than deleted, per this repo's rule for a brief that is still
+   iterating — step 01 has now reversed twice in three drops. The cost is these
+   ~100 lines in the stylesheet; the component itself is tree-shaken out of the
+   bundle because nothing imports it.
 
    These rules sit before the Final overrides block deliberately: nothing here
    ties with anything in it. .monitor-context-title is a heading-shaped element

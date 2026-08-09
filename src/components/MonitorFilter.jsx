@@ -1,15 +1,19 @@
 import React from "react";
 import CategoryIcon from "./CategoryIcon";
 
-// How It Works step 01, and the last raster on this site to become text.
+// PARKED. Nothing imports this (mbz-et8e.55.1).
 //
-// WHY IT IS NOT A PICTURE ANY MORE. drop_07 §4.2 puts all three steps in one
-// visual column of the same width, and his own step 02 and 03 assets set that
-// width at 640px. `monitor-filter.avif` is 1774px wide: measured on his source
-// PNG, its smallest type is 8-9px of cap height, which renders about 3.2px at
-// 640 — roughly a 4.6px font, against about 10px at the 1400px it used to get.
-// §4.3 says to keep the visual and not to redesign its content "unless needed
-// for responsive fit", and this is that case.
+// It was How It Works step 01, rebuilt as text in mbz-et8e.54.8 because
+// drop_07 §4.2 puts all three steps in one 640px visual column and
+// `monitor-filter.avif` is 1774px wide: measured on the source PNG, its
+// smallest type is 8-9px of cap height, which renders about 3.2px at 640 —
+// roughly a 4.6px font, against about 10px at the 1400px it used to get.
+//
+// drop_10 §4.1 reverses that and puts the raster back, in the same 640px frame,
+// saying "do not recreate the image in HTML". The measurement above did not
+// change; Manu made the trade knowing the frame width, because he set it. This
+// file stays because step 01 has reversed twice in three drops and rebuilding
+// it from the picture a third time would be the same work again.
 //
 // SAME THREE STAGES, SAME LABELS, STACKED INSTEAD OF SIDE BY SIDE. His artwork
 // reads left to right: a cloud of five source types, a YOUR CONTEXT panel that
