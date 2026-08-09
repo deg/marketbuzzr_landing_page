@@ -38,7 +38,7 @@ export const fintech = {
   },
 
   intro: {
-    heading: "See what matters. Understand what it means.",
+    heading: "See what matters. Understand what it means",
     // ONE PARAGRAPH, which drop_10 §7 asks for by name: "render the supporting
     // copy as ONE paragraph, not broken into separate lines/paragraph
     // fragments." His two sentences are unchanged; only the break between them

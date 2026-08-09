@@ -65,7 +65,7 @@ export const publicSafety = {
     // His own heading for this section on both MedTech and FinTech. Reused
     // rather than reinvented: it is the same section doing the same job, and a
     // third variation would read as three pages by three authors.
-    heading: "See what matters. Understand what it means.",
+    heading: "See what matters. Understand what it means",
     // One paragraph, his, word for word: "The 'See What Matters' section uses
     // one concise paragraph under the headline."
     paragraphs: [

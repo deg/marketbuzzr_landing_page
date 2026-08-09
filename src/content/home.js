@@ -95,7 +95,7 @@ export const home = {
 
   // §4 Product Proof / Insight
   insight: {
-    title: "Every insight. Clear. Actionable. Ready to use.",
+    title: "Every insight. Clear. Actionable. Ready to use",
     // The em dash before "and what you can do next" is gone, which is drop_07
     // §3.3 naming this line specifically and §1's site-wide rule doing the same
     // thing generally.
@@ -295,7 +295,7 @@ export const home = {
 
   // §8 Final CTA
   finalCta: {
-    title: "Know what changed. Understand what it means. Know what to do next.",
+    title: "Know what changed. Understand what it means. Know what to do next",
     paragraphs: [
       "Let MarketBuzzr continuously monitor your market and deliver the intelligence your team needs to stay ahead.",
     ],

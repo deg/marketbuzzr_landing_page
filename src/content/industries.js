@@ -34,7 +34,7 @@ export const industries = {
   // which used it as its own hero and which §12 gives a different one.
   hero: {
     kicker: "INDUSTRIES",
-    title: "Your market is unique. Your intelligence should be too.",
+    title: "Your market is unique. Your intelligence should be too",
     sub: [
       "Every industry moves differently. Different competitors, regulations, technologies, customer expectations and market dynamics shape what matters. MarketBuzzr is built around your niche, your company and your priorities, so you can stay ahead of the developments that could impact your business.",
     ],

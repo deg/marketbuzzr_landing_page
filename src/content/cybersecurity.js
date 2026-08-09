@@ -56,7 +56,7 @@ export const cybersecurity = {
   // rather than padded to match; whether the older six should lose their first
   // line is a question for him (mbz-et8e.28).
   intro: {
-    heading: "See what matters. Understand what it means.",
+    heading: "See what matters. Understand what it means",
     paragraphs: [
       "MarketBuzzr brings together signals from across the cybersecurity ecosystem and evaluates them in the context of your company, products, competitors and priorities, so you can quickly understand what deserves attention and what to do next.",
     ],

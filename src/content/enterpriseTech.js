@@ -61,7 +61,7 @@ export const enterpriseTech = {
   },
 
   intro: {
-    heading: "See what matters. Understand what it means.",
+    heading: "See what matters. Understand what it means",
     paragraphs: [
       "MarketBuzzr brings together signals from across your technology ecosystem and evaluates them in the context of your company, products, competitors and priorities, so you can quickly understand what deserves attention and what to do next.",
     ],

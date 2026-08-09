@@ -46,7 +46,7 @@ export const medtech = {
   },
 
   intro: {
-    heading: "See what matters. Understand what it means.",
+    heading: "See what matters. Understand what it means",
     // ONE PARAGRAPH since drop_10 §7: "render the supporting copy as ONE
     // paragraph, not broken into separate lines/paragraph fragments." His
     // sentences are unchanged (mbz-et8e.55.6).

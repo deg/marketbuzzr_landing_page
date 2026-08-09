@@ -62,7 +62,7 @@ export const howItWorks = {
     {
       id: "monitor-filter",
       number: "01",
-      title: "Monitor your market. Filter the noise.",
+      title: "Monitor your market. Filter the noise",
       body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every development against your company, products, competitors, goals, role and markets, so you see what deserves your attention.",
       // IT HAS TO NAME THE THREE OUTPUTS. They are the right third of the
       // picture and the payoff of the whole diagram, and since the drawn
@@ -216,7 +216,7 @@ export const howItWorks = {
   },
 
   finalCta: {
-    title: "Stop following the market manually.",
+    title: "Stop following the market manually",
     paragraphs: [
       "Let MarketBuzzr monitor what's changing, surface what deserves your attention, and help you turn intelligence into action.",
     ],
