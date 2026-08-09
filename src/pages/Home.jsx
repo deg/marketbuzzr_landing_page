@@ -157,7 +157,9 @@ const Home = () => {
         </p>
       </section>
 
-      {/* §7 Intelligence areas */}
+      {/* §7 Intelligence areas. The closing link is drop_10's README and its
+          checklist item 3, and it is deliberately §6's link with a different
+          destination — "styled like 'Explore all industries →'". */}
       <section className="section container">
         <SectionTitle title={categories.title} lead={categories.lead} />
         <div className="category-grid">
@@ -165,6 +167,11 @@ const Home = () => {
             <CategoryCard key={item.heading} {...item} />
           ))}
         </div>
+        <p className="lead">
+          <Link className="text-link" to={categories.exploreTo}>
+            {categories.exploreLabel} →
+          </Link>
+        </p>
       </section>
 
       {/* §8 Final CTA */}

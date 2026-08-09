@@ -284,6 +284,13 @@ export const home = {
         ],
       },
     ],
+    // drop_10's README and its acceptance checklist item 3, which the numbered
+    // sections do not carry: "add 'Explore what you get →' below the six
+    // intelligence/category boxes, styled like 'Explore all industries →'". So
+    // it is §6's link with a different destination, and the arrow comes from
+    // the component rather than from this string, as it does there.
+    exploreLabel: "Explore what you get",
+    exploreTo: "/what-you-get",
   },
 
   // §8 Final CTA
