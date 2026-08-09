@@ -3150,8 +3150,20 @@ footer h4 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-lg);
-  margin-top: var(--spacing-2xl);
+  /* Same margins as .industry-grid, and the bottom one is there for the same
+     reason: drop_10 adds an "Explore what you get →" link under this grid and
+     asks for it "styled like 'Explore all industries →'". Without it the link
+     sat 8px below the cards where §6's sits 32px below its own
+     (mbz-et8e.55.4). */
+  margin: var(--spacing-2xl) 0 var(--spacing-xl);
   align-items: stretch;
+}
+
+/* Zeroed where the grid ends its section, so the margin does not stack onto the
+   section padding and read as a missing element. Same guard .industry-grid
+   carries, for the same reason. */
+.category-grid:last-child {
+  margin-bottom: 0;
 }
 
 .category-card {
