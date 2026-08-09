@@ -73,9 +73,15 @@ const IndustryPage = ({ data }) => {
         aside={<SourceCluster {...sources} />}
       />
 
+      {/* ONE PARAGRAPH, ALWAYS. drop_10 §7: "render the supporting copy as ONE
+          paragraph, not broken into separate lines/paragraph fragments." An
+          `emphasis` line used to render above it, unconditionally, which put an
+          empty <p> and its margin on the eight pages that never had one; the
+          one page that did now opens its paragraph with that sentence instead
+          (mbz-et8e.55.6). `paragraphs` stays an array so the shape matches
+          `outro` and a future page can say otherwise. */}
       <section className="section container info-block">
         <h2>{intro.heading}</h2>
-        <p className="lead lead-strong">{intro.emphasis}</p>
         {intro.paragraphs.map((p, i) => (
           <p className="lead" key={i}>
             {p}

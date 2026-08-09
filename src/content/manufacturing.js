@@ -128,8 +128,6 @@ export const manufacturing = {
           "Understand changing customer requirements, demand patterns, new use cases and emerging market opportunities.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

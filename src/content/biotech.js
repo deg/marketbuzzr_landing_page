@@ -62,12 +62,16 @@ export const biotech = {
 
   intro: {
     heading: "See what's happening beyond the clinical data",
-    // Also one paragraph, also his: "The 'See What Matters' section uses one
-    // concise paragraph under the headline."
+    // ONE PARAGRAPH, and this is the page where that cost something. "Clinical
+    // data tells only part of the story." was his, and stood above the
+    // paragraph as its own emphasised line -- the only `emphasis` on any of the
+    // nine. drop_10 §7 asks this block for "ONE paragraph, not broken into
+    // separate lines/paragraph fragments", so the line opens the paragraph
+    // instead of standing over it. No copy is lost, and nothing else on the
+    // template renders an emphasis line any more (mbz-et8e.55.6).
     paragraphs: [
-      "MarketBuzzr brings together patient and caregiver communities, KOL discussions, conference commentary, biotech media, YouTube, Reddit, advocacy groups and competitor communications to show how your therapy is being perceived, discussed and positioned across the ecosystem.",
+      "Clinical data tells only part of the story. MarketBuzzr brings together patient and caregiver communities, KOL discussions, conference commentary, biotech media, YouTube, Reddit, advocacy groups and competitor communications to show how your therapy is being perceived, discussed and positioned across the ecosystem.",
     ],
-    emphasis: "Clinical data tells only part of the story.",
   },
 
   // A worked example of what the product produces. The copy is Manu's, from the

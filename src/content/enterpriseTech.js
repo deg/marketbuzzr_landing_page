@@ -151,8 +151,6 @@ export const enterpriseTech = {
           "Identify emerging segments, new use cases, geographic openings and unmet needs worth building or selling into.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

@@ -3773,9 +3773,18 @@ footer h4 {
   }
 }
 
-/* The intro block, at the sketch's weight and measure. Ours ran lighter and
-   wider, which was most of why the two pages read differently below the hero. */
-.industry-example {
+/* THE INSIGHT CARD SITS UNDER ITS COPY, not a full section break below it.
+   drop_10 §7: "move the insight card upward so it is aligned with the copy
+   above. The card and its corresponding copy should read as one cohesive split
+   section rather than having excess vertical space."
+
+   This rule has been here since the template was built and had never once
+   applied: .industry-page .section sets padding-top: 72px at (0,2,0) and beats
+   a bare .industry-example at (0,1,0), so the card kept the full break. Giving
+   it the page scope is the whole fix — 176px between the copy and the card
+   becomes 104px, which is the intro's own padding-bottom (mbz-et8e.55.6). Same
+   shape as .industry-page .industry-capabilities directly above. */
+.industry-page .industry-example {
   padding-top: 0;
 }
 

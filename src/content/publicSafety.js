@@ -168,8 +168,6 @@ export const publicSafety = {
           "Understand how the demands on responders and defense teams are changing, and what that means for the capabilities they set out to buy.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

@@ -128,8 +128,6 @@ export const retail = {
           "Identify emerging segments, new formats, geographic opportunities and areas of changing demand.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

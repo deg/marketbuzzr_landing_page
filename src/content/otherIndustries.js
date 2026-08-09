@@ -78,9 +78,14 @@ export const otherIndustries = {
   // §12's first headed passage, verbatim.
   intro: {
     heading: "Intelligence that reflects your priorities",
+    // ONE PARAGRAPH, like the other eight. drop_10 §7 asks the intro block for
+    // "ONE paragraph, not broken into separate lines/paragraph fragments" and
+    // heads that section "apply globally", so this page's equivalent block
+    // follows even though §7 names the other pages' heading. The `outro` below
+    // keeps its two: it is a second headed passage that §12 gave this page
+    // alone, not the block §7 is about (mbz-et8e.55.6).
     paragraphs: [
-      "Whether you're operating in an established category, a specialized niche or a market that spans several industries, the intelligence you need is rarely generic.",
-      "MarketBuzzr connects developments across your market and puts them in the context of your company and goals, helping your team understand what changed, why it matters and where it may require action.",
+      "Whether you're operating in an established category, a specialized niche or a market that spans several industries, the intelligence you need is rarely generic. MarketBuzzr connects developments across your market and puts them in the context of your company and goals, helping your team understand what changed, why it matters and where it may require action.",
     ],
   },
 

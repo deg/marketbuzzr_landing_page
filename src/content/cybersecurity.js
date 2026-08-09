@@ -146,8 +146,6 @@ export const cybersecurity = {
           "Understand changing customer priorities, buying criteria, category expectations and the trends influencing cybersecurity demand.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

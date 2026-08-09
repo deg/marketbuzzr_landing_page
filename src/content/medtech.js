@@ -47,12 +47,15 @@ export const medtech = {
 
   intro: {
     heading: "See what matters. Understand what it means.",
+    // ONE PARAGRAPH since drop_10 §7: "render the supporting copy as ONE
+    // paragraph, not broken into separate lines/paragraph fragments." His
+    // sentences are unchanged (mbz-et8e.55.6).
+    //
+    // Comma, not an em dash, in the second one. His revised page drops the dash
+    // there, and his August handover makes it a rule for the whole site: "No
+    // dashes in marketing copy. Rewrite naturally instead."
     paragraphs: [
-      "In MedTech, a regulatory update, competitor launch or emerging technology can quickly change the market.",
-      // Comma, not an em dash. His revised page drops the dash here, and his
-      // August handover makes it a rule for the whole site: "No dashes in
-      // marketing copy. Rewrite naturally instead."
-      "MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities, so you can see what deserves attention and what to do next.",
+      "In MedTech, a regulatory update, competitor launch or emerging technology can quickly change the market. MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities, so you can see what deserves attention and what to do next.",
     ],
   },
 
@@ -139,8 +142,6 @@ export const medtech = {
           "Identify emerging segments, geographic opportunities, unmet needs and potential areas for expansion.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {

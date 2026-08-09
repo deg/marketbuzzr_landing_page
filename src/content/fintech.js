@@ -39,9 +39,12 @@ export const fintech = {
 
   intro: {
     heading: "See what matters. Understand what it means.",
+    // ONE PARAGRAPH, which drop_10 §7 asks for by name: "render the supporting
+    // copy as ONE paragraph, not broken into separate lines/paragraph
+    // fragments." His two sentences are unchanged; only the break between them
+    // is (mbz-et8e.55.6).
     paragraphs: [
-      "In financial services, a regulatory change, new product launch or emerging technology can quickly shift customer expectations and the competitive landscape.",
-      "MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities, so you can see what deserves attention and what to do next.",
+      "In financial services, a regulatory change, new product launch or emerging technology can quickly shift customer expectations and the competitive landscape. MarketBuzzr brings together signals from across your industry and evaluates them in the context of your company, products, competitors and priorities, so you can see what deserves attention and what to do next.",
     ],
   },
 
@@ -124,8 +127,6 @@ export const fintech = {
           "Identify emerging segments, new use cases, geographic opportunities and potential areas for expansion.",
       },
     ],
-    closer:
-      "MarketBuzzr helps your team stay on top of the developments that could\nshape your strategy, products and growth.",
   },
 
   closing: {
