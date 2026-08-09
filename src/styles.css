@@ -2264,11 +2264,33 @@ footer h4 {
    gained 170px of horizontal overflow at both 1440 and 1280. A rule like this
    one used to exist for the split that drop_06 removed; it comes back with the
    split. */
+/* TWO PROPORTIONAL TRACKS, NOT A FIXED RAIL, since drop_10 §3.1: "the current
+   implementation squeezes the copy too far left and lets the animation dominate
+   too much width... target a visually balanced split around 45% copy / 55%
+   visual", using "the same balanced split logic as the What You Get split
+   sections", which is what .wyg-split already does with fractions.
+
+   minmax(0, Nfr) and not a bare Nfr: a bare fr takes its automatic minimum from
+   its content, and an SVG this wide inflates the track it sits in.
+
+   align-items: start is §3.1's "vertically align the top of the animation with
+   the main copy block". It was centre, which floated a short copy column
+   against a tall visual.
+
+   WHAT THIS COSTS, measured at 1440 in a 1352px container. The visual goes from
+   988px to 730px, and its type goes with it: the card labels are 17 units on a
+   1380-unit canvas, so they fall from 12.2px to 9.0px, and the smallest text in
+   the composition from 11.5px to 8.5px. mbz-et8e.54.5 spent this width
+   deliberately to keep those labels legible. His number is shipped as written
+   -- he calls it a visual target rather than a rigid requirement, and 40/60
+   would have bought 0.8px -- and the numbers go to him in the memo
+   (mbz-et8e.55.3). Below 1200 the two stack and the visual gets the whole
+   container back. */
 .problem-split {
   display: grid;
-  grid-template-columns: 340px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
   gap: var(--spacing-lg);
-  align-items: center;
+  align-items: start;
 }
 
 .problem-split .product-frame {
@@ -2300,10 +2322,11 @@ footer h4 {
 /* One column below the point where the rail stops paying for itself, with the
    copy first and the animation under it — §3.2's mobile order.
 
-   Stacked, the animation gets the whole container; split, it gets the container
-   minus a 340px rail and a 24px gap, so the split costs it 364px at every width
-   — measured against the old full-width breakout the visual drops 1392px to
-   988px. The narrower the viewport, the larger a share of it that is.
+   Stacked, the animation gets the whole container; split, it gets 55% of the
+   container minus the gap, so the split costs it 45% at every width — measured
+   at 1440, the visual runs 730px against the 1352px the stack gives it, and
+   1392px before any of this. The narrower the viewport, the more that hurts,
+   and drop_10 §3.1 widened the copy's share from 25% to 45%.
 
    1200px IS A JUDGEMENT, NOT A DERIVED THRESHOLD, and an earlier version of this
    comment claimed otherwise. The split reads worse than the stack at every
