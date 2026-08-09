@@ -3545,30 +3545,23 @@ footer h4 {
   margin-bottom: 18px;
 }
 
-/* Rectangles with a small radius, not full pills, and no glow. */
+/* THE HERO'S BUTTONS ARE THE SITE'S NOW, and the geometry override that made
+   them the sketch's rectangles is gone. drop_10 §7: "current industry-page CTAs
+   are too square. Use the same rounded/oval CTA components used across the rest
+   of the site. Keep Try for Free filled and Book a Demo outlined."
+
+   The whole block went rather than border-radius alone: it also set its own
+   padding, size, weight and killed the pill's glow, and a half-reverted
+   override is what nobody can read a month later. That leaves .cta and
+   .cta-secondary saying the same thing here as in the nav, the homepage and
+   every closing panel — drop_07 §7 had already moved the closing band, so this
+   was the last place the site spoke two button languages.
+
+   The row's own spacing stays: 28px and 14px are the sketch's and §7 says
+   nothing about them (mbz-et8e.55.7). */
 .hero-split .cta-actions {
   margin-top: 28px;
   gap: 14px;
-}
-
-/* The hero's buttons only. This used to cover the closing band as well, so
-   that one page spoke a single button language throughout; drop_07 §7 ends that
-   by putting the closing CTA on "the standard site-wide rounded CTA box and
-   rounded buttons", which is the site's pill. The hero keeps the sketch's
-   rectangles. */
-.hero-split .cta-actions .cta,
-.hero-split .cta-actions .cta-secondary {
-  border-radius: 10px;
-  padding: 14px 22px;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.5;
-  box-shadow: none;
-}
-
-.hero-split .cta-actions .cta:hover,
-.hero-split .cta-actions .cta-secondary:hover {
-  box-shadow: var(--shadow-md);
 }
 
 /* --- Hero source cluster --------------------------------------------------
