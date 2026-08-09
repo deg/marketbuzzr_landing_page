@@ -329,6 +329,31 @@ nav {
   text-transform: uppercase;
 }
 
+/* AN EYEBROW TAKES ITS HEADLINE'S ALIGNMENT, which drop_10 §1 makes a universal
+   rule: "every eyebrow must align to the headline directly below it... never
+   let an eyebrow float on a different horizontal axis from its headline."
+
+   A section heading is centred by the site's own h2 rule, but .kicker is an
+   inline-block and an inline-block answers to its PARENT's text-align — and
+   .section sets none, so the eyebrow sat hard left under a centred headline.
+   Two of them did, both on What You Get, and
+   reference-what-you-get-roles-section.png is one of them (mbz-et8e.55.10).
+
+   display: block is what makes text-align bite here: centring an inline-block
+   that is already shrink-wrapped to its text does nothing.
+
+   THE DIRECT-CHILD COMBINATOR IS THE WHOLE SCOPE. A left-aligned section puts
+   its eyebrow inside the copy column — .wyg-split-copy, .problem-copy — where
+   it already inherits left from the block it shares with the heading, and where
+   this rule cannot reach it. The hero eyebrows are outside .section entirely
+   and take .hero's or .hero-split's alignment the same way. Audited at 1440
+   across all five page types: every other eyebrow already shared its heading's
+   axis. */
+.section > .kicker {
+  display: block;
+  text-align: center;
+}
+
 /* Every heading on the site takes the title colour here, rather than each rule
    restating it. `body` sets --text and `p` sets --muted, so before this a
    heading and a paragraph differed by two steps of the same blue; drop_07 §1
