@@ -4,7 +4,7 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import CtaPanel from "../components/CtaPanel";
 import ProductImage from "../components/ProductImage";
-import RoleDashboard from "../components/RoleDashboard";
+import RoleTailoring from "../components/RoleTailoring";
 import DraftFromIdea from "../components/DraftFromIdea";
 import monitorAvif from "../assets/monitor-filter.avif";
 import monitorWebp from "../assets/monitor-filter.webp";
@@ -41,7 +41,11 @@ import monitorWebp from "../assets/monitor-filter.webp";
 // memo. MonitorFilter is PARKED, not deleted — this page's visuals have now
 // reversed twice.
 //
-// Steps 02 and 03 stay drawn, from drop_06.
+// STEP 02 IS A DIFFERENT PANEL, same story. drop_10 §4.2 replaces its animation
+// with assets/marketbuzzr-what-you-get-role-animation-v1.html, which is
+// RoleTailoring — What You Get's hero until this drop. The two pages traded
+// animations; What You Get took RoleDashboard (mbz-et8e.55.2). Step 03 is
+// untouched, which §4.3 says by name.
 
 const MONITOR_VISUAL = {
   avif: monitorAvif,
@@ -60,7 +64,7 @@ const VISUAL = {
     />
   ),
   "role-based-intelligence": () => (
-    <RoleDashboard {...howItWorks.roleDashboard} />
+    <RoleTailoring {...howItWorks.roleTailoring} />
   ),
   "turn-intelligence-into-action": () => (
     <DraftFromIdea {...howItWorks.draftFromIdea} />

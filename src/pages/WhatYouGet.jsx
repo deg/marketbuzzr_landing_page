@@ -4,10 +4,16 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
 import SectionTitle from "../components/SectionTitle";
 import CtaPanel from "../components/CtaPanel";
-import RoleTailoring from "../components/RoleTailoring";
+import RoleDashboard from "../components/RoleDashboard";
 import SignalField from "../components/SignalField";
 import IntelligenceToAction from "../components/IntelligenceToAction";
 
+// THE HERO ANIMATION IS RoleDashboard SINCE drop_10 §5.1, which names
+// assets/marketbuzzr-role-based-single-dashboard-animation-v4-light-right-column.html
+// for it — How It Works step 02 until this drop. The two pages traded
+// animations; step 02 took RoleTailoring (mbz-et8e.55.2). §5.1 keeps the hero
+// copy and the copy-left/animation-right split exactly as they were.
+//
 // What You Get, from drop_07 §5. A new page, and the brief's own framing is
 // that it should look like it was already here: "use the live website and
 // existing component styles as the design source of truth". So the hero is
@@ -26,7 +32,7 @@ import IntelligenceToAction from "../components/IntelligenceToAction";
 // that the homepage does not do throughout. §5 gives one per section by name.
 const WhatYouGet = () => {
   useDocumentTitle(whatYouGet.title);
-  const { hero, roleTailoring, roleCards, value, signals, action, finalCta } =
+  const { hero, roleDashboard, roleCards, value, signals, action, finalCta } =
     whatYouGet;
 
   return (
@@ -35,7 +41,7 @@ const WhatYouGet = () => {
         kicker={hero.kicker}
         title={hero.title}
         sub={hero.sub}
-        aside={<RoleTailoring {...roleTailoring} />}
+        aside={<RoleDashboard {...roleDashboard} />}
       />
 
       {/* §5.3 — four equal cards in ONE row on desktop, which the brief says

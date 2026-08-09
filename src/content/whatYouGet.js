@@ -29,39 +29,113 @@ export const whatYouGet = {
     ],
   },
 
-  // The hero's animation. One market development read four ways, which is the
-  // same device How It Works step 02 uses and deliberately not the same panel:
-  // his sequence here is SAME MARKET DEVELOPMENT -> the development ->
-  // RECOMMENDATIONS TAILORED TO YOUR ROLE, with the reading changing underneath.
-  roleTailoring: {
-    brand: "MarketBuzzr",
-    kicker: "Same market development",
-    headline: "A competitor expands into a new enterprise segment",
-    contextLabel: "Recommendations tailored to your role",
+  // The hero's animation since drop_10 §5.1, which names
+  // assets/marketbuzzr-role-based-single-dashboard-animation-v4-light-right-column.html
+  // for it. That file built How It Works step 02 in drop_06, and the two pages
+  // have traded animations (mbz-et8e.55.2). The hero copy and the split are
+  // unchanged — §5.1 says to keep both.
+  //
+  // One dashboard, one role at a time, cycling — his brief is emphatic that no
+  // two profiles appear side by side, which is what rules out reusing the
+  // industry pages' RoleBar.
+  //
+  // `tone` names a token rather than a colour. His four roles are four hues and
+  // that is a real device — the badge, the profile title, the card borders and
+  // the progress dot all take the role's colour, so the whole panel changes
+  // identity together. His literals are #7d58f6 / #2f7ee8 / #6aaf4b / #3ba9b4;
+  // the site's four accents sit in the same hue order and are used instead, so
+  // this introduces no new colour (the same rule the industry pages follow).
+  roleDashboard: {
+    kicker: "Role Based Intelligence",
+    sub: "The same market, filtered for what matters to this role.",
+    // Not a closer under the visual — this is inside it, and it is his. It is
+    // also nearly the line drop_06 deletes from under the section.
+    caption: {
+      emphasis: "Same market intelligence.",
+      rest: " Different priorities for each role.",
+    },
+    badgeLabel: "Prepared for:",
     roles: [
       {
-        chip: "CEO & Leadership",
-        label: "Strategic Opportunity",
-        title: "Potential opening in an adjacent market",
-        text: "Assess whether the move creates a new growth opportunity or changes competitive priorities.",
+        name: "Executive",
+        profile: "CEO Profile",
+        tone: "brand-3",
+        cards: [
+          {
+            icon: "growth",
+            tag: "GROWTH OPPORTUNITY",
+            title: "Establish a niche in AI/ML medical device regulation",
+            action: "Draft Action Plan",
+          },
+          {
+            icon: "shield",
+            tag: "STRATEGIC PRIORITY",
+            title: "Prioritize neurotechnology and Imaging + SaaS",
+            action: "Draft Internal Memo",
+          },
+          {
+            icon: "message",
+            tag: "BOARD DISCUSSION POINT",
+            title: "Define our response to competitors' platform offerings",
+            action: "Draft Board Talking Points",
+          },
+        ],
       },
       {
-        chip: "Marketing",
-        label: "Positioning Opportunity",
-        title: "New angle for category positioning",
-        text: "Review how the competitor is framing the market and where your messaging can differentiate.",
+        name: "Marketing",
+        profile: "Marketing Profile",
+        tone: "brand-2",
+        cards: [
+          {
+            icon: "idea",
+            tag: "THOUGHT LEADERSHIP",
+            title:
+              "AI regulation readiness: what MedTech companies need to know",
+            action: "Draft Article",
+          },
+          {
+            icon: "target",
+            tag: "CAMPAIGN IDEA",
+            title: "AI regulation readiness campaign for MedTech innovators",
+            action: "Draft Campaign",
+          },
+          {
+            // His icon here is LinkedIn's "in" wordmark. That is someone
+            // else's trademark, and drawing a lookalike is worse than not
+            // drawing it — the label already says LinkedIn in words.
+            icon: "threads",
+            tag: "LINKEDIN POST",
+            title: "3 AI regulation myths holding back MedTech innovation",
+            action: "Draft LinkedIn Post",
+          },
+        ],
       },
       {
-        chip: "Sales",
-        label: "Competitive Talking Point",
-        title: "Update enterprise sales messaging",
-        text: "Prepare sales teams with a concise response to the competitor's new enterprise positioning.",
-      },
-      {
-        chip: "Customer Success",
-        label: "Expansion Opportunity",
-        title: "New conversation with strategic accounts",
-        text: "Identify customers that may benefit from a proactive discussion about changing market expectations.",
+        name: "Sales",
+        profile: "Sales Profile",
+        tone: "positive",
+        cards: [
+          {
+            // Crossed swords in his file. `target` is what the homepage
+            // already uses for competitive intelligence.
+            icon: "target",
+            tag: "COMPETITIVE INSIGHT",
+            title: "New entrant offering AI validation platform for SaMD",
+            action: "Draft Battlecard",
+          },
+          {
+            icon: "message",
+            tag: "MESSAGING SHIFT",
+            title: "Competitors lead with AI trust and safety",
+            action: "Draft Talk Track",
+          },
+          {
+            icon: "mail",
+            tag: "NEW MARKET OPPORTUNITY",
+            title: "Rising demand for AI regulatory readiness",
+            action: "Draft Outreach Email",
+          },
+        ],
       },
     ],
   },

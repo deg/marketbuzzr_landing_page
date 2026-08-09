@@ -1497,10 +1497,25 @@ footer h4 {
      step 03 rendered in the page's pale blue on the white panel. .insight-wrap
      sets its own colour for exactly this reason. */
   color: var(--text);
-  margin: var(--spacing-xl) auto 0;
   /* His .wrap in both files. This is "the standard right-column visual frame"
-     §4.2 asks all three steps to share, in numbers. */
+     §4.2 asks all three steps to share, in numbers, and also what What You
+     Get's hero aside holds. */
   max-width: 640px;
+}
+
+/* The top margin used to be in the shared rule above, and it is a STEP concern
+   rather than something either component owns. drop_10 traded RoleDashboard to
+   What You Get's hero and RoleTailoring into step 02 (mbz-et8e.55.2), so a
+   margin left in the shared rule would have travelled with the wrong one. Each
+   now states what its own placement needs; .role-tailor's is beside its own
+   rules further down. */
+.draft-idea {
+  margin: var(--spacing-xl) auto 0;
+}
+
+/* No top margin: it is a hero aside now, and PageHero owns that rhythm. */
+.role-dash {
+  margin: 0 auto;
 }
 
 .role-dash-tone-brand-3 {
@@ -4684,14 +4699,16 @@ footer h4 {
   }
 }
 
-/* What You Get's hero animation (drop_07 §5.2). A light panel, the same
-   treatment the two How It Works animations take, with the same explicit colour
-   — see .role-dash for why that is not optional. His values throughout. */
+/* How It Works step 02 since drop_10 §4.2, and What You Get's hero before that
+   (mbz-et8e.55.2). A light panel, the same treatment the other two animations
+   take, with the same explicit colour — see .role-dash for why that is not
+   optional. His values throughout, and the top margin is step 03's, because
+   this is a step visual now. */
 .role-tailor {
   --title: var(--light-ink);
   width: 100%;
   max-width: 640px;
-  margin: 0 auto;
+  margin: var(--spacing-xl) auto 0;
   padding: 10px;
   border: 1px solid var(--light-rule);
   border-radius: 22px;
