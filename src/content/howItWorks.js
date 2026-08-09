@@ -64,8 +64,12 @@ export const howItWorks = {
       number: "01",
       title: "Monitor your market. Filter the noise.",
       body: "MarketBuzzr continuously monitors the sources shaping your market and evaluates every development against your company, products, competitors, goals, role and markets, so you see what deserves your attention.",
+      // IT HAS TO NAME THE THREE OUTPUTS. They are the right third of the
+      // picture and the payoff of the whole diagram, and since the drawn
+      // version was parked nothing else on this page carries those words as
+      // text (mbz-et8e.55.1).
       visualAlt:
-        "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets to surface only relevant developments.",
+        "Market activity from competitors, industry news, regulation, podcasts, webinars and research is filtered through the reader's company, products, competitors, goals, role and markets, surfacing three kinds of relevant development: a competitor launch, a regulatory change and an emerging opportunity.",
       // drop_06: "There should be no additional copy below the section 01
       // visual." The line that was here, "Less noise. More signal. More time
       // for what matters.", is deleted rather than moved.
