@@ -3626,9 +3626,26 @@ footer h4 {
     margin-inline: auto;
   }
 
+  /* padding-inline: 0 IS THE FIX FOR drop_10 §10's "slightly shifted left",
+     which it reports twice — once for What You Get's hero and once for the
+     industry pages'. Both are .hero-split, and the cause is one declaration.
+
+     Above 900 the desktop rule zeroes padding-left so the copy starts on the
+     heading's axis. The base .sub keeps its right padding and RAISES it at 768
+     and again at 480. Stacking the hero restores centring but not symmetry, so
+     the text box was short on the right and its centred lines landed half that
+     padding to the left: measured at 390, the box ran 16 to 350 inside a hero
+     spanning 16 to 374, putting the text's centre at 183 against the page's
+     195. Manu's screenshots show exactly that 12px.
+
+     Zeroing both sides rather than restoring the base value, because the base
+     value exists to keep prose off the screen edge and .hero already supplies a
+     gutter for that. The sub now shares the h1's own edges
+     (mbz-et8e.55.12). */
   .hero-split .sub {
     max-width: var(--lead-measure);
     margin-inline: auto;
+    padding-inline: 0;
   }
 
   .hero-split .cta-actions {
