@@ -342,11 +342,33 @@ h3 {
   color: var(--title);
 }
 
+/* ONE HEADLINE TREATMENT SITE-WIDE, from drop_10 §1: "use the same headline
+   font family, weight and overall typographic treatment currently used on the
+   What You Get page for the Homepage and How It Works page headlines as well.
+   Match the What You Get headline look rather than maintaining a separate
+   headline style on those pages." Reference is
+   reference-what-you-get-desktop-headline-font.png.
+
+   The family was never the difference -- every h1 on the site is Inter through
+   --font-display. Measured, exactly three properties were: What You Get renders
+   its h1 through .hero-split at weight 800, line-height 1.03 and -0.035em,
+   while the centred hero took 700, 1.05 and -0.02em. Those three move here, so
+   every h1 shares them rather than two pages being patched to match a third.
+   Industries and the not-found page come along, which is the point of the rule.
+
+   THE SIZE DOES NOT MOVE. .hero-split's clamp(34px, 4.2vw, 62px) exists because
+   a 45%-wide column drove that heading to four lines with one word stranded;
+   applying it to a full-width centred hero would make the homepage's headline
+   SMALLER, which is not what matching the look means (mbz-et8e.55.9).
+
+   h2 needed nothing: measured at 46px/700/1.08/-0.03em on all three pages
+   already. */
 h1 {
   font-size: clamp(36px, 6vw, 72px);
-  line-height: 1.05;
+  font-weight: 800;
+  line-height: 1.03;
   margin: 18px auto 12px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 /* Prose is 18px, not the body's 16px, on every page (mbz-et8e.52.15).
@@ -3347,10 +3369,15 @@ footer h4 {
   max-width: none;
 }
 
-/* Type scale */
+/* Type scale. NO font-weight: it used to say 700, which was heavier than the
+   site's default at the time and is now LIGHTER than it — drop_10 §1 puts every
+   headline on What You Get's 800 (mbz-et8e.55.9). The declaration's own reason
+   was that "his heading is the loudest thing on the page", so leaving it would
+   have kept the inverted version of the rule it was written for. The size,
+   leading and tracking stay: those answer to the 45% column this heading sits
+   in, which the centred heroes do not have. */
 .industry-page .hero-split h1 {
   font-size: clamp(42px, 5vw, 68px);
-  font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.04em;
   margin: 14px 0 22px;
