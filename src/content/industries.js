@@ -38,13 +38,18 @@ export const industries = {
     sub: [
       "Every industry moves differently. Different competitors, regulations, technologies, customer expectations and market dynamics shape what matters. MarketBuzzr is built around your niche, your company and your priorities, so you can stay ahead of the developments that could impact your business.",
     ],
-    emphasis: "Focused intelligence around your world.",
   },
 
-  picker: {
-    title: "Explore MarketBuzzr by Industry",
-    lead: "See how MarketBuzzr can help teams stay ahead of the developments shaping their market.",
-  },
+  // NO `emphasis` AND NO `picker`. drop_10 §6 deletes three pieces of copy from
+  // this page by quoting each one: the hero's closing line "Focused
+  // intelligence around your world.", the section heading "Explore MarketBuzzr
+  // by Industry" and its supporting line "See how MarketBuzzr can help teams
+  // stay ahead of the developments shaping their market." — then asks the grid
+  // to sit "directly below the hero copy with normal section spacing" with no
+  // large empty gap. That empties the picker block entirely, so the nine tiles
+  // are the whole section (mbz-et8e.55.5).
+  //
+  // The nine and their card copy are unchanged, and §6 says so twice.
 
   // §6.4, replacing drop_06's wording for the same panel.
   finalCta: {

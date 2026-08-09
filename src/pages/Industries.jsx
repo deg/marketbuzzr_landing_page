@@ -2,7 +2,6 @@ import React from "react";
 import { industries } from "../content/industries";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import PageHero from "../components/PageHero";
-import SectionTitle from "../components/SectionTitle";
 import IndustryTile from "../components/IndustryTile";
 import CtaPanel from "../components/CtaPanel";
 
@@ -20,21 +19,20 @@ import CtaPanel from "../components/CtaPanel";
 // so PageHero takes no children and there is no artwork import.
 const Industries = () => {
   useDocumentTitle(industries.title);
-  const { hero, picker, finalCta, items } = industries;
+  const { hero, finalCta, items } = industries;
 
   return (
     <>
       {/* No CTAs in the hero. His page structure puts them only in the closing
           section, and on a page this short a second pair would be most of it. */}
-      <PageHero
-        kicker={hero.kicker}
-        title={hero.title}
-        sub={hero.sub}
-        emphasis={hero.emphasis}
-      />
+      <PageHero kicker={hero.kicker} title={hero.title} sub={hero.sub} />
 
+      {/* THE GRID IS THE WHOLE SECTION. drop_10 §6 deletes the heading and the
+          supporting line that stood above it and asks the tiles to follow the
+          hero copy directly — see content/industries.js for the three lines it
+          quotes. The gap it wanted closed was the heading's own margins, so
+          removing them is the fix; nothing here sets a spacer of its own. */}
       <section className="section container">
-        <SectionTitle title={picker.title} lead={picker.lead} />
         <div className="industry-grid">
           {items.map((item) => (
             <IndustryTile
